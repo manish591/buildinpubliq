@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import SessionProvider from "@/components/SessionProvider";
+import { Poppins } from "next/font/google";
 import { getServerSession } from "next-auth";
 
-const inter = Inter({ subsets: ["latin"] });
+import "./globals.css";
+import SessionProvider from "@/components/SessionProvider";
+
+const font = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"]});
 
 export const metadata: Metadata = {
   title: "pravah",
@@ -19,8 +20,8 @@ export default async function RootLayout({
   const session = await getServerSession();
 
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className="dark">
+      <body className={font.className}>
         <SessionProvider session={session}>
           {children}
         </SessionProvider>
