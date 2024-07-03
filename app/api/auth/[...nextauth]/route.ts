@@ -1,8 +1,10 @@
 import NextAuth from "next-auth/next";
 import { SessionStrategy } from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import type { Adapter } from "next-auth/adapters";
+
 import { db } from "@/prisma/src";
 
 export const authOptions = {
@@ -19,9 +21,34 @@ export const authOptions = {
     signIn: "/login",
   },
   callbacks: {
-
+    async jwt({ token, account }) {
+      if(account?.access_token) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if(token?.accessToken) {
+        session.userId = token.sub;
+        session.accessToken = token.accessToken;
+      }
+      return session;
+    }
   }
-};
+} satisfies NextAuthOptions;
 
 const handlers = NextAuth(authOptions);
 export { handlers as GET, handlers as POST };
+
+declare module "next-auth" {
+  interface Session {
+    accessToken?: string
+    userId?: string
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    accessToken?: string
+  }
+}
