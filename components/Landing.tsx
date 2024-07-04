@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { CircleArrowRight, Twitter } from "lucide-react";
+import Image from "next/image";
+import { CircleArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
@@ -9,7 +10,7 @@ export default function Landing() {
     <div className="flex flex-col min-h-[100dvh]">
       <Navbar />
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-36 bg-muted">
+        <section className="w-full py-12 md:py-24 lg:py-36 bg-background">
           <div className="container px-4 md:px-6 space-y-8">
             <div className="px-4 sm:px-6 md:gap-8 lg:gap-12">
               <div className="w-[80%] mx-auto text-center">
@@ -49,7 +50,7 @@ export default function Landing() {
                           variant="secondary"
                           className="inline-flex h-9 items-center justify-center rounded-md px-4 text-sm font-medium"
                         >
-                          <Twitter className="h-4 w-4 mr-2" />
+                          <Image src="/x.svg" width={16} height={16} alt="github" className="w-4 h-4" />
                           Tweet
                         </Button>
                       </div>
@@ -66,7 +67,7 @@ export default function Landing() {
                           variant="secondary"
                           className="inline-flex h-9 items-center justify-center rounded-md px-4 text-sm font-medium"
                         >
-                          <Twitter className="h-4 w-4 mr-2" />
+                          <Image src="/x.svg" width={16} height={16} alt="github" className="w-4 h-4" />
                           Tweet
                         </Button>
                       </div>
@@ -83,7 +84,7 @@ export default function Landing() {
                           variant="secondary"
                           className="inline-flex h-9 items-center justify-center rounded-md px-4 text-sm font-medium"
                         >
-                          <Twitter className="h-4 w-4 mr-2" />
+                          <Image src="/x.svg" width={16} height={16} alt="github" className="w-4 h-4" />
                           Tweet
                         </Button>
                       </div>
@@ -100,7 +101,7 @@ export default function Landing() {
                           variant="secondary"
                           className="inline-flex h-9 items-center justify-center rounded-md px-4 text-sm font-medium"
                         >
-                          <Twitter className="h-4 w-4 mr-2" />
+                          <Image src="/x.svg" width={16} height={16} alt="github" className="w-4 h-4" />
                           Tweet
                         </Button>
                       </div>
