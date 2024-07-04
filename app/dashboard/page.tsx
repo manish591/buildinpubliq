@@ -7,12 +7,8 @@ import { BookOpen, GitPullRequest, House, LayoutPanelLeft, MoveHorizontal } from
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import Navbar from "@/components/Navbar";
-import ShowRepoOrInstallRepo from "@/components/ShowRepoOrInstallRepo";
+import DashboardTaskbar from "@/components/DashboardTaskbar";
 
 export default async function Dashboard() {
   const session = await getServerSession(authOptions);
@@ -24,40 +20,9 @@ export default async function Dashboard() {
   return (
     <div className="flex flex-col w-full min-h-screen">
       <Navbar />
-      <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] bg-muted/40 flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
-        <div className="max-w-6xl w-full text-right mx-auto">
-          <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="default" className="ml-auto">
-              Create New Project
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[500px]">
-            <DialogHeader>
-              <DialogTitle>Create a New Project</DialogTitle>
-              <DialogDescription>Fill out the details for your new project.</DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="space-y-2">
-                <Label htmlFor="project-title">Project Title</Label>
-                <Input id="project-title" placeholder="Enter project title" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="project-description">Project Description</Label>
-                <Textarea id="project-description" placeholder="Enter project description" className="min-h-[100px]" />
-              </div>
-              <ShowRepoOrInstallRepo />
-            </div>
-            <DialogFooter>
-              <Button variant="outline" className="mr-auto">
-                Cancel
-              </Button>
-              <Button>Create Project</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
+      <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] bg-background flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
+        <DashboardTaskbar />
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-7xl w-full mx-auto">
           <Card>
             <CardHeader className="flex flex-row items-center gap-4">
               <House className="w-8 h-8" />

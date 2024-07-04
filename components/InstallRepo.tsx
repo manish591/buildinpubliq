@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 
 export default function InstallRepo() {
   return (
-    <div className="mt-4 border py-4 text-center">
-      <p className="text-sm w-[70%] mx-auto">You Must Install the Github Plugin to start Sharing Your Project Updates</p>
+    <div className="mt-4 border py-4 rounded-md text-center">
+      <p className="text-sm w-[80%] mx-auto text-muted-foreground">Install the github plugin to create the project updates. Only the respos allowed will be eligible for creating project updates.</p>
       <Button 
         variant="outline"
         className="border py-2 px-3 mt-4" 

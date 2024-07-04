@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { isGithubIntegrationInstalled } from "@/utils/github";
 import InstallRepo from "@/components/InstallRepo";
-import ListRepositories from "@/components/ListRepositories";
+import ListRepositories from "@/components/ListRepositoriesContainer";
 
 export default async function ShowRepoOrInstallRepo() {
   const session = await getServerSession(authOptions);
