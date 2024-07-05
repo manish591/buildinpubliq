@@ -1,9 +1,8 @@
 "use server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
-
+import { authOptions } from "../api/auth/[...nextauth]/route";
 import { db } from "@/prisma/src";
-import { getInstallationAccessToken } from "@/utils/github";
+import { generateJWT } from "@/utils/github";
 
 export interface Repository {
   id: number;
@@ -29,6 +28,32 @@ export interface Repository {
   open_issues_count: number;
   default_branch: string;
 }
+
+export async function getInstallationAccessToken(installationId: string) {
+  try {
+    const jwt = generateJWT();
+    const url = `https://api.github.com/app/installations/${installationId}/access_tokens`;
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        Accept: 'application/vnd.github+json',
+      },
+    });
+
+    const data = await response.json();
+
+
+    if(!response.ok) {
+      return "";
+    }
+
+    return data.token;
+  } catch(err) {
+    return "";
+  }
+};
 
 export async function getGithubRepositries() {
   try {
@@ -58,7 +83,7 @@ export async function getGithubRepositries() {
 
     // when you will access the last page it will not have the link header of next
 
-    const response = await fetch(`https://api.github.com/installation/repositories?page=${1}`, {
+    const response = await fetch(`https://api.github.com/installation/repositories?page=${2}`, {
       headers: {
         Authorization: `Bearer ${installationToken}`,
         Accept: 'application/vnd.github+json',
@@ -70,4 +95,19 @@ export async function getGithubRepositries() {
   } catch(err) {
     return [];
   }
+}
+
+export async function isGithubIntegrationInstalled(userId: string) {
+  const githubDetails = await db.githubIntegration.findFirst({
+    where: {
+      userId: userId,
+      isActive: true,
+    }
+  });
+
+  if(githubDetails) {
+    return true;
+  }
+
+  return false;
 }

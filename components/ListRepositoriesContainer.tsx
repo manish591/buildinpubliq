@@ -1,14 +1,20 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import ListRepositories from "@/components/ListRepositories";
-import { Repository } from "@/app/actions";
+import { Repository } from "@/app/actions/github";
 
-export default function ListRepositoriesContainer() {
+interface ListRepositoriesContainerProps {
+  selectedRepo: Repository | null,
+  setSelectedRepo: React.Dispatch<React.SetStateAction<Repository | null>>
+}
+
+export default function ListRepositoriesContainer({ 
+  selectedRepo, setSelectedRepo 
+}: Readonly<ListRepositoriesContainerProps>) {
   const [isRepoSectionOpen, setIsRepoSectionOpen] = useState(false);
-  const [selectedRepo, setSelectedRepo] = useState<Repository | null>(null);
 
   return (
     <div className="space-y-2 relative">
