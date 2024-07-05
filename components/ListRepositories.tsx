@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { getGithubRepositries, Repository } from "@/app/actions";
+import { getGithubRepositries, Repository } from "@/app/actions/github";
 import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
 
@@ -60,7 +60,7 @@ export default function ListRepositories({
                 <div className="h-32 px-5 overflow-auto flex flex-col mt-4 text-center">
                   <div className="grid grid-cols-1 gap-2 mt-2">
                     {
-                      filteredRepo.slice(0, 5).map(repo => {
+                      filteredRepo.slice(0, 10).map(repo => {
                         return (
                           <Button 
                             variant="outline"
