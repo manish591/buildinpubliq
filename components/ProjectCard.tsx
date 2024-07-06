@@ -1,10 +1,12 @@
 import Image from "next/image";
-import { GitPullRequest, House, MoveHorizontal } from "lucide-react";
+import Link from "next/link";
+import { GitPullRequest, MoveHorizontal } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 
 interface ProjectCardProps {
+  id: string,
   title: string,
   fullName: string,
   repositoryUrl: string,
@@ -12,7 +14,9 @@ interface ProjectCardProps {
   description: string
 }
 
-export default function ProjectCard({ title, fullName, repositoryUrl, defaultBranch, description }: ProjectCardProps) {
+export default function ProjectCard({ 
+  id, title, fullName, repositoryUrl, defaultBranch, description 
+}: Readonly<ProjectCardProps>) {
   return (
     <Card className="bg-muted/10 break-inside-avoid">
       <CardHeader className="flex flex-row items-center gap-4">
@@ -28,8 +32,12 @@ export default function ProjectCard({ title, fullName, repositoryUrl, defaultBra
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>View Project</DropdownMenuItem>
-            <DropdownMenuItem>View Settings</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/dashboard/projects/${id}`}>View Updates</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={repositoryUrl} target="_blank">View Repo</Link>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </CardHeader>

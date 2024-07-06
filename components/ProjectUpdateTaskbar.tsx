@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import {Select,SelectContent,SelectItem,SelectTrigger,SelectValue} from "@/components/ui/select";
 
-export default function DashboardTaskbar() {
+export default function ProjectUpdateTaskbar() {
   return (
     <div className="w-full text-right flex gap-2">
       <Input placeholder="Search Projects..." className="bg-transparent py-3" />
@@ -18,17 +18,9 @@ export default function DashboardTaskbar() {
           <SelectItem value="dark">Sort By Date</SelectItem>
         </SelectContent>
       </Select>
-      <ToggleGroup type="single" className="border rounded-md">
-        <ToggleGroupItem value="grid" size="sm">
-          <LayoutGrid width={17} height={17} />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="list" size="sm">
-          <LayoutList width={17} height={17} />
-        </ToggleGroupItem>
-      </ToggleGroup>
       <Link href="/dashboard/new">
         <Button variant="default" className="ml-auto">
-          Create New Project
+          Create New Update
         </Button>
       </Link>
     </div>

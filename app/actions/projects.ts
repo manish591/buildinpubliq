@@ -86,3 +86,36 @@ export async function getAllProjects() {
     }
   }
 }
+
+export default async function getProjectDetails(id: string) {
+  try {
+    const data = await db.project.findFirst({
+      where: {
+        OR: [
+          { repoId: id },
+          { id }
+        ]
+      }
+    });
+
+    if(!data) {
+      return {
+        status: STATUS.ERROR,
+        message: "Not found",
+        data: null
+      }
+    }
+
+    return {
+      status: STATUS.SUCCESS,
+      message: "successfully returned project details",
+      data
+    }
+  } catch(err) {
+    return {
+      status: STATUS.ERROR,
+      message: "An internal server error occured",
+      data: null
+    }
+  }
+}

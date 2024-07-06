@@ -15,7 +15,7 @@ import { STATUS } from "@/constants/response";
 
 export default function CreateProjectForm({ 
   isGithubAppInstalled 
-}: Readonly<{ isGithubAppInstalled: Boolean }>) {
+}: Readonly<{ isGithubAppInstalled: boolean }>) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [selectedRepo, setSelectedRepo] = useState<Repository | null>(null);
@@ -88,7 +88,7 @@ export default function CreateProjectForm({
           }
         </CardContent>
         <CardFooter className="mt-6">
-          <Link href="/dashboard">
+          <Link href="/dashboard/projects">
             <Button variant="secondary" className="mr-auto">
               Cancel
             </Button>
