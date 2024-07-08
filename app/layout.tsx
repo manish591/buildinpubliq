@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Ubuntu_Mono } from "next/font/google";
 import { getServerSession } from "next-auth";
 
 import "./globals.css";
 import SessionProvider from "@/components/SessionProvider";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
-const font = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"]});
+const font = Ubuntu_Mono({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
-  title: "pravah",
-  description: "build and find great people",
+  title: "BuilDD",
+  description: "Build Projects And Find Greate People On The Journey",
 };
 
 export default async function RootLayout({
@@ -20,11 +21,13 @@ export default async function RootLayout({
   const session = await getServerSession();
 
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="capitalize">
       <body className={font.className}>
-        <SessionProvider session={session}>
-          {children}
-        </SessionProvider>
+        <ThemeProvider attribute="class" defaultTheme="light">
+          <SessionProvider session={session}>
+            {children}
+          </SessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
