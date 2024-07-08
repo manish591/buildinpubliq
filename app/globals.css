@@ -58,6 +58,11 @@
   }
 }
 
+html,
+body {
+  height: 100%;
+}
+
 .loader{
 	position:relative;
 	margin:auto;
