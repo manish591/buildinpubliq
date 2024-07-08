@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
       }
     });
     
-    return NextResponse.redirect("http://localhost:3000/dashboard");
+    return NextResponse.redirect("http://localhost:3000/dashboard/projects");
   } else {
     return NextResponse.json({ message: "Unsupported action" }, { status: 400 });
   }

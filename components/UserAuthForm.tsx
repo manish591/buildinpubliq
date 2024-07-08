@@ -11,7 +11,7 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   function handleLoginUser() {
-    signIn("github", { callbackUrl: "/dashboard" });
+    signIn("github", { callbackUrl: "/dashboard/projects" });
   }
 
   return (
