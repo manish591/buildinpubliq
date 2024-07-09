@@ -9,7 +9,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 const font = Ubuntu_Mono({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
-  title: "BuilDD",
+  title: "Buildd",
   description: "Build Projects And Find Greate People On The Journey",
 };
 

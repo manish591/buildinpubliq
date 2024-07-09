@@ -22,14 +22,14 @@ const features = [
   {
     name: 'Be Discovered',
     description:
-      'find other people work in the discover tab. share your your to get discovered',
+      'find other people work in the discover tab. share your work to get discovered',
     icon: Globe,
   },
 ]
 
 export function BenefitsSection() {
   return (
-    <div className="py-24 sm:py-32">
+    <div className="py-24 sm:py-32" id="learn-more">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-4xl lg:text-center">
           <h2 className="text-base font-semibold leading-7">be discovered</h2>
@@ -45,7 +45,7 @@ export function BenefitsSection() {
             {features.map((feature) => (
               <div key={feature.name} className="relative pl-16">
                 <dt className="text-lg font-semibold leading-7">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
+                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
                     <feature.icon aria-hidden="true" className="h-6 w-6" />
                   </div>
                   {feature.name}
