@@ -57,8 +57,9 @@ export default async function Login() {
             </div>
             <UserAuthForm />
             <p className="px-8 text-center text-sm text-muted-foreground">
-              By connecting your github, you agree to our{" "}
-              <Link
+              By connecting your github account, you gave yourself a chance to shine
+              {/* By connecting your github, you agree to our  */}
+              {/* <Link
                 href="/terms"
                 className="underline underline-offset-4 hover:text-primary"
               >
@@ -70,8 +71,7 @@ export default async function Login() {
                 className="underline underline-offset-4 hover:text-primary"
               >
                 Privacy Policy
-              </Link>
-              .
+              </Link> */}
             </p>
           </div>
         </div>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { getGithubRepositries, Repository } from "@/app/actions/github";
 import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
+import { timeAgo } from "@/utils/date";
 
 interface ListRepositoriesProps {
   selectedRepo: Repository | null
@@ -34,7 +35,7 @@ export default function ListRepositories({
   }, []);
 
   return (
-    <div className="py-5 bg-background border absolute top-[100%] mt-4 w-full rounded-md">
+    <div className="py-5 bg-background z-10 border absolute top-[100%] mt-4 w-full rounded-md">
       {
         loading ? (
           <div>
@@ -73,7 +74,7 @@ export default function ListRepositories({
                               <Image src="/github.svg" width={16} height={16} alt="github" className="w-5 h-5" />
                               <h3>{repo.owner.login} / {repo.name}</h3>
                               <span className="mb-2 text-muted-foreground">.</span>
-                              <p className="text-xs text-muted-foreground">3 hours ago</p>
+                              <p className="text-xs text-muted-foreground">{timeAgo(new Date(repo.updated_at).getTime())}</p>
                           </Button>
                         )
                       })

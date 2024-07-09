@@ -1,18 +1,12 @@
 import Link from "next/link";
 import { FolderKanban, History, Settings, Users, UserSearch } from "lucide-react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SignoutButton from "@/components/SignoutButton";
 
-export function Sidebar() {
+export function Sidebar({ children }: Readonly<{ children?: React.ReactNode }>) {
   return (
     <div className="bg-muted/30 h-[100vh] sticky top-0 p-3 border-r flex flex-col">
-      <div className="text-center flex items-center gap-4 hover:bg-muted p-2 transition rounded-md">
-        <Avatar className="h-[2rem] w-[2rem]">
-          <AvatarFallback className="bg-primary">MD</AvatarFallback>
-        </Avatar>
-        <span className="truncate">manish devrani</span>
-      </div>
+      {children}
       <div className="mt-6">
         <h2 className="pl-2 text-sm text-muted-foreground">Projects</h2>
         <Link href="/dashboard/projects">
@@ -28,7 +22,7 @@ export function Sidebar() {
           </div>
         </Link>
       </div>
-      <div className="mt-6">
+      <div className="mt-6 hidden">
         <h2 className="pl-2 text-sm text-muted-foreground">Explore</h2>
         <Link href="#">
           <div className="p-2 hover:bg-muted trasition rounded-md mt-2 flex items-center gap-2">
@@ -43,7 +37,7 @@ export function Sidebar() {
           </div>
         </Link>
       </div>
-      <div className="mt-6">
+      <div className="mt-6 hidden">
         <h2 className="pl-2 text-sm text-muted-foreground">Account</h2>
         <Link href="#">
           <div className="p-2 hover:bg-muted trasition rounded-md mt-2 flex items-center gap-2">

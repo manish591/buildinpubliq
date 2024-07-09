@@ -83,7 +83,7 @@ export async function getGithubRepositries() {
 
     // when you will access the last page it will not have the link header of next
 
-    const response = await fetch(`https://api.github.com/installation/repositories?page=${2}`, {
+    const response = await fetch(`https://api.github.com/installation/repositories?page=${1}&per_page=${100}`, {
       headers: {
         Authorization: `Bearer ${installationToken}`,
         Accept: 'application/vnd.github+json',

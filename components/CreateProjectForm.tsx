@@ -33,7 +33,7 @@ export default function CreateProjectForm({
       const data = await createProject(title, description, selectedRepo);
 
       if(data.status === STATUS.SUCCESS) {
-        router.push("/dashboard");
+        router.push("/dashboard/projects");
       }
 
       if(data.status === STATUS.ERROR) {
