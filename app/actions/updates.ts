@@ -24,3 +24,25 @@ export default async function getAllProjectUpdates(repoId: string) {
     }
   }
 }
+
+export async function getAllUpdates() {
+  try {
+    const data = await db.projectUpdate.findMany({
+      include: {
+        project: true
+      }
+    });
+
+    return {
+      status: STATUS.SUCCESS,
+      message: "Data returned successfully",
+      data
+    }
+  } catch(err) {
+    return {
+      status: STATUS.ERROR,
+      message: "An internal server error occured",
+      data: []
+    }
+  }
+}

@@ -5,7 +5,7 @@ export async function ProjectsGrid() {
   const projectsData = await getAllProjects();
 
   return (
-    <div className="gap-8 md:columns-2 lg:columns-3 w-full">
+    <div className="py-4 gap-8 md:columns-2 lg:columns-3 w-full">
       {
         projectsData.data.map(project => {
           return (
