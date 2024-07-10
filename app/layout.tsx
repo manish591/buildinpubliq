@@ -6,7 +6,7 @@ import "./globals.css";
 import SessionProvider from "@/components/SessionProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
-const font = Ubuntu_Mono({ subsets: ["latin"], weight: ["400", "700"] });
+const font = Ubuntu_Mono({ subsets: ["latin"], display: "swap", weight: ["400", "700"] });
 
 export const metadata: Metadata = {
   title: "Buildd",
