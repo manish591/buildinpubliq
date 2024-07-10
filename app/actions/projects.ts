@@ -2,7 +2,7 @@
 
 import { Prisma } from "@prisma/client";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/auth";
 import { db } from "@/prisma/src";
 import { Repository } from "@/app/actions/github";
 import { STATUS } from "@/constants/response";

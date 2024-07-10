@@ -1,7 +1,7 @@
 import DashboardTaskbar from "@/components/DashboardTaskbar";
 import { ProjectsGrid } from "@/components/ProjectsGrid";
 
-export default async function Dashboard() {
+export default function Dashboard() {
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-between">

@@ -1,8 +1,7 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/auth";
 import CreateProjectForm from "@/components/CreateProjectForm";
 import { isGithubIntegrationInstalled } from "@/app/actions/github";
-import { ChevronRight } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 

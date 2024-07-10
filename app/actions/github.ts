@@ -1,6 +1,6 @@
 "use server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/auth";
 import { db } from "@/prisma/src";
 import { generateJWT } from "@/utils/github";
 
