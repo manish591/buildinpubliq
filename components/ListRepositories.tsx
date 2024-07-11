@@ -5,6 +5,7 @@ import { getGithubRepositries, Repository } from "@/app/actions/github";
 import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
 import { timeAgo } from "@/utils/date";
+import { Loader } from "@/components/Loader";
 
 interface ListRepositoriesProps {
   selectedRepo: Repository | null
@@ -38,12 +39,8 @@ export default function ListRepositories({
     <div className="py-5 bg-background z-10 border absolute top-[100%] mt-4 w-full rounded-md">
       {
         loading ? (
-          <div>
-            <div className="loader">
-              <svg className='circular' viewBox='25 25 50 50'>
-                <circle className='path' cx='50' cy='50' r='20' fill='none' strokeWidth='2' strokeMiterlimit='10' ></circle>
-              </svg>
-            </div>
+          <div className="flex justify-center">
+            <Loader />
           </div>
         ):(
           <div>
