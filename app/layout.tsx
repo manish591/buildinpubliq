@@ -1,17 +1,14 @@
-import type { Metadata } from "next";
 import { Ubuntu_Mono } from "next/font/google";
 import { getServerSession } from "next-auth";
 
 import "./globals.css";
 import SessionProvider from "@/components/SessionProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { generateMetadata } from "@/utils/generateMetadata";
 
 const font = Ubuntu_Mono({ subsets: ["latin"], display: "swap", weight: ["400", "700"] });
 
-export const metadata: Metadata = {
-  title: "Buildd",
-  description: "Build Projects And Find Greate People On The Journey",
-};
+export const metadata = generateMetadata();
 
 export default async function RootLayout({
   children,
