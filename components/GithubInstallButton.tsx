@@ -11,7 +11,7 @@ export default function GithubInstallButton() {
         variant="secondary"
         className="border py-2 px-3 mt-4" 
         onClick={async () => {
-        window.location.href = "https://github.com/apps/pravah-dev/installations/new";
+        window.location.href = `https://github.com/apps/${process.env.GITHUB_APP_NAME}/installations/new`;
         }}>
           <div className="flex items-center gap-2">
             <GithubIcon />
