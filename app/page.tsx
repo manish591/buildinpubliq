@@ -8,8 +8,8 @@ export default async function Home() {
     <div>
       <Navbar />
       <main>
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6 space-y-8">
+        <section className="w-full py-12 md:py-32">
+          <div className="container space-y-32 md:space-y-44">
             <HeroSection />
             <BenefitsSection />
           </div>

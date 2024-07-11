@@ -45,7 +45,7 @@ export default function CreateProjectForm({
   }
 
   return (
-    <div className="flex items-center mb-4 col-start-2 col-span-2">
+    <div className="flex items-center mb-4 md:col-start-2 md:col-span-2">
       <Card className="w-full bg-muted/30">
         <CardHeader>
           <CardTitle>Create a New Project</CardTitle>

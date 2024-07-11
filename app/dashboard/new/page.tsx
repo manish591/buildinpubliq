@@ -31,7 +31,7 @@ export default async function Projects() {
         </BreadcrumbList>
       </Breadcrumb>
       </div>
-      <div className="container py-12 mx-auto px-4 md:px-6 grid md:grid-cols-4 gap-8 md:pb-40">
+      <div className="container py-12 mx-auto px-4 md:px-24 grid grid-cols-1 md:grid-cols-4 md:pb-40">
         <CreateProjectForm isGithubAppInstalled={isGithubAppInstalled} />
       </div>
     </div>
