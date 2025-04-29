@@ -1,4 +1,4 @@
-import { BarChart2, MessageCirclePlus, Repeat2, Globe } from "lucide-react";
+import { BarChart2, MessageCirclePlus, Repeat2, Globe } from 'lucide-react';
 
 const features = [
   {
@@ -10,7 +10,7 @@ const features = [
   {
     name: 'Share Updates',
     description:
-      'We help you create your feature announcement post for plateforms like twitter, linkedIn and Instagram.',
+      'We help you create your feature announcement post for plateforms like twitter, linkedIn.',
     icon: Repeat2,
   },
   {
@@ -25,7 +25,7 @@ const features = [
       'find other people work in the discover tab. share your work to get discovered',
     icon: Globe,
   },
-]
+];
 
 export function BenefitsSection() {
   return (
@@ -36,7 +36,8 @@ export function BenefitsSection() {
           the benefits of building in public
         </p>
         <p className="mt-6 text-lg leading-8 lg:px-16">
-          Sharing your development journey can help you grow an audience, get valuable feedback, and stay motivated throughout your projects.
+          Sharing your development journey can help you grow an audience, get
+          valuable feedback, and stay motivated throughout your projects.
         </p>
       </div>
       <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
@@ -49,11 +50,13 @@ export function BenefitsSection() {
                 </div>
                 {feature.name}
               </dt>
-              <dd className="mt-2 text-base leading-7">{feature.description}</dd>
+              <dd className="mt-2 text-base leading-7">
+                {feature.description}
+              </dd>
             </div>
           ))}
         </dl>
       </div>
     </div>
-  )
+  );
 }
