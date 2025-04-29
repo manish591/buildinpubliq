@@ -1,13 +1,13 @@
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 
-import { UserAuthForm } from "@/components/UserAuthForm";
+import { UserAuthForm } from '@/components/UserAuthForm';
 
 export default async function Login() {
   const session = await getServerSession();
-  
-  if(session?.user) {
-    return redirect("/dashboard/projects");
+
+  if (session?.user) {
+    return redirect('/dashboard/projects');
   }
 
   return (
@@ -15,12 +15,14 @@ export default async function Login() {
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
         <div className="absolute inset-0 bg-zinc-900" />
         <div className="relative z-20 flex items-center text-lg font-medium">
-          Buildd
+          buildinpubliq
         </div>
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              &ldquo;Buildd Is The One Place Where People Can Learn And Find Great People. Everyone Should Check Out This Amazing Platform.&rdquo;
+              &ldquo;Buildinpubliq Is The One Place Where People Can Learn And
+              Find Great People. Everyone Should Check Out This Amazing
+              Platform.&rdquo;
             </p>
             <footer className="text-sm">unknown</footer>
           </blockquote>
@@ -38,10 +40,11 @@ export default async function Login() {
           </div>
           <UserAuthForm />
           <p className="px-8 text-center text-sm text-muted-foreground">
-            By connecting your github account, you gave yourself a chance to shine
+            By connecting your github account, you gave yourself a chance to
+            shine
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 }
