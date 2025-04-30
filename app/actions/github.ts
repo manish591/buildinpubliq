@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
-import { db } from "@/prisma/src";
+import { prisma } from "@/prisma/src";
 import { generateJWT } from "@/utils/github";
 
 export interface Repository {
@@ -63,7 +63,7 @@ export async function getGithubRepositries() {
       return [];
     }
 
-    const githubData = await db.githubIntegration.findFirst({
+    const githubData = await prisma.githubIntegration.findFirst({
       where: {
         userId: session?.user?.id,
         isActive: true,
@@ -98,7 +98,7 @@ export async function getGithubRepositries() {
 }
 
 export async function isGithubIntegrationInstalled(userId: string) {
-  const githubDetails = await db.githubIntegration.findFirst({
+  const githubDetails = await prisma.githubIntegration.findFirst({
     where: {
       userId: userId,
       isActive: true,
