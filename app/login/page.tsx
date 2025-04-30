@@ -1,10 +1,9 @@
-import { getServerSession } from 'next-auth';
+import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
-
 import { UserAuthForm } from '@/components/UserAuthForm';
 
 export default async function Login() {
-  const session = await getServerSession();
+  const session = await auth();
 
   if (session?.user) {
     return redirect('/dashboard/projects');

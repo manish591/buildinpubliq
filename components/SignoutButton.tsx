@@ -1,14 +1,13 @@
-"use client";
+'use client';
 
-import { LogOut } from "lucide-react";
-import { signOut } from "next-auth/react";
-
-import { Button } from "@/components/ui/button";
+import { LogOut } from 'lucide-react';
+import { signOut } from 'next-auth/react';
+import { Button } from '@/components/ui/button';
 
 export default function SignoutButton() {
   return (
     <div className="mt-auto">
-      <Button 
+      <Button
         variant="outline"
         className="p-0 w-full justify-start bg-transparent border-0"
         onClick={() => {
@@ -21,5 +20,5 @@ export default function SignoutButton() {
         </div>
       </Button>
     </div>
-  )
+  );
 }

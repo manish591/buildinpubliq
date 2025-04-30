@@ -1,6 +1,5 @@
-import DashboardTaskbar from "@/components/DashboardTaskbar";
-import { ProjectsGrid } from "@/components/ProjectsGrid";
-import { Menu } from "lucide-react";
+import DashboardTaskbar from '@/components/DashboardTaskbar';
+import { ProjectsGrid } from '@/components/ProjectsGrid';
 
 export default function Dashboard() {
   return (
@@ -8,11 +7,13 @@ export default function Dashboard() {
       <div className="flex items-center justify-between">
         <div className="flex md:block items-center gap-4">
           <h2 className="text-2xl font-bold hidden md:block">My Projects</h2>
-          <p className="hidden md:block">View your projects. Create New projects</p>
+          <p className="hidden md:block">
+            View your projects. Create New projects
+          </p>
         </div>
         <DashboardTaskbar />
       </div>
       <ProjectsGrid />
     </div>
-  )
-};
+  );
+}

@@ -1,12 +1,15 @@
-import { Ubuntu_Mono } from "next/font/google";
-import { getServerSession } from "next-auth";
+import './globals.css';
+import { Ubuntu_Mono } from 'next/font/google';
+import { auth } from '@/auth';
+import SessionProvider from '@/components/SessionProvider';
+import { ThemeProvider } from '@/components/ThemeProvider';
+import { generateMetadata } from '@/utils/generateMetadata';
 
-import "./globals.css";
-import SessionProvider from "@/components/SessionProvider";
-import { ThemeProvider } from "@/components/ThemeProvider";
-import { generateMetadata } from "@/utils/generateMetadata";
-
-const font = Ubuntu_Mono({ subsets: ["latin"], display: "swap", weight: ["400", "700"] });
+const font = Ubuntu_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '700'],
+});
 
 export const metadata = generateMetadata();
 
@@ -15,15 +18,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession();
+  const session = await auth();
 
   return (
     <html lang="en" className="capitalize">
       <body className={font.className}>
         <ThemeProvider attribute="class" defaultTheme="light">
-          <SessionProvider session={session}>
-            {children}
-          </SessionProvider>
+          <SessionProvider session={session}>{children}</SessionProvider>
         </ThemeProvider>
       </body>
     </html>

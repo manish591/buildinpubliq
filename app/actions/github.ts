@@ -1,6 +1,6 @@
 "use server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/auth";
+
+import { auth } from "@/auth";
 import { db } from "@/prisma/src";
 import { generateJWT } from "@/utils/github";
 
@@ -33,7 +33,7 @@ export async function getInstallationAccessToken(installationId: string) {
   try {
     const jwt = generateJWT();
     const url = `https://api.github.com/app/installations/${installationId}/access_tokens`;
-    
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -45,39 +45,39 @@ export async function getInstallationAccessToken(installationId: string) {
     const data = await response.json();
 
 
-    if(!response.ok) {
+    if (!response.ok) {
       return "";
     }
 
     return data.token;
-  } catch(err) {
+  } catch (err) {
     return "";
   }
 };
 
 export async function getGithubRepositries() {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
-    if(!session) {
+    if (!session) {
       return [];
     }
 
     const githubData = await db.githubIntegration.findFirst({
       where: {
-        userId: session?.userId,
+        userId: session?.user?.id,
         isActive: true,
       }
     });
 
-    if(!githubData) {
+    if (!githubData) {
       return [];
     }
 
     const installationId = githubData.installationId;
     const installationToken = await getInstallationAccessToken(installationId);
 
-    if(!installationToken) {
+    if (!installationToken) {
       return [];
     }
 
@@ -92,7 +92,7 @@ export async function getGithubRepositries() {
 
     const data = await response.json();
     return data.repositories;
-  } catch(err) {
+  } catch (err) {
     return [];
   }
 }
@@ -105,7 +105,7 @@ export async function isGithubIntegrationInstalled(userId: string) {
     }
   });
 
-  if(githubDetails) {
+  if (githubDetails) {
     return true;
   }
 

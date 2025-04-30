@@ -1,17 +1,16 @@
 "use server";
 
 import { Prisma } from "@prisma/client";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/auth";
+import { auth } from "@/auth";
 import { db } from "@/prisma/src";
 import { Repository } from "@/app/actions/github";
 import { STATUS } from "@/constants/response";
 
 export async function createProject(title: string, description: string, selectedRepo: Repository) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
-    if(!session?.user || !session?.userId) {
+    if (!session?.user || !session?.user.id) {
       return {
         status: STATUS.ERROR,
         message: "Unauthorized"
@@ -27,7 +26,7 @@ export async function createProject(title: string, description: string, selected
       defaultBranch: selectedRepo.default_branch,
       language: selectedRepo.language,
       repositoryUpdatedAt: selectedRepo.pushed_at,
-      userId: session.userId,
+      userId: session.user.id,
     }
 
     await db.project.create({
@@ -38,9 +37,9 @@ export async function createProject(title: string, description: string, selected
       status: STATUS.SUCCESS,
       message: "Successfully created project"
     }
-  } catch(err) {
-    if(err instanceof Prisma.PrismaClientKnownRequestError) {
-      if(err.code === "P2002") {
+  } catch (err) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      if (err.code === "P2002") {
         return {
           status: STATUS.ERROR,
           message: "Project corresponds to repository exits"
@@ -57,9 +56,9 @@ export async function createProject(title: string, description: string, selected
 
 export async function getAllProjects() {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
-    if(!session?.user || !session?.userId) {
+    if (!session?.user || !session?.user?.id) {
       return {
         status: STATUS.ERROR,
         message: "Unauthorized",
@@ -69,7 +68,7 @@ export async function getAllProjects() {
 
     const projects = await db.project.findMany({
       where: {
-        userId: session.userId
+        userId: session.user.id
       }
     });
 
@@ -78,7 +77,7 @@ export async function getAllProjects() {
       message: "Successfully returned the data",
       data: projects
     }
-  } catch(err) {
+  } catch (err) {
     return {
       status: STATUS.ERROR,
       message: "An internal Server error occured",
@@ -98,7 +97,7 @@ export default async function getProjectDetails(id: string) {
       }
     });
 
-    if(!data) {
+    if (!data) {
       return {
         status: STATUS.ERROR,
         message: "Not found",
@@ -111,7 +110,7 @@ export default async function getProjectDetails(id: string) {
       message: "successfully returned project details",
       data
     }
-  } catch(err) {
+  } catch (err) {
     return {
       status: STATUS.ERROR,
       message: "An internal server error occured",

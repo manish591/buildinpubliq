@@ -1,7 +1,6 @@
-import Link from "next/link";
-
-import { Button } from "@/components/ui/button";
-import { CirclePlus } from "lucide-react";
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { CirclePlus } from 'lucide-react';
 
 export default function DashboardTaskbar() {
   return (
@@ -11,5 +10,5 @@ export default function DashboardTaskbar() {
         <span>Create New Project</span>
       </Button>
     </Link>
-  )
+  );
 }

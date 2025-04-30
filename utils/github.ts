@@ -1,11 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 const GITHUB_APP_ID = process.env.GITHUB_APP_ID;
-let GITHUB_APP_PRIVATE_KEY = process.env.GITHUB_APP_PRIVATE_KEY?.replace(/\\n/g, '\n');
-
-if(!GITHUB_APP_PRIVATE_KEY) {
-  GITHUB_APP_PRIVATE_KEY = "";
-}
+let GITHUB_APP_PRIVATE_KEY = process.env.GITHUB_APP_PRIVATE_KEY?.replace(/\\n/g, '\n') ?? "";
 
 export const generateJWT = () => {
   const payload = {

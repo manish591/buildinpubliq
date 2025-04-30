@@ -1,9 +1,16 @@
-import Link from "next/link";
-import { FolderKanban, History, Settings, Users, UserSearch } from "lucide-react";
+import Link from 'next/link';
+import {
+  FolderKanban,
+  History,
+  Settings,
+  Users,
+  UserSearch,
+} from 'lucide-react';
+import SignoutButton from '@/components/SignoutButton';
 
-import SignoutButton from "@/components/SignoutButton";
-
-export function Sidebar({ children }: Readonly<{ children?: React.ReactNode }>) {
+export function Sidebar({
+  children,
+}: Readonly<{ children?: React.ReactNode }>) {
   return (
     <div className="bg-muted/30 h-[100vh] sticky top-0 p-3 border-r flex flex-col">
       {children}
@@ -48,5 +55,5 @@ export function Sidebar({ children }: Readonly<{ children?: React.ReactNode }>) 
       </div>
       <SignoutButton />
     </div>
-  )
+  );
 }

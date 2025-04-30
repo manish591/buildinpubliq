@@ -1,25 +1,19 @@
-import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/auth";
+import { redirect } from 'next/navigation';
+import { auth } from '@/auth';
+import { Sidebar } from '@/components/dashboard/Sidebar';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { AvatarFallback } from '@radix-ui/react-avatar';
+import { Menu } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
-import { Sidebar } from "@/components/dashboard/Sidebar";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { AvatarFallback } from "@radix-ui/react-avatar";
-import { Menu } from "lucide-react";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-
-export default async function DashboardLayout({ 
-  children 
+export default async function DashboardLayout({
+  children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   const user = session?.user;
-  
-  if(!user) {
-    return redirect("/login");
+
+  if (!user) {
+    return redirect('/login');
   }
 
   return (
@@ -28,8 +22,8 @@ export default async function DashboardLayout({
         <Sidebar>
           <div className="text-center flex items-center gap-4 hover:bg-muted p-2 transition rounded-md">
             <Avatar className="h-[2rem] w-[2rem] bg-primary text-background">
-              <AvatarImage src={user.image ? user.image : ""} />
-              <AvatarFallback>{user.name ? user.name[0] : "1"}</AvatarFallback>
+              <AvatarImage src={user.image ?? ''} />
+              <AvatarFallback>{user.name ? user.name[0] : '1'}</AvatarFallback>
             </Avatar>
             <span className="truncate">{user.name}</span>
           </div>
@@ -45,8 +39,10 @@ export default async function DashboardLayout({
               <Sidebar>
                 <div className="text-center flex items-center gap-4 hover:bg-muted p-2 transition rounded-md">
                   <Avatar className="h-[2rem] w-[2rem] bg-primary text-background">
-                    <AvatarImage src={user.image ? user.image : ""} />
-                    <AvatarFallback>{user.name ? user.name[0] : "1"}</AvatarFallback>
+                    <AvatarImage src={user.image ?? ''} />
+                    <AvatarFallback>
+                      {user.name ? user.name[0] : '1'}
+                    </AvatarFallback>
                   </Avatar>
                   <span className="truncate">{user.name}</span>
                 </div>
@@ -54,10 +50,8 @@ export default async function DashboardLayout({
             </SheetContent>
           </Sheet>
         </div>
-        <div>
-          {children}
-        </div>
+        <div>{children}</div>
       </main>
     </div>
-  )
+  );
 }
