@@ -2,7 +2,7 @@
 
 import { Prisma } from "@prisma/client";
 import { auth } from "@/auth";
-import { db } from "@/prisma/src";
+import { prisma } from "@/prisma/src";
 import { Repository } from "@/app/actions/github";
 import { STATUS } from "@/constants/response";
 
@@ -10,7 +10,7 @@ export async function createProject(title: string, description: string, selected
   try {
     const session = await auth();
 
-    if (!session?.user || !session?.user.id) {
+    if (!session?.user?.id) {
       return {
         status: STATUS.ERROR,
         message: "Unauthorized"
@@ -29,7 +29,7 @@ export async function createProject(title: string, description: string, selected
       userId: session.user.id,
     }
 
-    await db.project.create({
+    await prisma.project.create({
       data: projectData
     });
 
@@ -58,7 +58,7 @@ export async function getAllProjects() {
   try {
     const session = await auth();
 
-    if (!session?.user || !session?.user?.id) {
+    if (!session?.user) {
       return {
         status: STATUS.ERROR,
         message: "Unauthorized",
@@ -66,7 +66,7 @@ export async function getAllProjects() {
       }
     }
 
-    const projects = await db.project.findMany({
+    const projects = await prisma.project.findMany({
       where: {
         userId: session.user.id
       }
@@ -88,7 +88,7 @@ export async function getAllProjects() {
 
 export default async function getProjectDetails(id: string) {
   try {
-    const data = await db.project.findFirst({
+    const data = await prisma.project.findFirst({
       where: {
         OR: [
           { repoId: id },
