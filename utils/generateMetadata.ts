@@ -8,11 +8,11 @@ type GenerateMetadataProps = {
   noIndex?: boolean
 }
 
-export function generateMetadata({ 
-  title = "Buildd - Promoting building in public", 
-  description = "Create Your Projects In The Open And Be Discovered By A Community Eager To Connect, Collaborate, And Celebrate Innovation. Share Your Learning Each For Better Visibility.", 
-  image = "/thumbnail.png", 
-  icons = "/favicon.ico", 
+export function generateMetadata({
+  title = "Buildinpubliq - Promoting building in public",
+  description = "Create Your Projects In The Open And Be Discovered By A Community Eager To Connect, Collaborate, And Celebrate Innovation. Share Your Learning Each For Better Visibility.",
+  image = "/thumbnail.png",
+  icons = "/favicon.ico",
   noIndex = false
 }: GenerateMetadataProps = {}): Metadata {
   return {

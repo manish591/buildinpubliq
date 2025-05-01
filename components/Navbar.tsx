@@ -1,43 +1,99 @@
 import Link from 'next/link';
 import ThemeToggle from './ThemeToggle';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import { Menu } from 'lucide-react';
 
 export default function Navbar() {
   return (
-    <header className="z-10 px-4 lg:px-6 h-14 flex items-center sticky top-0 bg-background/30 backdrop-blur-lg">
-      <div className="flex items-center justify-center">
-        <span className="font-bold text-xl">buildinpubliq</span>
+    <header className="border-b border-foreground/10 z-10 px-4 sticky top-0 bg-background/30 backdrop-blur-lg">
+      <div className="flex items-center justify-between h-20 max-w-7xl mx-auto">
+        <div className="flex items-center justify-center">
+          <span className="font-bold text-xl">buildinpubliq</span>
+        </div>
+        <Sheet>
+          <SheetTrigger className="block sm:hidden">
+            <Menu></Menu>
+          </SheetTrigger>
+          <SheetContent side="bottom">
+            <SheetHeader className="text-left">
+              <SheetTitle>buildinpubliq</SheetTitle>
+              <SheetDescription>
+                share your work in the public to build your personal developer
+                portfolio on social media.
+              </SheetDescription>
+            </SheetHeader>
+            <nav className="ml-auto gap-4 sm:gap-6 items-center flex">
+              <Link
+                href="#"
+                className="text-sm font-medium hover:underline underline-offset-4"
+                prefetch={false}
+              >
+                How It Works
+              </Link>
+              <Link
+                href="#"
+                className="text-sm font-medium hover:underline underline-offset-4"
+                prefetch={false}
+              >
+                About
+              </Link>
+              <Link
+                href="#"
+                className="text-sm font-medium hover:underline underline-offset-4"
+                prefetch={false}
+              >
+                Support
+              </Link>
+              <Link
+                href="#"
+                className="text-sm font-medium hover:underline underline-offset-4"
+                prefetch={false}
+              >
+                Contact
+              </Link>
+              <ThemeToggle />
+            </nav>
+          </SheetContent>
+        </Sheet>
+        <nav className="ml-auto gap-4 sm:gap-6 items-center hidden sm:flex">
+          <Link
+            href="#"
+            className="text-sm font-medium hover:underline underline-offset-4"
+            prefetch={false}
+          >
+            How It Works
+          </Link>
+          <Link
+            href="#"
+            className="text-sm font-medium hover:underline underline-offset-4"
+            prefetch={false}
+          >
+            About
+          </Link>
+          <Link
+            href="#"
+            className="text-sm font-medium hover:underline underline-offset-4"
+            prefetch={false}
+          >
+            Support
+          </Link>
+          <Link
+            href="#"
+            className="text-sm font-medium hover:underline underline-offset-4"
+            prefetch={false}
+          >
+            Contact
+          </Link>
+          <ThemeToggle />
+        </nav>
       </div>
-      <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
-        <Link
-          href="#"
-          className="text-sm font-medium hover:underline underline-offset-4 hidden"
-          prefetch={false}
-        >
-          How It Works
-        </Link>
-        <Link
-          href="#"
-          className="text-sm font-medium hover:underline underline-offset-4 hidden"
-          prefetch={false}
-        >
-          About
-        </Link>
-        <Link
-          href="#"
-          className="text-sm font-medium hover:underline underline-offset-4 hidden"
-          prefetch={false}
-        >
-          Support
-        </Link>
-        <Link
-          href="#"
-          className="text-sm font-medium hover:underline underline-offset-4 hidden"
-          prefetch={false}
-        >
-          Contact
-        </Link>
-        <ThemeToggle />
-      </nav>
     </header>
   );
 }
