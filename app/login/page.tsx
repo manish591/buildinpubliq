@@ -27,7 +27,7 @@ export default async function Login() {
           </blockquote>
         </div>
       </div>
-      <div className="border p-4 py-10 bg-muted/40 rounded-md md:bg-transparent md:rounded-none md:border-none lg:p-8">
+      <div className="border p-4 py-10 bg-muted/40 rounded-md lg:bg-transparent lg:rounded-none lg:border-none lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col space-y-2 text-center">
             <h1 className="text-2xl font-semibold tracking-tight">
@@ -39,8 +39,8 @@ export default async function Login() {
           </div>
           <UserAuthForm />
           <p className="px-8 text-center text-sm text-muted-foreground">
-            By connecting your github account, you gave yourself a chance to
-            shine
+            By connecting your github account, you will give yourself a chance
+            to shine
           </p>
         </div>
       </div>
