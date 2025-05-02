@@ -14,9 +14,11 @@ export default function Dashboard() {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="outline" className="rounded-lg text-sm h-9">
-            GitHub Plugin Settings
-          </Button>
+          <Link href="/dashboard/projects/updates">
+            <Button variant="outline" className="rounded-lg text-sm h-9">
+              View Updates
+            </Button>
+          </Link>
           <Link href="/dashboard/new">
             <Button variant="default" className="flex items-center gap-2">
               <CirclePlus strokeWidth={1} width={16} height={16} />

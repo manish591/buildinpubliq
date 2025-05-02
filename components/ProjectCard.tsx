@@ -51,7 +51,9 @@ export default function ProjectCard({
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem>
-              <Link href="/dashboard/projects/updates">View Updates</Link>
+              <Button className="bg-transparent h-6 px-0 text-foreground no-underline lowercase">
+                Edit
+              </Button>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Link href={repositoryUrl} target="_blank">
