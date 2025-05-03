@@ -21,7 +21,7 @@ import {
 import { createProject } from '@/app/actions/projects';
 import { STATUS } from '@/constants/response';
 
-export default function CreateProjectForm({
+export function CreateProjectForm({
   isGithubAppInstalled,
 }: Readonly<{ isGithubAppInstalled: boolean }>) {
   const [title, setTitle] = useState('');
@@ -56,14 +56,14 @@ export default function CreateProjectForm({
 
   return (
     <div className="flex items-center mb-4 md:col-start-2 md:col-span-2">
-      <Card className="w-full bg-muted/30">
-        <CardHeader>
+      <Card className="w-full p-0 border-none shadow-none">
+        <CardHeader className="px-2">
           <CardTitle>Create a New Project</CardTitle>
           <CardDescription>
             Fill out the form to create a new project.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 px-2">
           <div className="space-y-2">
             <Label htmlFor="title">Project Title</Label>
             <Input
@@ -97,7 +97,7 @@ export default function CreateProjectForm({
             <InstallRepo />
           )}
         </CardContent>
-        <CardFooter className="mt-6">
+        <CardFooter className="mt-6 px-2">
           <Link href="/dashboard/projects">
             <Button variant="secondary" className="mr-auto">
               Cancel
