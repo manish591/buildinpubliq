@@ -1,11 +1,11 @@
 "use server";
 
 import { STATUS } from "@/constants/response";
-import { db } from "@/prisma/src";
+import { prisma } from "@/prisma/src";
 
 export default async function getAllProjectUpdates(repoId: string) {
   try {
-    const data = await db.projectUpdate.findMany({
+    const data = await prisma.projectUpdate.findMany({
       where: {
         projectId: repoId,
       }
@@ -16,7 +16,7 @@ export default async function getAllProjectUpdates(repoId: string) {
       message: "Data returned successfully",
       data
     }
-  } catch(err) {
+  } catch (err) {
     return {
       status: STATUS.ERROR,
       message: "An internal server error occured",
@@ -27,7 +27,7 @@ export default async function getAllProjectUpdates(repoId: string) {
 
 export async function getAllUpdates() {
   try {
-    const data = await db.projectUpdate.findMany({
+    const data = await prisma.projectUpdate.findMany({
       include: {
         project: true
       }
@@ -38,7 +38,7 @@ export async function getAllUpdates() {
       message: "Data returned successfully",
       data
     }
-  } catch(err) {
+  } catch (err) {
     return {
       status: STATUS.ERROR,
       message: "An internal server error occured",

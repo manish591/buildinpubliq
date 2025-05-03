@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 
 export default function Dashboard() {
   return (
-    <div className="w-full max-w-7xl mx-auto mt-10">
-      <div className="flex justify-between items-center mb-6">
+    <div className="w-full max-w-7xl mx-auto mt-10 px-4">
+      <div className="flex flex-col sm:flex-row justify-between gap-6 sm:gap-0 sm:items-center mb-6">
         <div>
           <p className="text-lg font-bold">my projects</p>
           <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">

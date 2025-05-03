@@ -12,8 +12,8 @@ import { Menu } from 'lucide-react';
 
 export default function Navbar() {
   return (
-    <header className="border-b border-foreground/10 z-10 px-4 sticky top-0 bg-background/30 backdrop-blur-lg">
-      <div className="flex items-center justify-between h-20 max-w-7xl mx-auto">
+    <header className="border-b border-foreground/10 z-10 px-4 sticky top-0 backdrop-blur-lg">
+      <div className="flex items-center justify-between h-16 max-w-7xl mx-auto">
         <div className="flex items-center justify-center">
           <span className="font-bold text-xl">buildinpubliq</span>
         </div>

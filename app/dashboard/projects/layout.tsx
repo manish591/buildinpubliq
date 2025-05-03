@@ -1,17 +1,16 @@
 import { redirect } from 'next/navigation';
 import { auth } from '@/auth';
-import { LogOut, User } from 'lucide-react';
+import { LogOut, Settings, User } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import ThemeToggle from '@/components/ThemeToggle';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import ThemeToggle from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
 
 export default async function DashboardLayout({
@@ -25,9 +24,9 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen w-full">
-      <header className="border-b border-foreground/10 z-10 px-4 sticky top-0 bg-background/30 backdrop-blur-lg">
-        <div className="flex items-center justify-between h-20 max-w-7xl mx-auto">
+    <div className="min-h-screen w-full bg-secondary/50 dark:bg-secondary/15">
+      <header className="border-b border-foreground/10 z-10 sticky top-0 bg-background backdrop-blur-lg">
+        <div className="flex items-center justify-between h-16 max-w-7xl px-4 mx-auto">
           <div className="flex items-center gap-2">
             <span className="font-bold text-xl">buildinpubliq</span>
           </div>
@@ -65,12 +64,15 @@ export default async function DashboardLayout({
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                  <DropdownMenuItem className="gap-2">
-                    <User className="h-5 w-5" />
-                    Account
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
+                <DropdownMenuItem className="gap-2">
+                  <User className="h-5 w-5" />
+                  Profile
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="gap-2">
+                  <Settings className="h-5 w-5" />
+                  Settings
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="gap-2">
                   <LogOut className="h-5 w-5" />

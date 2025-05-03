@@ -11,7 +11,7 @@ export default async function Home() {
     <div>
       <Navbar />
       <main className="space-y-32 sm:space-y-40">
-        <div className="pt-24 md:pt-32 relative flex w-full flex-col items-center justify-center overflow-hidden bg-background">
+        <div className="pt-24 md:pt-32 relative flex w-full flex-col items-center justify-center overflow-hidden">
           <HeroSection />
           <GridPattern
             width={20}
