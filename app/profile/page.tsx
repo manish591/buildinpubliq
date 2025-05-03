@@ -1,12 +1,6 @@
-import { LogOut, User, Edit, Twitter, Linkedin } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { auth, signOut } from '@/auth';
+import { redirect } from 'next/navigation';
+import { LogOut, Edit, Twitter, Linkedin } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import ThemeToggle from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
@@ -17,8 +11,16 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { NavbarProfileDropdown } from '@/components/navbarProfileDropdown';
 
-export default function Profile() {
+export default async function Profile() {
+  const session = await auth();
+  const user = session?.user;
+
+  if (!user) {
+    return redirect('/login');
+  }
+
   return (
     <div className="min-h-screen w-full bg-secondary/50 dark:bg-secondary/30">
       <header className="border-b border-foreground/10 z-10 sticky top-0 bg-background backdrop-blur-lg">
@@ -28,49 +30,11 @@ export default function Profile() {
           </div>
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  size="icon"
-                  variant="outline"
-                  className="bg-transparent hover:bg-transparent border-0"
-                >
-                  <Avatar className="h-8 w-8 rounded-full">
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-                side={'bottom'}
-                align="end"
-                sideOffset={4}
-              >
-                <DropdownMenuLabel className="p-0 font-normal">
-                  <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                    <Avatar className="h-8 w-8 rounded-lg">
-                      <AvatarImage src="https://github.com/shadcn.png" />
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                    <div className="grid flex-1 text-left text-sm leading-tight">
-                      <span className="truncate font-semibold">manish</span>
-                      <span className="truncate text-xs">manishdevrani777</span>
-                    </div>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="gap-2">
-                  <User className="h-5 w-5" />
-                  Profile
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="gap-2">
-                  <LogOut className="h-5 w-5" />
-                  Log out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <NavbarProfileDropdown
+              name={user.name ?? ''}
+              img={user.image ?? ''}
+              email={user.email ?? ''}
+            />
           </div>
         </div>
       </header>
@@ -78,24 +42,24 @@ export default function Profile() {
         <div className="flex flex-col sm:flex-row justify-between gap-6 sm:gap-0 sm:items-center mb-6">
           <div className="flex gap-4 items-center">
             <Avatar className="h-20 w-20">
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage src={user.image ?? ''} />
+              <AvatarFallback>{user.name ? user.name[0] : 'U'}</AvatarFallback>
             </Avatar>
             <div>
-              <p className="text-lg font-bold">manish devrani</p>
+              <p className="text-lg font-bold">{user.name ?? ''}</p>
               <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">
-                manishdevrani777@gmail.com
+                {user.email ?? ''}
               </p>
             </div>
           </div>
           <div>
-            <Button variant="outline">
+            {/* <Button variant="outline">
               <Edit></Edit>
               <span>edit profile</span>
-            </Button>
+            </Button> */}
           </div>
         </div>
-        <Card className="bg-background mt-6 overflow-hidden border-0 shadow-lg">
+        {/* <Card className="bg-background mt-6 overflow-hidden border-0 shadow-lg">
           <CardHeader className="border-b-2 pb-4">
             <CardTitle>Connected Accounts</CardTitle>
             <CardDescription>
@@ -146,7 +110,7 @@ export default function Profile() {
               </div>
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
         <Card className="bg-background overflow-hidden border-0 shadow-lg mt-6">
           <CardHeader className="border-b pb-4">
             <CardTitle>Account Settings</CardTitle>
@@ -155,7 +119,7 @@ export default function Profile() {
             </CardDescription>
           </CardHeader>
           <CardContent className="p-0">
-            <div className="p-4 flex justify-between items-center">
+            <div className="px-6 py-4 flex justify-between items-center">
               <div>
                 <h3 className="font-medium">Log out from your account</h3>
                 <p className="text-xs text-foreground/50">
@@ -166,6 +130,10 @@ export default function Profile() {
                 variant="destructive"
                 className="flex items-center gap-2"
                 size="sm"
+                onClick={async () => {
+                  'use server';
+                  await signOut();
+                }}
               >
                 <LogOut size={16} />
                 <span>Logout</span>

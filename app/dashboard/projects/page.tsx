@@ -11,7 +11,6 @@ import {
 import { isGithubIntegrationInstalled } from '@/app/actions/github';
 import { auth } from '@/auth';
 import { CreateProjectForm } from '@/components/CreateProjectForm';
-import { DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
 
 export default async function Dashboard() {
   const session = await auth();
