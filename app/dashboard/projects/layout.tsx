@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { auth } from '@/auth';
-import { LogOut, Settings, User } from 'lucide-react';
+import { LogOut, User } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +12,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import ThemeToggle from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default async function DashboardLayout({
   children,
@@ -24,7 +25,7 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen w-full bg-secondary/50 dark:bg-secondary/15">
+    <div className="min-h-screen w-full bg-secondary/50 dark:bg-secondary/30">
       <header className="border-b border-foreground/10 z-10 sticky top-0 bg-background backdrop-blur-lg">
         <div className="flex items-center justify-between h-16 max-w-7xl px-4 mx-auto">
           <div className="flex items-center gap-2">
@@ -65,13 +66,10 @@ export default async function DashboardLayout({
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="gap-2">
-                  <User className="h-5 w-5" />
-                  Profile
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="gap-2">
-                  <Settings className="h-5 w-5" />
-                  Settings
+                  <Link href="/profile" className="flex items-center gap-2">
+                    <User className="h-5 w-5" />
+                    <span>Profile</span>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="gap-2">
