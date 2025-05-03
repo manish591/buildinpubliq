@@ -21,7 +21,7 @@ export default async function ProjectUpdates() {
             manage your announcement posts that are generated from pull requests
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        {/* <div className="flex items-center gap-3">
           <Dialog>
             <DialogTrigger>
               <Button variant="default" className="flex items-center gap-2">
@@ -33,12 +33,11 @@ export default async function ProjectUpdates() {
               <DialogHeader>
                 <DialogTitle className="text-xl">Create new update</DialogTitle>
               </DialogHeader>
-              {/* create new update form here */}
             </DialogContent>
           </Dialog>
-        </div>
+        </div> */}
       </div>
-      <div className="grid gap-8 md:grid-cols-3">
+      {/* <div className="grid gap-8 md:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Drafts</CardTitle>
@@ -71,9 +70,9 @@ export default async function ProjectUpdates() {
             <p className="text-xs text-muted-foreground">Posts published</p>
           </CardContent>
         </Card>
-      </div>
+      </div> */}
       <div className="bg-background rounded-lg shadow-md p-6 mt-6">
-        <Tabs defaultValue="all updates" className="w-full">
+        {/* <Tabs defaultValue="all updates" className="w-full">
           <TabsList>
             <TabsTrigger value="all updates">all updates</TabsTrigger>
             <TabsTrigger value="draft">draft</TabsTrigger>
@@ -92,7 +91,8 @@ export default async function ProjectUpdates() {
           <TabsContent value="published">
             all published updates will show here
           </TabsContent>
-        </Tabs>
+        </Tabs> */}
+        <ProjectUpdatesTable />
       </div>
     </div>
   );

@@ -28,6 +28,8 @@ import {
   Settings,
   User,
   ExternalLink,
+  CirclePlus,
+  FolderPlus,
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -38,110 +40,52 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { getAllUpdates } from '@/app/actions/updates';
+import { CreateNewProject } from './createNewProject';
 
 export default async function ProjectUpdatesTable() {
-  // const { data } = await getAllUpdates();
-  const data = [
-    {
-      id: '1a2b3c',
-      title: 'Build a Portfolio',
-      tagline: 'Showcase your dev journey',
-      description: 'A personal portfolio to showcase my projects.',
-      project: {
-        repositoryUrl: 'https://github.com/johndoe/portfolio',
-        fullName: 'johndoe/portfolio',
-      },
-      repoId: 'repo001',
-      defaultBranch: 'main',
-      language: 'TypeScript',
-      repositoryUpdatedAt: '2025-04-28T14:32:00Z',
-      userId: 'user123',
-      createdAt: new Date('2025-04-01T10:00:00Z'),
-      updatedAt: new Date('2025-04-28T14:32:00Z'),
-    },
-    {
-      id: '4d5e6f',
-      title: 'Chat App',
-      tagline: 'Talk in real time',
-      description: 'A simple real-time chat application using WebSockets.',
-      project: {
-        repositoryUrl: 'https://github.com/janedoe/chat-app',
-        fullName: 'janedoe/chat-app',
-      },
-      repoId: 'repo002',
-      defaultBranch: 'main',
-      language: 'JavaScript',
-      repositoryUpdatedAt: '2025-04-25T16:00:00Z',
-      userId: 'user456',
-      createdAt: new Date('2025-03-15T09:00:00Z'),
-      updatedAt: new Date('2025-04-25T16:00:00Z'),
-    },
-    {
-      id: '7g8h9i',
-      title: 'Task Manager',
-      tagline: 'Stay organized effortlessly',
-      description: 'A task manager with drag-and-drop support.',
-      project: {
-        repositoryUrl: 'https://github.com/bobsmith/task-manager',
-        fullName: 'bobsmith/task-manager',
-      },
-      repoId: 'repo003',
-      defaultBranch: 'develop',
-      language: 'Python',
-      repositoryUpdatedAt: '2025-04-20T08:45:00Z',
-      userId: 'user789',
-      createdAt: new Date('2025-02-20T12:30:00Z'),
-      updatedAt: new Date('2025-04-20T08:45:00Z'),
-    },
-    {
-      id: '0j1k2l',
-      title: 'E-commerce API',
-      tagline: 'Power your online store backend',
-      description: 'A backend API for an e-commerce application.',
-      project: {
-        repositoryUrl: 'https://github.com/alice/ecommerce-api',
-        fullName: 'alice/ecommerce-api',
-      },
-      repoId: 'repo004',
-      defaultBranch: 'main',
-      language: 'Go',
-      repositoryUpdatedAt: '2025-04-22T11:10:00Z',
-      userId: 'user321',
-      createdAt: new Date('2025-01-10T14:00:00Z'),
-      updatedAt: new Date('2025-04-22T11:10:00Z'),
-    },
-    {
-      id: '3m4n5o',
-      title: 'Blog CMS',
-      tagline: 'Manage content with ease',
-      description: 'A headless CMS for managing blog content.',
-      project: {
-        repositoryUrl: 'https://github.com/carol/blog-cms',
-        fullName: 'carol/blog-cms',
-      },
-      repoId: 'repo005',
-      defaultBranch: 'main',
-      language: 'Ruby',
-      repositoryUpdatedAt: '2025-04-30T18:00:00Z',
-      userId: 'user654',
-      createdAt: new Date('2025-03-01T08:15:00Z'),
-      updatedAt: new Date('2025-04-30T18:00:00Z'),
-    },
-  ];
-
+  const { data } = await getAllUpdates();
   return (
     <>
       {data.length <= 0 ? (
-        <div className="py-32">
-          <h2 className="text-2xl text-center">No updates to show</h2>
+        // <div className="py-32 flex items-center justify-center flex-col">
+        //   <h2 className="text-lg text-center">
+        //     No updates. Start working on your projects by creating pull requests
+        //   </h2>
+        //   <Button variant="outline" className="flex items-center gap-2 mt-4">
+        //     <CirclePlus strokeWidth={1} width={16} height={16} />
+        //     <span>Create New update</span>
+        //   </Button>
+        // </div>
+        <div className="flex flex-col items-center justify-center py-16 px-4">
+          <div className="bg-muted/40 rounded-full p-6 mb-6">
+            <FolderPlus className="h-12 w-12 text-muted-foreground" />
+          </div>
+          <h2 className="text-2xl font-semibold mb-2">No updates yet</h2>
+          <p className="text-muted-foreground text-center max-w-md mb-8">
+            You haven't created any updates yet.
+            <br /> Start by creating your first update.
+          </p>
+          <Dialog>
+            <DialogTrigger>
+              <Button variant="default" className="lowercase flex items-center gap-2">
+                <CirclePlus strokeWidth={1} width={16} height={16} />
+                <span>Create New update</span>
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>new updates</DialogHeader>
+            </DialogContent>
+          </Dialog>
         </div>
       ) : (
         <Table className="mt-4">
           <TableHeader>
             <TableRow>
               <TableHead>Content</TableHead>
-              <TableHead className="hidden sm:table-cell">Platforms</TableHead>
-              <TableHead className="hidden sm:table-cell">Status</TableHead>
+              <TableHead className="hidden sm:table-cell">repo</TableHead>
+              {/* <TableHead className="hidden sm:table-cell">Platforms</TableHead>
+              <TableHead className="hidden sm:table-cell">Status</TableHead> */}
               <TableHead className="hidden sm:table-cell">Date</TableHead>
               <TableHead className="text-right sm:table-cell">
                 Actions
@@ -153,13 +97,18 @@ export default async function ProjectUpdatesTable() {
               return (
                 <TableRow key={item.id}>
                   <TableCell>
-                    <div className="text-base line-clamp-2 max-w-xs">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Mollitia beatae eligendi atque vitae sint eaque dicta
-                      fugiat, repellendus blanditiis debitis.
+                    <div className="text-base line-clamp-3 max-w-xs">
+                      {item.description}
                     </div>
                   </TableCell>
-                  <TableCell className="hidden sm:table-cell">
+                  <TableCell>
+                    <div className="text-base line-clamp-1 max-w-56">
+                      <Link href={`/${item.project.repositoryUrl}`}>
+                        {item.project.fullName}
+                      </Link>
+                    </div>
+                  </TableCell>
+                  {/* <TableCell className="hidden sm:table-cell">
                     <div className="flex space-x-1">
                       <Badge
                         variant="outline"
@@ -174,16 +123,16 @@ export default async function ProjectUpdatesTable() {
                         LinkedIn
                       </Badge>
                     </div>
-                  </TableCell>
-                  <TableCell className="hidden sm:table-cell">
+                  </TableCell> */}
+                  {/* <TableCell className="hidden sm:table-cell">
                     <Badge className="text-xs" variant="secondary">
                       Scheduled
                     </Badge>
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell className="hidden md:table-cell">
                     <div className="flex gap-1 items-center">
                       <Check className="h-3 w-3 text-gray-500"></Check>
-                      <span>May 1, 10:30 AM</span>
+                      <span>{item.createdAt.toISOString()}</span>
                     </div>
                   </TableCell>
                   <TableCell className="text-right">
