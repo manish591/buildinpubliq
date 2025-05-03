@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { GitPullRequest, MoveHorizontal } from 'lucide-react';
+import { ExternalLink, GitPullRequest, MoveHorizontal } from 'lucide-react';
 import {
   Card,
   CardHeader,
@@ -50,13 +50,18 @@ export default function ProjectCard({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>
-              <Button className="bg-transparent h-6 px-0 text-foreground no-underline lowercase">
+            {/* <DropdownMenuItem>
+              <Button className="hover:bg-transparent w-full flex justify-start text-left bg-transparent h-5 px-0 text-foreground no-underline lowercase">
                 Edit
               </Button>
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
             <DropdownMenuItem>
-              <Link href={repositoryUrl} target="_blank">
+              <Link
+                href={repositoryUrl}
+                target="_blank"
+                className="w-full flex items-center gap-2"
+              >
+                <ExternalLink className="h-5 w-5 text-gray-500"></ExternalLink>
                 View Repo
               </Link>
             </DropdownMenuItem>
