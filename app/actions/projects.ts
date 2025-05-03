@@ -54,6 +54,39 @@ export async function createProject(title: string, description: string, selected
   }
 }
 
+export async function editProject(id: string, title: string, description: string) {
+  try {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+      return {
+        status: STATUS.ERROR,
+        message: "Unauthorized"
+      }
+    }
+
+    await prisma.project.update({
+      where: {
+        id
+      },
+      data: {
+        title,
+        description
+      }
+    });
+
+    return {
+      status: STATUS.SUCCESS,
+      message: "successfully edited project"
+    }
+  } catch (err) {
+    return {
+      status: STATUS.ERROR,
+      message: "An internal server erorr occured"
+    }
+  }
+}
+
 export async function getAllProjects() {
   try {
     const session = await auth();

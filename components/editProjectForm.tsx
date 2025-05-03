@@ -1,15 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Repository } from '@/app/actions/github';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import ListRepositoriesContainer from '@/components/ListRepositoriesContainer';
-import InstallRepo from '@/components/InstallRepo';
 import {
   Card,
   CardHeader,
@@ -18,29 +13,37 @@ import {
   CardContent,
   CardFooter,
 } from '@/components/ui/card';
-import { createProject } from '@/app/actions/projects';
 import { STATUS } from '@/constants/response';
+import { editProject } from '@/app/actions/projects';
+import { useRouter } from 'next/navigation';
 
-export function CreateProjectForm({
-  isGithubAppInstalled,
-}: Readonly<{ isGithubAppInstalled: boolean }>) {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [selectedRepo, setSelectedRepo] = useState<Repository | null>(null);
+export type EditProjectFormProps = {
+  id: string;
+  title: string;
+  description: string;
+};
+
+export function EditProjectForm({
+  id,
+  title,
+  description,
+}: Readonly<EditProjectFormProps>) {
+  const [projectTitle, setProjectTitle] = useState(title);
+  const [projectDescription, setProjectDescription] = useState(description);
   const router = useRouter();
 
-  async function handleCreateProjectForm(
-    e: React.SyntheticEvent<HTMLButtonElement>,
-  ) {
+  async function handleEditProject(e: React.SyntheticEvent<HTMLButtonElement>) {
     e.preventDefault();
 
-    if (!title || !description || !selectedRepo) {
+    if (!title || !description) {
       console.log('Data is missing');
       return;
     }
 
     try {
-      const data = await createProject(title, description, selectedRepo);
+      const data = await editProject(id, projectTitle, projectDescription);
+
+      console.log('the data', data);
 
       if (data.status === STATUS.SUCCESS) {
         router.refresh();
@@ -58,58 +61,46 @@ export function CreateProjectForm({
     <div className="flex items-center mb-4 md:col-start-2 md:col-span-2">
       <Card className="w-full p-0 border-none shadow-none">
         <CardHeader className="px-2">
-          <CardTitle>Create a New Project</CardTitle>
+          <CardTitle>edit project</CardTitle>
           <CardDescription>
-            Fill out the form to create a new project.
+            fill out the form to edit a project.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 px-2">
           <div className="space-y-2">
-            <Label htmlFor="title">Project Title</Label>
+            <Label htmlFor="title">project title</Label>
             <Input
               id="title"
               placeholder="Enter project title"
               className="bg-transparent"
-              value={title}
+              value={projectTitle}
               onChange={(e) => {
-                setTitle(e.target.value);
+                setProjectTitle(e.target.value);
               }}
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="description">Project Description</Label>
+            <Label htmlFor="description">project description</Label>
             <Textarea
               id="description"
               placeholder="Please add relevant data, This will help us generate meaningful updates"
               className="bg-transparent min-h-[100px]"
-              value={description}
+              value={projectDescription}
               onChange={(e) => {
-                setDescription(e.target.value);
+                setProjectDescription(e.target.value);
               }}
             />
           </div>
-          {isGithubAppInstalled ? (
-            <ListRepositoriesContainer
-              selectedRepo={selectedRepo}
-              setSelectedRepo={setSelectedRepo}
-            />
-          ) : (
-            <InstallRepo />
-          )}
+          {/* add input to display seelcted repo readonly */}
         </CardContent>
         <CardFooter className="mt-6 px-2">
-          <Link href="/dashboard/projects">
-            <Button variant="secondary" className="mr-auto">
-              Cancel
-            </Button>
-          </Link>
           <Button
             type="submit"
             className="ml-auto"
-            disabled={!title || !description || !selectedRepo}
-            onClick={handleCreateProjectForm}
+            disabled={!title || !description}
+            onClick={handleEditProject}
           >
-            Create Project
+            edit project
           </Button>
         </CardFooter>
       </Card>
