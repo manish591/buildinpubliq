@@ -21,7 +21,7 @@ export default async function ProjectUpdates() {
             manage your announcement posts that are generated from pull requests
           </p>
         </div>
-        {/* <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3">
           <Dialog>
             <DialogTrigger>
               <Button variant="default" className="flex items-center gap-2">
@@ -35,7 +35,7 @@ export default async function ProjectUpdates() {
               </DialogHeader>
             </DialogContent>
           </Dialog>
-        </div> */}
+        </div>
       </div>
       {/* <div className="grid gap-8 md:grid-cols-3">
         <Card>
