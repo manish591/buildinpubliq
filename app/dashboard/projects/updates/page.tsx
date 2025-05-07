@@ -1,13 +1,10 @@
-import { CirclePlus, Clock, SquarePen, Wifi } from 'lucide-react';
+import { CirclePlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import ProjectUpdatesTable from '@/components/ProjectUpdatesTable';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { CreateNewUpdate } from '@/components/createNewUpdate';

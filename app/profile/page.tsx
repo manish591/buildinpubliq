@@ -1,6 +1,6 @@
 import { auth, signOut } from '@/auth';
 import { redirect } from 'next/navigation';
-import { LogOut, Edit, Twitter, Linkedin } from 'lucide-react';
+import { LogOut, Twitter, Linkedin } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import ThemeToggle from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
@@ -38,8 +38,8 @@ export default async function Profile() {
           </div>
         </div>
       </header>
-      <div className="w-full max-w-7xl mx-auto mt-10 px-4">
-        <div className="flex flex-col sm:flex-row justify-between gap-6 sm:gap-0 sm:items-center mb-6">
+      <div className="w-full max-w-7xl mx-auto mt-8 px-4 pb-8">
+        <div className="flex flex-col gap-8 items-start mb-6">
           <div className="flex gap-4 items-center">
             <Avatar className="h-20 w-20">
               <AvatarImage src={user.image ?? ''} />
