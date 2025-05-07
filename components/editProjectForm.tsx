@@ -21,12 +21,14 @@ export type EditProjectFormProps = {
   id: string;
   title: string;
   description: string;
+  setIsOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export function EditProjectForm({
   id,
   title,
   description,
+  setIsOpenForm,
 }: Readonly<EditProjectFormProps>) {
   const [projectTitle, setProjectTitle] = useState(title);
   const [projectDescription, setProjectDescription] = useState(description);
@@ -43,22 +45,26 @@ export function EditProjectForm({
     try {
       const data = await editProject(id, projectTitle, projectDescription);
 
-      console.log('the data', data);
-
-      if (data.status === STATUS.SUCCESS) {
-        router.refresh();
-      }
-
       if (data.status === STATUS.ERROR) {
         console.log('ERROR: ', data.message);
+        return;
+      }
+
+      if (data.status === STATUS.SUCCESS) {
+        setIsOpenForm(false);
+        router.refresh();
+        console.log('project edited successfully');
       }
     } catch (err) {
       console.log('Error occured', err);
+    } finally {
+      setProjectTitle('');
+      setProjectDescription('');
     }
   }
 
   return (
-    <div className="flex items-center mb-4 md:col-start-2 md:col-span-2">
+    <div className="flex items-center md:col-start-2 md:col-span-2">
       <Card className="w-full p-0 border-none shadow-none">
         <CardHeader className="px-2">
           <CardTitle>edit project</CardTitle>
@@ -91,9 +97,19 @@ export function EditProjectForm({
               }}
             />
           </div>
-          {/* add input to display seelcted repo readonly */}
         </CardContent>
-        <CardFooter className="mt-6 px-2">
+        <CardFooter className="mt-6 px-2 pb-0">
+          <Button
+            onClick={() => {
+              setProjectTitle('');
+              setProjectDescription('');
+              setIsOpenForm(false);
+            }}
+            variant="secondary"
+            className="mr-auto"
+          >
+            cancel
+          </Button>
           <Button
             type="submit"
             className="ml-auto"

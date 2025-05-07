@@ -1,11 +1,7 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import {
-  Edit,
-  ExternalLink,
-  GitPullRequest,
-  MoveHorizontal,
-} from 'lucide-react';
+import { GitPullRequest } from 'lucide-react';
+import { timeAgo } from '@/utils/date';
+import { ProjectCardDropdown } from './projectCardActionDropdown';
 import {
   Card,
   CardHeader,
@@ -13,21 +9,6 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/ui/card';
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from '@/components/ui/dropdown-menu';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { timeAgo } from '@/utils/date';
-import { EditProjectForm } from './editProjectForm';
 
 interface ProjectCardProps {
   id: string;
@@ -55,45 +36,12 @@ export default function ProjectCard({
           <CardTitle>{title}</CardTitle>
           <CardDescription>{fullName}</CardDescription>
         </div>
-        <Dialog>
-          <DropdownMenu modal={false}>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="ml-auto">
-                <MoveHorizontal className="w-4 h-4" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem>
-                <DialogTrigger className="w-full">
-                  <Button className="hover:bg-transparent w-full flex justify-start text-left bg-transparent h-5 px-0 text-foreground no-underline lowercase">
-                    <Edit className="h-5 w-5 text-gray-500"></Edit>
-                    <span>Edit</span>
-                  </Button>
-                </DialogTrigger>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link
-                  href={repositoryUrl}
-                  target="_blank"
-                  className="w-full flex items-center gap-2"
-                >
-                  <ExternalLink className="h-5 w-5 text-gray-500"></ExternalLink>
-                  View Repo
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-            <DialogContent>
-              <DialogHeader>
-                <EditProjectForm
-                  id={id}
-                  title={title}
-                  description={description}
-                />
-              </DialogHeader>
-            </DialogContent>
-          </DropdownMenu>
-        </Dialog>
+        <ProjectCardDropdown
+          id={id}
+          title={title}
+          description={description}
+          repositoryUrl={repositoryUrl}
+        />
       </CardHeader>
       <CardContent className="grid gap-2">
         <div className="text-sm">{description}</div>
