@@ -52,12 +52,7 @@ export default async function Profile() {
               </p>
             </div>
           </div>
-          <div>
-            <Button variant="outline">
-              <Edit></Edit>
-              <span>edit profile</span>
-            </Button>
-          </div>
+          <div></div>
         </div>
         <Card className="bg-background mt-6 overflow-hidden border-0 shadow-lg">
           <CardHeader className="border-b-2 pb-4">
