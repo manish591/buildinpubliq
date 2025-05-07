@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { CreateNewUpdate } from '@/components/createNewUpdate';
 
 export default async function ProjectUpdates() {
   return (
@@ -31,7 +32,7 @@ export default async function ProjectUpdates() {
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle className="text-xl">Create new update</DialogTitle>
+                <CreateNewUpdate />
               </DialogHeader>
             </DialogContent>
           </Dialog>

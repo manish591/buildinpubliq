@@ -53,13 +53,13 @@ export default async function Profile() {
             </div>
           </div>
           <div>
-            {/* <Button variant="outline">
+            <Button variant="outline">
               <Edit></Edit>
               <span>edit profile</span>
-            </Button> */}
+            </Button>
           </div>
         </div>
-        {/* <Card className="bg-background mt-6 overflow-hidden border-0 shadow-lg">
+        <Card className="bg-background mt-6 overflow-hidden border-0 shadow-lg">
           <CardHeader className="border-b-2 pb-4">
             <CardTitle>Connected Accounts</CardTitle>
             <CardDescription>
@@ -110,7 +110,7 @@ export default async function Profile() {
               </div>
             </div>
           </CardContent>
-        </Card> */}
+        </Card>
         <Card className="bg-background overflow-hidden border-0 shadow-lg mt-6">
           <CardHeader className="border-b pb-4">
             <CardTitle>Account Settings</CardTitle>

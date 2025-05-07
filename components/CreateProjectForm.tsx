@@ -55,15 +55,15 @@ export function CreateProjectForm({
   }
 
   return (
-    <div className="flex items-center mb-4 md:col-start-2 md:col-span-2">
+    <div className="flex items-center md:col-start-2 md:col-span-2">
       <Card className="w-full p-0 border-none shadow-none">
-        <CardHeader className="px-2">
+        <CardHeader className="px-0">
           <CardTitle>Create a New Project</CardTitle>
           <CardDescription>
             Fill out the form to create a new project.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4 px-2">
+        <CardContent className="space-y-4 px-0">
           <div className="space-y-2">
             <Label htmlFor="title">Project Title</Label>
             <Input
@@ -80,7 +80,7 @@ export function CreateProjectForm({
             <Label htmlFor="description">Project Description</Label>
             <Textarea
               id="description"
-              placeholder="Please add relevant data, This will help us generate meaningful updates"
+              placeholder="please add relevant data, this will help us generate meaningful updates"
               className="bg-transparent min-h-[100px]"
               value={description}
               onChange={(e) => {
@@ -88,19 +88,15 @@ export function CreateProjectForm({
               }}
             />
           </div>
-          {isGithubAppInstalled ? (
-            <ListRepositoriesContainer
-              selectedRepo={selectedRepo}
-              setSelectedRepo={setSelectedRepo}
-            />
-          ) : (
-            <InstallRepo />
-          )}
+          <ListRepositoriesContainer
+            selectedRepo={selectedRepo}
+            setSelectedRepo={setSelectedRepo}
+          />
         </CardContent>
-        <CardFooter className="mt-6 px-2">
+        <CardFooter className="px-0 pt-6">
           <Link href="/dashboard/projects">
             <Button variant="secondary" className="mr-auto">
-              Cancel
+              cancel
             </Button>
           </Link>
           <Button
@@ -109,7 +105,7 @@ export function CreateProjectForm({
             disabled={!title || !description || !selectedRepo}
             onClick={handleCreateProjectForm}
           >
-            Create Project
+            create project
           </Button>
         </CardFooter>
       </Card>

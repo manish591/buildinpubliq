@@ -7,9 +7,8 @@ export default async function DashboardLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const session = await auth();
-  const user = session?.user;
 
-  if (!user) {
+  if (!session?.user) {
     return redirect('/login');
   }
 
@@ -23,9 +22,9 @@ export default async function DashboardLayout({
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <NavbarProfileDropdown
-              name={user.name ?? ''}
-              img={user.image ?? ''}
-              email={user.email ?? ''}
+              name={session.user.name ?? ''}
+              img={session.user.image ?? ''}
+              email={session.user.email ?? ''}
             />
           </div>
         </div>

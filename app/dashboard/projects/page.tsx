@@ -1,9 +1,21 @@
 import Link from 'next/link';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
+import { ExternalLink } from 'lucide-react';
 import { ProjectsGrid } from '@/components/ProjectsGrid';
 import { Button } from '@/components/ui/button';
 import { CreateNewProject } from '@/components/createNewProject';
+import { isGithubIntegrationInstalled } from '@/app/actions/github';
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    return redirect('/login');
+  }
+
+  const isGithubInstalled = await isGithubIntegrationInstalled(session.user.id);
+
   return (
     <div className="w-full max-w-7xl mx-auto mt-10 px-4">
       <div className="flex flex-col sm:flex-row justify-between gap-6 sm:gap-0 sm:items-center mb-6">
@@ -14,11 +26,17 @@ export default function Dashboard() {
           </p>
         </div>
         <div className="flex gap-3">
-          <Link href="/dashboard/projects/updates">
-            <Button variant="outline" className="rounded-lg text-sm">
-              View Updates
-            </Button>
-          </Link>
+          {isGithubInstalled && (
+            <Link href="#">
+              <Button
+                variant="outline"
+                className="rounded-lg text-sm flex items-center"
+              >
+                <span>github plugin settings</span>
+                <ExternalLink></ExternalLink>
+              </Button>
+            </Link>
+          )}
           <CreateNewProject />
         </div>
       </div>

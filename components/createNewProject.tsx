@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/dialog';
 import { CirclePlus } from 'lucide-react';
 import { CreateProjectForm } from './CreateProjectForm';
+import InstallRepo from '@/components/InstallRepo';
 
 export async function CreateNewProject() {
   const session = await auth();
@@ -25,7 +26,11 @@ export async function CreateNewProject() {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <CreateProjectForm isGithubAppInstalled={isGithubAppInstalled} />
+          {isGithubAppInstalled ? (
+            <CreateProjectForm isGithubAppInstalled={isGithubAppInstalled} />
+          ) : (
+            <InstallRepo />
+          )}
         </DialogHeader>
       </DialogContent>
     </Dialog>
