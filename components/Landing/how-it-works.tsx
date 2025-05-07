@@ -63,7 +63,7 @@ export default function HowItWorks() {
           </div>
         </div>
         <div className="flex justify-center mt-12">
-          <Link href="/login" className="inline-block">
+          <Link href="/auth" className="inline-block">
             <Button
               variant="outline"
               className="rounded-md h-12 px-6 gap-2 text-base"

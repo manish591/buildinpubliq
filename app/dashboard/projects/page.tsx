@@ -11,7 +11,7 @@ export default async function Dashboard() {
   const session = await auth();
 
   if (!session?.user?.id) {
-    return redirect('/login');
+    return redirect('/auth');
   }
 
   const isGithubInstalled = await isGithubIntegrationInstalled(session.user.id);

@@ -14,7 +14,7 @@ export function HeroSection() {
         each for better visibility.
       </p>
       <div className="flex items-center gap-6 justify-center mt-10">
-        <Link href="/login" className="inline-block">
+        <Link href="/auth" className="inline-block">
           <Button className="rounded-md h-12 px-6 gap-2 text-base">
             <span className="font-bold">Start Your Journey - It's Free </span>
             <ArrowRight className="h-10"></ArrowRight>

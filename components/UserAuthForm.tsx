@@ -14,7 +14,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   }
 
   return (
-    <div className={cn('grid gap-6', className)} {...props}>
+    <div className={cn('grid gap-6 w-[90%] mx-auto', className)} {...props}>
       <Button variant="outline" type="button" onClick={handleLoginUser}>
         <Image
           src="/github.svg"
