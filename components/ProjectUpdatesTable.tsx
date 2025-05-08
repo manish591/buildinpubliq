@@ -34,6 +34,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { CreateNewUpdate } from './createNewUpdate';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
+import { getConnectedChannels } from '@/app/profile/actions';
 
 export type TUpdates = {
   id: string;
@@ -52,6 +56,20 @@ export type TUpdates = {
 export default async function ProjectUpdatesTable({
   data,
 }: Readonly<{ data: TUpdates[] }>) {
+  const session = await auth();
+
+  if (!session?.user) {
+    return redirect('/auth');
+  }
+
+  const channelData = await getConnectedChannels(session.user.id ?? '');
+  const isLinkedinConnected = channelData.some(
+    (channel) => channel.platform == 'LINKEDIN',
+  );
+  const isTwitterConnected = channelData.some(
+    (channel) => channel.platform == 'TWITTER',
+  );
+
   return (
     <>
       {data.length <= 0 ? (
@@ -75,7 +93,10 @@ export default async function ProjectUpdatesTable({
               </Button>
             </DialogTrigger>
             <DialogContent>
-              <DialogHeader>new updates</DialogHeader>
+              <CreateNewUpdate
+                isLinkedinConnected={isLinkedinConnected}
+                isTwitterConnected={isTwitterConnected}
+              />
             </DialogContent>
           </Dialog>
         </div>

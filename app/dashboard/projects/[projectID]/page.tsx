@@ -1,5 +1,6 @@
+import { auth } from '@/auth';
+import { notFound, redirect } from 'next/navigation';
 import { CirclePlus, Clock, SquarePen, Wifi } from 'lucide-react';
-import { notFound } from 'next/navigation';
 import getProjectDetails from '@/app/actions/projects';
 import { Button } from '@/components/ui/button';
 import ProjectUpdatesTable from '@/components/ProjectUpdatesTable';
@@ -13,10 +14,17 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { getAllProjectUpdates } from './actions';
+import { getConnectedChannels } from '@/app/profile/actions';
 
 export default async function ProjectUpdates({
   params,
 }: Readonly<{ params: Promise<{ projectID: string }> }>) {
+  const session = await auth();
+
+  if (!session?.user) {
+    return redirect('/auth');
+  }
+
   const { projectID } = await params;
   const projectDetails = await getProjectDetails(projectID);
 
@@ -31,6 +39,14 @@ export default async function ProjectUpdates({
   );
   const publishedUpdates = allUpdates.filter(
     (update) => update.status === 'PUBLISHED',
+  );
+
+  const channelData = await getConnectedChannels(session.user.id ?? '');
+  const isLinkedinConnected = channelData.some(
+    (channel) => channel.platform == 'LINKEDIN',
+  );
+  const isTwitterConnected = channelData.some(
+    (channel) => channel.platform == 'TWITTER',
   );
 
   return (
@@ -52,7 +68,10 @@ export default async function ProjectUpdates({
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <CreateNewUpdate />
+                <CreateNewUpdate
+                  isLinkedinConnected={isLinkedinConnected}
+                  isTwitterConnected={isTwitterConnected}
+                />
               </DialogHeader>
             </DialogContent>
           </Dialog>
