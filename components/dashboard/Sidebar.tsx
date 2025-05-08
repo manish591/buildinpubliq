@@ -16,13 +16,13 @@ export function Sidebar({
       {children}
       <div className="mt-6">
         <h2 className="pl-2 text-sm text-muted-foreground">Projects</h2>
-        <Link href="/dashboard/projects">
+        <Link href="/dashboard">
           <div className="p-2 hover:bg-muted trasition rounded-md mt-2 flex items-center gap-2">
             <FolderKanban strokeWidth={1} width={16} height={16} />
             <span>My Projects</span>
           </div>
         </Link>
-        <Link href="/dashboard/projects/updates">
+        <Link href="#">
           <div className="p-2 hover:bg-muted trasition rounded-md flex items-center gap-2">
             <History strokeWidth={1} width={16} height={16} />
             <span>View Updates</span>

@@ -9,7 +9,7 @@ export default async function Login() {
   const session = await auth();
 
   if (session?.user) {
-    return redirect('/dashboard/projects');
+    return redirect('/dashboard');
   }
 
   return (

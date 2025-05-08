@@ -1,7 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { Edit, ExternalLink, MoveHorizontal } from 'lucide-react';
+import { useState } from 'react';
+import { Edit, ExternalLink, MoveHorizontal, RefreshCcw } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { EditProjectForm } from '@/components/editProjectForm';
 import {
   Dialog,
   DialogContent,
@@ -14,9 +17,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
-import { EditProjectForm } from './editProjectForm';
-import { useState } from 'react';
 
 export type ProjectCardDropdownProps = {
   id: string;
@@ -59,6 +59,15 @@ export function ProjectCardDropdown({
             >
               <ExternalLink className="h-5 w-5 text-gray-500"></ExternalLink>
               View Repo
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link
+              href={`/dashboard/projects/${id}`}
+              className="w-full flex items-center gap-2"
+            >
+              <RefreshCcw className="h-5 w-5 text-gray-500"></RefreshCcw>
+              view updates
             </Link>
           </DropdownMenuItem>
         </DropdownMenuContent>

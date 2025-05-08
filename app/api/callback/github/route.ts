@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
       }
     });
 
-    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/dashboard/projects`);
+    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/dashboard`);
   } else {
     return NextResponse.json({ message: "Unsupported action" }, { status: 400 });
   }

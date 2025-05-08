@@ -120,34 +120,20 @@ export async function getAllProjects() {
 }
 
 export default async function getProjectDetails(id: string) {
-  try {
-    const data = await prisma.project.findFirst({
-      where: {
-        OR: [
-          { repoId: id },
-          { id }
-        ]
-      }
-    });
+  const session = await auth();
 
-    if (!data) {
-      return {
-        status: STATUS.ERROR,
-        message: "Not found",
-        data: null
-      }
-    }
-
-    return {
-      status: STATUS.SUCCESS,
-      message: "successfully returned project details",
-      data
-    }
-  } catch (err) {
-    return {
-      status: STATUS.ERROR,
-      message: "An internal server error occured",
-      data: null
-    }
+  if (!session?.user) {
+    throw new Error("unauthenticated");
   }
+
+  const data = await prisma.project.findFirst({
+    where: {
+      OR: [
+        { repoId: id },
+        { id }
+      ]
+    }
+  });
+
+  return data;
 }

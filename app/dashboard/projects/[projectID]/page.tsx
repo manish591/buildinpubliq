@@ -8,15 +8,26 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { CreateNewUpdate } from '@/components/createNewUpdate';
+import getProjectDetails from '@/app/actions/projects';
+import { notFound } from 'next/navigation';
 
-export default async function ProjectUpdates() {
+export default async function ProjectUpdates({
+  params,
+}: Readonly<{ params: Promise<{ projectID: string }> }>) {
+  const { projectID } = await params;
+  const projectDetails = await getProjectDetails(projectID);
+
+  if (projectDetails == null) {
+    notFound();
+  }
+
   return (
     <div className="w-full max-w-7xl mx-auto mt-8 pb-8 px-4">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <p className="text-lg font-bold">my updates</p>
+          <p className="text-lg font-bold">{projectDetails.title}</p>
           <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">
-            manage your announcement posts that are generated from pull requests
+            {projectDetails.description}
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -24,7 +35,7 @@ export default async function ProjectUpdates() {
             <DialogTrigger>
               <Button variant="default" className="flex items-center gap-2">
                 <CirclePlus strokeWidth={1} width={16} height={16} />
-                <span>Create New update</span>
+                <span>create new update</span>
               </Button>
             </DialogTrigger>
             <DialogContent>
