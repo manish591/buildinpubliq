@@ -1,5 +1,14 @@
 import Link from 'next/link';
-import { timeAgo } from '@/utils/date';
+import { SocialPlateform, Status } from '@prisma/client';
+import {
+  Check,
+  Delete,
+  Edit,
+  Ellipsis,
+  ExternalLink,
+  CirclePlus,
+  FolderPlus,
+} from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -19,44 +28,33 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import {
-  Check,
-  Delete,
-  Edit,
-  Ellipsis,
-  EllipsisVertical,
-  LogOut,
-  Settings,
-  User,
-  ExternalLink,
-  CirclePlus,
-  FolderPlus,
-} from 'lucide-react';
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { getAllUpdates } from '@/app/actions/updates';
-import { CreateNewProject } from './createNewProject';
 
-export default async function ProjectUpdatesTable() {
-  const { data } = await getAllUpdates();
+export type TUpdates = {
+  id: string;
+  tagline: string;
+  description: string;
+  projectId: string;
+  userId: string;
+  scheduledAt: Date | null;
+  postedAt: Date | null;
+  status: Status;
+  channel: SocialPlateform[];
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export default async function ProjectUpdatesTable({
+  data,
+}: Readonly<{ data: TUpdates[] }>) {
   return (
     <>
       {data.length <= 0 ? (
-        // <div className="py-32 flex items-center justify-center flex-col">
-        //   <h2 className="text-lg text-center">
-        //     No updates. Start working on your projects by creating pull requests
-        //   </h2>
-        //   <Button variant="outline" className="flex items-center gap-2 mt-4">
-        //     <CirclePlus strokeWidth={1} width={16} height={16} />
-        //     <span>Create New update</span>
-        //   </Button>
-        // </div>
         <div className="flex flex-col items-center justify-center py-16 px-4">
           <div className="bg-muted/40 rounded-full p-6 mb-6">
             <FolderPlus className="h-12 w-12 text-muted-foreground" />
@@ -68,7 +66,10 @@ export default async function ProjectUpdatesTable() {
           </p>
           <Dialog>
             <DialogTrigger>
-              <Button variant="default" className="lowercase flex items-center gap-2">
+              <Button
+                variant="default"
+                className="lowercase flex items-center gap-2"
+              >
                 <CirclePlus strokeWidth={1} width={16} height={16} />
                 <span>Create New update</span>
               </Button>
@@ -84,8 +85,8 @@ export default async function ProjectUpdatesTable() {
             <TableRow>
               <TableHead>Content</TableHead>
               <TableHead className="hidden sm:table-cell">repo</TableHead>
-              {/* <TableHead className="hidden sm:table-cell">Platforms</TableHead>
-              <TableHead className="hidden sm:table-cell">Status</TableHead> */}
+              <TableHead className="hidden sm:table-cell">Platforms</TableHead>
+              <TableHead className="hidden sm:table-cell">Status</TableHead>
               <TableHead className="hidden sm:table-cell">Date</TableHead>
               <TableHead className="text-right sm:table-cell">
                 Actions
@@ -103,12 +104,10 @@ export default async function ProjectUpdatesTable() {
                   </TableCell>
                   <TableCell>
                     <div className="text-base line-clamp-1 max-w-56">
-                      <Link href={`/${item.project.repositoryUrl}`}>
-                        {item.project.fullName}
-                      </Link>
+                      <Link href="/">will decide</Link>
                     </div>
                   </TableCell>
-                  {/* <TableCell className="hidden sm:table-cell">
+                  <TableCell className="hidden sm:table-cell">
                     <div className="flex space-x-1">
                       <Badge
                         variant="outline"
@@ -123,12 +122,12 @@ export default async function ProjectUpdatesTable() {
                         LinkedIn
                       </Badge>
                     </div>
-                  </TableCell> */}
-                  {/* <TableCell className="hidden sm:table-cell">
+                  </TableCell>
+                  <TableCell className="hidden sm:table-cell">
                     <Badge className="text-xs" variant="secondary">
                       Scheduled
                     </Badge>
-                  </TableCell> */}
+                  </TableCell>
                   <TableCell className="hidden md:table-cell">
                     <div className="flex gap-1 items-center">
                       <Check className="h-3 w-3 text-gray-500"></Check>

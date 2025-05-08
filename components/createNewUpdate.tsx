@@ -1,15 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Repository } from '@/app/actions/github';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import ListRepositoriesContainer from '@/components/ListRepositoriesContainer';
-import InstallRepo from '@/components/InstallRepo';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Card,
   CardHeader,
@@ -18,9 +12,6 @@ import {
   CardContent,
   CardFooter,
 } from '@/components/ui/card';
-import { createProject } from '@/app/actions/projects';
-import { STATUS } from '@/constants/response';
-import { Checkbox } from '@/components/ui/checkbox';
 import {
   Select,
   SelectContent,

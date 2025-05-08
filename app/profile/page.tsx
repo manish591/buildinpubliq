@@ -12,14 +12,22 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { NavbarProfileDropdown } from '@/components/navbarProfileDropdown';
+import { getConnectedChannels } from './actions';
 
 export default async function Profile() {
   const session = await auth();
-  const user = session?.user;
 
-  if (!user) {
+  if (!session?.user) {
     return redirect('/auth');
   }
+
+  const channelData = await getConnectedChannels(session.user.id ?? '');
+  const isLinkedinConnected = channelData.find(
+    (channel) => channel.platform == 'LINKEDIN',
+  );
+  const isTwitterConnected = channelData.find(
+    (channel) => channel.platform == 'TWITTER',
+  );
 
   return (
     <div className="min-h-screen w-full bg-secondary/50 dark:bg-secondary/30">
@@ -31,9 +39,9 @@ export default async function Profile() {
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <NavbarProfileDropdown
-              name={user.name ?? ''}
-              img={user.image ?? ''}
-              email={user.email ?? ''}
+              name={session.user.name ?? ''}
+              img={session.user.image ?? ''}
+              email={session.user.email ?? ''}
             />
           </div>
         </div>
@@ -42,13 +50,15 @@ export default async function Profile() {
         <div className="flex flex-col gap-8 items-start mb-6">
           <div className="flex gap-4 items-center">
             <Avatar className="h-20 w-20">
-              <AvatarImage src={user.image ?? ''} />
-              <AvatarFallback>{user.name ? user.name[0] : 'U'}</AvatarFallback>
+              <AvatarImage src={session.user.image ?? ''} />
+              <AvatarFallback>
+                {session.user.name ? session.user.name[0] : 'U'}
+              </AvatarFallback>
             </Avatar>
             <div>
-              <p className="text-lg font-bold">{user.name ?? ''}</p>
+              <p className="text-lg font-bold">{session.user.name ?? ''}</p>
               <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">
-                {user.email ?? ''}
+                {session.user.email ?? ''}
               </p>
             </div>
           </div>
@@ -56,7 +66,7 @@ export default async function Profile() {
         </div>
         <Card className="bg-background mt-6 overflow-hidden border-0 shadow-lg">
           <CardHeader className="border-b-2 pb-4">
-            <CardTitle>Connected Accounts</CardTitle>
+            <CardTitle>connected channels</CardTitle>
             <CardDescription>
               Manage your connected social media accounts
             </CardDescription>
@@ -77,9 +87,13 @@ export default async function Profile() {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-medium text-slate-500">
-                      Disconnected
-                    </span>
+                    {isTwitterConnected ? (
+                      <span className="text-xs font-medium text-green-500">
+                        connected
+                      </span>
+                    ) : (
+                      <Button>connect</Button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -97,9 +111,13 @@ export default async function Profile() {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-medium text-slate-500">
-                      Disconnected
-                    </span>
+                    {isLinkedinConnected ? (
+                      <span className="text-xs font-medium text-green-500">
+                        connected
+                      </span>
+                    ) : (
+                      <Button>connect</Button>
+                    )}
                   </div>
                 </div>
               </div>
