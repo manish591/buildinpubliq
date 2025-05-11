@@ -93,10 +93,12 @@ export default async function ProjectUpdatesTable({
               </Button>
             </DialogTrigger>
             <DialogContent>
-              <CreateNewUpdate
-                isLinkedinConnected={isLinkedinConnected}
-                isTwitterConnected={isTwitterConnected}
-              />
+              <DialogHeader>
+                <CreateNewUpdate
+                  isLinkedinConnected={isLinkedinConnected}
+                  isTwitterConnected={isTwitterConnected}
+                />
+              </DialogHeader>
             </DialogContent>
           </Dialog>
         </div>

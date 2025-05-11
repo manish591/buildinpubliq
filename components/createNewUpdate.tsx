@@ -65,7 +65,7 @@ export function CreateNewUpdate({
                 <p className="block text-sm font-medium mb-2">Platforms</p>
                 <div className="flex space-x-4">
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="twitter" disabled={isTwitterConnected} />
+                    <Checkbox id="twitter" disabled={!isTwitterConnected} />
                     <label
                       htmlFor="twitter"
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -75,7 +75,7 @@ export function CreateNewUpdate({
                   </div>
 
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="linkedin" disabled={isLinkedinConnected} />
+                    <Checkbox id="linkedin" disabled={!isLinkedinConnected} />
                     <label
                       htmlFor="linkedin"
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
