@@ -92,7 +92,7 @@ export default async function ProjectUpdatesTable({
                 <span>Create New update</span>
               </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="p-0">
               <DialogHeader>
                 <CreateNewUpdate
                   isLinkedinConnected={isLinkedinConnected}

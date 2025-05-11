@@ -1,5 +1,6 @@
 "use server";
 
+import { auth } from "@/auth";
 import { STATUS } from "@/constants/response";
 import { prisma } from "@/prisma/src";
 
@@ -45,4 +46,14 @@ export async function getAllUpdates() {
       data: []
     }
   }
+}
+
+export async function createNewUpdate() {
+  const session = await auth();
+
+  if (!session?.user) {
+    throw new Error("unauthenticated");
+  }
+
+
 }
