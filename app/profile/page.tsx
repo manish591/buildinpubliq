@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/card';
 import { NavbarProfileDropdown } from '@/components/navbarProfileDropdown';
 import { getConnectedChannels } from './actions';
+import { ConnectLinkedin } from '@/components/connecteLinkedin';
 
 export default async function Profile() {
   const session = await auth();
@@ -88,7 +89,7 @@ export default async function Profile() {
                   </div>
                   <div className="flex items-center gap-3">
                     {isTwitterConnected ? (
-                      <span className="text-xs font-medium text-green-500">
+                      <span className="text-sm font-medium text-green-500">
                         connected
                       </span>
                     ) : (
@@ -112,11 +113,11 @@ export default async function Profile() {
                   </div>
                   <div className="flex items-center gap-3">
                     {isLinkedinConnected ? (
-                      <span className="text-xs font-medium text-green-500">
+                      <span className="text-sm font-medium text-green-500">
                         connected
                       </span>
                     ) : (
-                      <Button>connect</Button>
+                      <ConnectLinkedin />
                     )}
                   </div>
                 </div>

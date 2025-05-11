@@ -47,8 +47,8 @@ model Channel {
   id           String          @id @default(uuid())
   platform     SocialPlateform
   accessToken  String
-  expiredAt    String
-  accountName  String
+  expiresIn    DateTime
+  accountName  String?
   accountImg   String?
   accountEmail String?
   userId       String
