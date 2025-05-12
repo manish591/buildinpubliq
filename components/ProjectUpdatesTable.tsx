@@ -1,13 +1,13 @@
 import Link from 'next/link';
-import { SocialPlateform, Status } from '@prisma/client';
+import { SocialPlatform, Status } from '@prisma/client';
 import {
   Check,
   Delete,
   Edit,
   Ellipsis,
-  ExternalLink,
   CirclePlus,
   FolderPlus,
+  Clock,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -38,6 +38,7 @@ import { CreateNewUpdate } from './createNewUpdate';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import { getConnectedChannels } from '@/app/profile/actions';
+import { format } from 'date-fns';
 
 export type TUpdates = {
   id: string;
@@ -48,14 +49,15 @@ export type TUpdates = {
   scheduledAt: Date | null;
   postedAt: Date | null;
   status: Status;
-  channel: SocialPlateform[];
+  channel: SocialPlatform[];
   createdAt: Date;
   updatedAt: Date;
 };
 
 export default async function ProjectUpdatesTable({
   data,
-}: Readonly<{ data: TUpdates[] }>) {
+  projectId,
+}: Readonly<{ data: TUpdates[]; projectId: string }>) {
   const session = await auth();
 
   if (!session?.user) {
@@ -97,6 +99,7 @@ export default async function ProjectUpdatesTable({
                 <CreateNewUpdate
                   isLinkedinConnected={isLinkedinConnected}
                   isTwitterConnected={isTwitterConnected}
+                  projectId={projectId}
                 />
               </DialogHeader>
             </DialogContent>
@@ -107,7 +110,6 @@ export default async function ProjectUpdatesTable({
           <TableHeader>
             <TableRow>
               <TableHead>Content</TableHead>
-              <TableHead className="hidden sm:table-cell">repo</TableHead>
               <TableHead className="hidden sm:table-cell">Platforms</TableHead>
               <TableHead className="hidden sm:table-cell">Status</TableHead>
               <TableHead className="hidden sm:table-cell">Date</TableHead>
@@ -121,41 +123,44 @@ export default async function ProjectUpdatesTable({
               return (
                 <TableRow key={item.id}>
                   <TableCell>
-                    <div className="text-base line-clamp-3 max-w-xs">
+                    <div className="text-base line-clamp-3 max-w-sm">
                       {item.description}
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="text-base line-clamp-1 max-w-56">
-                      <Link href="/">will decide</Link>
                     </div>
                   </TableCell>
                   <TableCell className="hidden sm:table-cell">
                     <div className="flex space-x-1">
-                      <Badge
-                        variant="outline"
-                        className="bg-blue-50 text-blue-700 border-blue-200"
-                      >
-                        Twitter
-                      </Badge>
-                      <Badge
-                        variant="outline"
-                        className="bg-blue-50 text-blue-800 border-blue-200"
-                      >
-                        LinkedIn
-                      </Badge>
+                      {item.channel.map((channelName) => {
+                        return (
+                          <Badge
+                            key={channelName}
+                            variant="outline"
+                            className="bg-blue-50 text-blue-700 border-blue-200"
+                          >
+                            {channelName}
+                          </Badge>
+                        );
+                      })}
                     </div>
                   </TableCell>
                   <TableCell className="hidden sm:table-cell">
                     <Badge className="text-xs" variant="secondary">
-                      Scheduled
+                      {item.status}
                     </Badge>
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
-                    <div className="flex gap-1 items-center">
-                      <Check className="h-3 w-3 text-gray-500"></Check>
-                      <span>{item.createdAt.toISOString()}</span>
-                    </div>
+                    {item.status != 'DRAFT' && (
+                      <div className="flex gap-1 items-center">
+                        {item.status === 'SCHEDULED' ? (
+                          <Clock className="h-3 w-3 text-gray-500"></Clock>
+                        ) : (
+                          <Check className="h-3 w-3 text-green-500"></Check>
+                        )}
+                        <span className="mb-[3px]">
+                          {item.scheduledAt &&
+                            format(item?.scheduledAt, 'LLLL d, HH:mm aaa')}
+                        </span>
+                      </div>
+                    )}
                   </TableCell>
                   <TableCell className="text-right">
                     <Dialog>
@@ -189,11 +194,6 @@ export default async function ProjectUpdatesTable({
                           <DropdownMenuItem className="gap-2">
                             <Delete className="h-5 w-5 text-gray-500" />
                             Delete
-                          </DropdownMenuItem>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem className="gap-2">
-                            <ExternalLink className="h-5 w-5 text-gray-500" />
-                            pull request
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>

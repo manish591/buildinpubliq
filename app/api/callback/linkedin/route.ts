@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { prisma } from "@/prisma/src";
-import { SocialPlateform } from "@prisma/client";
+import { SocialPlatform } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
 
   await prisma.channel.create({
     data: {
-      platform: SocialPlateform.LINKEDIN,
+      platform: SocialPlatform.LINKEDIN,
       accessToken: data.access_token,
       expiresIn: new Date(Date.now() + data.expires_in * 1000),
       accountName: session.user.name ?? "",

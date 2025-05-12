@@ -44,8 +44,8 @@ model GithubIntegration {
 }
 
 model Channel {
-  id           String          @id @default(uuid())
-  platform     SocialPlateform
+  id           String         @id @default(uuid())
+  platform     SocialPlatform
   accessToken  String
   expiresIn    DateTime
   accountName  String?
@@ -79,7 +79,7 @@ model Project {
 }
 
 model ProjectUpdate {
-  id          String            @id @default(cuid())
+  id          String           @id @default(cuid())
   tagline     String
   description String
   projectId   String
@@ -87,7 +87,7 @@ model ProjectUpdate {
   scheduledAt DateTime?
   postedAt    DateTime?
   status      Status
-  channel     SocialPlateform[]
+  channel     SocialPlatform[]
 
   project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -141,7 +141,7 @@ enum Status {
   SCHEDULED
 }
 
-enum SocialPlateform {
+enum SocialPlatform {
   TWITTER
   LINKEDIN
 }

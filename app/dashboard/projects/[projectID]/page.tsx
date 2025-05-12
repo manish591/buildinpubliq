@@ -71,6 +71,7 @@ export default async function ProjectUpdates({
                 <CreateNewUpdate
                   isLinkedinConnected={isLinkedinConnected}
                   isTwitterConnected={isTwitterConnected}
+                  projectId={projectID}
                 />
               </DialogHeader>
             </DialogContent>
@@ -120,16 +121,22 @@ export default async function ProjectUpdates({
             <TabsTrigger value="published">published</TabsTrigger>
           </TabsList>
           <TabsContent value="all updates">
-            <ProjectUpdatesTable data={allUpdates} />
+            <ProjectUpdatesTable data={allUpdates} projectId={projectID} />
           </TabsContent>
           <TabsContent value="draft">
-            <ProjectUpdatesTable data={draftUpdates} />
+            <ProjectUpdatesTable data={draftUpdates} projectId={projectID} />
           </TabsContent>
           <TabsContent value="scheduled">
-            <ProjectUpdatesTable data={scheduledUpdates} />
+            <ProjectUpdatesTable
+              data={scheduledUpdates}
+              projectId={projectID}
+            />
           </TabsContent>
           <TabsContent value="published">
-            <ProjectUpdatesTable data={publishedUpdates} />
+            <ProjectUpdatesTable
+              data={publishedUpdates}
+              projectId={projectID}
+            />
           </TabsContent>
         </Tabs>
       </div>

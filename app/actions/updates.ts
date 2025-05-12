@@ -3,6 +3,17 @@
 import { auth } from "@/auth";
 import { STATUS } from "@/constants/response";
 import { prisma } from "@/prisma/src";
+import { SocialPlatform, Status } from "@prisma/client";
+import { revalidatePath } from "next/cache";
+
+export type TUpdate = {
+  tagline: string,
+  description: string,
+  platform: SocialPlatform[],
+  status: keyof typeof Status,
+  scheduledDate: Date | null,
+  projectId: string
+}
 
 export default async function getAllProjectUpdates(repoId: string) {
   try {
@@ -48,12 +59,24 @@ export async function getAllUpdates() {
   }
 }
 
-export async function createNewUpdate() {
+export async function createNewUpdate(data: TUpdate) {
   const session = await auth();
 
   if (!session?.user) {
     throw new Error("unauthenticated");
   }
 
+  await prisma.projectUpdate.create({
+    data: {
+      tagline: data.tagline,
+      description: data.description,
+      projectId: data.projectId,
+      userId: session.user.id as string,
+      status: data.status,
+      channel: data.platform,
+      scheduledAt: data.scheduledDate
+    }
+  });
 
+  revalidatePath(`/dashboard/projects/${data.projectId}`);
 }

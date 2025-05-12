@@ -1,6 +1,6 @@
 'use client';
 
-import { Status } from '@prisma/client';
+import { SocialPlatform, Status } from '@prisma/client';
 import { useState } from 'react';
 import Link from 'next/link';
 import { Link as LinkIcon, Calendar as CalendarIcon } from 'lucide-react';
@@ -32,13 +32,39 @@ import {
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
+import { date } from 'zod';
+import { createNewUpdate, TUpdate } from '@/app/actions/updates';
 
 export function CreateNewUpdate({
   isLinkedinConnected,
   isTwitterConnected,
-}: Readonly<{ isLinkedinConnected: boolean; isTwitterConnected: boolean }>) {
+  projectId,
+}: Readonly<{
+  isLinkedinConnected: boolean;
+  isTwitterConnected: boolean;
+  projectId: string;
+}>) {
+  const [tagline, setTagline] = useState('');
+  const [description, setDescription] = useState('');
+  const [platform, setPlatform] = useState<SocialPlatform[]>([]);
   const [status, setStatus] = useState<keyof typeof Status>(Status.DRAFT);
-  const [date, setDate] = useState<Date>();
+  const [scheduledDate, setScheduledDate] = useState<Date>();
+
+  async function handleCreateNewUpdate() {
+    try {
+      const data: TUpdate = {
+        tagline,
+        description,
+        platform,
+        status,
+        projectId,
+        scheduledDate: scheduledDate ?? null,
+      };
+      await createNewUpdate(data);
+    } catch (err) {
+      console.error('An error occurred while creating a new update:', err);
+    }
+  }
 
   return (
     <>
@@ -68,11 +94,15 @@ export function CreateNewUpdate({
             </CardHeader>
             <CardContent className="space-y-4 h-[350px] overflow-y-auto">
               <div className="space-y-2">
-                <Label htmlFor="description">tagline</Label>
+                <Label htmlFor="tagline">tagline</Label>
                 <Input
-                  id="description"
-                  placeholder="add your new update title"
+                  id="tagline"
+                  placeholder="add your new update tagline"
                   className="bg-transparent"
+                  value={tagline}
+                  onChange={(e) => {
+                    setTagline(e.target.value);
+                  }}
                 />
               </div>
               <div className="space-y-2">
@@ -81,13 +111,33 @@ export function CreateNewUpdate({
                   id="description"
                   placeholder="add your new update description"
                   className="bg-transparent min-h-[100px]"
+                  value={description}
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
                 />
               </div>
               <div>
                 <p className="block text-sm font-medium mb-2">Platforms</p>
                 <div className="flex space-x-4">
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="twitter" disabled={!isTwitterConnected} />
+                    <Checkbox
+                      id="twitter"
+                      disabled={!isTwitterConnected}
+                      checked={platform.includes(SocialPlatform.TWITTER)}
+                      onCheckedChange={(val) => {
+                        if (val) {
+                          if (!platform.includes(SocialPlatform.TWITTER)) {
+                            setPlatform([...platform, SocialPlatform.TWITTER]);
+                          }
+                        } else {
+                          const updatedPlatform = platform.filter(
+                            (item) => item !== SocialPlatform.TWITTER,
+                          );
+                          setPlatform(updatedPlatform);
+                        }
+                      }}
+                    />
                     <label
                       htmlFor="twitter"
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -97,7 +147,23 @@ export function CreateNewUpdate({
                   </div>
 
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="linkedin" disabled={!isLinkedinConnected} />
+                    <Checkbox
+                      id="linkedin"
+                      disabled={!isLinkedinConnected}
+                      checked={platform.includes(SocialPlatform.LINKEDIN)}
+                      onCheckedChange={(val) => {
+                        if (val) {
+                          if (!platform.includes(SocialPlatform.LINKEDIN)) {
+                            setPlatform([...platform, SocialPlatform.LINKEDIN]);
+                          }
+                        } else {
+                          const updatedPlatform = platform.filter(
+                            (item) => item !== SocialPlatform.LINKEDIN,
+                          );
+                          setPlatform(updatedPlatform);
+                        }
+                      }}
+                    />
                     <label
                       htmlFor="linkedin"
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -155,8 +221,8 @@ export function CreateNewUpdate({
                           )}
                         >
                           <CalendarIcon className="mr-2 h-4 w-4" />
-                          {date ? (
-                            format(date, 'PPP')
+                          {scheduledDate ? (
+                            format(scheduledDate, 'PPP')
                           ) : (
                             <span>Pick a date</span>
                           )}
@@ -165,14 +231,31 @@ export function CreateNewUpdate({
                       <PopoverContent className="w-auto p-0">
                         <Calendar
                           mode="single"
-                          selected={date}
-                          onSelect={setDate}
+                          selected={scheduledDate}
+                          onSelect={setScheduledDate}
                           initialFocus
                           disabled={(date) => date < new Date()}
                         />
                       </PopoverContent>
                     </Popover>
-                    <Select defaultValue="0">
+                    <Select
+                      onValueChange={(val) => {
+                        const now = new Date();
+                        const date =
+                          scheduledDate ||
+                          new Date(
+                            now.getFullYear(),
+                            now.getMonth(),
+                            now.getDate() + 1,
+                            0,
+                            0,
+                            0,
+                            0,
+                          );
+                        date.setHours(Number(val));
+                        setScheduledDate(date);
+                      }}
+                    >
                       <SelectTrigger className="w-[100px]">
                         <SelectValue
                           placeholder="select time"
@@ -201,7 +284,11 @@ export function CreateNewUpdate({
               <Button variant="secondary" className="mr-auto">
                 Cancel
               </Button>
-              <Button type="submit" className="ml-auto">
+              <Button
+                type="submit"
+                className="ml-auto"
+                onClick={handleCreateNewUpdate}
+              >
                 create update
               </Button>
             </CardFooter>
