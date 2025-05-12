@@ -1,6 +1,6 @@
 import { auth } from '@/auth';
 import { notFound, redirect } from 'next/navigation';
-import { Clock, SquarePen, Wifi } from 'lucide-react';
+import { Clock, ExternalLink, SquarePen, Wifi } from 'lucide-react';
 import getProjectDetails from '@/app/actions/projects';
 import ProjectUpdatesTable from '@/components/ProjectUpdatesTable';
 import { CreateNewUpdate } from '@/components/createNewUpdate';
@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getAllProjectUpdates } from './actions';
 import { getConnectedChannels } from '@/app/profile/actions';
+import Link from 'next/link';
 
 export default async function ProjectUpdates({
   params,
@@ -46,7 +47,13 @@ export default async function ProjectUpdates({
     <div className="w-full max-w-7xl mx-auto mt-8 pb-8 px-4">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <p className="text-lg font-bold">{projectDetails.title}</p>
+          <Link
+            href={`${projectDetails.repositoryUrl}`}
+            className="text-lg font-bold flex items-center gap-2"
+          >
+            {projectDetails.title}
+            <ExternalLink className="h-5 w-5 text-gray-500"></ExternalLink>
+          </Link>
           <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">
             {projectDetails.description}
           </p>

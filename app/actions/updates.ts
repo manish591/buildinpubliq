@@ -80,3 +80,31 @@ export async function createNewUpdate(data: TUpdate) {
 
   revalidatePath(`/dashboard/projects/${data.projectId}`);
 }
+
+export async function deleteProjectUpdate(projectUpdateId: string, projectId: string) {
+  const session = await auth();
+
+  if (!session?.user) {
+    throw new Error("unauthenticated")
+  }
+
+  const isProjectUpdateExists = await prisma.projectUpdate.findFirst({
+    where: {
+      id: projectUpdateId,
+      projectId,
+      userId: session.user.id
+    }
+  });
+
+  if (!isProjectUpdateExists) {
+    throw new Error("project doesn't exists");
+  }
+
+  await prisma.projectUpdate.delete({
+    where: {
+      id: isProjectUpdateExists.id
+    }
+  })
+
+  revalidatePath(`/dashboard/projects/${projectId}`);
+}

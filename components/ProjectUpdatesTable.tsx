@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { SocialPlatform, Status } from '@prisma/client';
-import { Check, Delete, Edit, Ellipsis, FolderPlus, Clock } from 'lucide-react';
+import { Check, Edit, Ellipsis, FolderPlus, Clock } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -31,6 +31,7 @@ import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import { getConnectedChannels } from '@/app/profile/actions';
 import { format } from 'date-fns';
+import { DeleteProjectUpdateButton } from './deleteProjectUpdateButton';
 
 export type TUpdates = {
   id: string;
@@ -169,8 +170,10 @@ export default async function ProjectUpdatesTable({
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem className="gap-2">
-                            <Delete className="h-5 w-5 text-gray-500" />
-                            Delete
+                            <DeleteProjectUpdateButton
+                              projectUpdateId={item.id}
+                              projectId={projectId}
+                            />
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
