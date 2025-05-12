@@ -3,7 +3,11 @@
 import { SocialPlatform, Status } from '@prisma/client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { Link as LinkIcon, Calendar as CalendarIcon } from 'lucide-react';
+import {
+  Link as LinkIcon,
+  Calendar as CalendarIcon,
+  CirclePlus,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -34,6 +38,12 @@ import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { date } from 'zod';
 import { createNewUpdate, TUpdate } from '@/app/actions/updates';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 
 export function CreateNewUpdate({
   isLinkedinConnected,
@@ -44,6 +54,7 @@ export function CreateNewUpdate({
   isTwitterConnected: boolean;
   projectId: string;
 }>) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [tagline, setTagline] = useState('');
   const [description, setDescription] = useState('');
   const [platform, setPlatform] = useState<SocialPlatform[]>([]);
@@ -61,6 +72,7 @@ export function CreateNewUpdate({
         scheduledDate: scheduledDate ?? null,
       };
       await createNewUpdate(data);
+      setIsModalOpen(false);
     } catch (err) {
       console.error('An error occurred while creating a new update:', err);
     }
@@ -84,216 +96,246 @@ export function CreateNewUpdate({
           </Link>
         </div>
       ) : (
-        <div className="flex items-center md:col-start-2 md:col-span-2">
-          <Card className="w-full p-0 border-none shadow-none">
-            <CardHeader className="pt-10">
-              <CardTitle>create new update</CardTitle>
-              <CardDescription>
-                fill out the form to create a new update.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4 h-[350px] overflow-y-auto">
-              <div className="space-y-2">
-                <Label htmlFor="tagline">tagline</Label>
-                <Input
-                  id="tagline"
-                  placeholder="add your new update tagline"
-                  className="bg-transparent"
-                  value={tagline}
-                  onChange={(e) => {
-                    setTagline(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="description">description</Label>
-                <Textarea
-                  id="description"
-                  placeholder="add your new update description"
-                  className="bg-transparent min-h-[100px]"
-                  value={description}
-                  onChange={(e) => {
-                    setDescription(e.target.value);
-                  }}
-                />
-              </div>
-              <div>
-                <p className="block text-sm font-medium mb-2">Platforms</p>
-                <div className="flex space-x-4">
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="twitter"
-                      disabled={!isTwitterConnected}
-                      checked={platform.includes(SocialPlatform.TWITTER)}
-                      onCheckedChange={(val) => {
-                        if (val) {
-                          if (!platform.includes(SocialPlatform.TWITTER)) {
-                            setPlatform([...platform, SocialPlatform.TWITTER]);
-                          }
-                        } else {
-                          const updatedPlatform = platform.filter(
-                            (item) => item !== SocialPlatform.TWITTER,
-                          );
-                          setPlatform(updatedPlatform);
-                        }
-                      }}
-                    />
-                    <label
-                      htmlFor="twitter"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Twitter
-                    </label>
-                  </div>
+        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+          <DialogTrigger>
+            <Button variant="default" className="flex items-center gap-2">
+              <CirclePlus strokeWidth={1} width={16} height={16} />
+              <span>create new update</span>
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="p-0">
+            <DialogHeader>
+              <div className="flex items-center md:col-start-2 md:col-span-2">
+                <Card className="w-full p-0 border-none shadow-none">
+                  <CardHeader className="pt-10">
+                    <CardTitle>create new update</CardTitle>
+                    <CardDescription>
+                      fill out the form to create a new update.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4 h-[350px] overflow-y-auto">
+                    <div className="space-y-2">
+                      <Label htmlFor="tagline">tagline</Label>
+                      <Input
+                        id="tagline"
+                        placeholder="add your new update tagline"
+                        className="bg-transparent"
+                        value={tagline}
+                        onChange={(e) => {
+                          setTagline(e.target.value);
+                        }}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="description">description</Label>
+                      <Textarea
+                        id="description"
+                        placeholder="add your new update description"
+                        className="bg-transparent min-h-[100px]"
+                        value={description}
+                        onChange={(e) => {
+                          setDescription(e.target.value);
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <p className="block text-sm font-medium mb-2">
+                        Platforms
+                      </p>
+                      <div className="flex space-x-4">
+                        <div className="flex items-center space-x-2">
+                          <Checkbox
+                            id="twitter"
+                            disabled={!isTwitterConnected}
+                            checked={platform.includes(SocialPlatform.TWITTER)}
+                            onCheckedChange={(val) => {
+                              if (val) {
+                                if (
+                                  !platform.includes(SocialPlatform.TWITTER)
+                                ) {
+                                  setPlatform([
+                                    ...platform,
+                                    SocialPlatform.TWITTER,
+                                  ]);
+                                }
+                              } else {
+                                const updatedPlatform = platform.filter(
+                                  (item) => item !== SocialPlatform.TWITTER,
+                                );
+                                setPlatform(updatedPlatform);
+                              }
+                            }}
+                          />
+                          <label
+                            htmlFor="twitter"
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          >
+                            Twitter
+                          </label>
+                        </div>
 
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="linkedin"
-                      disabled={!isLinkedinConnected}
-                      checked={platform.includes(SocialPlatform.LINKEDIN)}
-                      onCheckedChange={(val) => {
-                        if (val) {
-                          if (!platform.includes(SocialPlatform.LINKEDIN)) {
-                            setPlatform([...platform, SocialPlatform.LINKEDIN]);
-                          }
-                        } else {
-                          const updatedPlatform = platform.filter(
-                            (item) => item !== SocialPlatform.LINKEDIN,
-                          );
-                          setPlatform(updatedPlatform);
-                        }
+                        <div className="flex items-center space-x-2">
+                          <Checkbox
+                            id="linkedin"
+                            disabled={!isLinkedinConnected}
+                            checked={platform.includes(SocialPlatform.LINKEDIN)}
+                            onCheckedChange={(val) => {
+                              if (val) {
+                                if (
+                                  !platform.includes(SocialPlatform.LINKEDIN)
+                                ) {
+                                  setPlatform([
+                                    ...platform,
+                                    SocialPlatform.LINKEDIN,
+                                  ]);
+                                }
+                              } else {
+                                const updatedPlatform = platform.filter(
+                                  (item) => item !== SocialPlatform.LINKEDIN,
+                                );
+                                setPlatform(updatedPlatform);
+                              }
+                            }}
+                          />
+                          <label
+                            htmlFor="linkedin"
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          >
+                            LinkedIn
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="block text-sm font-medium mb-2">status</p>
+                      <Select
+                        defaultValue={Status.DRAFT}
+                        value={status}
+                        onValueChange={(val) => {
+                          const newVal = val as keyof typeof Status;
+                          setStatus(newVal);
+                        }}
+                      >
+                        <SelectTrigger className="w-[150px]">
+                          <SelectValue
+                            placeholder="Select status"
+                            className="lowercase"
+                          />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem
+                            value={Status.DRAFT}
+                            className="hover:bg-accent lowercase"
+                          >
+                            draft
+                          </SelectItem>
+                          <SelectItem
+                            value={Status.SCHEDULED}
+                            className="hover:bg-accent lowercase"
+                          >
+                            scheduled
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    {status === Status.SCHEDULED && (
+                      <div>
+                        <p className="block text-sm font-medium mb-2">
+                          Select date and time
+                        </p>
+                        <div className="flex items-center gap-4">
+                          <Popover modal={true}>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant={'outline'}
+                                className={cn(
+                                  'w-[200px] justify-start text-left font-normal',
+                                  !date && 'text-muted-foreground',
+                                )}
+                              >
+                                <CalendarIcon className="mr-2 h-4 w-4" />
+                                {scheduledDate ? (
+                                  format(scheduledDate, 'PPP')
+                                ) : (
+                                  <span>Pick a date</span>
+                                )}
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0">
+                              <Calendar
+                                mode="single"
+                                selected={scheduledDate}
+                                onSelect={setScheduledDate}
+                                initialFocus
+                                disabled={(date) => date < new Date()}
+                              />
+                            </PopoverContent>
+                          </Popover>
+                          <Select
+                            onValueChange={(val) => {
+                              const now = new Date();
+                              const date =
+                                scheduledDate ||
+                                new Date(
+                                  now.getFullYear(),
+                                  now.getMonth(),
+                                  now.getDate() + 1,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                );
+                              date.setHours(Number(val));
+                              setScheduledDate(date);
+                            }}
+                          >
+                            <SelectTrigger className="w-[100px]">
+                              <SelectValue
+                                placeholder="select time"
+                                className="lowercase"
+                              />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {Array.from({ length: 24 }, (_, i) => {
+                                return (
+                                  <SelectItem
+                                    key={i}
+                                    value={i.toString()}
+                                    className="hover:bg-accent lowercase"
+                                  >
+                                    {i < 10 ? `0${i}` : i}:00
+                                  </SelectItem>
+                                );
+                              })}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                    )}
+                  </CardContent>
+                  <CardFooter className="mt-6 pb-10">
+                    <Button
+                      variant="secondary"
+                      className="mr-auto"
+                      onClick={() => {
+                        setIsModalOpen(false);
                       }}
-                    />
-                    <label
-                      htmlFor="linkedin"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
-                      LinkedIn
-                    </label>
-                  </div>
-                </div>
+                      Cancel
+                    </Button>
+                    <Button
+                      type="submit"
+                      className="ml-auto"
+                      onClick={handleCreateNewUpdate}
+                    >
+                      create update
+                    </Button>
+                  </CardFooter>
+                </Card>
               </div>
-              <div>
-                <p className="block text-sm font-medium mb-2">status</p>
-                <Select
-                  defaultValue={Status.DRAFT}
-                  value={status}
-                  onValueChange={(val) => {
-                    const newVal = val as keyof typeof Status;
-                    setStatus(newVal);
-                  }}
-                >
-                  <SelectTrigger className="w-[150px]">
-                    <SelectValue
-                      placeholder="Select status"
-                      className="lowercase"
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem
-                      value={Status.DRAFT}
-                      className="hover:bg-accent lowercase"
-                    >
-                      draft
-                    </SelectItem>
-                    <SelectItem
-                      value={Status.SCHEDULED}
-                      className="hover:bg-accent lowercase"
-                    >
-                      scheduled
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              {status === Status.SCHEDULED && (
-                <div>
-                  <p className="block text-sm font-medium mb-2">
-                    Select date and time
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <Popover modal={true}>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant={'outline'}
-                          className={cn(
-                            'w-[200px] justify-start text-left font-normal',
-                            !date && 'text-muted-foreground',
-                          )}
-                        >
-                          <CalendarIcon className="mr-2 h-4 w-4" />
-                          {scheduledDate ? (
-                            format(scheduledDate, 'PPP')
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0">
-                        <Calendar
-                          mode="single"
-                          selected={scheduledDate}
-                          onSelect={setScheduledDate}
-                          initialFocus
-                          disabled={(date) => date < new Date()}
-                        />
-                      </PopoverContent>
-                    </Popover>
-                    <Select
-                      onValueChange={(val) => {
-                        const now = new Date();
-                        const date =
-                          scheduledDate ||
-                          new Date(
-                            now.getFullYear(),
-                            now.getMonth(),
-                            now.getDate() + 1,
-                            0,
-                            0,
-                            0,
-                            0,
-                          );
-                        date.setHours(Number(val));
-                        setScheduledDate(date);
-                      }}
-                    >
-                      <SelectTrigger className="w-[100px]">
-                        <SelectValue
-                          placeholder="select time"
-                          className="lowercase"
-                        />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {Array.from({ length: 24 }, (_, i) => {
-                          return (
-                            <SelectItem
-                              key={i}
-                              value={i.toString()}
-                              className="hover:bg-accent lowercase"
-                            >
-                              {i < 10 ? `0${i}` : i}:00
-                            </SelectItem>
-                          );
-                        })}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-              )}
-            </CardContent>
-            <CardFooter className="mt-6 pb-10">
-              <Button variant="secondary" className="mr-auto">
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-                className="ml-auto"
-                onClick={handleCreateNewUpdate}
-              >
-                create update
-              </Button>
-            </CardFooter>
-          </Card>
-        </div>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
       )}
     </>
   );

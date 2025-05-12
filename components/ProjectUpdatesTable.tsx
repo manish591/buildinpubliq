@@ -1,14 +1,6 @@
 import Link from 'next/link';
 import { SocialPlatform, Status } from '@prisma/client';
-import {
-  Check,
-  Delete,
-  Edit,
-  Ellipsis,
-  CirclePlus,
-  FolderPlus,
-  Clock,
-} from 'lucide-react';
+import { Check, Delete, Edit, Ellipsis, FolderPlus, Clock } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -84,26 +76,11 @@ export default async function ProjectUpdatesTable({
             You haven't created any updates yet.
             <br /> Start by creating your first update.
           </p>
-          <Dialog>
-            <DialogTrigger>
-              <Button
-                variant="default"
-                className="lowercase flex items-center gap-2"
-              >
-                <CirclePlus strokeWidth={1} width={16} height={16} />
-                <span>Create New update</span>
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="p-0">
-              <DialogHeader>
-                <CreateNewUpdate
-                  isLinkedinConnected={isLinkedinConnected}
-                  isTwitterConnected={isTwitterConnected}
-                  projectId={projectId}
-                />
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
+          <CreateNewUpdate
+            isLinkedinConnected={isLinkedinConnected}
+            isTwitterConnected={isTwitterConnected}
+            projectId={projectId}
+          />
         </div>
       ) : (
         <Table className="mt-4">

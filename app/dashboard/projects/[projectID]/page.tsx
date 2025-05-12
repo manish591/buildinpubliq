@@ -1,18 +1,11 @@
 import { auth } from '@/auth';
 import { notFound, redirect } from 'next/navigation';
-import { CirclePlus, Clock, SquarePen, Wifi } from 'lucide-react';
+import { Clock, SquarePen, Wifi } from 'lucide-react';
 import getProjectDetails from '@/app/actions/projects';
-import { Button } from '@/components/ui/button';
 import ProjectUpdatesTable from '@/components/ProjectUpdatesTable';
 import { CreateNewUpdate } from '@/components/createNewUpdate';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTrigger,
-} from '@/components/ui/dialog';
 import { getAllProjectUpdates } from './actions';
 import { getConnectedChannels } from '@/app/profile/actions';
 
@@ -59,23 +52,11 @@ export default async function ProjectUpdates({
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Dialog>
-            <DialogTrigger>
-              <Button variant="default" className="flex items-center gap-2">
-                <CirclePlus strokeWidth={1} width={16} height={16} />
-                <span>create new update</span>
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="p-0">
-              <DialogHeader>
-                <CreateNewUpdate
-                  isLinkedinConnected={isLinkedinConnected}
-                  isTwitterConnected={isTwitterConnected}
-                  projectId={projectID}
-                />
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
+          <CreateNewUpdate
+            isLinkedinConnected={isLinkedinConnected}
+            isTwitterConnected={isTwitterConnected}
+            projectId={projectID}
+          />
         </div>
       </div>
       <div className="grid gap-8 md:grid-cols-3">
