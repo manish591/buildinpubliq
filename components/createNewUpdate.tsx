@@ -1,43 +1,19 @@
 'use client';
 
-import { SocialPlatform, Status } from '@prisma/client';
 import { useState } from 'react';
 import Link from 'next/link';
-import {
-  Link as LinkIcon,
-  Calendar as CalendarIcon,
-  CirclePlus,
-} from 'lucide-react';
+import { Link as LinkIcon, CirclePlus } from 'lucide-react';
+import { Status } from '@prisma/client';
+import { createNewUpdate } from '@/app/actions/updates';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Checkbox } from '@/components/ui/checkbox';
+import { ProjectUpdateForm } from '@/components/ProjectUpdateForm';
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-  CardFooter,
 } from '@/components/ui/card';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import { Calendar } from '@/components/ui/calendar';
-import { format } from 'date-fns';
-import { cn } from '@/lib/utils';
-import { date } from 'zod';
-import { createNewUpdate, TUpdate } from '@/app/actions/updates';
 import {
   Dialog,
   DialogContent,
@@ -55,29 +31,6 @@ export function CreateNewUpdate({
   projectId: string;
 }>) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [tagline, setTagline] = useState('');
-  const [description, setDescription] = useState('');
-  const [platform, setPlatform] = useState<SocialPlatform[]>([]);
-  const [status, setStatus] = useState<keyof typeof Status>(Status.DRAFT);
-  const [scheduledDate, setScheduledDate] = useState<Date>();
-
-  async function handleCreateNewUpdate() {
-    try {
-      const data: TUpdate = {
-        tagline,
-        description,
-        platform,
-        status,
-        projectId,
-        scheduledDate: scheduledDate ?? null,
-      };
-      await createNewUpdate(data);
-      setIsModalOpen(false);
-    } catch (err) {
-      console.error('An error occurred while creating a new update:', err);
-    }
-  }
-
   return (
     <>
       {!isLinkedinConnected && !isTwitterConnected ? (
@@ -113,224 +66,25 @@ export function CreateNewUpdate({
                       fill out the form to create a new update.
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-4 h-[350px] overflow-y-auto">
-                    <div className="space-y-2">
-                      <Label htmlFor="tagline">tagline</Label>
-                      <Input
-                        id="tagline"
-                        placeholder="add your new update tagline"
-                        className="bg-transparent"
-                        value={tagline}
-                        onChange={(e) => {
-                          setTagline(e.target.value);
-                        }}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="description">description</Label>
-                      <Textarea
-                        id="description"
-                        placeholder="add your new update description"
-                        className="bg-transparent min-h-[100px]"
-                        value={description}
-                        onChange={(e) => {
-                          setDescription(e.target.value);
-                        }}
-                      />
-                    </div>
-                    <div>
-                      <p className="block text-sm font-medium mb-2">
-                        Platforms
-                      </p>
-                      <div className="flex space-x-4">
-                        <div className="flex items-center space-x-2">
-                          <Checkbox
-                            id="twitter"
-                            disabled={!isTwitterConnected}
-                            checked={platform.includes(SocialPlatform.TWITTER)}
-                            onCheckedChange={(val) => {
-                              if (val) {
-                                if (
-                                  !platform.includes(SocialPlatform.TWITTER)
-                                ) {
-                                  setPlatform([
-                                    ...platform,
-                                    SocialPlatform.TWITTER,
-                                  ]);
-                                }
-                              } else {
-                                const updatedPlatform = platform.filter(
-                                  (item) => item !== SocialPlatform.TWITTER,
-                                );
-                                setPlatform(updatedPlatform);
-                              }
-                            }}
-                          />
-                          <label
-                            htmlFor="twitter"
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                          >
-                            Twitter
-                          </label>
-                        </div>
-
-                        <div className="flex items-center space-x-2">
-                          <Checkbox
-                            id="linkedin"
-                            disabled={!isLinkedinConnected}
-                            checked={platform.includes(SocialPlatform.LINKEDIN)}
-                            onCheckedChange={(val) => {
-                              if (val) {
-                                if (
-                                  !platform.includes(SocialPlatform.LINKEDIN)
-                                ) {
-                                  setPlatform([
-                                    ...platform,
-                                    SocialPlatform.LINKEDIN,
-                                  ]);
-                                }
-                              } else {
-                                const updatedPlatform = platform.filter(
-                                  (item) => item !== SocialPlatform.LINKEDIN,
-                                );
-                                setPlatform(updatedPlatform);
-                              }
-                            }}
-                          />
-                          <label
-                            htmlFor="linkedin"
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                          >
-                            LinkedIn
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <p className="block text-sm font-medium mb-2">status</p>
-                      <Select
-                        defaultValue={Status.DRAFT}
-                        value={status}
-                        onValueChange={(val) => {
-                          const newVal = val as keyof typeof Status;
-                          setStatus(newVal);
-                        }}
-                      >
-                        <SelectTrigger className="w-[150px]">
-                          <SelectValue
-                            placeholder="Select status"
-                            className="lowercase"
-                          />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem
-                            value={Status.DRAFT}
-                            className="hover:bg-accent lowercase"
-                          >
-                            draft
-                          </SelectItem>
-                          <SelectItem
-                            value={Status.SCHEDULED}
-                            className="hover:bg-accent lowercase"
-                          >
-                            scheduled
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    {status === Status.SCHEDULED && (
-                      <div>
-                        <p className="block text-sm font-medium mb-2">
-                          Select date and time
-                        </p>
-                        <div className="flex items-center gap-4">
-                          <Popover modal={true}>
-                            <PopoverTrigger asChild>
-                              <Button
-                                variant={'outline'}
-                                className={cn(
-                                  'w-[200px] justify-start text-left font-normal',
-                                  !date && 'text-muted-foreground',
-                                )}
-                              >
-                                <CalendarIcon className="mr-2 h-4 w-4" />
-                                {scheduledDate ? (
-                                  format(scheduledDate, 'PPP')
-                                ) : (
-                                  <span>Pick a date</span>
-                                )}
-                              </Button>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-auto p-0">
-                              <Calendar
-                                mode="single"
-                                selected={scheduledDate}
-                                onSelect={setScheduledDate}
-                                initialFocus
-                                disabled={(date) => date < new Date()}
-                              />
-                            </PopoverContent>
-                          </Popover>
-                          <Select
-                            onValueChange={(val) => {
-                              const now = new Date();
-                              const date =
-                                scheduledDate ||
-                                new Date(
-                                  now.getFullYear(),
-                                  now.getMonth(),
-                                  now.getDate() + 1,
-                                  0,
-                                  0,
-                                  0,
-                                  0,
-                                );
-                              date.setHours(Number(val));
-                              setScheduledDate(date);
-                            }}
-                          >
-                            <SelectTrigger className="w-[100px]">
-                              <SelectValue
-                                placeholder="select time"
-                                className="lowercase"
-                              />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {Array.from({ length: 24 }, (_, i) => {
-                                return (
-                                  <SelectItem
-                                    key={i}
-                                    value={i.toString()}
-                                    className="hover:bg-accent lowercase"
-                                  >
-                                    {i < 10 ? `0${i}` : i}:00
-                                  </SelectItem>
-                                );
-                              })}
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-                    )}
-                  </CardContent>
-                  <CardFooter className="mt-6 pb-10">
-                    <Button
-                      variant="secondary"
-                      className="mr-auto"
-                      onClick={() => {
-                        setIsModalOpen(false);
+                  <CardContent className="p-0">
+                    <ProjectUpdateForm
+                      isLinkedinConnected={isLinkedinConnected}
+                      isTwitterConnected={isTwitterConnected}
+                      defaultProjectUpdateData={{
+                        id: '',
+                        tagline: '',
+                        description: '',
+                        platform: [],
+                        projectId: projectId,
+                        status: Status.DRAFT,
+                        scheduledAt: new Date(
+                          new Date().getTime() + 4 * 60 * 60 * 1000,
+                        ),
                       }}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      type="submit"
-                      className="ml-auto"
-                      onClick={handleCreateNewUpdate}
-                    >
-                      create update
-                    </Button>
-                  </CardFooter>
+                      onSubmitFunc={createNewUpdate}
+                      closeModal={setIsModalOpen}
+                    />
+                  </CardContent>
                 </Card>
               </div>
             </DialogHeader>

@@ -1,8 +1,6 @@
-import Link from 'next/link';
 import { SocialPlatform, Status } from '@prisma/client';
-import { Check, Edit, Ellipsis, FolderPlus, Clock } from 'lucide-react';
+import { Check, FolderPlus, Clock } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
@@ -11,27 +9,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { CreateNewUpdate } from './createNewUpdate';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import { getConnectedChannels } from '@/app/profile/actions';
 import { format } from 'date-fns';
-import { DeleteProjectUpdateButton } from './deleteProjectUpdateButton';
+import { ProjectUpdateRowActions } from './projectUpdateRowActions';
 
 export type TUpdates = {
   id: string;
@@ -39,7 +22,7 @@ export type TUpdates = {
   description: string;
   projectId: string;
   userId: string;
-  scheduledAt: Date | null;
+  scheduledAt: Date;
   postedAt: Date | null;
   status: Status;
   channel: SocialPlatform[];
@@ -141,61 +124,12 @@ export default async function ProjectUpdatesTable({
                     )}
                   </TableCell>
                   <TableCell className="text-right">
-                    <Dialog>
-                      <DropdownMenu modal={false}>
-                        <DropdownMenuTrigger asChild>
-                          <Button
-                            variant="outline"
-                            className="bg-transparent px-2 border-none"
-                          >
-                            <Ellipsis className="h-5 w-5"></Ellipsis>
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent
-                          className="w-[--radix-dropdown-menu-trigger-width] min-w-36 rounded-lg"
-                          side={'bottom'}
-                          align="end"
-                          sideOffset={4}
-                        >
-                          <DropdownMenuItem className="gap-2">
-                            <DialogTrigger asChild>
-                              <Button
-                                variant="outline"
-                                className="bg-transparent px-0 border-none h-6 gap-2 lowercase"
-                              >
-                                <Edit className="h-5 w-5 text-gray-500" />
-                                Edit
-                              </Button>
-                            </DialogTrigger>
-                          </DropdownMenuItem>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem className="gap-2">
-                            <DeleteProjectUpdateButton
-                              projectUpdateId={item.id}
-                              projectId={projectId}
-                            />
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                      <DialogContent className="sm:max-w-[425px]">
-                        <DialogHeader>
-                          <DialogTitle className="pr-4">
-                            {item.tagline}
-                          </DialogTitle>
-                        </DialogHeader>
-                        <div className="bg-secondary/30 p-4 rounded-md mt-4">
-                          {item.description}
-                        </div>
-                        <DialogFooter className="mt-6">
-                          <Link
-                            href={`https://x.com/compose/post?text=${item.description}`}
-                            target="_blank"
-                          >
-                            <Button>Post On Twitter</Button>
-                          </Link>
-                        </DialogFooter>
-                      </DialogContent>
-                    </Dialog>
+                    <ProjectUpdateRowActions
+                      data={item}
+                      projectId={projectId}
+                      isTwitterConnected={isTwitterConnected}
+                      isLinkedinConnected={isLinkedinConnected}
+                    />
                   </TableCell>
                 </TableRow>
               );

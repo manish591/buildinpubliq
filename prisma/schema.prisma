@@ -84,7 +84,7 @@ model ProjectUpdate {
   description String
   projectId   String
   userId      String
-  scheduledAt DateTime?
+  scheduledAt DateTime
   postedAt    DateTime?
   status      Status
   channel     SocialPlatform[]
