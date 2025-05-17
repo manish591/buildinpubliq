@@ -52,6 +52,7 @@ model Channel {
   accountImg   String?
   accountEmail String?
   userId       String
+  IDToken      String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

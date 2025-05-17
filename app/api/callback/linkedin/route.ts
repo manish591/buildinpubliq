@@ -31,7 +31,8 @@ export async function GET(req: NextRequest) {
       accessToken: data.access_token,
       expiresIn: new Date(Date.now() + data.expires_in * 1000),
       accountName: session.user.name ?? "",
-      userId: session.user.id ?? ""
+      userId: session.user.id ?? "",
+      IDToken: data.id_token
     }
   });
 

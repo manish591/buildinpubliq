@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_ID;
 const REDIRECT_URI = 'http://localhost:3000/api/callback/linkedin';
-const SCOPE = 'w_member_social';
+const SCOPE = 'w_member_social openid email profile';
 
 export function ConnectLinkedin() {
   return (
