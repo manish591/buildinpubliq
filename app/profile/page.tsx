@@ -67,7 +67,9 @@ export default async function Profile() {
         </div>
         <Card className="bg-background mt-6 overflow-hidden border-0 shadow-lg">
           <CardHeader className="border-b-2 pb-4">
-            <CardTitle>connected channels</CardTitle>
+            <CardTitle className="text-xl sm:text-2xl">
+              connected channels
+            </CardTitle>
             <CardDescription>
               Manage your connected social media accounts
             </CardDescription>
@@ -75,7 +77,7 @@ export default async function Profile() {
           <CardContent className="p-0">
             <div className="divide-y">
               <div className="p-4 hover:bg-accent transition-colors">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-6">
                   <div className="flex items-center gap-3">
                     <div className="p-2.5 rounded-full">
                       <Twitter className="h-5 w-5" />
@@ -99,7 +101,7 @@ export default async function Profile() {
                 </div>
               </div>
               <div className="p-4 hover:bg-accent transition-colors">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-6">
                   <div className="flex items-center gap-3">
                     <div className="p-2.5 rounded-full">
                       <Linkedin className="h-5 w-5" />
@@ -127,15 +129,19 @@ export default async function Profile() {
         </Card>
         <Card className="bg-background overflow-hidden border-0 shadow-lg mt-6">
           <CardHeader className="border-b pb-4">
-            <CardTitle>Account Settings</CardTitle>
+            <CardTitle className="text-xl sm:text-2xl">
+              Account Settings
+            </CardTitle>
             <CardDescription>
               Manage your account settings and preferences
             </CardDescription>
           </CardHeader>
           <CardContent className="p-0">
-            <div className="px-6 py-4 flex justify-between items-center">
+            <div className="px-6 py-4 flex justify-between items-center gap-4">
               <div>
-                <h3 className="font-medium">Log out from your account</h3>
+                <h3 className="font-medium text-base">
+                  Log out from your account
+                </h3>
                 <p className="text-xs text-foreground/50">
                   Sign out from the application on this device
                 </p>

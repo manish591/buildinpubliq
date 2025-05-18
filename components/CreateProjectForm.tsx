@@ -72,7 +72,7 @@ export function CreateProjectForm({
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DialogTrigger>
         <Button variant="default" className="flex items-center gap-2">
-          <CirclePlus strokeWidth={1} width={16} height={16} />
+          <CirclePlus strokeWidth={2} width={16} height={16} />
           <span>Create New Project</span>
         </Button>
       </DialogTrigger>
