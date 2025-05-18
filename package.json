@@ -1,7 +1,7 @@
 {
-  "name": "pravah",
+  "name": "buildinpubliq",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "postinstall": "prisma generate",
     "dev": "next dev",
