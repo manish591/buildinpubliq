@@ -45,7 +45,7 @@ export default async function ProjectUpdates({
 
   return (
     <div className="w-full max-w-7xl mx-auto mt-8 pb-8 px-4">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6 gap-3">
         <div>
           <Link
             href={`${projectDetails.repositoryUrl}`}
@@ -54,7 +54,7 @@ export default async function ProjectUpdates({
             {projectDetails.title}
             <ExternalLink className="h-5 w-5 text-gray-500"></ExternalLink>
           </Link>
-          <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">
+          <p className="text-slate-500 dark:text-slate-400 mt-1 text-xs sm:text-sm">
             {projectDetails.description}
           </p>
         </div>
@@ -66,7 +66,7 @@ export default async function ProjectUpdates({
           />
         </div>
       </div>
-      <div className="grid gap-8 md:grid-cols-3">
+      <div className="grid gap-4 sm:gap-8 md:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Drafts</CardTitle>

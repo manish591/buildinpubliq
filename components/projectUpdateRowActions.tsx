@@ -74,10 +74,10 @@ export function ProjectUpdateRowActions({
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <DialogContent className="p-0">
+      <DialogContent className="p-0 max-w-[350px] sm:max-w-[450px] mt-4">
         <DialogHeader>
           <div className="flex items-center md:col-start-2 md:col-span-2">
-            <Card className="w-full p-0 border-none shadow-none">
+            <Card className="text-left w-full p-0 border-none shadow-none">
               <CardHeader className="pt-10">
                 <CardTitle>edit update</CardTitle>
                 <CardDescription>

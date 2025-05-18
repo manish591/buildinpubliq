@@ -84,7 +84,7 @@ export default async function ProjectUpdatesTable({
               return (
                 <TableRow key={item.id}>
                   <TableCell>
-                    <div className="text-base line-clamp-3 max-w-sm">
+                    <div className="text-base line-clamp-4 max-w-md">
                       {item.description}
                     </div>
                   </TableCell>
@@ -95,7 +95,7 @@ export default async function ProjectUpdatesTable({
                           <Badge
                             key={channelName}
                             variant="outline"
-                            className="bg-blue-50 text-blue-700 border-blue-200"
+                            className="text-xs bg-blue-50 text-blue-700 border-blue-200"
                           >
                             {channelName}
                           </Badge>

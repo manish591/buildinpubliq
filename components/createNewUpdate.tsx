@@ -52,14 +52,16 @@ export function CreateNewUpdate({
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <DialogTrigger>
             <Button variant="default" className="flex items-center gap-2">
-              <CirclePlus strokeWidth={1} width={16} height={16} />
-              <span>create new update</span>
+              <CirclePlus strokeWidth={2} width={16} height={16} />
+              <span>
+                <span className="hidden sm:inline">create </span>new update
+              </span>
             </Button>
           </DialogTrigger>
-          <DialogContent className="p-0">
+          <DialogContent className="p-0 max-w-[350px] sm:max-w-[450px] mt-4">
             <DialogHeader>
               <div className="flex items-center md:col-start-2 md:col-span-2">
-                <Card className="w-full p-0 border-none shadow-none">
+                <Card className="text-left w-full p-0 border-none shadow-none">
                   <CardHeader className="pt-10">
                     <CardTitle>create new update</CardTitle>
                     <CardDescription>
