@@ -31,32 +31,25 @@ export default function Navbar() {
             </SheetHeader>
             <nav className="ml-auto gap-4 sm:gap-6 items-center flex">
               <Link
-                href="#"
+                href="#how-it-works"
                 className="text-sm font-medium hover:underline underline-offset-4"
                 prefetch={false}
               >
-                How It Works
+                how it works
               </Link>
               <Link
-                href="#"
+                href="#benefits"
                 className="text-sm font-medium hover:underline underline-offset-4"
                 prefetch={false}
               >
-                About
+                benefits
               </Link>
               <Link
-                href="#"
+                href="#contact"
                 className="text-sm font-medium hover:underline underline-offset-4"
                 prefetch={false}
               >
-                Support
-              </Link>
-              <Link
-                href="#"
-                className="text-sm font-medium hover:underline underline-offset-4"
-                prefetch={false}
-              >
-                Contact
+                contact
               </Link>
               <ThemeToggle />
             </nav>
@@ -64,32 +57,25 @@ export default function Navbar() {
         </Sheet>
         <nav className="ml-auto gap-4 sm:gap-6 items-center hidden sm:flex">
           <Link
-            href="#"
+            href="#how-it-works"
             className="text-sm font-medium hover:underline underline-offset-4"
             prefetch={false}
           >
-            How It Works
+            how it works
           </Link>
           <Link
-            href="#"
+            href="#benefits"
             className="text-sm font-medium hover:underline underline-offset-4"
             prefetch={false}
           >
-            About
+            benefits
           </Link>
           <Link
-            href="#"
+            href="#contact"
             className="text-sm font-medium hover:underline underline-offset-4"
             prefetch={false}
           >
-            Support
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Contact
+            contact
           </Link>
           <ThemeToggle />
         </nav>

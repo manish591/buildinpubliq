@@ -4,7 +4,7 @@ import { Button } from '../ui/button';
 
 export default function HowItWorks() {
   return (
-    <section className="w-full pb-28 sm:pb-32">
+    <section id="how-it-works" className="w-full pb-28 sm:pb-32">
       <div className="max-w-5xl mx-auto px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div>

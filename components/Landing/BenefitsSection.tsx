@@ -29,7 +29,7 @@ const features = [
 
 export function BenefitsSection() {
   return (
-    <div className="mx-auto max-w-5xl px-6">
+    <div id="benefits" className="mx-auto max-w-5xl px-6">
       <div className="text-center">
         <div className="mx-auto inline-block rounded-lg bg-gray-100 dark:bg-gray-600 px-3 py-1 text-sm">
           be discovered
