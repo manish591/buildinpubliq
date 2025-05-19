@@ -1,14 +1,13 @@
 "use server";
 
 import { z } from "zod";
-import { auth } from "@/auth";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { RunnableSequence } from "@langchain/core/runnables";
 import { StructuredOutputParser } from "@langchain/core/output_parsers";
 
 const model = new ChatGoogleGenerativeAI({
-  model: "gemini-1.5-flash",
+  model: "gemini-2.0-flash",
 });
 
 const outputSchema = z.object({
@@ -27,12 +26,6 @@ const chain = RunnableSequence.from([
 ]);
 
 export async function generateTwitterPost(title: string, description: string, feat_title: string, feat_desc: string) {
-  const session = await auth();
-
-  if (!session?.user) {
-    throw new Error("unauthenticated");
-  }
-
   const data = await chain.invoke(
     {
       format_instructions: parser.getFormatInstructions(),

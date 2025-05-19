@@ -1,11 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/prisma/src";
 
-export async function GET(req: NextRequest) {
-  const session = await auth();
-
-  if (!session?.user) {
+export const GET = auth(async function GET(req) {
+  if (!req.auth?.user) {
     return NextResponse.json(
       { message: "Unauthorized" },
       { status: 401 }
@@ -20,7 +18,7 @@ export async function GET(req: NextRequest) {
     await prisma.githubIntegration.create({
       data: {
         installationId,
-        userId: session.user.id ?? "",
+        userId: req.auth.user.id ?? "",
         isActive: true
       }
     });
@@ -29,4 +27,4 @@ export async function GET(req: NextRequest) {
   } else {
     return NextResponse.json({ message: "Unsupported action" }, { status: 400 });
   }
-}
+});

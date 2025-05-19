@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/prisma/src";
 import { SocialPlatform } from "@prisma/client";
@@ -7,10 +7,9 @@ const CLIENT_ID = process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_ID;
 const CLIENT_SECRET = process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_SECRET;
 const REDIRECT_URI = "http://localhost:3000/api/callback/linkedin";
 
-export async function GET(req: NextRequest) {
-  const session = await auth();
-
-  if (!session?.user) {
+export const GET = auth(async function GET(req) {
+  console.log("session", req.auth);
+  if (!req.auth?.user) {
     return NextResponse.json(
       { message: "Unauthorized" },
       { status: 401 }
@@ -35,11 +34,11 @@ export async function GET(req: NextRequest) {
       platform: SocialPlatform.LINKEDIN,
       accessToken: data.access_token,
       expiresIn: new Date(Date.now() + data.expires_in * 1000),
-      accountName: session.user.name ?? "",
-      userId: session.user.id ?? "",
+      accountName: req.auth.user.name ?? "",
+      userId: req.auth.user.id ?? "",
       IDToken: data.id_token
     }
   });
 
   return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/profile`);
-}
+});

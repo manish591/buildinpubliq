@@ -64,12 +64,6 @@ export async function getAllProjects() {
 }
 
 export default async function getProjectDetails(id: string) {
-  const session = await auth();
-
-  if (!session?.user) {
-    throw new Error("unauthenticated");
-  }
-
   const data = await prisma.project.findFirst({
     where: {
       OR: [

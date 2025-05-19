@@ -1,21 +1,11 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createHmac, timingSafeEqual } from "crypto";
-import { auth } from "@/auth";
 import { prisma } from "@/prisma/src";
 import getProjectDetails from "@/app/actions/projects";
 import { generateTwitterPost } from "@/app/actions/langchain";
 import { SocialPlatform, Status } from "@prisma/client";
 
 export async function POST(req: NextRequest) {
-  const session = await auth();
-
-  if (!session?.user) {
-    return NextResponse.json(
-      { message: "Unauthorized" },
-      { status: 401 }
-    );
-  }
-
   const payload = JSON.stringify(req.body);
   const signature = req.headers.get("X-Hub-Signature-256");
   const webhookSecret = process.env.GITHUB_APP_WEBHOOK_SECRET ?? "";
@@ -24,9 +14,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: "Invalid signature" }, { status: 401 });
   }
 
-  const signatureHex = signature.replace('sha256=', '');
-  const expectedSignatureHex = createHmac('sha256', webhookSecret).update(payload).digest('hex');
-  const receivedBuffer = Uint8Array.from(Buffer.from(signatureHex, 'hex'));
+  const expectedSignatureHex = `sha256=${createHmac('sha256', webhookSecret).update(payload).digest('hex')}`;
+  const receivedBuffer = Uint8Array.from(Buffer.from(signature, 'hex'));
   const expectedBuffer = Uint8Array.from(Buffer.from(expectedSignatureHex, 'hex'));
   const isValid = timingSafeEqual(receivedBuffer, expectedBuffer);
 
@@ -65,12 +54,12 @@ export async function POST(req: NextRequest) {
 
       await prisma.projectUpdate.create({
         data: {
-          projectId,
+          projectId: projectDetails.id,
           tagline: aiResponse.tagline,
           description: aiResponse.description,
           status: Status.SCHEDULED,
           scheduledAt: new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000),
-          userId: session.user.id ?? "",
+          userId: projectDetails.userId,
           channel: [SocialPlatform.LINKEDIN, SocialPlatform.TWITTER]
         }
       });
