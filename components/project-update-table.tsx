@@ -1,6 +1,12 @@
-import { SocialPlatform, Status } from '@prisma/client';
 import { Check, FolderPlus, Clock } from 'lucide-react';
+import { format } from 'date-fns';
+import { redirect } from 'next/navigation';
+import { auth } from '@/auth';
+import { SocialPlatform, Status } from '@prisma/client';
+import { getConnectedChannels } from '@/app/profile/actions';
 import { Badge } from '@/components/ui/badge';
+import { CreateNewUpdate } from '@/components/create-new-update';
+import { ProjectUpdateRowActions } from '@/components/project-update-row-action';
 import {
   Table,
   TableBody,
@@ -9,12 +15,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { CreateNewUpdate } from './createNewUpdate';
-import { auth } from '@/auth';
-import { redirect } from 'next/navigation';
-import { getConnectedChannels } from '@/app/profile/actions';
-import { format } from 'date-fns';
-import { ProjectUpdateRowActions } from './projectUpdateRowActions';
 
 export type TUpdates = {
   id: string;
@@ -30,7 +30,7 @@ export type TUpdates = {
   updatedAt: Date;
 };
 
-export default async function ProjectUpdatesTable({
+export async function ProjectUpdatesTable({
   data,
   projectId,
 }: Readonly<{ data: TUpdates[]; projectId: string }>) {

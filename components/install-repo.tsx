@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
-export default function InstallRepo() {
+export function InstallRepo() {
   return (
     <div className="py-4 rounded-md text-center">
       <p className="text-sm w-[80%] mx-auto text-muted-foreground">

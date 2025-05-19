@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { editProject } from '@/app/actions/projects';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -13,9 +15,6 @@ import {
   CardContent,
   CardFooter,
 } from '@/components/ui/card';
-import { STATUS } from '@/constants/response';
-import { editProject } from '@/app/actions/projects';
-import { useRouter } from 'next/navigation';
 
 export type EditProjectFormProps = {
   id: string;
@@ -43,18 +42,10 @@ export function EditProjectForm({
     }
 
     try {
-      const data = await editProject(id, projectTitle, projectDescription);
-
-      if (data.status === STATUS.ERROR) {
-        console.log('ERROR: ', data.message);
-        return;
-      }
-
-      if (data.status === STATUS.SUCCESS) {
-        setIsOpenForm(false);
-        router.refresh();
-        console.log('project edited successfully');
-      }
+      editProject(id, projectTitle, projectDescription);
+      setIsOpenForm(false);
+      router.refresh();
+      console.log('project edited successfully');
     } catch (err) {
       console.log('Error occured', err);
     } finally {

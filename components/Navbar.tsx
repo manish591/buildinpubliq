@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import ThemeToggle from './ThemeToggle';
+import { Menu } from 'lucide-react';
+import { ThemeToggle } from '@/components/theme-toggle';
 import {
   Sheet,
   SheetContent,
@@ -8,9 +9,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { Menu } from 'lucide-react';
 
-export default function Navbar() {
+export function Navbar() {
   return (
     <header className="border-b border-foreground/10 z-10 px-4 sticky top-0 backdrop-blur-lg">
       <div className="flex items-center justify-between h-16 max-w-7xl mx-auto">

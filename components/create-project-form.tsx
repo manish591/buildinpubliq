@@ -4,11 +4,13 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CirclePlus } from 'lucide-react';
 import { Repository } from '@/app/actions/github';
+import { createProject } from '@/app/actions/projects';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import ListRepositoriesContainer from '@/components/ListRepositoriesContainer';
+import { InstallRepo } from '@/components/install-repo';
+import { ListRepositoriesContainer } from '@/components/list-repositories-container';
 import {
   Card,
   CardHeader,
@@ -23,9 +25,6 @@ import {
   DialogHeader,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { createProject } from '@/app/actions/projects';
-import { STATUS } from '@/constants/response';
-import InstallRepo from './InstallRepo';
 
 export function CreateProjectForm({
   isGithubAppInstalled,
@@ -47,17 +46,9 @@ export function CreateProjectForm({
     }
 
     try {
-      const data = await createProject(title, description, selectedRepo);
-
-      if (data.status === STATUS.ERROR) {
-        console.log('ERROR: ', data.message);
-        return;
-      }
-
-      if (data.status === STATUS.SUCCESS) {
-        router.refresh();
-        console.log('successfully created new project');
-      }
+      await createProject(title, description, selectedRepo);
+      router.refresh();
+      console.log('successfully created new project');
     } catch (err) {
       console.log('Error occured', err);
     } finally {

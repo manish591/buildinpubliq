@@ -1,9 +1,9 @@
 import './globals.css';
 import { Manrope } from 'next/font/google';
 import { auth } from '@/auth';
-import SessionProvider from '@/components/SessionProvider';
-import { ThemeProvider } from '@/components/ThemeProvider';
-import { generateMetadata } from '@/utils/generateMetadata';
+import { SessionProvider } from '@/components/session-provider';
+import { ThemeProvider } from '@/components/theme-provider';
+import { generateMetadata } from '@/lib/generateMetadata';
 
 const font = Manrope({
   subsets: ['latin'],

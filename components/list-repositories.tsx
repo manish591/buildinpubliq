@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
 import { getGithubRepositries, Repository } from '@/app/actions/github';
 import { Input } from '@/components/ui/input';
-import { Button } from './ui/button';
-import { timeAgo } from '@/utils/date';
-import { Loader } from '@/components/Loader';
+import { Button } from '@/components/ui/button';
+import { timeAgo } from '@/lib/date';
+import { Loader } from '@/components/loader';
 
 interface ListRepositoriesProps {
   selectedRepo: Repository | null;
@@ -14,7 +14,7 @@ interface ListRepositoriesProps {
   setSelectedRepo: React.Dispatch<React.SetStateAction<Repository | null>>;
 }
 
-export default function ListRepositories({
+export function ListRepositories({
   setIsRepoSectionOpen,
   setSelectedRepo,
 }: Readonly<ListRepositoriesProps>) {

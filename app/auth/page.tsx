@@ -1,9 +1,9 @@
-import { auth } from '@/auth';
-import { redirect } from 'next/navigation';
-import { UserAuthForm } from '@/components/UserAuthForm';
-import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
+import { redirect } from 'next/navigation';
+import { auth } from '@/auth';
+import { UserAuthForm } from '@/components/user-auth-form';
+import { Button } from '@/components/ui/button';
 
 export default async function Login() {
   const session = await auth();

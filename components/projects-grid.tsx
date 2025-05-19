@@ -1,14 +1,14 @@
-import { getAllProjects } from '@/app/actions/projects';
-import ProjectCard from '@/components/ProjectCard';
 import { FolderPlus } from 'lucide-react';
-import { CreateNewProject } from './createNewProject';
+import { getAllProjects } from '@/app/actions/projects';
+import { ProjectCard } from '@/components/project-card';
+import { CreateNewProject } from '@/components/create-new-project';
 
 export async function ProjectsGrid() {
   const projectsData = await getAllProjects();
 
   return (
     <div className="py-4">
-      {projectsData.data.length <= 0 ? (
+      {projectsData.length <= 0 ? (
         <div className="flex flex-col items-center justify-center py-16 px-4">
           <div className="bg-muted/40 rounded-full p-6 mb-6">
             <FolderPlus className="h-12 w-12 text-muted-foreground" />
@@ -22,7 +22,7 @@ export async function ProjectsGrid() {
         </div>
       ) : (
         <div className="gap-8 md:columns-2 xl:columns-3 w-full">
-          {projectsData.data.map((project) => {
+          {projectsData.map((project) => {
             return (
               <div key={project.id} className="py-4">
                 <ProjectCard {...project} />

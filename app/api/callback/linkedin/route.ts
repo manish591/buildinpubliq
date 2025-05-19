@@ -1,7 +1,11 @@
+import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/prisma/src";
 import { SocialPlatform } from "@prisma/client";
-import { NextRequest, NextResponse } from "next/server";
+
+const CLIENT_ID = process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_ID;
+const CLIENT_SECRET = process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_SECRET;
+const REDIRECT_URI = "http://localhost:3000/api/callback/linkedin";
 
 export async function GET(req: NextRequest) {
   const session = await auth();
@@ -16,7 +20,8 @@ export async function GET(req: NextRequest) {
   const searchParams = new URL(req.url).searchParams;
   const code = searchParams.get("code");
 
-  const res = await fetch(`https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=${code}&client_id=${process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_ID}&client_secret=${process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_SECRET}&redirect_uri=http://localhost:3000/api/callback/linkedin`, {
+  const res = await fetch(`
+    https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=${code}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&redirect_uri=${REDIRECT_URI}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"

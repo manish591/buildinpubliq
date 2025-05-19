@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { GitPullRequest } from 'lucide-react';
-import { timeAgo } from '@/utils/date';
-import { ProjectCardDropdown } from './projectCardActionDropdown';
+import { timeAgo } from '@/lib/date';
+import { ProjectCardDropdown } from '@/components/project-card-action-dropdown';
 import {
   Card,
   CardHeader,
@@ -20,7 +20,7 @@ interface ProjectCardProps {
   repositoryUpdatedAt: string;
 }
 
-export default function ProjectCard({
+export function ProjectCard({
   id,
   title,
   fullName,

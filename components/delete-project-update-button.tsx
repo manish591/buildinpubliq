@@ -1,8 +1,8 @@
 'use client';
 
+import { Delete } from 'lucide-react';
 import { deleteProjectUpdate } from '@/app/actions/updates';
 import { Button } from '@/components/ui/button';
-import { Delete } from 'lucide-react';
 
 export function DeleteProjectUpdateButton({
   projectUpdateId,

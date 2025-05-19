@@ -1,7 +1,7 @@
-import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Search } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 
-export default function ProjectUpdateTaskbar() {
+export function ProjectUpdateTaskbar() {
   return (
     <div className="w-full text-right flex gap-2">
       <div className="relative mr-auto flex-1 md:grow-0">
@@ -13,5 +13,5 @@ export default function ProjectUpdateTaskbar() {
         />
       </div>
     </div>
-  )
+  );
 }

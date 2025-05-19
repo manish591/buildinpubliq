@@ -1,7 +1,7 @@
-import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
-import ThemeToggle from '@/components/ThemeToggle';
-import { NavbarProfileDropdown } from '@/components/navbarProfileDropdown';
+import { auth } from '@/auth';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { NavbarProfileDropdown } from '@/components/navbar-profile-dropdown';
 
 export default async function DashboardLayout({
   children,

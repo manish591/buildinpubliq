@@ -1,9 +1,12 @@
-import { auth, signOut } from '@/auth';
 import { redirect } from 'next/navigation';
 import { LogOut, Twitter, Linkedin } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import ThemeToggle from '@/components/ThemeToggle';
+import { auth, signOut } from '@/auth';
+import { getConnectedChannels } from '@/app/profile/actions';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { NavbarProfileDropdown } from '@/components/navbar-profile-dropdown';
+import { ConnectLinkedin } from '@/components/connect-linkedin';
 import {
   Card,
   CardContent,
@@ -11,9 +14,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { NavbarProfileDropdown } from '@/components/navbarProfileDropdown';
-import { getConnectedChannels } from './actions';
-import { ConnectLinkedin } from '@/components/connecteLinkedin';
 
 export default async function Profile() {
   const session = await auth();

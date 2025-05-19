@@ -1,18 +1,18 @@
 'use client';
 
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import { Edit, Ellipsis } from 'lucide-react';
 import { editProjectUpdate } from '@/app/actions/updates';
-import { Button } from '@/components/ui/button';
-import { DeleteProjectUpdateButton } from '@/components/deleteProjectUpdateButton';
-import { TUpdates } from '@/components/ProjectUpdatesTable';
+import { ProjectUpdateForm } from '@/components/project-update-form';
+import { DeleteProjectUpdateButton } from '@/components/delete-project-update-button';
+import { TUpdates } from '@/components/project-update-table';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { ProjectUpdateForm } from '@/components/ProjectUpdateForm';
 import {
   DropdownMenu,
   DropdownMenuContent,

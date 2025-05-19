@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import { ExternalLink } from 'lucide-react';
-import { ProjectsGrid } from '@/components/ProjectsGrid';
+import { auth } from '@/auth';
 import { Button } from '@/components/ui/button';
-import { CreateNewProject } from '@/components/createNewProject';
+import { ProjectsGrid } from '@/components/projects-grid';
+import { CreateNewProject } from '@/components/create-new-project';
 import { isGithubIntegrationInstalled } from '@/app/actions/github';
 
 export default async function Dashboard() {

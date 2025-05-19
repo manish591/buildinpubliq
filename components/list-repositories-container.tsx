@@ -2,17 +2,17 @@
 
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { Repository } from '@/app/actions/github';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import ListRepositories from '@/components/ListRepositories';
-import { Repository } from '@/app/actions/github';
+import { ListRepositories } from '@/components/list-repositories';
 
 interface ListRepositoriesContainerProps {
   selectedRepo: Repository | null;
   setSelectedRepo: React.Dispatch<React.SetStateAction<Repository | null>>;
 }
 
-export default function ListRepositoriesContainer({
+export function ListRepositoriesContainer({
   selectedRepo,
   setSelectedRepo,
 }: Readonly<ListRepositoriesContainerProps>) {

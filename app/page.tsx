@@ -1,10 +1,10 @@
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { HeroSection } from '@/components/Landing/HeroSection';
-import { BenefitsSection } from '@/components/Landing/BenefitsSection';
-import { GridPattern } from '@/components/magicui/grid-pattern';
 import { cn } from '@/lib/utils';
-import HowItWorks from '@/components/Landing/how-it-works';
+import { Navbar } from '@/components/navbar';
+import { Footer } from '@/components/footer';
+import { HeroSection } from '@/components/hero-section';
+import { BenefitsSection } from '@/components/benefits-section';
+import { GridPattern } from '@/components/magicui/grid-pattern';
+import { HowItWorks } from '@/components/how-it-works';
 
 export default async function Home() {
   return (

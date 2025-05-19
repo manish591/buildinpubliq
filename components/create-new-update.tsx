@@ -6,7 +6,7 @@ import { Link as LinkIcon, CirclePlus } from 'lucide-react';
 import { Status } from '@prisma/client';
 import { createNewUpdate } from '@/app/actions/updates';
 import { Button } from '@/components/ui/button';
-import { ProjectUpdateForm } from '@/components/ProjectUpdateForm';
+import { ProjectUpdateForm } from '@/components/project-update-form';
 import {
   Card,
   CardHeader,

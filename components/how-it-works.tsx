@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { ArrowRight, Link2, NotebookPen, Package2, Rocket } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 
-export default function HowItWorks() {
+export function HowItWorks() {
   return (
     <section id="how-it-works" className="w-full pb-28 sm:pb-32">
       <div className="max-w-5xl mx-auto px-6">

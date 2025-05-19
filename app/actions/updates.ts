@@ -1,11 +1,9 @@
 "use server";
 
 import { auth } from "@/auth";
-import { TProjectUpdate } from "@/components/ProjectUpdateForm";
-import { STATUS } from "@/constants/response";
 import { prisma } from "@/prisma/src";
 import { SocialPlatform, Status } from "@prisma/client";
-import { revalidatePath } from "next/cache";
+import { TProjectUpdate } from "@/components/project-update-form";
 
 export type TUpdate = {
   tagline: string,
@@ -17,47 +15,36 @@ export type TUpdate = {
 }
 
 export default async function getAllProjectUpdates(repoId: string) {
-  try {
-    const data = await prisma.projectUpdate.findMany({
-      where: {
-        projectId: repoId,
-      }
-    });
+  const session = await auth();
 
-    return {
-      status: STATUS.SUCCESS,
-      message: "Data returned successfully",
-      data
-    }
-  } catch (err) {
-    return {
-      status: STATUS.ERROR,
-      message: "An internal server error occured",
-      data: []
-    }
+  if (!session?.user) {
+    throw new Error("unauthenticated");
   }
+
+  const data = await prisma.projectUpdate.findMany({
+    where: {
+      projectId: repoId,
+    }
+  });
+
+  return data;
 }
 
 export async function getAllUpdates() {
-  try {
-    const data = await prisma.projectUpdate.findMany({
-      include: {
-        project: true
-      }
-    });
+  const session = await auth();
 
-    return {
-      status: STATUS.SUCCESS,
-      message: "Data returned successfully",
-      data
-    }
-  } catch (err) {
-    return {
-      status: STATUS.ERROR,
-      message: "An internal server error occured",
-      data: []
-    }
+  if (!session?.user) {
+    throw new Error("unauthenticated");
   }
+
+
+  const data = await prisma.projectUpdate.findMany({
+    include: {
+      project: true
+    }
+  });
+
+  return data;
 }
 
 export async function createNewUpdate(data: TProjectUpdate) {
@@ -102,9 +89,7 @@ export async function editProjectUpdate(data: TProjectUpdate) {
       channel: data.platform,
       scheduledAt: data.scheduledAt
     }
-  })
-
-  revalidatePath(`/dashboard/projects/${data.projectId}`);
+  });
 }
 
 export async function deleteProjectUpdate(projectUpdateId: string, projectId: string) {
@@ -130,7 +115,5 @@ export async function deleteProjectUpdate(projectUpdateId: string, projectId: st
     where: {
       id: isProjectUpdateExists.id
     }
-  })
-
-  revalidatePath(`/dashboard/projects/${projectId}`);
+  });
 }

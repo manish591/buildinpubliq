@@ -1,10 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
+import Link from 'next/link';
 import { Edit, ExternalLink, MoveHorizontal, RefreshCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { EditProjectForm } from '@/components/editProjectForm';
+import { EditProjectForm } from '@/components/edit-project-form';
 import {
   Dialog,
   DialogContent,

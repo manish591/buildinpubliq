@@ -1,14 +1,14 @@
-import { auth } from '@/auth';
+import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { Clock, ExternalLink, SquarePen, Wifi } from 'lucide-react';
+import { auth } from '@/auth';
+import { getAllProjectUpdates } from '@/app/dashboard/projects/[projectID]/actions';
 import getProjectDetails from '@/app/actions/projects';
-import ProjectUpdatesTable from '@/components/ProjectUpdatesTable';
-import { CreateNewUpdate } from '@/components/createNewUpdate';
+import { getConnectedChannels } from '@/app/profile/actions';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { getAllProjectUpdates } from './actions';
-import { getConnectedChannels } from '@/app/profile/actions';
-import Link from 'next/link';
+import { ProjectUpdatesTable } from '@/components/project-update-table';
+import { CreateNewUpdate } from '@/components/create-new-update';
 
 export default async function ProjectUpdates({
   params,
