@@ -8,7 +8,6 @@ const CLIENT_SECRET = process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_SECRET;
 const REDIRECT_URI = "http://localhost:3000/api/callback/linkedin";
 
 export const GET = auth(async function GET(req) {
-  console.log("session", req.auth);
   if (!req.auth?.user) {
     return NextResponse.json(
       { message: "Unauthorized" },

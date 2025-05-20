@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { NavbarProfileDropdown } from '@/components/navbar-profile-dropdown';
 import { ConnectLinkedin } from '@/components/connect-linkedin';
+import { ConnectTwitter } from '@/components/connect-twitter';
 import {
   Card,
   CardContent,
@@ -95,7 +96,7 @@ export default async function Profile() {
                         connected
                       </span>
                     ) : (
-                      <Button>connect</Button>
+                      <ConnectTwitter />
                     )}
                   </div>
                 </div>
