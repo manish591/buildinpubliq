@@ -61,7 +61,7 @@ export function ProjectUpdateRowActions({
                 className="bg-transparent px-0 border-none h-6 gap-2 lowercase"
               >
                 <Edit className="h-5 w-5 text-gray-500" />
-                Edit
+                edit
               </Button>
             </DialogTrigger>
           </DropdownMenuItem>

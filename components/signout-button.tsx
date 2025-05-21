@@ -16,7 +16,7 @@ export function SignoutButton() {
       >
         <div className="p-2 hover:bg-muted trasition rounded-md mt-2 flex items-center gap-2">
           <LogOut strokeWidth={1} width={16} height={16} />
-          <span>Log Out</span>
+          <span>log out</span>
         </div>
       </Button>
     </div>

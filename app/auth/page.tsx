@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { auth } from '@/auth';
-import { UserAuthForm } from '@/components/user-auth-form';
+import { GithubAuthForm } from '@/components/github-auth-form';
 import { Button } from '@/components/ui/button';
 
 export default async function Login() {
@@ -46,7 +46,7 @@ export default async function Login() {
               use your github account to connect
             </p>
           </div>
-          <UserAuthForm />
+          <GithubAuthForm />
           <p className="px-8 text-center text-sm text-muted-foreground">
             By connecting your github account, you will give yourself a chance
             to shine

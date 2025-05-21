@@ -8,14 +8,16 @@ import { Button } from '@/components/ui/button';
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
-  async function handleLoginUser() {
-    signIn('github', { callbackUrl: '/dashboard' });
-  }
-
+export function GithubAuthForm({ className, ...props }: UserAuthFormProps) {
   return (
     <div className={cn('grid gap-6 w-[90%] mx-auto', className)} {...props}>
-      <Button variant="secondary" type="button" onClick={handleLoginUser}>
+      <Button
+        variant="secondary"
+        type="button"
+        onClick={() => {
+          signIn('github', { callbackUrl: '/dashboard' });
+        }}
+      >
         <Image
           src="/github.svg"
           width={16}
@@ -23,7 +25,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           alt="github"
           className="w-4 h-4"
         />
-        <span className="ml-2">GitHub</span>
+        <span className="ml-2">github</span>
       </Button>
     </div>
   );

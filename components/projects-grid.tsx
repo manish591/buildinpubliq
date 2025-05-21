@@ -13,10 +13,10 @@ export async function ProjectsGrid() {
           <div className="bg-muted/40 rounded-full p-6 mb-6">
             <FolderPlus className="h-12 w-12 text-muted-foreground" />
           </div>
-          <h2 className="text-2xl font-semibold mb-2">No projects yet</h2>
+          <h2 className="text-2xl font-semibold mb-2">no projects yet</h2>
           <p className="text-muted-foreground text-center max-w-md mb-8">
-            You haven't created any projects yet.
-            <br /> Start by creating your first project.
+            you haven't created any projects yet.
+            <br /> start by creating your first project.
           </p>
           <CreateNewProject />
         </div>

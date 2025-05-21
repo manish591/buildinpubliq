@@ -39,7 +39,7 @@ export function ProjectCardDropdown({
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon" className="ml-auto">
             <MoveHorizontal className="w-4 h-4" />
-            <span className="sr-only">Toggle menu</span>
+            <span className="sr-only">toggle menu</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -47,7 +47,7 @@ export function ProjectCardDropdown({
             <DialogTrigger className="w-full">
               <Button className="hover:bg-transparent w-full flex justify-start text-left bg-transparent h-5 px-0 text-foreground no-underline lowercase">
                 <Edit className="h-5 w-5 text-gray-500"></Edit>
-                <span>Edit</span>
+                <span>edit</span>
               </Button>
             </DialogTrigger>
           </DropdownMenuItem>
@@ -58,7 +58,7 @@ export function ProjectCardDropdown({
               className="w-full flex items-center gap-2"
             >
               <ExternalLink className="h-5 w-5 text-gray-500"></ExternalLink>
-              View Repo
+              view repo
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>

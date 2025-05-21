@@ -29,7 +29,7 @@ export interface Repository {
   default_branch: string;
 }
 
-export async function getInstallationAccessToken(installationId: string) {
+export async function getInstallationAccessToken(installationId: string): Promise<string | null> {
   const session = await auth();
 
   if (!session?.user) {
@@ -49,12 +49,7 @@ export async function getInstallationAccessToken(installationId: string) {
 
   const data = await response.json();
 
-
-  if (!response.ok) {
-    return "";
-  }
-
-  return data.token;
+  return data.token ?? null;
 };
 
 export async function getGithubRepositries() {
@@ -109,9 +104,5 @@ export async function isGithubIntegrationInstalled(userId: string) {
     }
   });
 
-  if (githubDetails) {
-    return true;
-  }
-
-  return false;
+  return githubDetails;
 }

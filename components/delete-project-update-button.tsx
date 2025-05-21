@@ -12,7 +12,7 @@ export function DeleteProjectUpdateButton({
     try {
       await deleteProjectUpdate(projectUpdateId, projectId);
     } catch (err) {
-      console.log('Error while deleting the project upadate', err);
+      console.log('error while deleting the project upadate', err);
     }
   }
 
@@ -23,7 +23,7 @@ export function DeleteProjectUpdateButton({
       onClick={handleDeleteProjectUpdate}
     >
       <Delete className="h-5 w-5 text-gray-500" />
-      <span>Delete</span>
+      <span>delete</span>
     </Button>
   );
 }

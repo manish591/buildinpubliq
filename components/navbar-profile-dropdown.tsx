@@ -61,7 +61,7 @@ export function NavbarProfileDropdown({
         <DropdownMenuItem className="gap-2">
           <Link href="/profile" className="flex items-center gap-2">
             <User className="h-5 w-5" />
-            <span>Profile</span>
+            <span>profile</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
@@ -73,7 +73,7 @@ export function NavbarProfileDropdown({
             className="h-6 p-0 bg-transparent hover:bg-transparent text-foreground"
           >
             <LogOut className="h-5 w-5" />
-            Log out
+            log out
           </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>

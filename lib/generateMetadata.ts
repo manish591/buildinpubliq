@@ -9,8 +9,8 @@ type GenerateMetadataProps = {
 }
 
 export function generateMetadata({
-  title = "Buildinpubliq - Promoting building in public",
-  description = "Create Your Projects In The Open And Be Discovered By A Community Eager To Connect, Collaborate, And Celebrate Innovation. Share Your Learning Each For Better Visibility.",
+  title = "buildinpubliq - promoting building in public",
+  description = "create your projects in the open and be discovered by a community eager to connect, collaborate, and celebrate innovation. share your learning each for better visibility.",
   image = "/thumbnail.png",
   icons = "/favicon.ico",
   noIndex = false

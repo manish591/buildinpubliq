@@ -37,10 +37,12 @@ export default async function ProjectUpdates({
 
   const channelData = await getConnectedChannels(session.user.id ?? '');
   const isLinkedinConnected = channelData.some(
-    (channel) => channel.platform == 'LINKEDIN',
+    (channel) =>
+      channel.platform == 'LINKEDIN' && channel.expiresIn >= new Date(),
   );
   const isTwitterConnected = channelData.some(
-    (channel) => channel.platform == 'TWITTER',
+    (channel) =>
+      channel.platform == 'TWITTER' && channel.expiresIn >= new Date(),
   );
 
   return (
@@ -69,34 +71,34 @@ export default async function ProjectUpdates({
       <div className="grid gap-4 sm:gap-8 md:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Drafts</CardTitle>
+            <CardTitle className="text-sm font-medium">drafts</CardTitle>
             <SquarePen className="h-5 w-5 text-gray-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{draftUpdates.length}</div>
             <p className="text-xs text-muted-foreground">
-              Posts in draft stage
+              posts in draft stage
             </p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Scheduled</CardTitle>
+            <CardTitle className="text-sm font-medium">scheduled</CardTitle>
             <Clock className="h-5 w-5 text-gray-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{scheduledUpdates.length}</div>
-            <p className="text-xs text-muted-foreground">Posts in queue</p>
+            <p className="text-xs text-muted-foreground">posts in queue</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Published</CardTitle>
+            <CardTitle className="text-sm font-medium">published</CardTitle>
             <Wifi className="h-5 w-5 text-gray-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{publishedUpdates.length}</div>
-            <p className="text-xs text-muted-foreground">Posts published</p>
+            <p className="text-xs text-muted-foreground">posts published</p>
           </CardContent>
         </Card>
       </div>

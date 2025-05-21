@@ -55,10 +55,10 @@ export async function ProjectUpdatesTable({
           <div className="bg-muted/40 rounded-full p-6 mb-6">
             <FolderPlus className="h-12 w-12 text-muted-foreground" />
           </div>
-          <h2 className="text-2xl font-semibold mb-2">No updates yet</h2>
+          <h2 className="text-2xl font-semibold mb-2">no updates yet</h2>
           <p className="text-muted-foreground text-center max-w-md mb-8">
-            You haven't created any updates yet.
-            <br /> Start by creating your first update.
+            you haven't created any updates yet.
+            <br /> start by creating your first update.
           </p>
           <CreateNewUpdate
             isLinkedinConnected={isLinkedinConnected}
@@ -70,12 +70,12 @@ export async function ProjectUpdatesTable({
         <Table className="mt-4">
           <TableHeader>
             <TableRow>
-              <TableHead>Content</TableHead>
-              <TableHead className="hidden sm:table-cell">Platforms</TableHead>
-              <TableHead className="hidden sm:table-cell">Status</TableHead>
-              <TableHead className="hidden sm:table-cell">Date</TableHead>
+              <TableHead>content</TableHead>
+              <TableHead className="hidden sm:table-cell">platforms</TableHead>
+              <TableHead className="hidden sm:table-cell">status</TableHead>
+              <TableHead className="hidden sm:table-cell">date</TableHead>
               <TableHead className="text-right sm:table-cell">
-                Actions
+                actions
               </TableHead>
             </TableRow>
           </TableHeader>

@@ -48,7 +48,6 @@ export async function POST(req: NextRequest) {
       const feat_desc = data.pull_request.body;
       const title = projectDetails.title;
       const description = projectDetails.description;
-      const projectId = projectDetails.repoId;
 
       const aiResponse = await generateTwitterPost(title, description, feat_title, feat_desc);
 

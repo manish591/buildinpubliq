@@ -32,6 +32,7 @@ export function ListRepositories({
         setRepositories(repositories);
       } catch (err) {
         setRepositories([]);
+        console.log('error occured while fetching repositories', err);
       } finally {
         setLoading(false);
       }
@@ -90,7 +91,7 @@ export function ListRepositories({
             </div>
           ) : (
             <div className="py-4 pt-9">
-              <p className="text-sm text-center">No repo found!</p>
+              <p className="text-sm text-center">no repo found!</p>
             </div>
           )}
         </div>

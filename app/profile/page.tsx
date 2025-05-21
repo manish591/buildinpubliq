@@ -25,10 +25,12 @@ export default async function Profile() {
 
   const channelData = await getConnectedChannels(session.user.id ?? '');
   const isLinkedinConnected = channelData.find(
-    (channel) => channel.platform == 'LINKEDIN',
+    (channel) =>
+      channel.platform == 'LINKEDIN' && channel.expiresIn >= new Date(),
   );
   const isTwitterConnected = channelData.find(
-    (channel) => channel.platform == 'TWITTER',
+    (channel) =>
+      channel.platform == 'TWITTER' && channel.expiresIn >= new Date(),
   );
 
   return (

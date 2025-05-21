@@ -21,7 +21,7 @@ export function ListRepositoriesContainer({
   return (
     <div className="space-y-2 relative">
       <div className="space-y-2">
-        <Label htmlFor="github-repo">GitHub Repository</Label>
+        <Label htmlFor="github-repo">gitHub repository</Label>
         <Button
           onClick={() => {
             setIsRepoSectionOpen(!isRepoSectionOpen);

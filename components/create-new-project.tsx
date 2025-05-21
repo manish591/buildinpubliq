@@ -7,5 +7,7 @@ export async function CreateNewProject() {
   const userId = session?.user?.id ?? '';
   const isGithubAppInstalled = await isGithubIntegrationInstalled(userId);
 
-  return <CreateProjectForm isGithubAppInstalled={isGithubAppInstalled} />;
+  return (
+    <CreateProjectForm isGithubAppInstalled={isGithubAppInstalled != null} />
+  );
 }

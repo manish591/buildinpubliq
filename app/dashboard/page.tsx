@@ -14,7 +14,9 @@ export default async function Dashboard() {
     return redirect('/auth');
   }
 
-  const isGithubInstalled = await isGithubIntegrationInstalled(session.user.id);
+  const githubInstallationData = await isGithubIntegrationInstalled(
+    session.user.id,
+  );
 
   return (
     <div className="w-full max-w-7xl mx-auto mt-10 px-4">
@@ -22,12 +24,15 @@ export default async function Dashboard() {
         <div>
           <p className="text-lg font-bold">my projects</p>
           <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">
-            Manage and organize your development projects
+            manage and organize your development projects
           </p>
         </div>
         <div className="flex gap-3">
-          {isGithubInstalled && (
-            <Link href="#">
+          {githubInstallationData && (
+            <Link
+              href={`https://github.com/settings/installations/${githubInstallationData.installationId}`}
+              target="_blank"
+            >
               <Button
                 variant="outline"
                 className="rounded-lg text-sm flex items-center"

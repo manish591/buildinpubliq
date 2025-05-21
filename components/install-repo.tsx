@@ -7,7 +7,7 @@ export function InstallRepo() {
   return (
     <div className="py-4 rounded-md text-center">
       <p className="text-sm w-[80%] mx-auto text-muted-foreground">
-        Install the github plugin to create the project updates.
+        install the github plugin to create the project updates.
       </p>
       <Button
         variant="outline"
@@ -24,7 +24,7 @@ export function InstallRepo() {
             alt="github"
             className="w-4 h-4"
           />
-          <span>Install Github Plugin</span>
+          <span>install github plugin</span>
         </div>
       </Button>
     </div>
