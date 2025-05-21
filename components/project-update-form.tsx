@@ -260,7 +260,13 @@ export function ProjectUpdateForm({
           )}
         </div>
         <div className="flex items-center mt-6 pb-6 px-6">
-          <Button variant="secondary" className="mr-auto">
+          <Button
+            variant="secondary"
+            className="mr-auto"
+            onClick={() => {
+              closeModal(false);
+            }}
+          >
             Cancel
           </Button>
           <Button type="submit" className="ml-auto">

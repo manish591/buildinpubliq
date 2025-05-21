@@ -1,116 +1,107 @@
 'use client';
 
-import { useState } from 'react';
+import { z } from 'zod';
 import { useRouter } from 'next/navigation';
-import { editProject } from '@/app/actions/projects';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from '@/components/ui/card';
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Button } from './ui/button';
+import { editProject } from '@/app/actions/projects';
 
-export type EditProjectFormProps = {
+const formSchema = z.object({
+  title: z.string().min(2).max(50),
+  description: z.string().min(5).max(280),
+});
+
+export type TProject = z.infer<typeof formSchema> & {
   id: string;
-  title: string;
-  description: string;
-  setIsOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export function EditProjectForm({
-  id,
-  title,
-  description,
-  setIsOpenForm,
-}: Readonly<EditProjectFormProps>) {
-  const [projectTitle, setProjectTitle] = useState(title);
-  const [projectDescription, setProjectDescription] = useState(description);
+  defaultProjectData,
+  setIsOpen,
+}: Readonly<{
+  defaultProjectData: TProject;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}>) {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: defaultProjectData.title,
+      description: defaultProjectData.description,
+    },
+  });
+
   const router = useRouter();
 
-  async function handleEditProject(e: React.SyntheticEvent<HTMLButtonElement>) {
-    e.preventDefault();
-
-    if (!title || !description) {
-      console.log('Data is missing');
-      return;
-    }
-
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      editProject(id, projectTitle, projectDescription);
-      setIsOpenForm(false);
+      const { title, description } = values;
+      await editProject(defaultProjectData.id, title, description);
+      setIsOpen(false);
       router.refresh();
-      console.log('project edited successfully');
     } catch (err) {
-      console.log('Error occured', err);
-    } finally {
-      setProjectTitle('');
-      setProjectDescription('');
+      console.log('error occured while creating project', err);
     }
   }
 
   return (
-    <div className="flex items-center md:col-start-2 md:col-span-2">
-      <Card className="w-full p-0 border-none shadow-none">
-        <CardHeader className="px-2">
-          <CardTitle>edit project</CardTitle>
-          <CardDescription>
-            fill out the form to edit a project.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4 px-2">
-          <div className="space-y-2">
-            <Label htmlFor="title">project title</Label>
-            <Input
-              id="title"
-              placeholder="Enter project title"
-              className="bg-transparent"
-              value={projectTitle}
-              onChange={(e) => {
-                setProjectTitle(e.target.value);
-              }}
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="description">project description</Label>
-            <Textarea
-              id="description"
-              placeholder="Please add relevant data, This will help us generate meaningful updates"
-              className="bg-transparent min-h-[100px]"
-              value={projectDescription}
-              onChange={(e) => {
-                setProjectDescription(e.target.value);
-              }}
-            />
-          </div>
-        </CardContent>
-        <CardFooter className="mt-6 px-2 pb-0">
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="title"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>title</FormLabel>
+              <FormControl>
+                <Input placeholder="enter project title" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>description</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="enter project description"
+                  className="bg-transparent min-h-[100px]"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="flex items-center mt-6 pb-6">
           <Button
-            onClick={() => {
-              setProjectTitle('');
-              setProjectDescription('');
-              setIsOpenForm(false);
-            }}
             variant="secondary"
             className="mr-auto"
+            onClick={() => {
+              setIsOpen(false);
+            }}
           >
-            cancel
+            Cancel
           </Button>
-          <Button
-            type="submit"
-            className="ml-auto"
-            disabled={!title || !description}
-            onClick={handleEditProject}
-          >
-            edit project
+          <Button type="submit" className="ml-auto">
+            submit
           </Button>
-        </CardFooter>
-      </Card>
-    </div>
+        </div>
+      </form>
+    </Form>
   );
 }

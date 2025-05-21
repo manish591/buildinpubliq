@@ -4,7 +4,7 @@ import { auth } from "@/auth";
 import { prisma } from "@/prisma/src";
 import { generateJWT } from "@/lib/github";
 
-export interface Repository {
+export type Repository = {
   id: number;
   name: string;
   full_name: string;
@@ -52,7 +52,7 @@ export async function getInstallationAccessToken(installationId: string): Promis
   return data.token ?? null;
 };
 
-export async function getGithubRepositries() {
+export async function getGithubRepositories() {
   const session = await auth();
 
   if (!session?.user) {

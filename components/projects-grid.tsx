@@ -3,7 +3,9 @@ import { getAllProjects } from '@/app/actions/projects';
 import { ProjectCard } from '@/components/project-card';
 import { CreateNewProject } from '@/components/create-new-project';
 
-export async function ProjectsGrid() {
+export async function ProjectsGrid({
+  isGithubAppInstalled,
+}: Readonly<{ isGithubAppInstalled: boolean }>) {
   const projectsData = await getAllProjects();
 
   return (
@@ -18,7 +20,7 @@ export async function ProjectsGrid() {
             you haven't created any projects yet.
             <br /> start by creating your first project.
           </p>
-          <CreateNewProject />
+          <CreateNewProject isGithubAppInstalled={isGithubAppInstalled} />
         </div>
       ) : (
         <div className="gap-8 md:columns-2 xl:columns-3 w-full">

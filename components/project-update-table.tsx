@@ -5,7 +5,7 @@ import { auth } from '@/auth';
 import { SocialPlatform, Status } from '@prisma/client';
 import { getConnectedChannels } from '@/app/profile/actions';
 import { Badge } from '@/components/ui/badge';
-import { CreateNewUpdate } from '@/components/create-new-update';
+import { CreateNewUpdate } from '@/components/create-new-project-update';
 import { ProjectUpdateRowActions } from '@/components/project-update-row-action';
 import {
   Table,

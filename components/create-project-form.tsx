@@ -1,142 +1,151 @@
 'use client';
 
-import { useState } from 'react';
+import { z } from 'zod';
 import { useRouter } from 'next/navigation';
-import { CirclePlus } from 'lucide-react';
-import { Repository } from '@/app/actions/github';
-import { createProject } from '@/app/actions/projects';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { InstallRepo } from '@/components/install-repo';
-import { ListRepositoriesContainer } from '@/components/list-repositories-container';
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from '@/components/ui/card';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { ListRepositoriesContainer } from './list-repositories-container';
+import { Button } from './ui/button';
+import { createProject } from '@/app/actions/projects';
+
+export const repositorySchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  full_name: z.string(),
+  private: z.boolean(),
+  owner: z.object({
+    login: z.string(),
+    id: z.number(),
+    avatar_url: z.string(),
+    html_url: z.string(),
+  }),
+  html_url: z.string(),
+  description: z.string().nullable(),
+  fork: z.boolean(),
+  created_at: z.string(),
+  updated_at: z.string(),
+  pushed_at: z.string(),
+  stargazers_count: z.number(),
+  watchers_count: z.number(),
+  language: z.string().nullable(),
+  forks_count: z.number(),
+  open_issues_count: z.number(),
+  default_branch: z.string(),
+});
+
+const formSchema = z.object({
+  title: z.string().min(2).max(50),
+  description: z.string().min(5).max(280),
+  selectedRepo: repositorySchema.nullable(),
+});
+
+export type TProject = z.infer<typeof formSchema> & {
+  id: string;
+};
 
 export function CreateProjectForm({
-  isGithubAppInstalled,
-}: Readonly<{ isGithubAppInstalled: boolean }>) {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [selectedRepo, setSelectedRepo] = useState<Repository | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  defaultProjectData,
+  setIsOpen,
+}: Readonly<{
+  defaultProjectData: TProject;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}>) {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: defaultProjectData.title,
+      description: defaultProjectData.description,
+      selectedRepo: defaultProjectData.selectedRepo,
+    },
+  });
+
   const router = useRouter();
 
-  async function handleCreateProjectForm(
-    e: React.SyntheticEvent<HTMLButtonElement>,
-  ) {
-    e.preventDefault();
-
-    if (!title || !description || !selectedRepo) {
-      console.log('Data is missing');
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!values.selectedRepo) {
+      console.log('selected repo is empty');
       return;
     }
 
     try {
+      const { title, description, selectedRepo } = values;
       await createProject(title, description, selectedRepo);
+      setIsOpen(false);
       router.refresh();
-      console.log('successfully created new project');
     } catch (err) {
-      console.log('Error occured', err);
-    } finally {
-      setDescription('');
-      setSelectedRepo(null);
-      setTitle('');
-      setIsModalOpen(false);
+      console.log('error occured while creating project', err);
     }
   }
 
   return (
-    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <DialogTrigger>
-        <Button variant="default" className="flex items-center gap-2">
-          <CirclePlus strokeWidth={2} width={16} height={16} />
-          <span>Create New Project</span>
-        </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          {isGithubAppInstalled ? (
-            <div className="flex items-center md:col-start-2 md:col-span-2">
-              <Card className="w-full p-0 border-none shadow-none">
-                <CardHeader className="px-0">
-                  <CardTitle>Create a New Project</CardTitle>
-                  <CardDescription>
-                    Fill out the form to create a new project.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4 px-0">
-                  <div className="space-y-2">
-                    <Label htmlFor="title">Project Title</Label>
-                    <Input
-                      id="title"
-                      placeholder="Enter project title"
-                      className="bg-transparent"
-                      value={title}
-                      onChange={(e) => {
-                        setTitle(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="description">Project Description</Label>
-                    <Textarea
-                      id="description"
-                      placeholder="please add relevant data, this will help us generate meaningful updates"
-                      className="bg-transparent min-h-[100px]"
-                      value={description}
-                      onChange={(e) => {
-                        setDescription(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <ListRepositoriesContainer
-                    selectedRepo={selectedRepo}
-                    setSelectedRepo={setSelectedRepo}
-                  />
-                </CardContent>
-                <CardFooter className="px-0 pt-6">
-                  <Button
-                    onClick={() => {
-                      setDescription('');
-                      setSelectedRepo(null);
-                      setTitle('');
-                      setIsModalOpen(false);
-                    }}
-                    variant="secondary"
-                    className="mr-auto"
-                  >
-                    cancel
-                  </Button>
-                  <Button
-                    type="submit"
-                    className="ml-auto"
-                    disabled={!title || !description || !selectedRepo}
-                    onClick={handleCreateProjectForm}
-                  >
-                    create project
-                  </Button>
-                </CardFooter>
-              </Card>
-            </div>
-          ) : (
-            <InstallRepo />
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="title"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>title</FormLabel>
+              <FormControl>
+                <Input placeholder="enter project title" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
           )}
-        </DialogHeader>
-      </DialogContent>
-    </Dialog>
+        />
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>description</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="enter project description"
+                  className="bg-transparent min-h-[100px]"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="selectedRepo"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>github repository</FormLabel>
+              <ListRepositoriesContainer {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="flex items-center mt-6 pb-6 px-6">
+          <Button
+            variant="secondary"
+            className="mr-auto"
+            onClick={() => {
+              setIsOpen(false);
+            }}
+          >
+            Cancel
+          </Button>
+          <Button type="submit" className="ml-auto">
+            submit
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 }

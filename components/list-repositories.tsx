@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { getGithubRepositries, Repository } from '@/app/actions/github';
+import { getGithubRepositories, Repository } from '@/app/actions/github';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { timeAgo } from '@/lib/date';
@@ -11,7 +11,7 @@ import { Loader } from '@/components/loader';
 interface ListRepositoriesProps {
   selectedRepo: Repository | null;
   setIsRepoSectionOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedRepo: React.Dispatch<React.SetStateAction<Repository | null>>;
+  setSelectedRepo: (val: Repository | null) => void;
 }
 
 export function ListRepositories({
@@ -28,7 +28,7 @@ export function ListRepositories({
   useEffect(function () {
     (async function () {
       try {
-        const repositories = await getGithubRepositries();
+        const repositories = await getGithubRepositories();
         setRepositories(repositories);
       } catch (err) {
         setRepositories([]);

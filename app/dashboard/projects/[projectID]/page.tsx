@@ -8,7 +8,7 @@ import { getConnectedChannels } from '@/app/profile/actions';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ProjectUpdatesTable } from '@/components/project-update-table';
-import { CreateNewUpdate } from '@/components/create-new-update';
+import { CreateNewUpdate } from '@/components/create-new-project-update';
 
 export default async function ProjectUpdates({
   params,

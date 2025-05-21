@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Edit, ExternalLink, MoveHorizontal, RefreshCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { EditProjectForm } from '@/components/edit-project-form';
+import { EditProject } from '@/components/edit-project';
 import {
   Dialog,
   DialogContent,
@@ -31,10 +31,10 @@ export function ProjectCardDropdown({
   description,
   repositoryUrl,
 }: Readonly<ProjectCardDropdownProps>) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon" className="ml-auto">
@@ -73,11 +73,11 @@ export function ProjectCardDropdown({
         </DropdownMenuContent>
         <DialogContent>
           <DialogHeader>
-            <EditProjectForm
+            <EditProject
               id={id}
               title={title}
               description={description}
-              setIsOpenForm={setIsOpen}
+              setIsOpen={setIsModalOpen}
             />
           </DialogHeader>
         </DialogContent>

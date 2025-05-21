@@ -3,25 +3,21 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Repository } from '@/app/actions/github';
-import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { ListRepositories } from '@/components/list-repositories';
 
-interface ListRepositoriesContainerProps {
-  selectedRepo: Repository | null;
-  setSelectedRepo: React.Dispatch<React.SetStateAction<Repository | null>>;
-}
-
 export function ListRepositoriesContainer({
-  selectedRepo,
-  setSelectedRepo,
-}: Readonly<ListRepositoriesContainerProps>) {
+  value,
+  onChange,
+}: Readonly<{
+  value: Repository | null;
+  onChange: (val: Repository | null) => void;
+}>) {
   const [isRepoSectionOpen, setIsRepoSectionOpen] = useState(false);
 
   return (
     <div className="space-y-2 relative">
       <div className="space-y-2">
-        <Label htmlFor="github-repo">gitHub repository</Label>
         <Button
           onClick={() => {
             setIsRepoSectionOpen(!isRepoSectionOpen);
@@ -30,7 +26,7 @@ export function ListRepositoriesContainer({
           className="w-full flex justify-between items-center bg-transparent hover:bg-transparent rounded-md px-3 py-2.5 text-sm"
         >
           <span className="text-muted-foreground">
-            {selectedRepo ? selectedRepo.name : 'Select Repositories'}
+            {value ? value.name : 'Select Repositories'}
           </span>
           <ChevronDown strokeWidth={1} className="w-5 h-5" />
         </Button>
@@ -38,8 +34,8 @@ export function ListRepositoriesContainer({
       {isRepoSectionOpen && (
         <ListRepositories
           setIsRepoSectionOpen={setIsRepoSectionOpen}
-          selectedRepo={selectedRepo}
-          setSelectedRepo={setSelectedRepo}
+          selectedRepo={value}
+          setSelectedRepo={onChange}
         />
       )}
     </div>

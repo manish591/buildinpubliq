@@ -42,10 +42,12 @@ export default async function Dashboard() {
               </Button>
             </Link>
           )}
-          <CreateNewProject />
+          <CreateNewProject
+            isGithubAppInstalled={githubInstallationData != null}
+          />
         </div>
       </div>
-      <ProjectsGrid />
+      <ProjectsGrid isGithubAppInstalled={githubInstallationData != null} />
     </div>
   );
 }
