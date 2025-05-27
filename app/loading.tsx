@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Loader } from '@/components/loader';
+import { Loader } from '@/components/app-loader';
 
 export default function Loading() {
   return (

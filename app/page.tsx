@@ -11,8 +11,8 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Navbar } from '@/components/navbar';
-import { Footer } from '@/components/footer';
+import { Navbar } from '@/components/app-navbar';
+import { Footer } from '@/components/app-footer';
 import { Button } from '@/components/ui/button';
 import { GridPattern } from '@/components/magicui/grid-pattern';
 

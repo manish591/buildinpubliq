@@ -6,7 +6,7 @@ import { getGithubRepositories, Repository } from '@/app/actions/github';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { timeAgo } from '@/lib/date';
-import { Loader } from '@/components/loader';
+import { Loader } from '@/components/app-loader';
 
 interface ListRepositoriesProps {
   selectedRepo: Repository | null;
