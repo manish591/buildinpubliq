@@ -12,8 +12,8 @@ export default function ProjectNotFound() {
         Project not found
       </h1>
       <p className="text-muted-foreground max-w-md mb-8">
-        We couldn't find the project you're looking for. It may have been
-        deleted or the URL might be incorrect.
+        We couldn&apos;t find the project you&apos;re looking for. It may have
+        been deleted or the URL might be incorrect.
       </p>
       <div className="flex flex-col sm:flex-row gap-4">
         <Link href="/dashboard">

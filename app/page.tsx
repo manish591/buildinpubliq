@@ -62,7 +62,7 @@ export default async function Home() {
               <Link href="/auth" className="inline-block">
                 <Button className="rounded-md h-12 px-6 gap-2 text-base">
                   <span className="font-bold">
-                    Start Your Journey - It's Free{' '}
+                    Start Your Journey - It&apos;s Free{' '}
                   </span>
                   <ArrowRight className="h-10"></ArrowRight>
                 </Button>
@@ -134,8 +134,8 @@ export default async function Home() {
                 </div>
                 <h3 className="text-xl font-bold">1. Describe</h3>
                 <p className="text-center text-sm text-gray-500">
-                  give your project a title and description. We'll use this to
-                  create a perfect social post.
+                  give your project a title and description. We&apos;ll use this
+                  to create a perfect social post.
                 </p>
               </div>
               <div className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-sm">
@@ -154,8 +154,8 @@ export default async function Home() {
                 </div>
                 <h3 className="text-xl font-bold">3. Ship</h3>
                 <p className="text-center text-sm text-gray-500">
-                  push your code and create a pull request. We'll generate a
-                  post for you based on your update.
+                  push your code and create a pull request. We&apos;ll generate
+                  a post for you based on your update.
                 </p>
               </div>
               <div className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-sm">
@@ -176,7 +176,7 @@ export default async function Home() {
                   className="rounded-md h-12 px-6 gap-2 text-base"
                 >
                   <span className="font-bold">
-                    Start Your Journey - It's Free{' '}
+                    Start Your Journey - It&apos;s Free{' '}
                   </span>
                   <ArrowRight className="h-10"></ArrowRight>
                 </Button>

@@ -57,7 +57,7 @@ export async function ProjectUpdatesTable({
           </div>
           <h2 className="text-2xl font-semibold mb-2">no updates yet</h2>
           <p className="text-muted-foreground text-center max-w-md mb-8">
-            you haven't created any updates yet.
+            you haven&apos;t created any updates yet.
             <br /> start by creating your first update.
           </p>
           <CreateNewUpdate

@@ -17,7 +17,7 @@ export async function ProjectsGrid({
           </div>
           <h2 className="text-2xl font-semibold mb-2">no projects yet</h2>
           <p className="text-muted-foreground text-center max-w-md mb-8">
-            you haven't created any projects yet.
+            you haven&apos;t created any projects yet.
             <br /> start by creating your first project.
           </p>
           <CreateNewProject isGithubAppInstalled={isGithubAppInstalled} />
