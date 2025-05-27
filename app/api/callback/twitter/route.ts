@@ -2,16 +2,17 @@ import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/prisma/src";
 import { SocialPlatform } from "@prisma/client";
+import { BASE_URL } from "@/constants";
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID;
-const CLIENT_SECRET = process.env.NEXT_PUBLIC_TWITTER_CLIENT_SECRET;
-const REDIRECT_URI = 'http://localhost:3000/api/callback/twitter';
+const CLIENT_SECRET = process.env.TWITTER_CLIENT_SECRET;
+const REDIRECT_URI = `${BASE_URL}/api/callback/twitter`;
 const basicAuth = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64');
 
 export const GET = auth(async function GET(req) {
   if (!req.auth?.user) {
     return NextResponse.json(
-      { message: "Unauthorized" },
+      { message: "unauthenticated" },
       { status: 401 }
     );
   }
@@ -21,7 +22,7 @@ export const GET = auth(async function GET(req) {
 
   if (!code) {
     return NextResponse.json(
-      { message: "Unauthorized" },
+      { message: "unauthenticated" },
       { status: 401 }
     );
   }
@@ -54,5 +55,5 @@ export const GET = auth(async function GET(req) {
     }
   });
 
-  return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/profile`);
+  return NextResponse.redirect(`${BASE_URL}/profile`);
 });

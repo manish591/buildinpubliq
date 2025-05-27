@@ -2,15 +2,15 @@ import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/prisma/src";
 import { SocialPlatform } from "@prisma/client";
+import { BASE_URL } from "@/constants";
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_ID;
-const CLIENT_SECRET = process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_SECRET;
-const REDIRECT_URI = "http://localhost:3000/api/callback/linkedin";
+const REDIRECT_URI = `${BASE_URL}/callback/linkedin`;
 
 export const GET = auth(async function GET(req) {
   if (!req.auth?.user) {
     return NextResponse.json(
-      { message: "Unauthorized" },
+      { message: "unauthenticated" },
       { status: 401 }
     );
   }
@@ -19,7 +19,7 @@ export const GET = auth(async function GET(req) {
   const code = searchParams.get("code");
 
   const res = await fetch(`
-    https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=${code}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&redirect_uri=${REDIRECT_URI}`, {
+    https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=${code}&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
@@ -39,5 +39,5 @@ export const GET = auth(async function GET(req) {
     }
   });
 
-  return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/profile`);
+  return NextResponse.redirect(`${BASE_URL}/profile`);
 });
