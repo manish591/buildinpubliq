@@ -79,9 +79,7 @@ export function CreateNewUpdate({
                         platform: [],
                         projectId: projectId,
                         status: Status.DRAFT,
-                        scheduledAt: new Date(
-                          new Date().getTime() + 4 * 60 * 60 * 1000,
-                        ),
+                        scheduledAt: new Date(new Date().setHours(0, 0, 0, 0)),
                       }}
                       onSubmitFunc={createNewUpdate}
                       closeModal={setIsModalOpen}

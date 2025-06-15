@@ -1,11 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { format } from 'date-fns';
-import { Calendar as CalendarIcon } from 'lucide-react';
+import { ChevronDownIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SocialPlatform, Status } from '@prisma/client';
 import { Button } from '@/components/ui/button';
@@ -41,7 +41,9 @@ const formSchema = z.object({
     message: 'select atleast one channel',
   }),
   status: z.nativeEnum(Status),
-  scheduledAt: z.date(),
+  scheduledAt: z.date().min(new Date(), {
+    message: 'select a future date',
+  }),
 });
 
 export type TProjectUpdate = z.infer<typeof formSchema> & {
@@ -62,6 +64,8 @@ export function ProjectUpdateForm({
   onSubmitFunc: (data: TProjectUpdate) => Promise<void>;
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
 }>) {
+  const [timeStr, setTimeStr] = useState<string>('00:00');
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -223,36 +227,60 @@ export function ProjectUpdateForm({
               name="scheduledAt"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>schedule date</FormLabel>
-                  <Popover modal={true}>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant={'outline'}
-                          className={cn(
-                            'w-[240px] pl-3 text-left font-normal',
-                            !field.value && 'text-muted-foreground',
-                          )}
+                  <div className="flex gap-4">
+                    <div className="flex flex-col gap-3">
+                      <FormLabel htmlFor="date" className="px-1">
+                        Date
+                      </FormLabel>
+                      <Popover modal={true}>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant="outline"
+                              id="date"
+                              className="justify-between font-normal"
+                            >
+                              {format(field.value, 'PPP')}
+                              <ChevronDownIcon className="h-4 w-4 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent
+                          className="w-auto overflow-hidden p-0"
+                          align="start"
                         >
-                          {field.value ? (
-                            format(field.value, 'PPP')
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={field.value}
-                        onSelect={field.onChange}
-                        disabled={(date) => date <= new Date()}
-                        initialFocus
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            disabled={{ before: new Date() }}
+                            captionLayout="dropdown"
+                            onSelect={field.onChange}
+                          />
+                        </PopoverContent>
+                      </Popover>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <FormLabel htmlFor="time" className="px-1">
+                        Time
+                      </FormLabel>
+                      <Input
+                        type="time"
+                        id="time"
+                        value={timeStr}
+                        onChange={(e) => {
+                          const d = e.target.value.split(':');
+                          const hours = parseInt(d[0]);
+                          const minutes = parseInt(d[1]);
+                          const currentDate = new Date(field.value);
+                          currentDate.setHours(hours);
+                          currentDate.setMinutes(minutes);
+                          field.onChange(currentDate);
+                          setTimeStr(`${d[0]}:${d[1]}`);
+                        }}
+                        className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
                       />
-                    </PopoverContent>
-                  </Popover>
+                    </div>
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}
