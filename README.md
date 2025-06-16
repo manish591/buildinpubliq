@@ -31,7 +31,7 @@ A tool to **build in public** — easily craft, schedule, and share your project
 ## 🚀 Demo
 
 _Deployed version coming soon!_  
-Follow updates on Twitter: [@manishdevrani77](https://twitter.com/manishdevrani77) :contentReference[oaicite:1]{index=1}
+Follow updates on Twitter: [@manishdevrani77](https://twitter.com/manishdevrani77)
 
 ---
 
@@ -50,7 +50,25 @@ Follow updates on Twitter: [@manishdevrani77](https://twitter.com/manishdevrani7
    npm install
    ```
 
-3. Run application:
+3. Running postgres locally and update env with database url
+
+   ```bash
+   docker run --name my-postgres -e POSTGRES_PASSWORD=my-password -p 5432:5432 -d postgres
+   ```
+
+4. Generate prisma client:
+
+   ```bash
+   npx prisma generate
+   ```
+
+5. Run application:
    ```bash
    npm run dev
    ```
+
+## 🧩 Github oauth app creation guide
+
+Our application authorizes users using GitHub OAuth. To create a GitHub OAuth application, please refer to [this guide](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app).
+
+To access repositories, we need to create a GitHub App that users can install on their GitHub account. To create a GitHub App, refer to [this guide](https://docs.github.com/en/apps/creating-github-apps).
