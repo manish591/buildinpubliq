@@ -8,7 +8,6 @@ const REDIRECT_URI = `${BASE_URL}/api/callback/twitter`;
 const SCOPE = 'tweet.write users.read offline.access';
 
 export function ConnectTwitter() {
-  console.log('the base url', BASE_URL);
   return (
     <Button
       onClick={async () => {
