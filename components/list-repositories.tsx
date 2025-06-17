@@ -40,7 +40,7 @@ export function ListRepositories({
   }, []);
 
   return (
-    <div className="py-5 bg-background z-10 border absolute top-[100%] mt-4 w-full rounded-md">
+    <div className="py-5 border bg-secondary/40 mt-4 mb-4 w-full rounded-md">
       {loading ? (
         <div className="flex justify-center">
           <Loader />
@@ -57,36 +57,37 @@ export function ListRepositories({
             />
           </div>
           {filteredRepo.length > 0 ? (
-            <div className="h-32 px-5 overflow-auto flex flex-col mt-4 text-center">
+            <div className="h-36 px-3 overflow-auto flex flex-col mt-4 text-center">
               <div className="grid grid-cols-1 gap-2 mt-2">
-                {filteredRepo.slice(0, 10).map((repo) => {
-                  return (
-                    <Button
-                      variant="outline"
-                      key={repo.id}
-                      className="flex justify-start items-center gap-2 p-3 rounded-md text-sm bg-muted/40"
-                      onClick={() => {
-                        setSelectedRepo(repo);
-                        setIsRepoSectionOpen(false);
-                      }}
-                    >
-                      <Image
-                        src="/github.svg"
-                        width={16}
-                        height={16}
-                        alt="github"
-                        className="w-5 h-5"
-                      />
-                      <h3>
-                        {repo.owner.login} / {repo.name}
-                      </h3>
-                      <span className="mb-2 text-muted-foreground">.</span>
-                      <p className="text-xs text-muted-foreground">
-                        {timeAgo(new Date(repo.updated_at).getTime())}
-                      </p>
-                    </Button>
-                  );
-                })}
+                {filteredRepo
+                  .toReversed()
+                  .slice(0, 10)
+                  .map((repo) => {
+                    return (
+                      <Button
+                        variant="outline"
+                        key={repo.id}
+                        className="flex justify-start items-center gap-2 p-3 rounded-md text-sm bg-muted/40"
+                        onClick={() => {
+                          setSelectedRepo(repo);
+                          setIsRepoSectionOpen(false);
+                        }}
+                      >
+                        <Image
+                          src="/github.svg"
+                          width={16}
+                          height={16}
+                          alt="github"
+                          className="w-5 h-5"
+                        />
+                        <h3 className="w-max text-left">{repo.name}</h3>
+                        <span className="mb-2 text-muted-foreground">.</span>
+                        <p className="text-xs text-muted-foreground">
+                          {timeAgo(new Date(repo.updated_at).getTime())}
+                        </p>
+                      </Button>
+                    );
+                  })}
               </div>
             </div>
           ) : (

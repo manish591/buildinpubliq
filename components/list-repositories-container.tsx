@@ -19,6 +19,7 @@ export function ListRepositoriesContainer({
     <div className="space-y-2 relative">
       <div className="space-y-2">
         <Button
+          type="button"
           onClick={() => {
             setIsRepoSectionOpen(!isRepoSectionOpen);
           }}

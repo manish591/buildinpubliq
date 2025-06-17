@@ -77,17 +77,28 @@ export async function getGithubRepositories() {
     throw new Error("installation token not found");
   }
 
-  // when you will access the last page it will not have the link header of next
+  let allRepositories: Repository[] = [];
+  let pageNumber = 1;
 
-  const response = await fetch(`https://api.github.com/installation/repositories?page=${1}&per_page=${100}`, {
-    headers: {
-      Authorization: `Bearer ${installationToken}`,
-      Accept: 'application/vnd.github+json',
-    },
-  });
+  while (true) {
+    const response = await fetch(`https://api.github.com/installation/repositories?page=${pageNumber}&per_page=${10}`, {
+      headers: {
+        Authorization: `Bearer ${installationToken}`,
+        Accept: 'application/vnd.github+json',
+      },
+    });
 
-  const data = await response.json();
-  return data.repositories;
+    const data = await response.json();
+
+    if (data.repositories.length == 0) {
+      break;
+    }
+
+    allRepositories = [...allRepositories, ...data.repositories];
+    pageNumber++;
+  }
+
+  return allRepositories;
 }
 
 export async function isGithubIntegrationInstalled(userId: string) {

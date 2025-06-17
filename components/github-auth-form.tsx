@@ -15,7 +15,7 @@ export function GithubAuthForm({ className, ...props }: UserAuthFormProps) {
         variant="secondary"
         type="button"
         onClick={() => {
-          signIn('github', { callbackUrl: '/dashboard' });
+          signIn('github', { redirectTo: '/dashboard' });
         }}
       >
         <Image

@@ -4,6 +4,7 @@ import { auth } from '@/auth';
 import { SessionProvider } from '@/components/session-provider';
 import { ThemeProvider } from '@/components/theme-provider';
 import { generateMetadata } from '@/lib/generateMetadata';
+import { Toaster } from '@/components/ui/sonner';
 
 const font = Manrope({
   subsets: ['latin'],
@@ -24,6 +25,7 @@ export default async function RootLayout({
     <html lang="en" className="lowercase">
       <body className={font.className}>
         <ThemeProvider attribute="class" defaultTheme="dark">
+          <Toaster richColors duration={6000} position="top-right" />
           <SessionProvider session={session}>{children}</SessionProvider>
         </ThemeProvider>
       </body>

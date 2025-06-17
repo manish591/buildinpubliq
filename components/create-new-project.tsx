@@ -32,12 +32,12 @@ export function CreateNewProject({
           <span>Create New Project</span>
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="px-0">
         <DialogHeader>
           {isGithubAppInstalled ? (
             <div className="flex items-center md:col-start-2 md:col-span-2">
               <Card className="w-full p-0 border-none shadow-none">
-                <CardHeader className="px-0">
+                <CardHeader className="px-6">
                   <CardTitle>Create a New Project</CardTitle>
                   <CardDescription>
                     Fill out the form to create a new project.
