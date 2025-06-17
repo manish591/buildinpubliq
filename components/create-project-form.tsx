@@ -117,8 +117,10 @@ export function CreateProjectForm({
       setIsOpen(false);
       router.refresh();
       toast.success('successfully created new project');
-    } catch (err) {
-      toast.error('failed to create new project');
+    } catch (err: any) {
+      toast.error('failed to create new project', {
+        description: err.message,
+      });
       console.log('error occured while creating project', err);
     }
   }

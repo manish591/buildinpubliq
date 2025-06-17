@@ -11,6 +11,16 @@ export async function createProject(title: string, description: string, selected
     throw new Error("unauthenticated");
   }
 
+  const isProjectWithSelectedRepoAlreadyExists = await prisma.project.findFirst({
+    where: {
+      repoId: String(selectedRepo.id)
+    }
+  });
+
+  if (isProjectWithSelectedRepoAlreadyExists) {
+    throw new Error("project with selected repo already exists");
+  }
+
   const projectData = {
     title,
     description,
