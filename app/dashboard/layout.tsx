@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { auth } from '@/auth';
 import { ThemeToggle } from '@/components/theme-toggle';
@@ -17,7 +18,9 @@ export default async function DashboardLayout({
       <header className="border-b border-foreground/10 z-10 sticky top-0 bg-background backdrop-blur-lg">
         <div className="flex items-center justify-between h-16 max-w-7xl px-4 mx-auto">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-xl">buildinpubliq</span>
+            <Link href="/" className="font-bold text-xl">
+              buildinpubliq
+            </Link>
           </div>
           <div className="flex items-center gap-2">
             <ThemeToggle />
