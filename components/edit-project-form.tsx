@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/form';
 import { Button } from './ui/button';
 import { editProject } from '@/app/actions/projects';
+import { toast } from 'sonner';
 
 const formSchema = z.object({
   title: z.string().min(2).max(50),
@@ -49,7 +50,10 @@ export function EditProjectForm({
       await editProject(defaultProjectData.id, title, description);
       setIsOpen(false);
       router.refresh();
+      toast.success('successfully edited the project');
+      console.log('success occured while creating project');
     } catch (err) {
+      toast.error('failed to edit the project');
       console.log('error occured while creating project', err);
     }
   }

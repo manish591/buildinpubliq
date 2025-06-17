@@ -25,7 +25,12 @@ export default async function RootLayout({
     <html lang="en" className="lowercase">
       <body className={font.className}>
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <Toaster richColors duration={6000} position="top-right" />
+          <Toaster
+            richColors
+            closeButton
+            duration={6000}
+            position="top-right"
+          />
           <SessionProvider session={session}>{children}</SessionProvider>
         </ThemeProvider>
       </body>
