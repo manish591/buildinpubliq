@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
 import { LogOut, Twitter, Linkedin } from 'lucide-react';
 import { auth, signOut } from '@/auth';
 import { getConnectedChannels } from '@/app/profile/actions';
@@ -38,7 +39,9 @@ export default async function Profile() {
       <header className="border-b border-foreground/10 z-10 sticky top-0 bg-background backdrop-blur-lg">
         <div className="flex items-center justify-between h-16 max-w-7xl px-4 mx-auto">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-xl">buildinpubliq</span>
+            <Link href="/" className="font-bold text-xl">
+              buildinpubliq
+            </Link>
           </div>
           <div className="flex items-center gap-2">
             <ThemeToggle />
