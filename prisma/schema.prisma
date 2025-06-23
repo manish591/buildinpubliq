@@ -15,9 +15,9 @@ datasource db {
 }
 
 model User {
-  id                 String             @id @default(cuid())
+  id                 String              @id @default(cuid())
   name               String?
-  email              String             @unique
+  email              String              @unique
   emailVerified      DateTime?
   image              String?
   accounts           Account[]
@@ -25,7 +25,7 @@ model User {
   projects           Project[]
   projectUpdates     ProjectUpdate[]
   channel            Channel[]
-  githubInstallation GithubIntegration?
+  githubInstallation GithubIntegration[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -34,7 +34,7 @@ model User {
 model GithubIntegration {
   id             String  @id @default(cuid())
   installationId String  @unique
-  userId         String  @unique
+  userId         String
   isActive       Boolean
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
