@@ -41,9 +41,7 @@ const formSchema = z.object({
     message: 'select atleast one channel',
   }),
   status: z.nativeEnum(Status),
-  scheduledAt: z.date().min(new Date(), {
-    message: 'select a future date',
-  }),
+  scheduledAt: z.date().optional(),
 });
 
 export type TProjectUpdate = z.infer<typeof formSchema> & {
@@ -81,12 +79,36 @@ export function ProjectUpdateForm({
   const router = useRouter();
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    const postScheduledAt = values.scheduledAt;
+
+    if (values.status === 'SCHEDULED' && !postScheduledAt) {
+      form.setError('scheduledAt', {
+        type: 'required',
+        message: 'Please select scheduled date',
+      });
+
+      return;
+    }
+
+    if (
+      values.status === 'SCHEDULED' &&
+      postScheduledAt!.getTime() < new Date().getTime()
+    ) {
+      form.setError('scheduledAt', {
+        type: 'min',
+        message: 'Please select a future date',
+      });
+
+      return;
+    }
+
     try {
       const data = {
         ...values,
         id: defaultProjectUpdateData.id,
         projectId: defaultProjectUpdateData.projectId,
       };
+      console.log('the data', data);
       await onSubmitFunc(data);
       closeModal(false);
       router.refresh();
@@ -240,7 +262,7 @@ export function ProjectUpdateForm({
                               id="date"
                               className="justify-between font-normal"
                             >
-                              {format(field.value, 'PPP')}
+                              {format(field.value!, 'PPP')}
                               <ChevronDownIcon className="h-4 w-4 opacity-50" />
                             </Button>
                           </FormControl>
@@ -271,7 +293,7 @@ export function ProjectUpdateForm({
                           const d = e.target.value.split(':');
                           const hours = parseInt(d[0]);
                           const minutes = parseInt(d[1]);
-                          const currentDate = new Date(field.value);
+                          const currentDate = new Date(field.value!);
                           currentDate.setHours(hours);
                           currentDate.setMinutes(minutes);
                           field.onChange(currentDate);
@@ -291,6 +313,7 @@ export function ProjectUpdateForm({
           <Button
             variant="secondary"
             className="mr-auto"
+            type="button"
             onClick={() => {
               closeModal(false);
             }}
