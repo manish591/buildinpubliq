@@ -5,7 +5,7 @@ import { BASE_URL } from '@/constants';
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID;
 const REDIRECT_URI = `${BASE_URL}/api/callback/twitter`;
-const SCOPE = 'tweet.write users.read offline.access';
+const SCOPE = 'tweet.write tweet.read users.read offline.access';
 
 export function ConnectTwitter() {
   return (
