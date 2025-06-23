@@ -5,7 +5,8 @@ import { SocialPlatform } from "@prisma/client";
 import { BASE_URL } from "@/constants";
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_ID;
-const REDIRECT_URI = `${BASE_URL}/callback/linkedin`;
+const CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET;
+const REDIRECT_URI = `${BASE_URL}/api/callback/linkedin`;
 
 export const GET = auth(async function GET(req) {
   if (!req.auth?.user) {
@@ -19,7 +20,7 @@ export const GET = auth(async function GET(req) {
   const code = searchParams.get("code");
 
   const res = await fetch(`
-    https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=${code}&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}`, {
+    https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=${code}&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&client_secret=${CLIENT_SECRET}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
@@ -27,6 +28,13 @@ export const GET = auth(async function GET(req) {
   });
 
   const data = await res.json();
+
+  if (!res.ok) {
+    return NextResponse.json(
+      { message: "bad request" },
+      { status: 400 }
+    );
+  }
 
   await prisma.channel.upsert({
     where: {
