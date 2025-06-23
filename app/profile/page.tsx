@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { LogOut, Twitter, Linkedin } from 'lucide-react';
+import { LogOut, Twitter, Linkedin, ChevronLeft } from 'lucide-react';
 import { auth, signOut } from '@/auth';
 import { getConnectedChannels } from '@/app/profile/actions';
 import { ThemeToggle } from '@/components/theme-toggle';
@@ -54,23 +54,12 @@ export default async function Profile() {
         </div>
       </header>
       <div className="w-full max-w-7xl mx-auto mt-8 px-4 pb-8">
-        <div className="flex flex-col gap-8 items-start mb-6">
-          <div className="flex gap-4 items-center">
-            <Avatar className="h-20 w-20">
-              <AvatarImage src={session.user.image ?? ''} />
-              <AvatarFallback>
-                {session.user.name ? session.user.name[0] : 'U'}
-              </AvatarFallback>
-            </Avatar>
-            <div>
-              <p className="text-lg font-bold">{session.user.name ?? ''}</p>
-              <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">
-                {session.user.email ?? ''}
-              </p>
-            </div>
-          </div>
-          <div></div>
-        </div>
+        <Link href="/dashboard">
+          <Button variant="outline">
+            <ChevronLeft className="w-4 h-4" strokeWidth={2} />
+            Dashboard
+          </Button>
+        </Link>
         <Card className="bg-background mt-6 overflow-hidden border-0 shadow-lg">
           <CardHeader className="border-b-2 pb-4">
             <CardTitle className="text-xl sm:text-2xl">
