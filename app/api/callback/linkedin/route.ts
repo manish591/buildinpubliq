@@ -28,8 +28,19 @@ export const GET = auth(async function GET(req) {
 
   const data = await res.json();
 
-  await prisma.channel.create({
-    data: {
+  await prisma.channel.upsert({
+    where: {
+      userId_platform: {
+        userId: req.auth.user.id ?? "",
+        platform: SocialPlatform.LINKEDIN
+      }
+    },
+    update: {
+      accessToken: data.access_token,
+      expiresIn: new Date(Date.now() + data.expires_in * 1000),
+      IDToken: data.id_token
+    },
+    create: {
       platform: SocialPlatform.LINKEDIN,
       accessToken: data.access_token,
       expiresIn: new Date(Date.now() + data.expires_in * 1000),

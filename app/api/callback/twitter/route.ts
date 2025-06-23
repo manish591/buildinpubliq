@@ -45,8 +45,18 @@ export const GET = auth(async function GET(req) {
 
   const data = await res.json();
 
-  await prisma.channel.create({
-    data: {
+  await prisma.channel.upsert({
+    where: {
+      userId_platform: {
+        userId: req.auth.user.id ?? "",
+        platform: SocialPlatform.TWITTER
+      }
+    },
+    update: {
+      accessToken: data.access_token,
+      expiresIn: new Date(Date.now() + data.expires_in * 1000),
+    },
+    create: {
       platform: SocialPlatform.TWITTER,
       accessToken: data.access_token,
       expiresIn: new Date(Date.now() + data.expires_in * 1000),

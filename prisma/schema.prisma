@@ -15,17 +15,17 @@ datasource db {
 }
 
 model User {
-  id                 String              @id @default(cuid())
+  id                 String             @id @default(cuid())
   name               String?
-  email              String              @unique
+  email              String             @unique
   emailVerified      DateTime?
   image              String?
   accounts           Account[]
   sessions           Session[]
-  githubInstallation GithubIntegration[]
   projects           Project[]
   projectUpdates     ProjectUpdate[]
   channel            Channel[]
+  githubInstallation GithubIntegration?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -34,7 +34,7 @@ model User {
 model GithubIntegration {
   id             String  @id @default(cuid())
   installationId String  @unique
-  userId         String
+  userId         String  @unique
   isActive       Boolean
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -44,7 +44,6 @@ model GithubIntegration {
 }
 
 model Channel {
-  id           String         @id @default(uuid())
   platform     SocialPlatform
   accessToken  String
   expiresIn    DateTime
@@ -58,6 +57,8 @@ model Channel {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@id([userId, platform])
 }
 
 model Project {

@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
           tagline: aiResponse.tagline,
           description: aiResponse.description,
           status: Status.SCHEDULED,
-          scheduledAt: new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000),
+          scheduledAt: new Date(new Date().getTime() + 2 * 1000),
           userId: projectDetails.userId,
           channel: [SocialPlatform.LINKEDIN, SocialPlatform.TWITTER]
         }
