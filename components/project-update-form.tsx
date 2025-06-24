@@ -108,7 +108,6 @@ export function ProjectUpdateForm({
         id: defaultProjectUpdateData.id,
         projectId: defaultProjectUpdateData.projectId,
       };
-      console.log('the data', data);
       await onSubmitFunc(data);
       closeModal(false);
       router.refresh();

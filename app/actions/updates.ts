@@ -62,7 +62,7 @@ export async function createNewUpdate(data: TProjectUpdate) {
       userId: session.user.id as string,
       status: data.status,
       channel: data.platform,
-      scheduledAt: data.scheduledAt
+      scheduledAt: data.scheduledAt!
     }
   });
 }
