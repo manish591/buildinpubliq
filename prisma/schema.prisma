@@ -44,6 +44,7 @@ model GithubIntegration {
 }
 
 model Channel {
+  id           String         @id @default(cuid())
   platform     SocialPlatform
   accessToken  String
   expiresIn    DateTime
@@ -52,13 +53,12 @@ model Channel {
   accountEmail String?
   userId       String
   IDToken      String?
+  isActive     Boolean
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@id([userId, platform])
 }
 
 model Project {

@@ -36,25 +36,26 @@ export const GET = auth(async function GET(req) {
     );
   }
 
-  await prisma.channel.upsert({
+  await prisma.channel.updateMany({
     where: {
-      userId_platform: {
-        userId: req.auth.user.id ?? "",
-        platform: SocialPlatform.LINKEDIN
-      }
+      userId: req.auth.user.id!,
+      platform: SocialPlatform.LINKEDIN,
+      isActive: true
     },
-    update: {
-      accessToken: data.access_token,
-      expiresIn: new Date(Date.now() + data.expires_in * 1000),
-      IDToken: data.id_token
-    },
-    create: {
+    data: {
+      isActive: false
+    }
+  });
+
+  await prisma.channel.create({
+    data: {
       platform: SocialPlatform.LINKEDIN,
       accessToken: data.access_token,
       expiresIn: new Date(Date.now() + data.expires_in * 1000),
       accountName: req.auth.user.name ?? "",
       userId: req.auth.user.id ?? "",
-      IDToken: data.id_token
+      IDToken: data.id_token,
+      isActive: true
     }
   });
 

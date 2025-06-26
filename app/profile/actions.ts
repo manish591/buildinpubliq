@@ -12,7 +12,8 @@ export async function getConnectedChannels(userId: string) {
 
   const data = await prisma.channel.findMany({
     where: {
-      userId
+      userId,
+      isActive: true
     }
   });
 
