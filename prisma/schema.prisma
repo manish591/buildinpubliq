@@ -31,73 +31,6 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
-model GithubIntegration {
-  id             String  @id @default(cuid())
-  installationId String  @unique
-  userId         String
-  isActive       Boolean
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Channel {
-  id           String         @id @default(cuid())
-  platform     SocialPlatform
-  accessToken  String
-  expiresIn    DateTime
-  accountName  String?
-  accountImg   String?
-  accountEmail String?
-  userId       String
-  IDToken      String?
-  isActive     Boolean
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Project {
-  id                  String          @id @default(cuid())
-  title               String
-  description         String
-  repositoryUrl       String
-  fullName            String
-  repoId              String          @unique
-  defaultBranch       String
-  language            String?
-  repositoryUpdatedAt String
-  userId              String
-  projectUpdate       ProjectUpdate[]
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model ProjectUpdate {
-  id          String           @id @default(cuid())
-  tagline     String
-  description String
-  projectId   String
-  userId      String
-  scheduledAt DateTime
-  postedAt    DateTime?
-  status      Status
-  channel     SocialPlatform[]
-
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
 model Account {
   userId            String
   type              String
@@ -135,6 +68,84 @@ model VerificationToken {
   expires    DateTime
 
   @@id([identifier, token])
+}
+
+model GithubIntegration {
+  id             String  @id @default(cuid())
+  installationId String  @unique
+  userId         String
+  isActive       Boolean
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id                  String          @id @default(cuid())
+  title               String
+  description         String
+  repositoryUrl       String
+  fullName            String
+  repoId              String          @unique
+  defaultBranch       String
+  language            String?
+  repositoryUpdatedAt String
+  userId              String
+  projectUpdate       ProjectUpdate[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProjectUpdate {
+  id          String    @id @default(cuid())
+  tagline     String
+  description String
+  projectId   String
+  userId      String
+  scheduledAt DateTime
+  postedAt    DateTime?
+  status      Status
+  projectUpdateOnChannel     ProjectUpdateOnChannel[]
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Channel {
+  id            String          @id @default(cuid())
+  platform      SocialPlatform
+  accessToken   String
+  expiresIn     DateTime
+  accountName   String?
+  accountImg    String?
+  accountEmail  String?
+  userId        String
+  IDToken       String?
+  isActive      Boolean
+  projectUpdateOnChannel     ProjectUpdateOnChannel[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProjectUpdateOnChannel {
+  channelId String
+  projectUpdateId String
+
+  channel Channel @relation(fields: [channelId], references: [id])
+  projectUpdate ProjectUpdate @relation(fields: [projectUpdateId], references: [id])
+
+  @@id([channelId, projectUpdateId])
 }
 
 enum Status {
