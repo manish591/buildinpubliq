@@ -1,0 +1,28 @@
+{
+  "name": "@buildinpubliq/db",
+  "version": "1.0.0",
+  "description": "Prisma client and migrations for Publiq",
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "postinstall": "prisma generate",
+    "migrate:dev": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
+    "studio": "prisma studio",
+    "generate": "prisma generate",
+    "db:push": "prisma db push"
+  },
+  "exports": {
+    ".": "./src/index.js",
+    "./prisma/*": "./prisma/*"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.1",
+    "prisma": "^5.16.1"
+  },
+  "dependencies": {
+    "@buildinpubliq/db": "5.22.0"
+  }
+}
