@@ -4,8 +4,10 @@
   "description": "Prisma client and migrations for Publiq",
   "type": "module",
   "keywords": [],
+  "private": true,
   "author": "",
   "license": "ISC",
+  "main": "src/index.ts",
   "scripts": {
     "postinstall": "prisma generate",
     "migrate:dev": "prisma migrate dev",
@@ -15,14 +17,13 @@
     "db:push": "prisma db push"
   },
   "exports": {
-    ".": "./src/index.js",
-    "./prisma/*": "./prisma/*"
+    ".": "./src/index.ts"
   },
   "devDependencies": {
     "@types/node": "^24.3.1",
     "prisma": "^5.16.1"
   },
   "dependencies": {
-    "@buildinpubliq/db": "5.22.0"
+    "@prisma/client": "5.22.0"
   }
 }

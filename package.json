@@ -1,13 +1,19 @@
 {
   "name": "buildinpubliq",
+  "private": true,
   "version": "1.0.0",
   "description": "A social media scheduler for promoting building in public.",
   "packageManager": "pnpm@10.0.0",
   "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "format": "npx @biomejs/biome check --write"
+    "format": "npx @biomejs/biome check --write",
+    "check-types": "turbo run check-types"
   },
   "keywords": [],
   "author": "manish591",
