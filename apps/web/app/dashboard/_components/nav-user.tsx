@@ -1,14 +1,11 @@
 'use client';
 
 import {
-  BadgeCheck,
-  Bell,
   ChevronsUpDown,
-  CreditCard,
+  ExternalLink,
   LogOut,
-  Sparkles,
+  User as UserIcon,
 } from 'lucide-react';
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
@@ -25,16 +22,11 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
+import type { User } from 'next-auth';
+import { signOut } from 'next-auth/react';
+import Link from 'next/link';
 
-export function NavUser({
-  user,
-}: Readonly<{
-  user: {
-    name: string;
-    email: string;
-    avatar: string;
-  };
-}>) {
+export function NavUser({ user }: Readonly<{ user: User }>) {
   const { isMobile } = useSidebar();
 
   return (
@@ -44,11 +36,16 @@ export function NavUser({
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground cursor-pointer"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+              <Avatar className="h-8 w-8 rounded-full">
+                <AvatarImage
+                  src={user.image ?? ''}
+                  alt={user.name ?? 'profile image'}
+                />
+                <AvatarFallback className="rounded-lg">
+                  {user.name?.at(0)}
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
@@ -65,9 +62,14 @@ export function NavUser({
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <Avatar className="h-8 w-8 rounded-full">
+                  <AvatarImage
+                    src={user.image ?? ''}
+                    alt={user.name ?? 'profile image'}
+                  />
+                  <AvatarFallback className="rounded-lg">
+                    {user.name?.at(0)}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
@@ -77,29 +79,30 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
+              <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+                <Link href="/profile">
+                  <UserIcon className="w-4 h-4" />
+                  profile
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="flex items-center gap-2 cursor-pointer"
+                asChild
+              >
+                <Link href="/blog" target="blank" rel="noreferrer">
+                  <ExternalLink className="w-4 h-4" />
+                  blog
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOut />
+            <DropdownMenuItem
+              className="flex items-center gap-2 cursor-pointer"
+              onClick={() => {
+                signOut({ redirectTo: '/auth' });
+              }}
+            >
+              <LogOut className="w-4 h-4" />
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>

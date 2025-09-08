@@ -1,15 +1,4 @@
-'use client';
-
-import {
-  Clock10,
-  FolderKanban,
-  Layers,
-  LayoutPanelLeft,
-  LifeBuoy,
-  Send,
-  StickyNote,
-  UserRoundCog,
-} from 'lucide-react';
+import { verifyAuthSession } from '@/app/dal/users/verify-auth-session';
 import { NavMain } from '@/app/dashboard/_components/nav-main';
 import { NavSecondary } from '@/app/dashboard/_components/nav-secondary';
 import { NavUser } from '@/app/dashboard/_components/nav-user';
@@ -24,61 +13,11 @@ import {
 } from '@/components/ui/sidebar';
 import { AppLogo } from '@/components/web/app-logo';
 
-const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
-  },
-  navMain: [
-    {
-      title: 'overview',
-      url: '/dashboard',
-      icon: LayoutPanelLeft,
-      isActive: true,
-    },
-    {
-      title: 'projects',
-      url: '/dashboard/projects',
-      icon: FolderKanban,
-      isActive: true,
-    },
-    {
-      title: 'New Post',
-      url: '/dashboard/new-post',
-      icon: StickyNote,
-    },
-    {
-      title: 'posts',
-      url: '/dashboard/posts',
-      icon: Layers,
-    },
-    {
-      title: 'Scheduled',
-      url: '/dashboard/scheduled',
-      icon: Clock10,
-    },
-    {
-      title: 'accounts',
-      url: '/dashboard/accounts',
-      icon: UserRoundCog,
-    },
-  ],
-  navSecondary: [
-    {
-      title: 'Support',
-      url: '/support',
-      icon: LifeBuoy,
-    },
-    {
-      title: 'Feedback',
-      url: '/feedback',
-      icon: Send,
-    },
-  ],
-};
+export async function AppSidebar({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) {
+  const user = await verifyAuthSession();
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
@@ -100,11 +39,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavMain />
+        <NavSecondary className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarFooter>
     </Sidebar>
   );
