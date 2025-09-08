@@ -1,9 +1,9 @@
 import './globals.css';
-import { Rosario } from 'next/font/google';
+import { Alegreya } from 'next/font/google';
 import { generateMetadata } from '@/lib/generateMetadata';
 import Providers from './providers';
 
-const font = Rosario({
+const font = Alegreya({
   subsets: ['latin'],
   display: 'swap',
 });

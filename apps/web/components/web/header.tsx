@@ -16,7 +16,16 @@ export function Header() {
   return (
     <header className="z-10 px-4 sticky top-0 backdrop-blur-lg">
       <div className="flex items-center h-16 max-w-5xl px-4 mx-auto gap-10">
-        <AppLogo />
+        <AppLogo>
+          <div className="bg-primary w-7 h-7 rounded-sm flex items-center justify-center">
+            <span className="mt-[1px] font-bold text-white text-2xl text-shadow-[1.5px_1.5px_0px_rgba(0,0,0,1)]">
+              b
+            </span>
+          </div>
+          <div className="flex items-center justify-center">
+            <span className="font-normal text-xl">buildinpubliq</span>
+          </div>
+        </AppLogo>
         <Sheet>
           <SheetTrigger className="block sm:hidden">
             <Menu></Menu>

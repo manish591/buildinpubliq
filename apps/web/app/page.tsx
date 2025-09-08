@@ -48,7 +48,7 @@ export default async function Home() {
       <main className="space-y-32 sm:space-y-40">
         <section className="py-24 md:py-32 relative flex w-full flex-col items-center justify-center overflow-hidden">
           <div className="w-full max-w-5xl text-center px-4">
-            <h1 className="text-4xl font-bold tracking-tighter leading-[1.1] sm:text-4xl md:text-6xl lg:text-7xl">
+            <h1 className="text-4xl font-bold leading-[1.1] sm:text-4xl md:text-6xl lg:text-7xl">
               Build Your Dev Presence
               <br /> While You Build Software.
             </h1>
@@ -80,7 +80,7 @@ export default async function Home() {
             <div className="mx-auto inline-block rounded-lg bg-gray-100 dark:bg-gray-600 px-3 py-1 text-sm">
               be discovered
             </div>
-            <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl w-[80%] sm:w-full mx-auto">
+            <p className="mt-2 text-3xl font-bold sm:text-4xl w-[80%] sm:w-full mx-auto">
               the benefits of building in public
             </p>
             <p className="text-gray-500 mt-6 sm:w-[90%] lg:w-[80%] mx-auto text-lg md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -114,7 +114,7 @@ export default async function Home() {
                 <div className="inline-block rounded-lg bg-gray-100 dark:bg-gray-600 px-3 py-1 text-sm">
                   Simple Process
                 </div>
-                <h2 className="mt-2 text-3xl font-bold tracking-tighter sm:text-5xl">
+                <h2 className="mt-2 text-3xl font-bold sm:text-5xl">
                   How It Works?
                 </h2>
                 <p className="text-gray-500 sm:w-[90%] lg:w-[75%] mx-auto md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed text-lg mt-6">
