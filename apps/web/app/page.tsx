@@ -11,10 +11,8 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { Footer } from '@/components/app-footer';
-import { Navbar } from '@/components/app-navbar';
-import { GridPattern } from '@/components/magicui/grid-pattern';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Header } from '@/components/web/header';
 
 const features = [
   {
@@ -46,39 +44,37 @@ const features = [
 export default async function Home() {
   return (
     <div>
-      <Navbar />
+      <Header />
       <main className="space-y-32 sm:space-y-40">
-        <div className="pt-24 md:pt-32 relative flex w-full flex-col items-center justify-center overflow-hidden">
-          <div className="w-full text-center">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-4xl md:text-6xl lg:text-[5.25rem]">
-              Build in the open<br></br> connect to be found
+        <section className="py-24 md:py-32 relative flex w-full flex-col items-center justify-center overflow-hidden">
+          <div className="w-full max-w-5xl text-center px-4">
+            <h1 className="text-4xl font-bold tracking-tighter leading-[1.1] sm:text-4xl md:text-6xl lg:text-7xl">
+              Build Your Dev Presence
+              <br /> While You Build Software.
             </h1>
-            <p className="mt-6 w-[80%] sm:w-[75%] lg:w-[55%] mx-auto text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Create your projects in the open and be discovered by a community
-              eager to connect, collaborate, and celebrate innovation. Share
-              your learning each for better visibility.
-            </p>
-            <div className="flex items-center gap-6 justify-center mt-10">
-              <Link href="/auth" className="inline-block">
-                <Button className="rounded-md h-12 px-6 gap-2 text-base">
-                  <span className="font-bold">
-                    Start Your Journey - It&apos;s Free{' '}
-                  </span>
-                  <ArrowRight className="h-10"></ArrowRight>
+            <div>
+              <p className="mt-6 mx-auto text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed max-w-[68%]">
+                Connect your GitHub once, and every time you merge a pull
+                request, buildinpubliq creates and schedules a polished post for
+                you. No more stressing about content — just ship code and watch
+                your presence grow.
+              </p>
+              <div className="flex items-center gap-6 justify-center mt-10">
+                <Link href="/auth" className="inline-block">
+                  <Button size="lg" className="rounded-md">
+                    <span className="font-bold">
+                      Start Your Journey - It&apos;s Free{' '}
+                    </span>
+                    <ArrowRight></ArrowRight>
+                  </Button>
+                </Link>
+                <Button size="lg" variant="outline">
+                  Learn More
                 </Button>
-              </Link>
+              </div>
             </div>
           </div>
-          <GridPattern
-            width={20}
-            height={20}
-            x={-1}
-            y={-1}
-            className={cn(
-              'mask-[linear-gradient(to_bottom_right,white,transparent,transparent)] ',
-            )}
-          />
-        </div>
+        </section>
         <div className="mx-auto max-w-5xl px-6">
           <div className="text-center">
             <div className="mx-auto inline-block rounded-lg bg-gray-100 dark:bg-gray-600 px-3 py-1 text-sm">

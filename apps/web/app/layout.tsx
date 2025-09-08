@@ -1,15 +1,11 @@
 import './globals.css';
-import { Manrope } from 'next/font/google';
-import { auth } from '@/auth';
-import { SessionProvider } from '@/components/session-provider';
-import { ThemeProvider } from '@/components/theme-provider';
-import { Toaster } from '@/components/ui/sonner';
+import { Rosario } from 'next/font/google';
 import { generateMetadata } from '@/lib/generateMetadata';
+import Providers from './providers';
 
-const font = Manrope({
+const font = Rosario({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['700', '500'],
 });
 
 export const metadata = generateMetadata();
@@ -19,20 +15,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
-
   return (
     <html lang="en" className="lowercase">
       <body className={font.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark">
-          <Toaster
-            richColors
-            closeButton
-            duration={6000}
-            position="top-right"
-          />
-          <SessionProvider session={session}>{children}</SessionProvider>
-        </ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
