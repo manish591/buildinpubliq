@@ -201,7 +201,7 @@ export function ProjectUpdateForm({
                                   }
                                 />
                               </FormControl>
-                              <FormLabel className="!mt-0">
+                              <FormLabel className="mt-0!">
                                 {platform}
                               </FormLabel>
                             </FormItem>

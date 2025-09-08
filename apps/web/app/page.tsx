@@ -75,7 +75,7 @@ export default async function Home() {
             x={-1}
             y={-1}
             className={cn(
-              '[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)] ',
+              'mask-[linear-gradient(to_bottom_right,white,transparent,transparent)] ',
             )}
           />
         </div>
@@ -128,7 +128,7 @@ export default async function Home() {
               </div>
             </div>
             <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 mt-12">
-              <div className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-sm">
+              <div className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-xs">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full border">
                   <NotebookPen className="h-6 w-6" />
                 </div>
@@ -138,7 +138,7 @@ export default async function Home() {
                   to create a perfect social post.
                 </p>
               </div>
-              <div className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-sm">
+              <div className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-xs">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full border">
                   <Link2 className="h-6 w-6" />
                 </div>
@@ -148,7 +148,7 @@ export default async function Home() {
                   updates on your behalf automatically.
                 </p>
               </div>
-              <div className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-sm">
+              <div className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-xs">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full border">
                   <Package2 className="h-6 w-6" />
                 </div>
@@ -158,7 +158,7 @@ export default async function Home() {
                   a post for you based on your update.
                 </p>
               </div>
-              <div className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-sm">
+              <div className="flex flex-col items-center space-y-2 rounded-lg border bg-card p-6 shadow-xs">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full border">
                   <Rocket className="h-6 w-6" />
                 </div>
