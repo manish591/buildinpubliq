@@ -4,6 +4,7 @@ import {
   Clock10,
   FolderKanban,
   Layers,
+  LayoutPanelLeft,
   LifeBuoy,
   Send,
   StickyNote,
@@ -31,41 +32,47 @@ const data = {
   },
   navMain: [
     {
+      title: 'overview',
+      url: '/dashboard',
+      icon: LayoutPanelLeft,
+      isActive: true,
+    },
+    {
       title: 'projects',
-      url: '#',
+      url: '/dashboard/projects',
       icon: FolderKanban,
       isActive: true,
     },
     {
       title: 'New Post',
-      url: '#',
+      url: '/dashboard/new-post',
       icon: StickyNote,
     },
     {
       title: 'posts',
-      url: '#',
+      url: '/dashboard/posts',
       icon: Layers,
     },
     {
       title: 'Scheduled',
-      url: '#',
+      url: '/dashboard/scheduled',
       icon: Clock10,
     },
     {
       title: 'accounts',
-      url: '#',
+      url: '/dashboard/accounts',
       icon: UserRoundCog,
     },
   ],
   navSecondary: [
     {
       title: 'Support',
-      url: '#',
+      url: '/support',
       icon: LifeBuoy,
     },
     {
       title: 'Feedback',
-      url: '#',
+      url: '/feedback',
       icon: Send,
     },
   ],

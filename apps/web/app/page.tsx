@@ -10,8 +10,8 @@ import {
   Rocket,
 } from 'lucide-react';
 import Link from 'next/link';
-import { Footer } from '@/components/app-footer';
 import { Button } from '@/components/ui/button';
+import { Footer } from '@/components/web/footer';
 import { Header } from '@/components/web/header';
 
 const features = [
