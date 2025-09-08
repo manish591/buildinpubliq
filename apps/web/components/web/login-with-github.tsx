@@ -1,6 +1,6 @@
 'use client';
 
-import { signIn } from '@/auth';
+import { signIn } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 
 export function LoginWithGithub({
@@ -9,8 +9,9 @@ export function LoginWithGithub({
   return (
     <Button
       variant="outline"
+      type="button"
       className="w-full cursor-pointer"
-      onClick={() => signIn('github')}
+      onClick={() => signIn('github', { redirectTo: '/dashboard' })}
     >
       {children}
     </Button>
