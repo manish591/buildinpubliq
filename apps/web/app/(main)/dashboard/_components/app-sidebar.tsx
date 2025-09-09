@@ -1,7 +1,7 @@
-import { verifyAuthSession } from '@/app/dal/users/verify-auth-session';
-import { NavMain } from '@/app/dashboard/_components/nav-main';
-import { NavSecondary } from '@/app/dashboard/_components/nav-secondary';
-import { NavUser } from '@/app/dashboard/_components/nav-user';
+import { verifyAuthSession } from '@/app/data/users/verify-auth-session';
+import { NavMain } from '@/app/(main)/dashboard/_components/nav-main';
+import { NavSecondary } from '@/app/(main)/dashboard/_components/nav-secondary';
+import { NavUser } from '@/app/(main)/dashboard/_components/nav-user';
 import {
   Sidebar,
   SidebarContent,

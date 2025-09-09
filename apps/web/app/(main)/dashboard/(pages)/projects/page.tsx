@@ -1,11 +1,3 @@
-import { ExternalLink } from 'lucide-react';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { isGithubIntegrationInstalled } from '@/app/actions/github';
-import { auth } from '@/auth';
-import { CreateNewProject } from '@/components/create-new-project';
-import { ProjectsGrid } from '@/components/projects-grid';
-import { Button } from '@/components/ui/button';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,12 +6,19 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { verifyAuthSession } from '@/app/dal/users/verify-auth-session';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Plus } from 'lucide-react';
+import { verifyAuthSession } from '@/app/data/users/verify-auth-session';
+import { hasGithubIntegration } from '@/app/data/github/has-github-integration';
+import { ProjectsSearchBar } from './_components/project-search-bar';
+import { GithubPluginSettings } from './_components/github-plugin-settings';
+import { InstallGithubIntegration } from './_components/install-github-integration';
+import { ProjectsGrid } from './_components/projects-grid';
 
 export default async function ProjectsPage() {
-  const user = await verifyAuthSession();
-
-  const githubInstallationData = await isGithubIntegrationInstalled(user.id);
+  await verifyAuthSession();
+  const githubIntegrationData = await hasGithubIntegration();
 
   return (
     <div>
@@ -39,34 +38,41 @@ export default async function ProjectsPage() {
         </div>
       </header>
       <main className="w-full max-w-4xl mx-auto py-6 px-6">
-        <div className="flex flex-col sm:flex-row justify-between gap-6 sm:gap-0 sm:items-center mb-6">
+        <div className="mb-8">
           <div>
             <p className="text-3xl font-bold">my projects</p>
-            <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">
+            <p className="text-foreground/70 mt-1 text-sm">
               manage and organize your development projects
             </p>
           </div>
+        </div>
+        <div className="flex items-center gap-4">
+          <ProjectsSearchBar />
           <div className="flex gap-3">
-            {githubInstallationData && (
-              <Link
-                href={`https://github.com/settings/installations/${githubInstallationData.installationId}`}
-                target="_blank"
-              >
-                <Button
-                  variant="outline"
-                  className="rounded-lg text-sm flex items-center"
-                >
-                  <span>github plugin settings</span>
-                  <ExternalLink></ExternalLink>
-                </Button>
-              </Link>
+            {githubIntegrationData && (
+              <GithubPluginSettings
+                githubIntegrationInstallationId={
+                  githubIntegrationData.installationId
+                }
+              />
             )}
-            <CreateNewProject
-              isGithubAppInstalled={githubInstallationData != null}
-            />
+            {githubIntegrationData ? (
+              <Button
+                variant="default"
+                className="flex items-center gap-2 cursor-pointer"
+                asChild
+              >
+                <Link href="/dashboard/projects/new">
+                  <Plus strokeWidth={2} width={16} height={16} />
+                  <span>Create New Project</span>
+                </Link>
+              </Button>
+            ) : (
+              <InstallGithubIntegration />
+            )}
           </div>
         </div>
-        <ProjectsGrid isGithubAppInstalled={githubInstallationData != null} />
+        <ProjectsGrid />
       </main>
     </div>
   );

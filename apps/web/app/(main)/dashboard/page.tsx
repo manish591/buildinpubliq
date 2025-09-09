@@ -32,7 +32,7 @@ export default async function OverviewPage() {
         <div className="flex flex-col sm:flex-row justify-between gap-6 sm:gap-0 sm:items-center mb-6">
           <div>
             <p className="text-3xl font-bold">overview</p>
-            <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">
+            <p className="text-foreground/70 mt-1 text-sm">
               manage and organize your development projects
             </p>
           </div>
