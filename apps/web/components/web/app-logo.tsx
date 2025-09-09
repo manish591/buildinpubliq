@@ -14,3 +14,30 @@ export function AppLogo({
     </Link>
   );
 }
+
+AppLogo.LogoIcon = ({
+  children,
+  className,
+}: Readonly<{ children: React.ReactNode; className?: string }>) => {
+  return (
+    <div
+      className={cn(
+        'bg-primary w-7 h-7 rounded-sm flex items-center justify-center',
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
+AppLogo.AppName = ({
+  children,
+  className,
+}: Readonly<{ children: React.ReactNode; className?: string }>) => {
+  return (
+    <div className={cn('flex items-center justify-center', className)}>
+      {children}
+    </div>
+  );
+};

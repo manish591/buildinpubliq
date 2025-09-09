@@ -1,5 +1,4 @@
-import { redirect } from 'next/navigation';
-import { auth } from '@/auth';
+import { verifyAuthSession } from '@/app/data/users/verify-auth-session';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,11 +9,7 @@ import {
 } from '@/components/ui/breadcrumb';
 
 export default async function OverviewPage() {
-  const session = await auth();
-
-  if (!session?.user?.id) {
-    return redirect('/auth');
-  }
+  await verifyAuthSession();
 
   return (
     <div>

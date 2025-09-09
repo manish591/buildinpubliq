@@ -79,7 +79,10 @@ export function NavUser({ user }: Readonly<{ user: User }>) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+              <DropdownMenuItem
+                className="flex items-center gap-2 cursor-pointer"
+                asChild
+              >
                 <Link href="/profile">
                   <UserIcon className="w-4 h-4" />
                   profile

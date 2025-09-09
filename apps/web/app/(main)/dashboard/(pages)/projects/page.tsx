@@ -14,17 +14,12 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { verifyAuthSession } from '@/app/dal/users/verify-auth-session';
 
 export default async function ProjectsPage() {
-  const session = await auth();
+  const user = await verifyAuthSession();
 
-  if (!session?.user?.id) {
-    return redirect('/auth');
-  }
-
-  const githubInstallationData = await isGithubIntegrationInstalled(
-    session.user.id,
-  );
+  const githubInstallationData = await isGithubIntegrationInstalled(user.id);
 
   return (
     <div>
