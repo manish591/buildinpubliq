@@ -1,6 +1,6 @@
 import "server-only";
 import { prisma } from "@buildinpubliq/db";
-import type { GithubRepository } from "@/app/(main)/dashboard/(pages)/projects/_components/create-project-form";
+import type { GithubRepository } from "@/app/(main)/dashboard/(pages)/projects/new/_components/create-project-form";
 import { verifyAuthSession } from "@/app/data/users/verify-auth-session";
 import { getGithubIntegrationToken } from "./get-github-integration-token";
 

@@ -15,6 +15,7 @@ import { ProjectsSearchBar } from './_components/project-search-bar';
 import { GithubPluginSettings } from './_components/github-plugin-settings';
 import { InstallGithubIntegration } from './_components/install-github-integration';
 import { ProjectsGrid } from './_components/projects-grid';
+import { Suspense } from 'react';
 
 export default async function ProjectsPage() {
   await verifyAuthSession();
@@ -72,7 +73,9 @@ export default async function ProjectsPage() {
             )}
           </div>
         </div>
-        <ProjectsGrid />
+        <Suspense fallback={<p>loading...</p>}>
+          <ProjectsGrid />
+        </Suspense>
       </main>
     </div>
   );

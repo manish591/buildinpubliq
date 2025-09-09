@@ -1,5 +1,5 @@
 import { FolderPlus } from 'lucide-react';
-import { getAllProjects } from '@/app/actions/projects';
+import { getAllProjects } from '@/app/data/projects/get-all-projects';
 import { ProjectCard } from '@/components/project-card';
 
 export async function ProjectsGrid() {
@@ -9,7 +9,7 @@ export async function ProjectsGrid() {
     <div className="py-4">
       {projectsData.length <= 0 ? (
         <div className="flex flex-col items-center justify-center py-16 px-4">
-          <div className="bg-muted/40 rounded-full p-6 mb-6">
+          <div className="bg-muted/40 rounded-full mb-6">
             <FolderPlus className="h-12 w-12 text-muted-foreground" />
           </div>
           <h2 className="text-2xl font-semibold mb-2">no projects yet</h2>

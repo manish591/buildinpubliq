@@ -7,7 +7,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { CreateProjectFormWrapper } from '../_components/create-project-form-wrapper';
+import { CreateProjectFormWrapper } from './_components/create-project-form-wrapper';
 
 export default async function NewProjectPage() {
   return (

@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@buildinpubliq/db";
-import type { CreateProjectData, GithubRepository } from "@/app/(main)/dashboard/(pages)/projects/_components/create-project-form";
+import type { CreateProjectData, GithubRepository } from "@/app/(main)/dashboard/(pages)/projects/new/_components/create-project-form";
 import { verifyAuthSession } from "@/app/data/users/verify-auth-session";
 
 export async function createProject(

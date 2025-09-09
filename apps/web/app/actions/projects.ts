@@ -25,22 +25,6 @@ export async function editProject(
   });
 }
 
-export async function getAllProjects() {
-  const session = await auth();
-
-  if (!session?.user) {
-    throw new Error('unauthenticated');
-  }
-
-  const data = await prisma.project.findMany({
-    where: {
-      userId: session.user.id,
-    },
-  });
-
-  return data;
-}
-
 export default async function getProjectDetails(id: string) {
   const data = await prisma.project.findFirst({
     where: {
