@@ -1,8 +1,8 @@
 "use server";
 
 import { prisma } from "@buildinpubliq/db";
-import type { CreateProjectData, GithubRepository } from "@/app/(main)/dashboard/(pages)/projects/new/_components/create-project-form";
 import { verifyAuthSession } from "@/app/data/users/verify-auth-session";
+import type { CreateProjectData, GithubRepository } from "./new/_components/create-project-form";
 
 export async function createProject(
   data: Omit<CreateProjectData, "repository"> & { selectedRepo?: GithubRepository }
@@ -44,5 +44,29 @@ export async function createProject(
 
   await prisma.project.create({
     data: projectData,
+  });
+}
+
+export async function editProject(
+  id: string,
+  title: string,
+  description: string,
+) {
+  const user = await verifyAuthSession();
+  const userId = user.id;
+
+  if (!userId) {
+    throw new Error("Unauthorized");
+  }
+
+  await prisma.project.update({
+    where: {
+      id,
+      userId: user.id
+    },
+    data: {
+      title,
+      description,
+    },
   });
 }

@@ -1,11 +1,10 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { z } from 'zod';
-import { editProject } from '@/app/actions/projects';
 import {
   Form,
   FormControl,
@@ -16,14 +15,15 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
+import { editProject } from '../actions';
 
 const formSchema = z.object({
   title: z.string().min(2).max(50),
   description: z.string().min(10).max(280),
 });
 
-export type TProject = z.infer<typeof formSchema> & {
+export type EditProjectData = z.infer<typeof formSchema> & {
   id: string;
 };
 
@@ -31,7 +31,7 @@ export function EditProjectForm({
   defaultProjectData,
   setIsOpen,
 }: Readonly<{
-  defaultProjectData: TProject;
+  defaultProjectData: EditProjectData;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }>) {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -91,7 +91,7 @@ export function EditProjectForm({
             </FormItem>
           )}
         />
-        <div className="flex items-center mt-6 pb-6">
+        <div className="flex items-center">
           <Button
             variant="secondary"
             className="mr-auto"

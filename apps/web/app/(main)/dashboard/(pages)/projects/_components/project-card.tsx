@@ -1,6 +1,5 @@
 import { GitPullRequest } from 'lucide-react';
 import Image from 'next/image';
-import { ProjectCardDropdown } from '@/components/project-card-action-dropdown';
 import {
   Card,
   CardContent,
@@ -9,6 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { timeAgo } from '@/lib/date';
+import { ProjectCardDropdown } from './project-card-dropdown';
 
 interface ProjectCardProps {
   id: string;

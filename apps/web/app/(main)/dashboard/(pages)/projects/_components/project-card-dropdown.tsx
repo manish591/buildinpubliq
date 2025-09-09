@@ -3,7 +3,6 @@
 import { Edit, ExternalLink, MoveHorizontal, RefreshCcw } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { EditProject } from '@/components/edit-project';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -17,6 +16,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { EditProjectModal } from './edit-project-modal';
 
 export type ProjectCardDropdownProps = {
   id: string;
@@ -44,11 +44,9 @@ export function ProjectCardDropdown({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem>
-            <DialogTrigger className="w-full">
-              <Button className="hover:bg-transparent w-full flex justify-start text-left bg-transparent h-5 px-0 text-foreground no-underline lowercase">
-                <Edit className="h-5 w-5 text-gray-500"></Edit>
-                <span>edit</span>
-              </Button>
+            <DialogTrigger className="hover:bg-transparent w-full flex justify-start text-left bg-transparent px-0 text-foreground no-underline lowercase items-center gap-2 cursor-pointer">
+              <Edit className="h-4 w-4 text-foreground/70"></Edit>
+              edit
             </DialogTrigger>
           </DropdownMenuItem>
           <DropdownMenuItem>
@@ -57,7 +55,7 @@ export function ProjectCardDropdown({
               target="_blank"
               className="w-full flex items-center gap-2"
             >
-              <ExternalLink className="h-5 w-5 text-gray-500"></ExternalLink>
+              <ExternalLink className="h-4 w-4 text-foreground/70"></ExternalLink>
               view repo
             </Link>
           </DropdownMenuItem>
@@ -66,14 +64,14 @@ export function ProjectCardDropdown({
               href={`/dashboard/projects/${id}`}
               className="w-full flex items-center gap-2"
             >
-              <RefreshCcw className="h-5 w-5 text-gray-500"></RefreshCcw>
+              <RefreshCcw className="h-4 w-4 text-foreground/70"></RefreshCcw>
               view updates
             </Link>
           </DropdownMenuItem>
         </DropdownMenuContent>
         <DialogContent>
           <DialogHeader>
-            <EditProject
+            <EditProjectModal
               id={id}
               title={title}
               description={description}

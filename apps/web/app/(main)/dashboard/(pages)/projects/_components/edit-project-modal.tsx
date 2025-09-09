@@ -1,6 +1,5 @@
 'use client';
 
-import { EditProjectForm } from '@/components/edit-project-form';
 import {
   Card,
   CardContent,
@@ -8,8 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { EditProjectForm } from './edit-project-form';
 
-export function EditProject({
+export function EditProjectModal({
   id,
   title,
   description,
@@ -22,14 +22,14 @@ export function EditProject({
 }>) {
   return (
     <div className="flex items-center md:col-start-2 md:col-span-2">
-      <Card className="w-full p-0 border-none shadow-none">
-        <CardHeader className="px-2">
+      <Card className="w-full p-0 border-none shadow-none bg-background">
+        <CardHeader className="px-0">
           <CardTitle>edit project</CardTitle>
           <CardDescription>
             fill out the form to edit a project.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4 px-2">
+        <CardContent className="p-0">
           <EditProjectForm
             setIsOpen={setIsOpen}
             defaultProjectData={{

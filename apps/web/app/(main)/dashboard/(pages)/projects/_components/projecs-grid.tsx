@@ -1,6 +1,6 @@
 import { FolderPlus } from 'lucide-react';
 import { getAllProjects } from '@/app/actions/projects';
-import { ProjectCard } from '@/components/project-card';
+import { ProjectCard } from '@/app/(main)/dashboard/(pages)/projects/_components/project-card';
 
 export async function ProjectsGrid() {
   const projectsData = await getAllProjects();
