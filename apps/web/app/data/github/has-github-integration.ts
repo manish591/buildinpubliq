@@ -1,11 +1,11 @@
 import "server-only";
 import { prisma } from "@buildinpubliq/db";
-import { verifyAuthSession } from "@/app/data/users/verify-auth-session";
+import { getCurrentUser } from "@/app/data/users/verify-auth-session";
 
 export async function hasGithubIntegration() {
-  const user = await verifyAuthSession();
+  const user = await getCurrentUser();
 
-  if (!user) {
+  if (!user?.id) {
     return null;
   }
 

@@ -1,4 +1,4 @@
-import { verifyAuthSession } from '@/app/data/users/verify-auth-session';
+import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { NavMain } from '@/app/(main)/dashboard/_components/nav-main';
 import { NavSecondary } from '@/app/(main)/dashboard/_components/nav-secondary';
 import { NavUser } from '@/app/(main)/dashboard/_components/nav-user';
@@ -12,11 +12,16 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { AppLogo } from '@/components/web/app-logo';
+import { redirect } from 'next/navigation';
 
 export async function AppSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
-  const user = await verifyAuthSession();
+  const user = await getCurrentUser();
+
+  if (!user?.id) {
+    redirect('/auth');
+  }
 
   return (
     <Sidebar variant="inset" {...props}>

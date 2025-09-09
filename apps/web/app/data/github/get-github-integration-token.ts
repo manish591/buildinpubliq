@@ -1,13 +1,19 @@
 import "server-only";
 import jwt from 'jsonwebtoken';
-import { verifyAuthSession } from "@/app/data/users/verify-auth-session";
+import { getCurrentUser } from "@/app/data/users/verify-auth-session";
+import { redirect } from "next/navigation";
 
 const GITHUB_APP_ID = process.env.GITHUB_APP_ID;
 const GITHUB_APP_PRIVATE_KEY =
   process.env.GITHUB_APP_PRIVATE_KEY?.replace(/\\n/g, '\n') ?? '';
 
 export async function getGithubIntegrationToken(installationId: string) {
-  await verifyAuthSession();
+  const user = await getCurrentUser();
+
+  if (!user) {
+    redirect("/auth");
+  }
+
   const url = `https://api.github.com/app/installations/${installationId}/access_tokens`;
   const bearerToken = jwt.sign({
     iat: Math.floor(Date.now() / 1000),

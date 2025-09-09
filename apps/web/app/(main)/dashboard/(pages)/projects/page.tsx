@@ -9,16 +9,22 @@ import {
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
-import { verifyAuthSession } from '@/app/data/users/verify-auth-session';
+import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { hasGithubIntegration } from '@/app/data/github/has-github-integration';
 import { ProjectsSearchBar } from './_components/project-search-bar';
 import { GithubPluginSettings } from './_components/github-plugin-settings';
 import { InstallGithubIntegration } from './_components/install-github-integration';
 import { ProjectsGrid } from './_components/projects-grid';
 import { Suspense } from 'react';
+import { redirect } from 'next/navigation';
 
 export default async function ProjectsPage() {
-  await verifyAuthSession();
+  const user = await getCurrentUser();
+
+  if (!user) {
+    redirect('/auth');
+  }
+
   const githubIntegrationData = await hasGithubIntegration();
 
   return (

@@ -14,14 +14,14 @@ import { Label } from '@/components/ui/label';
 import { BackButton } from '@/components/web/back-button';
 import { AppLogo } from '@/components/web/app-logo';
 import { LoginWithGithub } from '@/app/(main)/auth/_components/login-with-github';
-import { verifyAuthSession } from '@/app/data/users/verify-auth-session';
+import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import GithubSVGIcon from '@/components/svg-icons/github';
 import GoogleSVGIcon from '@/components/svg-icons/google';
 
 export default async function Login() {
-  const session = await verifyAuthSession();
+  const user = await getCurrentUser();
 
-  if (session) {
+  if (user) {
     redirect('/dashboard');
   }
 

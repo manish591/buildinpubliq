@@ -1,20 +1,20 @@
 import "server-only";
 import { prisma } from "@buildinpubliq/db";
 import type { GithubRepository } from "@/app/(main)/dashboard/(pages)/projects/new/_components/create-project-form";
-import { verifyAuthSession } from "@/app/data/users/verify-auth-session";
+import { getCurrentUser } from "@/app/data/users/verify-auth-session";
 import { getGithubIntegrationToken } from "./get-github-integration-token";
+import { redirect } from "next/navigation";
 
 export async function getGithubRepositories(): Promise<GithubRepository[]> {
-  const user = await verifyAuthSession();
-  const userId = user.id;
+  const user = await getCurrentUser();
 
-  if (!userId) {
-    throw new Error("Unauthorized");
+  if (!user?.id) {
+    redirect("/auth");
   }
 
   const githubIntegrationData = await prisma.githubIntegration.findFirst({
     where: {
-      userId,
+      userId: user.id,
       isActive: true,
     },
   });

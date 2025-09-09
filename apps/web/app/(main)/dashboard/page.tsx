@@ -1,4 +1,4 @@
-import { verifyAuthSession } from '@/app/data/users/verify-auth-session';
+import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,9 +7,14 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { redirect } from 'next/navigation';
 
 export default async function OverviewPage() {
-  await verifyAuthSession();
+  const user = await getCurrentUser();
+
+  if (!user) {
+    redirect('/auth');
+  }
 
   return (
     <div>
