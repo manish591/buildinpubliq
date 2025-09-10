@@ -14,7 +14,7 @@ import { IdeasLayoutSwitcher } from './_components/ideas-layout-switcher';
 import { IdeasSortBy } from './_components/ideas-sort-by';
 import { RepositoriesList } from './_components/repositories-list';
 import { hasGithubIntegration } from '@/app/data/github/has-github-integration';
-import { InstallGithubIntegration } from '../projects/_components/install-github-integration';
+import { InstallGithubIntegration } from './_components/install-github-integration';
 import { IdeasList } from './_components/ideas-list';
 import GithubSVGIcon from '@/components/svg-icons/github';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
