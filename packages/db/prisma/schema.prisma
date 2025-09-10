@@ -15,17 +15,18 @@ datasource db {
 }
 
 model User {
-  id                 String              @id @default(cuid())
-  name               String?
-  email              String              @unique
-  emailVerified      DateTime?
-  image              String?
-  accounts           Account[]
-  sessions           Session[]
-  projects           Project[]
-  projectUpdates     ProjectUpdate[]
-  channel            Channel[]
-  githubInstallation GithubIntegration[]
+  id                       String              @id @default(cuid())
+  name                     String?
+  email                    String              @unique
+  emailVerified            DateTime?
+  image                    String?
+  accounts                 Account[]
+  sessions                 Session[]
+  post                     Post[]
+  idea                     Idea[]
+  channel                  Channel[]
+  githubRepository         GithubRepository[]
+  githubIntegration        GithubIntegration[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -82,7 +83,7 @@ model GithubIntegration {
   updatedAt DateTime @updatedAt
 }
 
-model Project {
+model GithubRepository {
   id                  String          @id @default(cuid())
   title               String
   description         String
@@ -93,7 +94,7 @@ model Project {
   language            String?
   repositoryUpdatedAt String
   userId              String
-  projectUpdate       ProjectUpdate[]
+  idea                Idea[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -101,7 +102,22 @@ model Project {
   updatedAt DateTime @updatedAt
 }
 
-model ProjectUpdate {
+model Idea {
+  id                 String    @id @default(cuid())
+  title              String
+  content            String
+  isArchived         Boolean
+  userId             String
+  githubRepositoryId String?
+
+  githubRepository GithubRepository? @relation(fields: [githubRepositoryId], references: [id]) 
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
   id          String    @id @default(cuid())
   tagline     String
   description String
@@ -110,9 +126,8 @@ model ProjectUpdate {
   scheduledAt DateTime
   postedAt    DateTime?
   status      Status
-  projectUpdateOnChannel     ProjectUpdateOnChannel[]
+  postOnChannel     PostOnChannel[]
 
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
@@ -130,7 +145,7 @@ model Channel {
   userId        String
   IDToken       String?
   isActive      Boolean
-  projectUpdateOnChannel     ProjectUpdateOnChannel[]
+  postOnChannel     PostOnChannel[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -138,12 +153,12 @@ model Channel {
   updatedAt DateTime @updatedAt
 }
 
-model ProjectUpdateOnChannel {
+model PostOnChannel {
   channelId String
   projectUpdateId String
 
   channel Channel @relation(fields: [channelId], references: [id])
-  projectUpdate ProjectUpdate @relation(fields: [projectUpdateId], references: [id])
+  post Post @relation(fields: [projectUpdateId], references: [id])
 
   @@id([channelId, projectUpdateId])
 }
