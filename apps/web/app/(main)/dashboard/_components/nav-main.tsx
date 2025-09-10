@@ -16,6 +16,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 const items = [
   {
@@ -59,13 +61,19 @@ const items = [
 ];
 
 export function NavMain() {
+  const pathname = usePathname();
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>dashboard</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.title}>
-            <SidebarMenuButton asChild tooltip={item.title}>
+            <SidebarMenuButton
+              asChild
+              tooltip={item.title}
+              className={cn(pathname === item.url && 'bg-secondary')}
+            >
               <a href={item.url}>
                 <item.icon />
                 <span>{item.title}</span>
