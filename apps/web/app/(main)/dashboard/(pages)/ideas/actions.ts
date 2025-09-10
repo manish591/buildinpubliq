@@ -2,10 +2,10 @@
 
 import { prisma } from "@buildinpubliq/db";
 import { getCurrentUser } from "@/app/data/users/verify-auth-session";
-import type { CreateProjectData, GithubRepository } from "./new/_components/create-project-form";
+import type { AddRepoData, GithubRepository } from "./_components/add-repo-form";
 
-export async function createProject(
-  data: Omit<CreateProjectData, "repository"> & { selectedRepo?: GithubRepository }
+export async function addRepo(
+  data: Omit<AddRepoData, "repository"> & { selectedRepo?: GithubRepository }
 ) {
   const user = await getCurrentUser();
 
@@ -19,7 +19,7 @@ export async function createProject(
     throw new Error("Repository is required to create project");
   }
 
-  const projectWithRepoExists = await prisma.project.findFirst(
+  const projectWithRepoExists = await prisma.githubRepository.findFirst(
     {
       where: {
         repoId: String(selectedRepo.id),
@@ -43,30 +43,7 @@ export async function createProject(
     repositoryUpdatedAt: selectedRepo.updated_at,
   };
 
-  await prisma.project.create({
+  await prisma.githubRepository.create({
     data: projectData,
-  });
-}
-
-export async function editProject(
-  id: string,
-  title: string,
-  description: string,
-) {
-  const user = await getCurrentUser();
-
-  if (!user?.id) {
-    throw new Error("Unauthorized");
-  }
-
-  await prisma.project.update({
-    where: {
-      id,
-      userId: user.id
-    },
-    data: {
-      title,
-      description,
-    },
   });
 }

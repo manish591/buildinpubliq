@@ -1,13 +1,10 @@
 import { FolderPlus } from 'lucide-react';
-import { getAllProjects } from '@/app/data/projects/get-all-projects';
 import { ProjectCard } from './project-card';
 
 export async function ProjectsGrid() {
-  const projectsData = await getAllProjects();
-
   return (
     <div>
-      {projectsData.length <= 0 ? (
+      {/* {projectsData.length <= 0 ? (
         <div className="flex flex-col items-center justify-center py-16 px-4">
           <div className="bg-muted/40 rounded-full mb-6">
             <FolderPlus className="h-12 w-12 text-muted-foreground" />
@@ -28,7 +25,7 @@ export async function ProjectsGrid() {
             );
           })}
         </div>
-      )}
+      )} */}
     </div>
   );
 }

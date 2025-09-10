@@ -12,7 +12,7 @@ export function GithubPluginSettings({
     >
       <Button
         variant="outline"
-        className="rounded-md text-sm flex items-center"
+        className="w-full rounded-md text-sm flex items-center"
       >
         <span>github plugin settings</span>
         <ExternalLink />

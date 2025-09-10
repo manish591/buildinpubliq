@@ -16,7 +16,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { createProject } from '@/app/(main)/dashboard/(pages)/projects/actions';
 import {
   Popover,
   PopoverContent,
@@ -32,6 +31,7 @@ import {
   CommandList,
 } from '@/components/ui/command';
 import { cn } from '@/lib/utils';
+import { addRepo } from '../actions';
 
 export const repositorySchema = z.object({
   id: z.number(),
@@ -49,10 +49,10 @@ const formSchema = z.object({
   repository: z.string().optional(),
 });
 
-export type CreateProjectData = z.infer<typeof formSchema>;
+export type AddRepoData = z.infer<typeof formSchema>;
 export type GithubRepository = z.infer<typeof repositorySchema>;
 
-export function CreateProjectForm({
+export function AddRepoForm({
   repositoriesData,
 }: Readonly<{ repositoriesData: GithubRepository[] }>) {
   const router = useRouter();
@@ -70,7 +70,7 @@ export function CreateProjectForm({
       const selectedRepo = repositoriesData.find(
         (repo) => repo.full_name === values.repository,
       );
-      await createProject({
+      await addRepo({
         title: values.title,
         description: values.description,
         selectedRepo,
@@ -109,7 +109,7 @@ export function CreateProjectForm({
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
-                  <PopoverContent className="w-xl p-0">
+                  <PopoverContent className="w-[400px] p-0">
                     <Command>
                       <CommandInput
                         placeholder="Search framework..."

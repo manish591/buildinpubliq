@@ -16,9 +16,5 @@ export async function hasGithubIntegration() {
     },
   });
 
-  if (!data) {
-    return null;
-  }
-
   return data;
 }

@@ -1,11 +1,11 @@
 import "server-only";
 import { prisma } from "@buildinpubliq/db";
-import type { GithubRepository } from "@/app/(main)/dashboard/(pages)/projects/new/_components/create-project-form";
+import { redirect } from "next/navigation";
+import type { GithubRepository } from "@/app/(main)/dashboard/(pages)/ideas/_components/add-repo-form";
 import { getCurrentUser } from "@/app/data/users/verify-auth-session";
 import { getGithubIntegrationToken } from "./get-github-integration-token";
-import { redirect } from "next/navigation";
 
-export async function getGithubRepositories(): Promise<GithubRepository[]> {
+export async function getInstalledRepositories(): Promise<GithubRepository[]> {
   const user = await getCurrentUser();
 
   if (!user?.id) {
