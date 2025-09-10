@@ -1,6 +1,5 @@
 'use client';
 
-import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -30,7 +29,11 @@ export type GithubRepository = z.infer<typeof repositorySchema>;
 
 export function AddRepository({
   repositoriesData,
-}: Readonly<{ repositoriesData: GithubRepository[] }>) {
+  children,
+}: Readonly<{
+  repositoriesData: GithubRepository[];
+  children: React.ReactNode;
+}>) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const filteredRepoData = repositoriesData.filter((repo) =>
@@ -50,15 +53,7 @@ export function AddRepository({
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <DialogTrigger asChild>
-        <Button
-          variant="outline"
-          className="w-max mx-auto flex items-center gap-2 cursor-pointer"
-        >
-          <Plus strokeWidth={2} width={16} height={16} />
-          <span className="text-sm">Add new repository</span>
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger className="w-full">{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Add repository</DialogTitle>
