@@ -2,18 +2,14 @@
 
 import { prisma } from "@buildinpubliq/db";
 import { getCurrentUser } from "@/app/data/users/verify-auth-session";
-import type { AddRepoData, GithubRepository } from "./_components/add-repo-form";
+import type { GithubRepository } from "./_components/add-repository";
 
-export async function addRepo(
-  data: Omit<AddRepoData, "repository"> & { selectedRepo?: GithubRepository }
-) {
+export async function addRepository(selectedRepo: GithubRepository) {
   const user = await getCurrentUser();
 
   if (!user?.id) {
     throw new Error("Unauthorized");
   }
-
-  const selectedRepo = data.selectedRepo;
 
   if (!selectedRepo) {
     throw new Error("Repository is required to create project");
@@ -33,8 +29,6 @@ export async function addRepo(
 
   const projectData = {
     userId: user.id,
-    title: data.title,
-    description: data.description,
     repoId: String(selectedRepo.id),
     fullName: selectedRepo.full_name,
     repositoryUrl: selectedRepo.html_url,

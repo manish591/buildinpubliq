@@ -5,7 +5,7 @@ import { getInstalledRepositories } from '@/app/data/github/get-installed-reposi
 import GithubSVGIcon from '@/components/svg-icons/github';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { AddRepoModal } from './add-repo-modal';
+import { AddRepository } from './add-repository';
 
 export async function RepositoriesList() {
   const repositories = await getAllGithubRepositories();
@@ -25,7 +25,7 @@ export async function RepositoriesList() {
                 Select your first repository to start making new ideas
               </p>
             </div>
-            <AddRepoModal repositoriesData={installedRepos} />
+            <AddRepository repositoriesData={installedRepos} />
           </div>
         </div>
       ) : (
