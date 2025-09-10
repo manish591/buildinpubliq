@@ -85,8 +85,6 @@ model GithubIntegration {
 
 model GithubRepository {
   id                  String          @id @default(cuid())
-  title               String
-  description         String
   repositoryUrl       String
   fullName            String
   repoId              String          @unique
