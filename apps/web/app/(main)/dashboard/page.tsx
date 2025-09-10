@@ -33,7 +33,7 @@ export default async function OverviewPage() {
           </Breadcrumb>
         </div>
       </header>
-      <main className="w-full max-w-4xl mx-auto py-6 px-6">
+      <main className="w-full max-w-6xl mx-auto py-6 px-6">
         <div className="flex flex-col sm:flex-row justify-between gap-6 sm:gap-0 sm:items-center mb-6">
           <div>
             <p className="text-3xl font-bold">overview</p>

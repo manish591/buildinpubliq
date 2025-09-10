@@ -38,18 +38,18 @@ export default async function ProjectsPage() {
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
-                <BreadcrumbPage>projects</BreadcrumbPage>
+                <BreadcrumbPage>ideas</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </div>
       </header>
-      <main className="w-full max-w-4xl mx-auto py-6 px-6">
+      <main className="w-full max-w-5xl mx-auto py-6 px-6">
         <div className="mb-8">
           <div>
-            <p className="text-3xl font-bold">my projects</p>
+            <p className="text-3xl font-bold">my ideas</p>
             <p className="text-foreground/70 mt-1 text-sm">
-              manage and organize your development projects
+              manage and organize your post ideas here
             </p>
           </div>
         </div>
@@ -79,9 +79,12 @@ export default async function ProjectsPage() {
             )}
           </div>
         </div>
-        <Suspense fallback={<p>loading...</p>}>
-          <ProjectsGrid />
-        </Suspense>
+        <div className="grid grid-cols-[280px_minmax(0,1fr)] py-6 gap-8">
+          <div className="border py-10"></div>
+          <Suspense fallback={<p>loading...</p>}>
+            <ProjectsGrid />
+          </Suspense>
+        </div>
       </main>
     </div>
   );

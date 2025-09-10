@@ -5,6 +5,7 @@ import {
   FolderKanban,
   Layers,
   LayoutPanelLeft,
+  Lightbulb,
   StickyNote,
   UserRoundCog,
 } from 'lucide-react';
@@ -21,6 +22,12 @@ const items = [
     title: 'overview',
     url: '/dashboard',
     icon: LayoutPanelLeft,
+    isActive: true,
+  },
+  {
+    title: 'ideas',
+    url: '/dashboard/ideas',
+    icon: Lightbulb,
     isActive: true,
   },
   {
