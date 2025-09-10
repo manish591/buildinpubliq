@@ -1,14 +1,6 @@
 'use client';
 
-import {
-  Clock10,
-  FolderKanban,
-  Layers,
-  LayoutPanelLeft,
-  Lightbulb,
-  StickyNote,
-  UserRoundCog,
-} from 'lucide-react';
+import { Layers, LayoutPanelLeft, Lightbulb, UserRoundCog } from 'lucide-react';
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -16,8 +8,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
 
 const items = [
   {
@@ -33,47 +23,25 @@ const items = [
     isActive: true,
   },
   {
-    title: 'projects',
-    url: '/dashboard/projects',
-    icon: FolderKanban,
-    isActive: true,
-  },
-  {
-    title: 'New Post',
-    url: '/dashboard/new-post',
-    icon: StickyNote,
-  },
-  {
     title: 'posts',
     url: '/dashboard/posts',
     icon: Layers,
   },
   {
-    title: 'Scheduled',
-    url: '/dashboard/scheduled',
-    icon: Clock10,
-  },
-  {
-    title: 'accounts',
-    url: '/dashboard/accounts',
+    title: 'channels',
+    url: '/dashboard/channels',
     icon: UserRoundCog,
   },
 ];
 
 export function NavMain() {
-  const pathname = usePathname();
-
   return (
     <SidebarGroup>
       <SidebarGroupLabel>dashboard</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.title}>
-            <SidebarMenuButton
-              asChild
-              tooltip={item.title}
-              className={cn(pathname === item.url && 'bg-secondary')}
-            >
+            <SidebarMenuButton asChild tooltip={item.title}>
               <a href={item.url}>
                 <item.icon />
                 <span>{item.title}</span>
