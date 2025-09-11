@@ -13,10 +13,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { BackButton } from '@/components/web/back-button';
 import { AppLogo } from '@/components/web/app-logo';
-import { LoginWithGithub } from '@/app/(main)/auth/_components/login-with-github';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import GithubSVGIcon from '@/components/svg-icons/github';
 import GoogleSVGIcon from '@/components/svg-icons/google';
+import { LoginWithGithub } from './_components/login-with-github';
 
 export default async function Login() {
   const user = await getCurrentUser();

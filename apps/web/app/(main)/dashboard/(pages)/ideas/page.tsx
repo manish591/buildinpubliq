@@ -1,15 +1,5 @@
 import { Suspense } from 'react';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
 import { IdeasSearchBar } from './_components/ideas-search-bar';
-import { IdeasLayoutSwitcher } from './_components/ideas-layout-switcher';
-import { IdeasSortBy } from './_components/ideas-sort-by';
 import { RepositoriesList } from './_components/repositories-list';
 import { hasGithubIntegration } from '@/app/data/github/has-github-integration';
 import { InstallGithubIntegration } from './_components/install-github-integration';
@@ -18,6 +8,9 @@ import GithubSVGIcon from '@/components/svg-icons/github';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { redirect } from 'next/navigation';
 import { CreateIdea } from './_components/create-idea';
+import { MainHeader } from '@/app/(main)/_components/main-header';
+import { IdeasDisplayDropdown } from './_components/ideas-display-dropdown';
+import { IdeasFilterDropdown } from './_components/ideas-filters-dropdown';
 
 export default async function IdeasPage() {
   const user = await getCurrentUser();
@@ -30,35 +23,19 @@ export default async function IdeasPage() {
 
   return (
     <div>
-      <header className="flex h-16 shrink-0 items-center gap-2">
-        <div className="flex items-center gap-2 px-6">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">home</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>ideas</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
-      </header>
-      <main className="w-full max-w-6xl mx-auto py-6 px-6">
-        <div className="mb-8">
-          <div>
-            <p className="text-3xl font-bold">my ideas</p>
-            <p className="text-foreground/70 mt-1 text-sm">
-              manage and organize your post ideas here
-            </p>
-          </div>
-        </div>
-        <div className="flex items-center gap-3">
-          <IdeasSearchBar />
-          <IdeasSortBy />
-          <IdeasLayoutSwitcher />
+      <MainHeader>
+        <MainHeader.Wrapper>
+          <MainHeader.Title>ideas</MainHeader.Title>
           <CreateIdea />
+        </MainHeader.Wrapper>
+      </MainHeader>
+      <main className="w-full max-w-7xl mx-auto py-6 px-8">
+        <div className="flex items-center gap-3 justify-between">
+          <div className="flex items-center gap-2">
+            <IdeasFilterDropdown />
+            <IdeasDisplayDropdown />
+          </div>
+          <IdeasSearchBar />
         </div>
         <div className="flex mx-auto gap-8">
           <div className="w-80">
