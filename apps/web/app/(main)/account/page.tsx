@@ -1,7 +1,7 @@
 import { ChevronLeft, Linkedin, LogOut, Twitter } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { getConnectedChannels } from '@/app/profile/actions';
+import { getConnectedChannels } from '@/app/(main)/account/actions';
 import { auth, signOut } from '@/auth';
 import { ConnectLinkedin } from '@/components/connect-linkedin';
 import { ConnectTwitter } from '@/components/connect-twitter';

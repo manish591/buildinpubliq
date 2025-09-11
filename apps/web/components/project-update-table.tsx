@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import { Check, Clock, FolderPlus } from 'lucide-react';
 import { redirect } from 'next/navigation';
-import { getConnectedChannels } from '@/app/profile/actions';
+import { getConnectedChannels } from '@/app/(main)/account/actions';
 import { auth } from '@/auth';
 import { CreateNewUpdate } from '@/components/create-new-project-update';
 import { ProjectUpdateRowActions } from '@/components/project-update-row-action';

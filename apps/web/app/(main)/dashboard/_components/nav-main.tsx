@@ -27,11 +27,6 @@ const items = [
     url: '/dashboard/posts',
     icon: Layers,
   },
-  {
-    title: 'channels',
-    url: '/dashboard/channels',
-    icon: UserRoundCog,
-  },
 ];
 
 export function NavMain() {

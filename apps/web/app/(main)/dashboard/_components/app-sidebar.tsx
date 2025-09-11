@@ -13,7 +13,7 @@ import { AppLogo } from '@/components/web/app-logo';
 import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ExternalLink, LifeBuoy, LogOut, Send, UserIcon } from 'lucide-react';
+import { ExternalLink, LifeBuoy, LogOut, Send, Settings } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
@@ -100,8 +100,8 @@ export async function AppSidebar({
                       asChild
                     >
                       <Link href="/profile">
-                        <UserIcon className="w-4 h-4" />
-                        profile
+                        <Settings className="w-4 h-4" />
+                        settings
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem
