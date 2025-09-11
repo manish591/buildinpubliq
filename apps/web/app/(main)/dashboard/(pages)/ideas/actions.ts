@@ -3,6 +3,7 @@
 import { prisma } from "@buildinpubliq/db";
 import { getCurrentUser } from "@/app/data/users/verify-auth-session";
 import type { GithubRepository } from "./_components/add-repository";
+import type { CreateIdeaData } from "./_components/create-idea-form";
 
 export async function addRepository(selectedRepo: GithubRepository) {
   const user = await getCurrentUser();
@@ -39,5 +40,22 @@ export async function addRepository(selectedRepo: GithubRepository) {
 
   await prisma.githubRepository.create({
     data: projectData,
+  });
+}
+
+export async function createIdea(data: CreateIdeaData) {
+  const user = await getCurrentUser();
+
+  if (!user?.id) {
+    throw new Error("Unauthorized");
+  }
+
+  await prisma.idea.create({
+    data: {
+      title: data.title,
+      content: data.content,
+      userId: user.id,
+      isArchived: false,
+    }
   });
 }

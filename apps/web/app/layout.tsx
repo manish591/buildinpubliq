@@ -1,9 +1,9 @@
 import './globals.css';
-import { Alegreya } from 'next/font/google';
+import { Jost } from 'next/font/google';
 import { generateMetadata } from '@/lib/generateMetadata';
 import Providers from './providers';
 
-const font = Alegreya({
+const font = Jost({
   subsets: ['latin'],
   display: 'swap',
 });

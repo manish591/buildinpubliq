@@ -1,6 +1,4 @@
 import { Suspense } from 'react';
-import { Plus } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -19,6 +17,7 @@ import { IdeasList } from './_components/ideas-list';
 import GithubSVGIcon from '@/components/svg-icons/github';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { redirect } from 'next/navigation';
+import { CreateIdea } from './_components/create-idea';
 
 export default async function IdeasPage() {
   const user = await getCurrentUser();
@@ -59,10 +58,7 @@ export default async function IdeasPage() {
           <IdeasSearchBar />
           <IdeasSortBy />
           <IdeasLayoutSwitcher />
-          <Button className="gap-2">
-            <Plus className="h-4 w-4" />
-            New Idea
-          </Button>
+          <CreateIdea />
         </div>
         <div className="flex mx-auto gap-8">
           <div className="w-80">
