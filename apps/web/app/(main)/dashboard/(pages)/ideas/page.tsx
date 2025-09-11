@@ -63,9 +63,7 @@ export default async function IdeasPage() {
         <div className="flex mx-auto gap-8">
           <div className="w-80">
             <div className="py-6">
-              <h2 className="font-semibold text-lg text-sidebar-foreground mb-4">
-                Repositories
-              </h2>
+              <h2 className="font-semibold text-lg mb-4">Repositories</h2>
               {githubIntegrationData ? (
                 <Suspense fallback={<p>loading...</p>}>
                   <RepositoriesList />

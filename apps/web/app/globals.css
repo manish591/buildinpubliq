@@ -15,108 +15,112 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0f0509;
-  --card: #fdf7fa;
-  --card-foreground: #0f0509;
-  --popover: #fdf7fa;
-  --popover-foreground: #0f0509;
-  --primary: #8c2155;
+  --foreground: #492354;
+  --card: #ffffff;
+  --card-foreground: #492354;
+  --popover: #ffffff;
+  --popover-foreground: #492354;
+  --primary: #aa598a;
   --primary-foreground: #ffffff;
-  --secondary: #f5eaf0;
-  --secondary-foreground: #5c1639;
-  --muted: #f5eaf0;
-  --muted-foreground: #794d64;
-  --accent: #f5eaf0;
-  --accent-foreground: #5c1639;
-  --destructive: #ef4444;
+  --secondary: #f7eaf6;
+  --secondary-foreground: #70437f;
+  --muted: #ffffff;
+  --muted-foreground: #7f558c;
+  --accent: #f7eaf6;
+  --accent-foreground: #70437f;
+  --destructive: #ac5a6b;
   --destructive-foreground: #ffffff;
-  --border: #ebdde4;
-  --input: #ebdde4;
-  --ring: #8c2155;
-  --chart-1: #8c2155;
-  --chart-2: #b04a7b;
-  --chart-3: #d473a1;
-  --chart-4: #5c1639;
-  --chart-5: #380e23;
-  --sidebar: #fdf7fa;
-  --sidebar-foreground: #0f0509;
-  --sidebar-primary: #8c2155;
+  --border: #f3e2f4;
+  --input: #f0e2ef;
+  --ring: #ca519b;
+  --chart-1: #c950b8;
+  --chart-2: #5e2bb5;
+  --chart-3: #315256;
+  --chart-4: #e0bd92;
+  --chart-5: #e8a990;
+  --sidebar: #f2f2f2;
+  --sidebar-foreground: #a92d85;
+  --sidebar-primary: #4e505a;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f5eaf0;
-  --sidebar-accent-foreground: #5c1639;
-  --sidebar-border: #ebdde4;
-  --sidebar-ring: #8c2155;
-  --font-sans: Inter;
-  --font-serif: Lora;
-  --font-mono: Fira Code;
+  --sidebar-accent: #ffffff;
+  --sidebar-accent-foreground: #4e505a;
+  --sidebar-border: #ffffff;
+  --sidebar-ring: #ca519b;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
   --radius: 0.5rem;
-  --shadow-2xs: 0px 4px 8px -2px hsl(0 0% 0% / 0.05);
-  --shadow-xs: 0px 4px 8px -2px hsl(0 0% 0% / 0.05);
-  --shadow-sm: 0px 4px 8px -2px hsl(0 0% 0% / 0.1),
-    0px 1px 2px -3px hsl(0 0% 0% / 0.1);
-  --shadow: 0px 4px 8px -2px hsl(0 0% 0% / 0.1),
-    0px 1px 2px -3px hsl(0 0% 0% / 0.1);
-  --shadow-md: 0px 4px 8px -2px hsl(0 0% 0% / 0.1),
-    0px 2px 4px -3px hsl(0 0% 0% / 0.1);
-  --shadow-lg: 0px 4px 8px -2px hsl(0 0% 0% / 0.1),
-    0px 4px 6px -3px hsl(0 0% 0% / 0.1);
-  --shadow-xl: 0px 4px 8px -2px hsl(0 0% 0% / 0.1),
-    0px 8px 10px -3px hsl(0 0% 0% / 0.1);
-  --shadow-2xl: 0px 4px 8px -2px hsl(0 0% 0% / 0.25);
-  --tracking-normal: 0px;
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 4px 6px -1px hsl(0 0% 0% / 0.1);
+  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 8px 10px -1px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  --tracking-normal: 0em;
   --spacing: 0.25rem;
 }
 
 .dark {
-  --background: #140a0f;
-  --foreground: #fdf7fa;
-  --card: #1e0f17;
-  --card-foreground: #fdf7fa;
-  --popover: #1e0f17;
-  --popover-foreground: #fdf7fa;
-  --primary: #c75b8b;
-  --primary-foreground: #140a0f;
-  --secondary: #381c2a;
-  --secondary-foreground: #fdf7fa;
-  --muted: #381c2a;
-  --muted-foreground: #a68da0;
-  --accent: #381c2a;
-  --accent-foreground: #fdf7fa;
-  --destructive: #7f1d1d;
-  --destructive-foreground: #fdf7fa;
-  --border: #381c2a;
-  --input: #381c2a;
-  --ring: #c75b8b;
-  --chart-1: #c75b8b;
-  --chart-2: #a34973;
-  --chart-3: #8c2155;
-  --chart-4: #ebc2d5;
-  --chart-5: #f5eaf0;
-  --sidebar: #1e0f17;
-  --sidebar-foreground: #fdf7fa;
-  --sidebar-primary: #c75b8b;
-  --sidebar-primary-foreground: #140a0f;
-  --sidebar-accent: #381c2a;
-  --sidebar-accent-foreground: #fdf7fa;
-  --sidebar-border: #381c2a;
-  --sidebar-ring: #c75b8b;
-  --font-sans: Inter;
-  --font-serif: Lora;
-  --font-mono: Fira Code;
+  --background: #24212a;
+  --foreground: #e5e1eb;
+  --card: #2f2b35;
+  --card-foreground: #e9e0e7;
+  --popover: #1e151c;
+  --popover-foreground: #ffffff;
+  --primary: #9d166c;
+  --primary-foreground: #f5e5f0;
+  --secondary: #393441;
+  --secondary-foreground: #e8e4ee;
+  --muted: #2a2730;
+  --muted-foreground: #d4d0dc;
+  --accent: #494057;
+  --accent-foreground: #ffffff;
+  --destructive: #30161f;
+  --destructive-foreground: #ffffff;
+  --border: #40383e;
+  --input: #433b43;
+  --ring: #ca519b;
+  --chart-1: #aa598a;
+  --chart-2: #9171c3;
+  --chart-3: #d7865d;
+  --chart-4: #a87ed2;
+  --chart-5: #d3619a;
+  --sidebar: #1d161d;
+  --sidebar-foreground: #eee6ec;
+  --sidebar-primary: #427dcc;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #281d27;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #000000;
+  --sidebar-ring: #ca519b;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
   --radius: 0.5rem;
-  --shadow-2xs: 0px 4px 8px -2px hsl(0 0% 0% / 0.1);
-  --shadow-xs: 0px 4px 8px -2px hsl(0 0% 0% / 0.1);
-  --shadow-sm: 0px 4px 8px -2px hsl(0 0% 0% / 0.2),
-    0px 1px 2px -3px hsl(0 0% 0% / 0.2);
-  --shadow: 0px 4px 8px -2px hsl(0 0% 0% / 0.2),
-    0px 1px 2px -3px hsl(0 0% 0% / 0.2);
-  --shadow-md: 0px 4px 8px -2px hsl(0 0% 0% / 0.2),
-    0px 2px 4px -3px hsl(0 0% 0% / 0.2);
-  --shadow-lg: 0px 4px 8px -2px hsl(0 0% 0% / 0.2),
-    0px 4px 6px -3px hsl(0 0% 0% / 0.2);
-  --shadow-xl: 0px 4px 8px -2px hsl(0 0% 0% / 0.2),
-    0px 8px 10px -3px hsl(0 0% 0% / 0.2);
-  --shadow-2xl: 0px 4px 8px -2px hsl(0 0% 0% / 0.5);
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 4px 6px -1px hsl(0 0% 0% / 0.1);
+  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 8px 10px -1px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
 }
 
 @theme inline {
@@ -170,17 +174,6 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
-
-  --tracking-tighter: calc(var(--tracking-normal) - 0.05em);
-  --tracking-tight: calc(var(--tracking-normal) - 0.025em);
-  --tracking-normal: var(--tracking-normal);
-  --tracking-wide: calc(var(--tracking-normal) + 0.025em);
-  --tracking-wider: calc(var(--tracking-normal) + 0.05em);
-  --tracking-widest: calc(var(--tracking-normal) + 0.1em);
-}
-
-body {
-  letter-spacing: var(--tracking-normal);
 }
 
 @layer base {
