@@ -1,7 +1,5 @@
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { NavMain } from '@/app/(main)/dashboard/_components/nav-main';
-import { NavSecondary } from '@/app/(main)/dashboard/_components/nav-secondary';
-import { NavUser } from '@/app/(main)/dashboard/_components/nav-user';
 import {
   Sidebar,
   SidebarContent,
@@ -13,6 +11,19 @@ import {
 } from '@/components/ui/sidebar';
 import { AppLogo } from '@/components/web/app-logo';
 import { redirect } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { ExternalLink, LifeBuoy, LogOut, Send, UserIcon } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+} from '@/components/ui/dropdown-menu';
 
 export async function AppSidebar({
   ...props
@@ -24,32 +35,115 @@ export async function AppSidebar({
   }
 
   return (
-    <Sidebar variant="inset" {...props} className="border-r">
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <AppLogo>
-                <div className="bg-primary w-7 h-7 rounded-sm flex items-center justify-center">
-                  <span className="mt-[1px] font-bold text-white text-2xl text-shadow-[1.8px_1.8px_0px_rgba(0,0,0,1)]">
-                    b
-                  </span>
-                </div>
-                <div className="flex items-center justify-center">
-                  <span className="font-normal text-xl">buildinpubliq</span>
-                </div>
-              </AppLogo>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
-      <SidebarContent>
-        <NavMain />
-        <NavSecondary className="mt-auto" />
-      </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={user} />
-      </SidebarFooter>
+    <Sidebar variant="inset" {...props} className="border-none pl-0">
+      <div className="grid grid-cols-[60px_minmax(0,1fr)] h-full">
+        <div className="h-full py-4 flex flex-col">
+          <div className="flex justify-center">
+            <AppLogo>
+              <div className="bg-primary w-7 h-7 rounded-sm flex items-center justify-center">
+                <span className="mt-[1px] font-bold text-white text-2xl text-shadow-[1.8px_1.8px_0px_rgba(0,0,0,1)]">
+                  b
+                </span>
+              </div>
+            </AppLogo>
+          </div>
+          <div className="mt-auto flex flex-col gap-6 items-center justify-center">
+            <div className="flex flex-col gap-5">
+              <Button asChild size="icon" variant="ghost">
+                <Link href="/support">
+                  <LifeBuoy className="w-5! h-5! text-foreground/70" />
+                </Link>
+              </Button>
+              <Button asChild size="icon" variant="ghost">
+                <Link href="/feedback">
+                  <Send className="w-5! h-5! text-foreground/70" />
+                </Link>
+              </Button>
+            </div>
+            <SidebarMenu>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="w-max mx-auto">
+                  <Avatar className="w-8 h-8">
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  className="w-[var(--radix-dropdown-menu-trigger-width)] min-w-56 rounded-lg"
+                  align="end"
+                  side="right"
+                  sideOffset={4}
+                >
+                  <DropdownMenuLabel className="p-0 font-normal">
+                    <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                      <Avatar className="h-8 w-8 rounded-full">
+                        <AvatarImage
+                          src={user.image ?? ''}
+                          alt={user.name ?? 'profile image'}
+                        />
+                        <AvatarFallback className="rounded-lg">
+                          {user.name?.at(0)}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="grid flex-1 text-left text-sm leading-tight">
+                        <span className="truncate font-medium">
+                          {user.name}
+                        </span>
+                        <span className="truncate text-xs">{user.email}</span>
+                      </div>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem
+                      className="flex items-center gap-2 cursor-pointer"
+                      asChild
+                    >
+                      <Link href="/profile">
+                        <UserIcon className="w-4 h-4" />
+                        profile
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="flex items-center gap-2 cursor-pointer"
+                      asChild
+                    >
+                      <Link href="/blog" target="blank" rel="noreferrer">
+                        <ExternalLink className="w-4 h-4" />
+                        blog
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+                    <LogOut className="w-4 h-4" />
+                    Log out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </SidebarMenu>
+          </div>
+        </div>
+        <div className="h-full bg-secondary">
+          <SidebarHeader>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton size="lg" asChild>
+                  <AppLogo>
+                    <div className="flex items-center justify-center">
+                      <span className="font-light text-xl">buildinpubliq</span>
+                    </div>
+                  </AppLogo>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarHeader>
+          <SidebarContent>
+            <NavMain />
+          </SidebarContent>
+          <SidebarFooter></SidebarFooter>
+        </div>
+      </div>
     </Sidebar>
   );
 }
