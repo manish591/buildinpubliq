@@ -39,7 +39,7 @@
   --chart-4: #e0bd92;
   --chart-5: #e8a990;
   --sidebar: #f2f2f2;
-  --sidebar-foreground: #a92d85;
+  --sidebar-foreground: #70437f;
   --sidebar-primary: #4e505a;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #ffffff;
@@ -52,7 +52,7 @@
   --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
-  --radius: 0.5rem;
+  --radius: 0rem;
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
@@ -108,7 +108,7 @@
   --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
-  --radius: 0.5rem;
+  --radius: 0rem;
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
