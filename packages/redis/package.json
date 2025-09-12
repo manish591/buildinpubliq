@@ -1,0 +1,13 @@
+{
+  "name": "@buildinpubliq/redis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ioredis": "^5.7.0"
+  }
+}
