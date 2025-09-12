@@ -101,7 +101,7 @@ export async function AppSidebar({
                     >
                       <Link href="/profile">
                         <Settings className="w-4 h-4" />
-                        settings
+                        Settings
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem
@@ -110,7 +110,7 @@ export async function AppSidebar({
                     >
                       <Link href="/blog" target="blank" rel="noreferrer">
                         <ExternalLink className="w-4 h-4" />
-                        blog
+                        Blog
                       </Link>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
@@ -131,7 +131,7 @@ export async function AppSidebar({
                 <SidebarMenuButton size="lg" asChild>
                   <AppLogo>
                     <div className="flex items-center justify-center">
-                      <span className="font-light text-xl">buildinpubliq</span>
+                      <span className="font-light text-xl">Buildinpubliq</span>
                     </div>
                   </AppLogo>
                 </SidebarMenuButton>

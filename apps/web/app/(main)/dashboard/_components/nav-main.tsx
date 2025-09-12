@@ -11,19 +11,19 @@ import {
 
 const items = [
   {
-    title: 'overview',
+    title: 'Overview',
     url: '/dashboard',
     icon: LayoutPanelLeft,
     isActive: true,
   },
   {
-    title: 'ideas',
+    title: 'Ideas',
     url: '/dashboard/ideas',
     icon: Lightbulb,
     isActive: true,
   },
   {
-    title: 'posts',
+    title: 'Posts',
     url: '/dashboard/posts',
     icon: Layers,
   },
@@ -32,7 +32,7 @@ const items = [
 export function NavMain() {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>dashboard</SidebarGroupLabel>
+      <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.title}>
