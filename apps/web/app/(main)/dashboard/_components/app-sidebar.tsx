@@ -124,7 +124,7 @@ export async function AppSidebar({
             </SidebarMenu>
           </div>
         </div>
-        <div className="h-full bg-background/60">
+        <div className="h-full bg-background/80 rounded-xl">
           <SidebarHeader>
             <SidebarMenu>
               <SidebarMenuItem>
