@@ -116,17 +116,11 @@ model Idea {
 }
 
 model Post {
-  id          String    @id @default(cuid())
-  tagline     String
-  description String
-  projectId   String
-  userId      String
-  scheduledAt DateTime
-  postedAt    DateTime?
-  status      Status
+  id                String    @id @default(cuid())
+  userId            String
   postOnChannel     PostOnChannel[]
 
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user  User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -152,8 +146,14 @@ model Channel {
 }
 
 model PostOnChannel {
-  channelId String
+  channelId       String
   projectUpdateId String
+
+  postTitle       String
+  postContent     String
+  postScheduledAt DateTime?
+  postPublishedAt DateTime?
+  postStatus      PostStatus
 
   channel Channel @relation(fields: [channelId], references: [id])
   post Post @relation(fields: [projectUpdateId], references: [id])
@@ -161,10 +161,11 @@ model PostOnChannel {
   @@id([channelId, projectUpdateId])
 }
 
-enum Status {
+enum PostStatus {
   DRAFT
   PUBLISHED
   SCHEDULED
+  FAILED
 }
 
 enum SocialPlatform {
