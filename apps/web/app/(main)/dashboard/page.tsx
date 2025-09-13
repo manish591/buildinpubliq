@@ -12,7 +12,9 @@ export default async function OverviewPage() {
   return (
     <div>
       <MainHeader>
-        <MainHeader.Title>overview</MainHeader.Title>
+        <MainHeader.Wrapper>
+          <MainHeader.Title>Overview</MainHeader.Title>
+        </MainHeader.Wrapper>
       </MainHeader>
       <main className="w-full max-w-6xl mx-auto py-6 px-6"></main>
     </div>
