@@ -16,7 +16,7 @@ export default async function OverviewPage() {
           <MainHeader.Title>Overview</MainHeader.Title>
         </MainHeader.Wrapper>
       </MainHeader>
-      <main className="w-full max-w-6xl mx-auto py-6 px-6"></main>
+      <main className="w-full max-w-7xl mx-auto py-6 px-8"></main>
     </div>
   );
 }

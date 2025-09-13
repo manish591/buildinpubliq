@@ -1,14 +1,5 @@
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
-import { NavMain } from '@/app/(main)/_components/nav-main';
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from '@/components/ui/sidebar';
+import { Sidebar, SidebarMenu } from '@/components/ui/sidebar';
 import { AppLogo } from '@/components/web/app-logo';
 import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -24,6 +15,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
+import { AppSidebarSecondary } from './app-sidebar-secondary';
 
 export async function AppSidebar({
   ...props
@@ -129,25 +121,7 @@ export async function AppSidebar({
             </SidebarMenu>
           </div>
         </div>
-        <div className="h-full bg-background/60 rounded-[10px]">
-          <SidebarHeader>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton size="lg" asChild>
-                  <AppLogo>
-                    <div className="flex items-center justify-center">
-                      <span className="font-light text-xl">Buildinpubliq</span>
-                    </div>
-                  </AppLogo>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarHeader>
-          <SidebarContent>
-            <NavMain />
-          </SidebarContent>
-          <SidebarFooter></SidebarFooter>
-        </div>
+        <AppSidebarSecondary />
       </div>
     </Sidebar>
   );

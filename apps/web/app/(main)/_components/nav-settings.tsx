@@ -1,4 +1,6 @@
-import { Layers, LayoutPanelLeft, Lightbulb } from 'lucide-react';
+'use client';
+
+import { Radio, Settings } from 'lucide-react';
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -9,32 +11,27 @@ import {
 
 const items = [
   {
-    title: 'Overview',
-    url: '/dashboard',
-    icon: LayoutPanelLeft,
+    title: 'General',
+    url: '/settings/general',
+    icon: Settings,
     isActive: true,
   },
   {
-    title: 'Ideas',
-    url: '/dashboard/ideas',
-    icon: Lightbulb,
+    title: 'Channels',
+    url: '/settings/Channels',
+    icon: Radio,
     isActive: true,
-  },
-  {
-    title: 'Posts',
-    url: '/dashboard/posts',
-    icon: Layers,
   },
 ];
 
-export function NavMain() {
+export function NavSettings() {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
+      <SidebarGroupLabel>Settings</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.title}>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton asChild tooltip={item.title}>
               <a href={item.url}>
                 <item.icon />
                 <span>{item.title}</span>
