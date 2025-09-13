@@ -1,12 +1,10 @@
-import { ChevronLeft, Linkedin, LogOut, Twitter } from 'lucide-react';
+import { ChevronLeft, Linkedin, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { getConnectedChannels } from '@/app/(main)/account/channels/actions';
+import { getConnectedChannels } from '@/app/(main)/settings/channels/actions';
 import { auth, signOut } from '@/auth';
 import { ConnectLinkedin } from '@/components/connect-linkedin';
 import { ConnectTwitter } from '@/components/connect-twitter';
-import { NavbarProfileDropdown } from '@/components/navbar-profile-dropdown';
-import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -16,6 +14,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { MainHeader } from '../../_components/main-header';
+import TwitterSVGIcon from '@/components/svg-icons/twitter';
 
 export default async function Profile() {
   const session = await auth();
@@ -43,23 +42,6 @@ export default async function Profile() {
       </MainHeader>
       <main className="w-full max-w-6xl mx-auto py-6 px-6">
         <div className="min-h-screen w-full bg-secondary/50 dark:bg-secondary/30">
-          <header className="border-b border-foreground/10 z-10 sticky top-0 bg-background backdrop-blur-lg">
-            <div className="flex items-center justify-between h-16 max-w-7xl px-4 mx-auto">
-              <div className="flex items-center gap-2">
-                <Link href="/" className="font-bold text-xl">
-                  buildinpubliq
-                </Link>
-              </div>
-              <div className="flex items-center gap-2">
-                <ThemeToggle />
-                <NavbarProfileDropdown
-                  name={session.user.name ?? ''}
-                  img={session.user.image ?? ''}
-                  email={session.user.email ?? ''}
-                />
-              </div>
-            </div>
-          </header>
           <div className="w-full max-w-7xl mx-auto mt-8 px-4 pb-8">
             <Link href="/dashboard">
               <Button variant="outline">
@@ -82,7 +64,7 @@ export default async function Profile() {
                     <div className="flex items-center justify-between gap-6">
                       <div className="flex items-center gap-3">
                         <div className="p-2.5 rounded-full">
-                          <Twitter className="h-5 w-5" />
+                          <TwitterSVGIcon />
                         </div>
                         <div>
                           <h3 className="font-medium">Twitter</h3>

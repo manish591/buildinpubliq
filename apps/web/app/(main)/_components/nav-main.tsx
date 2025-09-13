@@ -1,6 +1,6 @@
 'use client';
 
-import { Layers, LayoutPanelLeft, Lightbulb, UserRoundCog } from 'lucide-react';
+import { Layers, LayoutPanelLeft, Lightbulb } from 'lucide-react';
 import {
   SidebarGroup,
   SidebarGroupLabel,

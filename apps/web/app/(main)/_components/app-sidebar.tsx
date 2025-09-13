@@ -1,5 +1,5 @@
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
-import { NavMain } from '@/app/(main)/dashboard/_components/nav-main';
+import { NavMain } from '@/app/(main)/_components/nav-main';
 import {
   Sidebar,
   SidebarContent,
@@ -51,21 +51,26 @@ export async function AppSidebar({
             <div className="flex flex-col gap-5">
               <Button asChild size="icon" variant="ghost">
                 <Link href="/support">
-                  <LifeBuoy className="w-4 h-4 text-foreground/70" />
+                  <LifeBuoy className="w-4 h-4 text-foreground/60" />
                 </Link>
               </Button>
               <Button asChild size="icon" variant="ghost">
                 <Link href="/feedback">
-                  <Send className="w-4 h-4 text-foreground/70" />
+                  <Send className="w-4 h-4 text-foreground/60" />
                 </Link>
               </Button>
             </div>
             <SidebarMenu>
               <DropdownMenu>
                 <DropdownMenuTrigger className="w-max mx-auto">
-                  <Avatar className="w-8 h-8">
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>CN</AvatarFallback>
+                  <Avatar className="h-8 w-8 rounded-full">
+                    <AvatarImage
+                      src={user.image ?? ''}
+                      alt={user.name ?? 'profile image'}
+                    />
+                    <AvatarFallback className="rounded-lg">
+                      {user.name?.at(0)}
+                    </AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
@@ -99,7 +104,7 @@ export async function AppSidebar({
                       className="flex items-center gap-2 cursor-pointer"
                       asChild
                     >
-                      <Link href="/profile">
+                      <Link href="/settings/general">
                         <Settings className="w-4 h-4" />
                         Settings
                       </Link>
