@@ -128,17 +128,20 @@ model Post {
 }
 
 model Channel {
-  id            String          @id @default(cuid())
-  platform      SocialPlatform
-  accessToken   String
-  expiresIn     DateTime
-  accountName   String?
-  accountImg    String?
-  accountEmail  String?
-  userId        String
-  IDToken       String?
-  isActive      Boolean
-  postOnChannel     PostOnChannel[]
+  id                    String          @id @default(cuid())
+  platform              Platform
+  accessToken           String
+  refreshToken          String
+  accessTokenExpiresIn  DateTime
+  refreshTokenExpiresIn DateTime
+  platformUserId        String @unique
+  platformUserName      String?
+  platformUserImg       String?
+  platformUserEmail     String?
+  platformIDToken       String?
+  userId                String
+  isActive              Boolean
+  postOnChannel         PostOnChannel[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -169,7 +172,7 @@ enum PostStatus {
   FAILED
 }
 
-enum SocialPlatform {
+enum Platform {
   TWITTER
   LINKEDIN
 }
