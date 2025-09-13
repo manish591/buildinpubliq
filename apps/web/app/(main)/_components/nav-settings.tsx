@@ -18,7 +18,7 @@ const items = [
   },
   {
     title: 'Channels',
-    url: '/settings/Channels',
+    url: '/settings/channels',
     icon: Radio,
     isActive: true,
   },
