@@ -51,12 +51,12 @@ export async function AppSidebar({
             <div className="flex flex-col gap-5">
               <Button asChild size="icon" variant="ghost">
                 <Link href="/support">
-                  <LifeBuoy className="w-5! h-5! text-foreground/70" />
+                  <LifeBuoy className="w-4 h-4 text-foreground/70" />
                 </Link>
               </Button>
               <Button asChild size="icon" variant="ghost">
                 <Link href="/feedback">
-                  <Send className="w-5! h-5! text-foreground/70" />
+                  <Send className="w-4 h-4 text-foreground/70" />
                 </Link>
               </Button>
             </div>
@@ -124,7 +124,7 @@ export async function AppSidebar({
             </SidebarMenu>
           </div>
         </div>
-        <div className="h-full bg-background/80 rounded-xl">
+        <div className="h-full bg-background/60 rounded-[10px]">
           <SidebarHeader>
             <SidebarMenu>
               <SidebarMenuItem>

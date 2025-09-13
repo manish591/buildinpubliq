@@ -14,7 +14,7 @@
 }
 
 :root {
-  --background: hsl(0 0% 99.2157%);
+  --background: hsl(0 0% 100%);
   --foreground: hsl(0 0% 0%);
   --card: hsl(0 0% 99.2157%);
   --card-foreground: hsl(0 0% 0%);
@@ -38,7 +38,7 @@
   --chart-3: hsl(84.8571 98.1308% 58.0392%);
   --chart-4: hsl(277.0787 76.7241% 54.5098%);
   --chart-5: hsl(0 0% 45.4902%);
-  --sidebar: hsl(270 42.8571% 97.2549%);
+  --sidebar: hsl(264 20% 95.098%);
   --sidebar-foreground: hsl(0 0% 0%);
   --sidebar-primary: hsl(0 0% 0%);
   --sidebar-primary-foreground: hsl(0 0% 100%);
@@ -49,7 +49,7 @@
   --font-sans: Plus Jakarta Sans, sans-serif;
   --font-serif: Lora, serif;
   --font-mono: IBM Plex Mono, monospace;
-  --radius: 1.4rem;
+  --radius: 0.5rem;
   --shadow-2xs: 0px 2px 3px 0px hsl(0 0% 10.1961% / 0.08);
   --shadow-xs: 0px 2px 3px 0px hsl(0 0% 10.1961% / 0.08);
   --shadow-sm: 0px 2px 3px 0px hsl(0 0% 10.1961% / 0.16),
@@ -103,7 +103,7 @@
   --font-sans: Plus Jakarta Sans, sans-serif;
   --font-serif: Lora, serif;
   --font-mono: IBM Plex Mono, monospace;
-  --radius: 1.4rem;
+  --radius: 0.5rem;
   --shadow-2xs: 0px 2px 3px 0px hsl(0 0% 10.1961% / 0.08);
   --shadow-xs: 0px 2px 3px 0px hsl(0 0% 10.1961% / 0.08);
   --shadow-sm: 0px 2px 3px 0px hsl(0 0% 10.1961% / 0.16),
