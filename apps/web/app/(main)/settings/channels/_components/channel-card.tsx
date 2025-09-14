@@ -47,8 +47,8 @@ export function ChannelCard({
         </div>
         <div>
           <p className="font-medium text-lg">{platformUserName}</p>
-          <p className="text-sm text-muted-foreground">
-            {platform.replace('TWITTER', 'X')} Account
+          <p className="text-sm text-muted-foreground capitalize">
+            {platform.replace('TWITTER', 'X').toLowerCase()} Account
           </p>
         </div>
       </div>
