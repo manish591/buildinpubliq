@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 
-export default function LinkedinSVGIcon({
+export function LinkedinSVGIcon({
   className,
 }: Readonly<{ className?: string }>) {
   return (

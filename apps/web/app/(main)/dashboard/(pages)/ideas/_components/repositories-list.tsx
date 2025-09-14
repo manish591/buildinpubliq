@@ -2,7 +2,7 @@ import { Plus } from 'lucide-react';
 import { format } from 'date-fns';
 import { getAllGithubRepositories } from '@/app/data/github/get-all-github-repositories';
 import { getInstalledRepositories } from '@/app/data/github/get-installed-repositories';
-import GithubSVGIcon from '@/components/svg-icons/github';
+import { GithubSVGIcon } from '@/components/svg-icons/github';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { AddRepository } from './add-repository';

@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 
-export default function TwitterSVGIcon({
+export function TwitterSVGIcon({
   className,
 }: Readonly<{ className?: string }>) {
   return (

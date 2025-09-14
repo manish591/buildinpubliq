@@ -58,7 +58,7 @@ export default async function ChannelsSettingsPage() {
           </div>
         ) : (
           allChannels.map((channel) => {
-            return <ChannelCard key={channel.id} />;
+            return <ChannelCard key={channel.id} {...channel} />;
           })
         )}
       </main>

@@ -14,7 +14,6 @@ export const LINKEDIN_AUTHORIZATION_QUERY_PARAMS = {
 export const TWITTER_AUTHORIZATION_BASE_URL = "https://x.com/i/oauth2/authorize";
 export const TWITTER_AUTHORIZATION_QUERY_PARAMS = {
   "response_type": "code",
-  "state": "state",
   "code_challenge": "challenge",
   "code_challenge_method": "plain",
   "client_id": process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID,

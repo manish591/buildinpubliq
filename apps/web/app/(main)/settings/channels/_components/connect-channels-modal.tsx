@@ -1,6 +1,6 @@
 import { ConnectChannelButton } from '@/components/general/connect-channel-button';
-import LinkedinSVGIcon from '@/components/svg-icons/linkedin';
-import TwitterSVGIcon from '@/components/svg-icons/twitter';
+import { LinkedinSVGIcon } from '@/components/svg-icons/linkedin';
+import { TwitterSVGIcon } from '@/components/svg-icons/twitter';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -21,11 +21,13 @@ import { constructAuthURL } from '@/lib/construct-auth-url';
 const LINKEDIN_AUTHORIZATION_URL = constructAuthURL(
   LINKEDIN_AUTHORIZATION_BASE_URL,
   LINKEDIN_AUTHORIZATION_QUERY_PARAMS,
+  '/settings/channels',
 );
 
 const TWITTER_AUTHORIZATION_URL = constructAuthURL(
   TWITTER_AUTHORIZATION_BASE_URL,
   TWITTER_AUTHORIZATION_QUERY_PARAMS,
+  '/settings/channels',
 );
 
 export function ConnectChannelsModal() {
@@ -47,7 +49,7 @@ export function ConnectChannelsModal() {
             className="border min-h-44 rounded-md flex flex-col items-center bg-transparent gap-0"
             authorizationURL={LINKEDIN_AUTHORIZATION_URL}
           >
-            <div className="w-14 h-14 bg-primary p-1 rounded-md">
+            <div className="w-12 h-12 bg-[#0A66C2] p-1 rounded-md">
               <LinkedinSVGIcon className="w-full! h-full!" />
             </div>
             <p className="font-medium text-lg mt-3">LinkedIn</p>
@@ -57,7 +59,7 @@ export function ConnectChannelsModal() {
             className="border min-h-44 rounded-md flex flex-col items-center bg-transparent gap-0"
             authorizationURL={TWITTER_AUTHORIZATION_URL}
           >
-            <div className="w-14 h-14 bg-primary p-1 rounded-md">
+            <div className="w-12 h-12 bg-black p-1 rounded-md">
               <TwitterSVGIcon className="w-full! h-full!" />
             </div>
             <p className="font-medium text-lg mt-3">X/Twitter</p>

@@ -1,30 +1,32 @@
+import { prisma } from '@buildinpubliq/db';
 import { NextResponse } from 'next/server';
 import { auth } from '@/auth';
 import { BASE_URL } from '@/constants';
-import { prisma } from '@buildinpubliq/db';
 
-export enum SocialPlatform {
-  LINKEDIN = 'LINKEDIN',
-  TWITTER = 'TWITTER',
-}
-
-const CLIENT_ID = process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID;
 const CLIENT_SECRET = process.env.TWITTER_CLIENT_SECRET;
-const REDIRECT_URI = `${BASE_URL}/api/callback/twitter`;
-const basicAuth = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString(
+const CLIENT_ID = process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID;
+const REDIRECT_URI = process.env.NEXT_PUBLIC_TWITTER_REDIRECT_URI as string;
+const BASIC_AUTH = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString(
   'base64',
 );
 
 export const GET = auth(async function GET(req) {
   if (!req.auth?.user) {
-    return NextResponse.json({ message: 'unauthenticated' }, { status: 401 });
+    return NextResponse.json({ message: 'Unauthenticated' });
+  }
+
+  const user = req.auth.user;
+
+  if (!user?.id) {
+    return NextResponse.json({ message: 'Unauthenticated' });
   }
 
   const searchParams = new URL(req.url).searchParams;
   const code = searchParams.get('code');
+  const state = searchParams.get('state');
 
-  if (!code) {
-    return NextResponse.json({ message: 'unauthenticated' }, { status: 401 });
+  if (!code || !state) {
+    return NextResponse.json({ message: 'Bad Request' });
   }
 
   const params = new URLSearchParams();
@@ -34,38 +36,65 @@ export const GET = auth(async function GET(req) {
   params.append('redirect_uri', REDIRECT_URI);
   params.append('code_verifier', 'challenge');
 
-  const res = await fetch(`https://api.x.com/2/oauth2/token`, {
+  const tokenRes = await fetch('https://api.x.com/2/oauth2/token', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: `Basic ${basicAuth}`,
+      Authorization: `Basic ${BASIC_AUTH}`,
     },
     body: params.toString(),
   });
 
-  const data = await res.json();
+  if (!tokenRes.ok) {
+    return NextResponse.json({ message: 'Internal server error' });
+  }
 
-  await prisma.channel.updateMany({
+  const tokenData = await tokenRes.json();
+  const accessToken = tokenData.access_token;
+  const accessTokenExpiresIn = new Date(Date.now() + tokenData.expires_in * 1000);
+  const refreshToken = tokenData.refresh_token;
+
+  const userRes = await fetch('https://api.x.com/2/users/me?user.fields=profile_image_url,confirmed_email', {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  });
+
+  if (!userRes.ok) {
+    return NextResponse.json({ message: 'Internal server error' });
+  }
+
+  const userData = await userRes.json();
+  const platformUserId = userData.data.id;
+  const platformUserName = userData.data.username;
+  const platformUserEmail = userData.data.confirmed_email;
+  const platformUserImg = userData.data.profile_image_url;
+
+  await prisma.channel.upsert({
     where: {
-      userId: req.auth.user.id ?? '',
-      platform: SocialPlatform.TWITTER,
+      platform: "TWITTER",
+      platformUserId,
+    },
+    update: {
+      accessToken,
+      refreshToken,
+      accessTokenExpiresIn,
+    },
+    create: {
+      platform: "TWITTER",
+      accessToken,
+      refreshToken,
+      accessTokenExpiresIn,
+      platformUserId,
+      platformUserName,
+      platformUserImg,
+      platformUserEmail,
+      userId: user.id,
       isActive: true,
-    },
-    data: {
-      isActive: false,
-    },
+    }
   });
 
-  await prisma.channel.create({
-    data: {
-      platform: SocialPlatform.TWITTER,
-      accessToken: data.access_token,
-      expiresIn: new Date(Date.now() + data.expires_in * 1000),
-      accountName: req.auth.user.name ?? '',
-      userId: req.auth.user.id ?? '',
-      isActive: true,
-    },
-  });
-
-  return NextResponse.redirect(`${BASE_URL}/profile`);
+  const redirectTo = JSON.parse(decodeURIComponent(state)) as { redirect: string };
+  return NextResponse.redirect(`${BASE_URL}${redirectTo.redirect}`);
 });

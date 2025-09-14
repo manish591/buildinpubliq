@@ -4,7 +4,7 @@ import { RepositoriesList } from './_components/repositories-list';
 import { hasGithubIntegration } from '@/app/data/github/has-github-integration';
 import { InstallGithubIntegration } from './_components/install-github-integration';
 import { IdeasList } from './_components/ideas-list';
-import GithubSVGIcon from '@/components/svg-icons/github';
+import { GithubSVGIcon } from '@/components/svg-icons/github';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { redirect } from 'next/navigation';
 import { CreateIdea } from './_components/create-idea';
