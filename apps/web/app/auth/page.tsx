@@ -13,15 +13,20 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { BackButton } from '@/components/web/back-button';
 import { AppLogo } from '@/components/web/app-logo';
-import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { GithubSVGIcon } from '@/components/svg-icons/github';
 import { GoogleSVGIcon } from '@/components/svg-icons/google';
 import { LoginWithGithub } from './_components/login-with-github';
+import { getUserDetails } from '../data/users/get-user-details';
 
 export default async function Login() {
-  const user = await getCurrentUser();
+  const userData = await getUserDetails();
+  const isOnboardingCompleted = userData?.isOnboardingCompleted;
 
-  if (user) {
+  if (userData && !isOnboardingCompleted) {
+    redirect('/onboarding/welcome');
+  }
+
+  if (userData && isOnboardingCompleted) {
     redirect('/dashboard');
   }
 

@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { IdeasSearchBar } from './_components/ideas-search-bar';
 import { RepositoriesList } from './_components/repositories-list';
 import { hasGithubIntegration } from '@/app/data/github/has-github-integration';
-import { InstallGithubIntegration } from './_components/install-github-integration';
+import { InstallGithubIntegration } from '../../../../../components/general/install-github-integration';
 import { IdeasList } from './_components/ideas-list';
 import { GithubSVGIcon } from '@/components/svg-icons/github';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
@@ -56,7 +56,7 @@ export default async function IdeasPage() {
                     </p>
                   </div>
                   <div className="flex justify-center">
-                    <InstallGithubIntegration />
+                    <InstallGithubIntegration></InstallGithubIntegration>
                   </div>
                 </div>
               )}

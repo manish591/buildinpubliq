@@ -11,7 +11,7 @@ export function LoginWithGithub({
       variant="outline"
       type="button"
       className="w-full cursor-pointer"
-      onClick={() => signIn('github', { redirectTo: '/dashboard' })}
+      onClick={() => signIn('github')}
     >
       {children}
     </Button>

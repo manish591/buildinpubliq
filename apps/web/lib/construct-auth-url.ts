@@ -1,13 +1,11 @@
-export function constructAuthURL(base_url: string, query: Record<string, unknown>, redirect: string) {
+export function constructChannelAuthURL(base_url: string, query: Record<string, unknown>) {
   const url = new URL(base_url);
 
   Object.entries(query).forEach(([key, value]) => {
-    const queryKey = key as string;
+    const queryKey = key;
     const queryValue = value as string;
     url.searchParams.append(queryKey, queryValue);
   });
-
-  url.searchParams.append("state", encodeURIComponent(JSON.stringify({ redirect })));
 
   return url.toString();
 }

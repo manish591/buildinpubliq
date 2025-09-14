@@ -1,6 +1,4 @@
 import { ConnectChannelButton } from '@/components/general/connect-channel-button';
-import { LinkedinSVGIcon } from '@/components/svg-icons/linkedin';
-import { TwitterSVGIcon } from '@/components/svg-icons/twitter';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -10,25 +8,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import {
-  LINKEDIN_AUTHORIZATION_BASE_URL,
-  LINKEDIN_AUTHORIZATION_QUERY_PARAMS,
-  TWITTER_AUTHORIZATION_BASE_URL,
-  TWITTER_AUTHORIZATION_QUERY_PARAMS,
-} from '@/constants';
-import { constructAuthURL } from '@/lib/construct-auth-url';
-
-const LINKEDIN_AUTHORIZATION_URL = constructAuthURL(
-  LINKEDIN_AUTHORIZATION_BASE_URL,
-  LINKEDIN_AUTHORIZATION_QUERY_PARAMS,
-  '/settings/channels',
-);
-
-const TWITTER_AUTHORIZATION_URL = constructAuthURL(
-  TWITTER_AUTHORIZATION_BASE_URL,
-  TWITTER_AUTHORIZATION_QUERY_PARAMS,
-  '/settings/channels',
-);
+import { AVAILABLE_PLATFORM } from '@/constants';
+import { constructChannelAuthURL } from '@/lib/construct-auth-url';
+import { cn } from '@/lib/utils';
 
 export function ConnectChannelsModal() {
   return (
@@ -45,26 +27,36 @@ export function ConnectChannelsModal() {
           </DialogDescription>
         </DialogHeader>
         <div className="grid grid-cols-3 gap-4 mt-4">
-          <ConnectChannelButton
-            className="border min-h-44 rounded-md flex flex-col items-center bg-transparent gap-0"
-            authorizationURL={LINKEDIN_AUTHORIZATION_URL}
-          >
-            <div className="w-12 h-12 bg-[#0A66C2] p-1 rounded-md">
-              <LinkedinSVGIcon className="w-full! h-full!" />
-            </div>
-            <p className="font-medium text-lg mt-3">LinkedIn</p>
-            <p className="text-muted-foreground mt-1">Profile</p>
-          </ConnectChannelButton>
-          <ConnectChannelButton
-            className="border min-h-44 rounded-md flex flex-col items-center bg-transparent gap-0"
-            authorizationURL={TWITTER_AUTHORIZATION_URL}
-          >
-            <div className="w-12 h-12 bg-black p-1 rounded-md">
-              <TwitterSVGIcon className="w-full! h-full!" />
-            </div>
-            <p className="font-medium text-lg mt-3">X/Twitter</p>
-            <p className="text-muted-foreground mt-1">Profile</p>
-          </ConnectChannelButton>
+          {AVAILABLE_PLATFORM.map((platform) => {
+            return (
+              <ConnectChannelButton
+                key={platform.name}
+                className="border min-h-44 rounded-md flex flex-col items-center bg-transparent gap-0"
+                authorizationURL={constructChannelAuthURL(
+                  platform.authBaseURL,
+                  {
+                    ...platform.authQueryParams,
+                    state: encodeURIComponent(
+                      JSON.stringify({
+                        redirect: '/onboarding/connect-channels',
+                      }),
+                    ),
+                  },
+                )}
+              >
+                <div
+                  className={cn(
+                    'w-12 h-12 p-1 rounded-md',
+                    platform.iconBGColor,
+                  )}
+                >
+                  {<platform.icon className="w-full! h-full!" />}
+                </div>
+                <p className="font-medium text-lg mt-3">{platform.title}</p>
+                <p className="text-muted-foreground mt-1">Profile</p>
+              </ConnectChannelButton>
+            );
+          })}
         </div>
       </DialogContent>
     </Dialog>

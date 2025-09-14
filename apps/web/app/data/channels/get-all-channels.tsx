@@ -2,7 +2,7 @@ import 'server-only';
 import { prisma } from '@buildinpubliq/db';
 import { getCurrentUser } from '../users/verify-auth-session';
 
-export async function getAllChannels() {
+export async function getAllConnectedChannels() {
   const user = await getCurrentUser();
 
   if (!user?.id) {
@@ -12,6 +12,7 @@ export async function getAllChannels() {
   const data = await prisma.channel.findMany({
     where: {
       userId: user.id,
+      isActive: true,
     },
   });
 
