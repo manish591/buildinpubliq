@@ -40,7 +40,7 @@ export async function AppSidebar({
             </AppLogo>
           </div>
           <div className="mt-auto flex flex-col gap-6 items-center justify-center">
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-3">
               <Button asChild size="icon" variant="ghost">
                 <Link href="/support">
                   <LifeBuoy className="w-4 h-4 text-foreground/60" />
@@ -105,7 +105,11 @@ export async function AppSidebar({
                       className="flex items-center gap-2 cursor-pointer"
                       asChild
                     >
-                      <Link href="/blog" target="blank" rel="noreferrer">
+                      <Link
+                        href="https://buildinpubliq.blogbee.site/"
+                        target="blank"
+                        rel="noreferrer"
+                      >
                         <ExternalLink className="w-4 h-4" />
                         Blog
                       </Link>
