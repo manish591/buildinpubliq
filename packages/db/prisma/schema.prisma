@@ -131,13 +131,12 @@ model Channel {
   id                    String          @id @default(cuid())
   platform              Platform
   accessToken           String
-  refreshToken          String
+  refreshToken          String?
   accessTokenExpiresIn  DateTime
   platformUserId        String @unique
   platformUserName      String?
   platformUserImg       String?
   platformUserEmail     String?
-  platformIDToken       String?
   userId                String
   isActive              Boolean
   postOnChannel         PostOnChannel[]
