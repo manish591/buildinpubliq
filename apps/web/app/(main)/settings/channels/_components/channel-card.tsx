@@ -1,12 +1,5 @@
 import type { Prisma } from '@buildinpubliq/db';
-import {
-  Delete,
-  EllipsisVertical,
-  ExternalLink,
-  RefreshCcw,
-} from 'lucide-react';
-import { LinkedinSVGIcon } from '@/components/svg-icons/linkedin';
-import { TwitterSVGIcon } from '@/components/svg-icons/twitter';
+import { Delete, EllipsisVertical, RefreshCcw } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -16,18 +9,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Link from 'next/link';
-
-const PLATFORM_BASE_URL = {
-  TWITTER: 'https://x.com',
-  LINKEDIN: 'https://www.linkedin.com/in',
-};
+import { AVAILABLE_PLATFORM } from '@/constants';
+import { ConnectChannelButton } from '@/components/general/connect-channel-button';
+import { constructChannelAuthURL } from '@/lib/construct-auth-url';
+import { cn } from '@/lib/utils';
 
 export function ChannelCard({
   platformUserName,
   platform,
   platformUserImg,
 }: Readonly<Prisma.Channel>) {
+  const platformData = AVAILABLE_PLATFORM.find((p) => p.name === platform);
+  const platformAuthURL = platformData?.authBaseURL as string;
+  const platformQueryParams = platformData?.authQueryParams as Record<
+    string,
+    unknown
+  >;
+
   return (
     <div className="border rounded-md p-4 px-6 flex items-center justify-between">
       <div className="flex items-center gap-4">
@@ -37,11 +35,13 @@ export function ChannelCard({
             <AvatarFallback>{platformUserName?.at(0)}</AvatarFallback>
           </Avatar>
           <div className="absolute size-[22px] bg-background right-0 bottom-[0%] rounded-full flex items-center justify-center">
-            {platform === 'LINKEDIN' && (
-              <LinkedinSVGIcon className="size-[18px] p-0.5 bg-[#0A66C2] rounded-full" />
-            )}
-            {platform === 'TWITTER' && (
-              <TwitterSVGIcon className="size-[18px] p-0.5 bg-black rounded-full" />
+            {platformData && (
+              <platformData.icon
+                className={cn(
+                  'size-[18px] p-0.5 rounded-full',
+                  platformData.iconBGColor,
+                )}
+              />
             )}
           </div>
         </div>
@@ -60,24 +60,23 @@ export function ChannelCard({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem
-              asChild
-              className="flex items-center gap-2 cursor-pointer capitalize"
-            >
-              <Link
-                href={`${PLATFORM_BASE_URL[platform]}/${platformUserName}`}
-                target="_blank"
+            <DropdownMenuItem className="flex gap-2 items-center" asChild>
+              <ConnectChannelButton
+                className="hover:shadow-none h-8 hover:bg-secondary font-normal"
+                authorizationURL={constructChannelAuthURL(platformAuthURL, {
+                  ...platformQueryParams,
+                  state: encodeURIComponent(
+                    JSON.stringify({
+                      redirect: '/dashboard/channels',
+                    }),
+                  ),
+                })}
               >
-                <ExternalLink className="size-4" />
-                View on {platform.toLowerCase()}
-                {platform === 'TWITTER' && '/X'}
-              </Link>
+                <RefreshCcw className="size-4" /> Refresh Connection
+              </ConnectChannelButton>
             </DropdownMenuItem>
-            <DropdownMenuItem className="flex gap-2 items-center">
-              <RefreshCcw className="size-4" /> Refresh Connection
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="flex gap-2 items-center text-destructive">
+            <DropdownMenuSeparator className="hidden" />
+            <DropdownMenuItem className="hidden gap-2 items-center text-destructive">
               <Delete className="size-4" /> Disconnect Channel
             </DropdownMenuItem>
           </DropdownMenuContent>

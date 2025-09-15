@@ -70,7 +70,7 @@ export default async function OnboardingConnectChanneslsPage() {
               <div
                 className={cn('w-12 h-12 p-1 rounded-md', platform.iconBGColor)}
               >
-                {<platform.icon className="w-full! h-full!" />}
+                <platform.icon className="w-full! h-full!" />
               </div>
               <p className="font-medium text-lg mt-3">{platform.title}</p>
               <p className="text-muted-foreground mt-1">Profile</p>
