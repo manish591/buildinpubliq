@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils';
 export function ConnectChannelsModal() {
   return (
     <Dialog>
-      <DialogTrigger asChild>
+      <DialogTrigger asChild className="cursor-pointer">
         <Button>Connect Channel</Button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl!">

@@ -60,7 +60,7 @@ export function AppSidebarSecondary() {
                   className="hover:bg-transparent cursor-pointer active:bg-transparent"
                 >
                   <Link
-                    href="/dashboard"
+                    href="/dashboard/posts"
                     className="flex items-center justify-start gap-4 group/sidebar"
                   >
                     <div className="h-6 w-6 flex items-center justify-center">
