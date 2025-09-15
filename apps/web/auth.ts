@@ -1,5 +1,5 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
-import { prisma } from "@buildinpubliq/db";
+import { prisma } from '@buildinpubliq/db';
 import NextAuth from 'next-auth';
 import GitHub from 'next-auth/providers/github';
 

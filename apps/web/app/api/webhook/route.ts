@@ -1,8 +1,8 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
+import { prisma } from '@buildinpubliq/db';
 import { type NextRequest, NextResponse } from 'next/server';
 import { generateTwitterPost } from '@/app/actions/langchain';
 import getProjectDetails from '@/app/actions/projects';
-import { prisma } from '@buildinpubliq/db';
 
 export enum SocialPlatform {
   LINKEDIN = 'LINKEDIN',
@@ -99,8 +99,8 @@ export async function POST(req: NextRequest) {
       await prisma.projectUpdate.create({
         data: {
           projectId: projectDetails.id,
-          tagline: "",
-          description: "",
+          tagline: '',
+          description: '',
           status: Status.SCHEDULED,
           scheduledAt: new Date(Date.now() + 2 * 1000),
           userId: projectDetails.userId,

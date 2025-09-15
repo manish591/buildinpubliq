@@ -1,3 +1,4 @@
+import { ChevronDown, Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -7,7 +8,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { ChevronDown, Filter } from 'lucide-react';
 
 export function IdeasFilterDropdown() {
   return (

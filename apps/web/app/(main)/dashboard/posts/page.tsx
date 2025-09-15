@@ -1,12 +1,12 @@
+import { CalendarCheck, FileCheck, FilePen, Plus } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { MainHeader } from '@/app/(main)/_components/main-header';
+import { getUserDetails } from '@/app/data/users/get-user-details';
 import { Button } from '@/components/ui/button';
-import { CalendarCheck, FileCheck, FilePen, Plus } from 'lucide-react';
+import { EmptyState } from '@/components/ui/empty-state';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PostsChannelFilterDropdown } from './_components/posts-channel-filter-dropdown';
 import { PostsTimezonesDropdown } from './_components/posts-timezones-dropdown';
-import { EmptyState } from '@/components/ui/empty-state';
-import { getUserDetails } from '@/app/data/users/get-user-details';
 
 export default async function PostsPage() {
   const userData = await getUserDetails();
@@ -57,12 +57,6 @@ export default async function PostsPage() {
                 <EmptyState.Description>
                   Schedule some posts and they will appear here
                 </EmptyState.Description>
-                <EmptyState.Actions>
-                  <Button>
-                    <Plus /> New Post
-                  </Button>
-                  <Button variant="outline">Learn More</Button>
-                </EmptyState.Actions>
               </EmptyState>
             </div>
           </TabsContent>
@@ -84,12 +78,6 @@ export default async function PostsPage() {
                 <EmptyState.Description>
                   Create your first draft post here
                 </EmptyState.Description>
-                <EmptyState.Actions>
-                  <Button>
-                    <Plus /> New Post
-                  </Button>
-                  <Button variant="outline">Learn More</Button>
-                </EmptyState.Actions>
               </EmptyState>
             </div>
           </TabsContent>
@@ -111,12 +99,6 @@ export default async function PostsPage() {
                 <EmptyState.Description>
                   Your published post appear here
                 </EmptyState.Description>
-                <EmptyState.Actions>
-                  <Button>
-                    <Plus /> New Post
-                  </Button>
-                  <Button variant="outline">Learn More</Button>
-                </EmptyState.Actions>
               </EmptyState>
             </div>
           </TabsContent>

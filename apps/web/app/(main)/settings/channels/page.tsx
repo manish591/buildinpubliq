@@ -1,11 +1,11 @@
-import { MainHeader } from '../../_components/main-header';
-import { ConnectChannelsModal } from './_components/connect-channels-modal';
-import { getCurrentUser } from '@/app/data/users/verify-auth-session';
-import { redirect } from 'next/navigation';
-import { ChannelFilterDropdown } from './_components/channel-filter-dropdown';
-import { Suspense } from 'react';
-import { ChannelsGrid } from './_components/channels-grid';
 import type { Prisma } from '@buildinpubliq/db';
+import { redirect } from 'next/navigation';
+import { Suspense } from 'react';
+import { getCurrentUser } from '@/app/data/users/verify-auth-session';
+import { MainHeader } from '../../_components/main-header';
+import { ChannelFilterDropdown } from './_components/channel-filter-dropdown';
+import { ChannelsGrid } from './_components/channels-grid';
+import { ConnectChannelsModal } from './_components/connect-channels-modal';
 
 export default async function ChannelsSettingsPage({
   searchParams,

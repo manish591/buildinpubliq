@@ -1,8 +1,8 @@
 'use server';
 
+import { prisma } from '@buildinpubliq/db';
 import { auth } from '@/auth';
 import type { TProjectUpdate } from '@/components/project-update-form';
-import { prisma } from '@buildinpubliq/db';
 
 export enum Status {
   DRAFT = 'DRAFT',

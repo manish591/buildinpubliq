@@ -2,10 +2,10 @@ import { Calendar, ChevronLeft, User2 } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getUserDetails } from '@/app/data/users/get-user-details';
+import { GithubSVGIcon } from '@/components/svg-icons/github';
 import { Button } from '@/components/ui/button';
 import { AppLogo } from '@/components/web/app-logo';
 import { WelcomeFeatureCard } from './_components/welcome-feature-card';
-import { GithubSVGIcon } from '@/components/svg-icons/github';
 
 export default async function OnboardingWelcomePage() {
   const userData = await getUserDetails();

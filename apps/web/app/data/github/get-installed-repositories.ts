@@ -1,15 +1,15 @@
-import "server-only";
-import { prisma } from "@buildinpubliq/db";
-import { redirect } from "next/navigation";
-import type { GithubRepository } from "@/app/(main)/dashboard/(pages)/ideas/_components/add-repo-form";
-import { getCurrentUser } from "@/app/data/users/verify-auth-session";
-import { getGithubIntegrationToken } from "./get-github-integration-token";
+import 'server-only';
+import { prisma } from '@buildinpubliq/db';
+import { redirect } from 'next/navigation';
+import type { GithubRepository } from '@/app/(main)/dashboard/(pages)/ideas/_components/add-repo-form';
+import { getCurrentUser } from '@/app/data/users/verify-auth-session';
+import { getGithubIntegrationToken } from './get-github-integration-token';
 
 export async function getInstalledRepositories(): Promise<GithubRepository[]> {
   const user = await getCurrentUser();
 
   if (!user?.id) {
-    redirect("/auth");
+    redirect('/auth');
   }
 
   const githubIntegrationData = await prisma.githubIntegration.findFirst({
@@ -50,5 +50,7 @@ export async function getInstalledRepositories(): Promise<GithubRepository[]> {
     pageNumber++;
   }
 
-  return allRepositories.sort((repoOne, repoTwo) => repoOne.updated_at > repoTwo.updated_at ? -1 : 1);
+  return allRepositories.sort((repoOne, repoTwo) =>
+    repoOne.updated_at > repoTwo.updated_at ? -1 : 1,
+  );
 }

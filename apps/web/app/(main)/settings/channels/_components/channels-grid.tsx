@@ -1,8 +1,8 @@
-import { getAllChannels } from '@/app/data/channels/get-all-channels';
-import { ChannelCard } from './channel-card';
-import { EmptyState } from '@/components/ui/empty-state';
-import { Radio } from 'lucide-react';
 import type { Prisma } from '@buildinpubliq/db';
+import { Radio } from 'lucide-react';
+import { getAllChannels } from '@/app/data/channels/get-all-channels';
+import { EmptyState } from '@/components/ui/empty-state';
+import { ChannelCard } from './channel-card';
 
 export async function ChannelsGrid({
   filters,

@@ -1,6 +1,7 @@
 'use client';
 
 import { ChevronLeft } from 'lucide-react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   SidebarContent,
@@ -10,11 +11,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { NavMain } from './nav-main';
-import Link from 'next/link';
-import { NavSettings } from './nav-settings';
 import { AppLogo } from '@/components/web/app-logo';
 import { cn } from '@/lib/utils';
+import { NavMain } from './nav-main';
+import { NavSettings } from './nav-settings';
 
 export function AppSidebarSecondary() {
   const pathname = usePathname();

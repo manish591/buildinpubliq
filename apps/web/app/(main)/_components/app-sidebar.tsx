@@ -1,22 +1,22 @@
-import { getCurrentUser } from '@/app/data/users/verify-auth-session';
-import { Sidebar, SidebarMenu } from '@/components/ui/sidebar';
-import { AppLogo } from '@/components/web/app-logo';
-import { redirect } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import { ExternalLink, LifeBuoy, LogOut, Send, Settings } from 'lucide-react';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { getCurrentUser } from '@/app/data/users/verify-auth-session';
+import { LogoutButton } from '@/components/general/logout-button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Sidebar, SidebarMenu } from '@/components/ui/sidebar';
+import { AppLogo } from '@/components/web/app-logo';
 import { AppSidebarSecondary } from './app-sidebar-secondary';
-import { LogoutButton } from '@/components/general/logout-button';
 
 export async function AppSidebar({
   ...props

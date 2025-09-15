@@ -46,6 +46,5 @@ export async function generateTwitterPost(
   //   feat_title,
   //   feat_desc,
   // });
-
   // return data;
 }

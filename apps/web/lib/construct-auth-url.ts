@@ -1,4 +1,7 @@
-export function constructChannelAuthURL(base_url: string, query: Record<string, unknown>) {
+export function constructChannelAuthURL(
+  base_url: string,
+  query: Record<string, unknown>,
+) {
   const url = new URL(base_url);
 
   Object.entries(query).forEach(([key, value]) => {

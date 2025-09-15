@@ -1,16 +1,16 @@
-import { Suspense } from 'react';
-import { IdeasSearchBar } from './_components/ideas-search-bar';
-import { RepositoriesList } from './_components/repositories-list';
-import { hasGithubIntegration } from '@/app/data/github/has-github-integration';
-import { IdeasList } from './_components/ideas-list';
-import { GithubSVGIcon } from '@/components/svg-icons/github';
-import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { redirect } from 'next/navigation';
-import { CreateIdea } from './_components/create-idea';
+import { Suspense } from 'react';
 import { MainHeader } from '@/app/(main)/_components/main-header';
+import { hasGithubIntegration } from '@/app/data/github/has-github-integration';
+import { getCurrentUser } from '@/app/data/users/verify-auth-session';
+import { InstallGithubIntegration } from '@/components/general/install-github-integration';
+import { GithubSVGIcon } from '@/components/svg-icons/github';
+import { CreateIdea } from './_components/create-idea';
 import { IdeasDisplayDropdown } from './_components/ideas-display-dropdown';
 import { IdeasFilterDropdown } from './_components/ideas-filters-dropdown';
-import { InstallGithubIntegration } from '@/components/general/install-github-integration';
+import { IdeasList } from './_components/ideas-list';
+import { IdeasSearchBar } from './_components/ideas-search-bar';
+import { RepositoriesList } from './_components/repositories-list';
 
 export default async function IdeasPage() {
   const user = await getCurrentUser();

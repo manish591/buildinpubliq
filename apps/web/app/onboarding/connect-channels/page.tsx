@@ -1,14 +1,14 @@
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
-import { ConnectChannelButton } from '@/components/general/connect-channel-button';
-import { AVAILABLE_PLATFORM } from '@/constants';
-import { Button } from '@/components/ui/button';
-import { AppLogo } from '@/components/web/app-logo';
-import { constructChannelAuthURL } from '@/lib/construct-auth-url';
-import { getUserDetails } from '@/app/data/users/get-user-details';
 import { redirect } from 'next/navigation';
 import { getAllChannels } from '@/app/data/channels/get-all-channels';
+import { getUserDetails } from '@/app/data/users/get-user-details';
+import { ConnectChannelButton } from '@/components/general/connect-channel-button';
+import { Button } from '@/components/ui/button';
+import { AppLogo } from '@/components/web/app-logo';
+import { AVAILABLE_PLATFORM } from '@/constants';
+import { constructChannelAuthURL } from '@/lib/construct-auth-url';
+import { cn } from '@/lib/utils';
 
 export default async function OnboardingConnectChanneslsPage() {
   const userData = await getUserDetails();

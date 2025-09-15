@@ -1,6 +1,8 @@
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { GithubSVGIcon } from '@/components/svg-icons/github';
+import { GoogleSVGIcon } from '@/components/svg-icons/google';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -11,12 +13,10 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { BackButton } from '@/components/web/back-button';
 import { AppLogo } from '@/components/web/app-logo';
-import { GithubSVGIcon } from '@/components/svg-icons/github';
-import { GoogleSVGIcon } from '@/components/svg-icons/google';
-import { LoginWithGithub } from './_components/login-with-github';
+import { BackButton } from '@/components/web/back-button';
 import { getUserDetails } from '../data/users/get-user-details';
+import { LoginWithGithub } from './_components/login-with-github';
 
 export default async function Login() {
   const userData = await getUserDetails();

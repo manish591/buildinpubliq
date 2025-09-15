@@ -1,6 +1,9 @@
 'use client';
 
+import { Prisma } from '@buildinpubliq/db';
 import { ChevronDown, Filter, X } from 'lucide-react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -10,9 +13,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Prisma } from '@buildinpubliq/db';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { Badge } from '@/components/ui/badge';
 
 export function ChannelFilterDropdown() {
   const router = useRouter();

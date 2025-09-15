@@ -1,20 +1,20 @@
 import {
-  ExternalLink,
-  Edit,
   Archive,
-  MoreHorizontal,
+  Edit,
+  ExternalLink,
   Lightbulb,
+  MoreHorizontal,
 } from 'lucide-react';
+import { getAllIdeas } from '@/app/data/ideas/get-all-ideas';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { getAllIdeas } from '@/app/data/ideas/get-all-ideas';
 
 export async function IdeasList() {
   const allIdeas = await getAllIdeas();

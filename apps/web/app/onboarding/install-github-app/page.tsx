@@ -1,11 +1,11 @@
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
-import { hasGithubIntegration } from '@/app/data/github/has-github-integration';
 import { redirect } from 'next/navigation';
+import { hasGithubIntegration } from '@/app/data/github/has-github-integration';
+import { getUserDetails } from '@/app/data/users/get-user-details';
 import { InstallGithubIntegration } from '@/components/general/install-github-integration';
 import { Button } from '@/components/ui/button';
 import { AppLogo } from '@/components/web/app-logo';
-import { getUserDetails } from '@/app/data/users/get-user-details';
 import { cn } from '@/lib/utils';
 import { FinishOnboardingButton } from './_components/finish-onboarding-button';
 

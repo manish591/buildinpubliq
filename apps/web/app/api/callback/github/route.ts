@@ -11,20 +11,20 @@ export const GET = auth(async function GET(req) {
   const user = req.auth.user;
 
   if (!user?.id) {
-    return NextResponse.json({ message: "Unauthenticated" });
+    return NextResponse.json({ message: 'Unauthenticated' });
   }
 
   const searchParams = new URL(req.url).searchParams;
   const installationId = searchParams.get('installation_id');
   const setupAction = searchParams.get('setup_action');
-  const state = searchParams.get("state");
+  const state = searchParams.get('state');
 
   if (!state || !setupAction || !installationId) {
-    return NextResponse.json({ message: "Bad request" });
+    return NextResponse.json({ message: 'Bad request' });
   }
 
   if (setupAction !== 'install') {
-    return NextResponse.json({ message: "Bad request" });
+    return NextResponse.json({ message: 'Bad request' });
   }
 
   await prisma.githubIntegration.create({
@@ -35,6 +35,8 @@ export const GET = auth(async function GET(req) {
     },
   });
 
-  const redirectTo = JSON.parse(decodeURIComponent(state)) as { redirect: string };
-  return NextResponse.redirect(`${BASE_URL}${redirectTo.redirect}`)
+  const redirectTo = JSON.parse(decodeURIComponent(state)) as {
+    redirect: string;
+  };
+  return NextResponse.redirect(`${BASE_URL}${redirectTo.redirect}`);
 });

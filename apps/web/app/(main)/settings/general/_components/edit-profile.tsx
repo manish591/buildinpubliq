@@ -1,14 +1,11 @@
 'use client';
 
 import type { Prisma } from '@buildinpubliq/db';
+import { Upload } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { updateUserDetails } from '../../actions';
-import { Upload } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import {
   Dialog,
   DialogContent,
@@ -17,6 +14,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
+import { updateUserDetails } from '../../actions';
 
 export function EditProfile({ name, email }: Readonly<Prisma.User>) {
   const [username, setUsername] = useState(name ?? '');

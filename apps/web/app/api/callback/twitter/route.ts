@@ -51,15 +51,20 @@ export const GET = auth(async function GET(req) {
 
   const tokenData = await tokenRes.json();
   const accessToken = tokenData.access_token;
-  const accessTokenExpiresIn = new Date(Date.now() + tokenData.expires_in * 1000);
+  const accessTokenExpiresIn = new Date(
+    Date.now() + tokenData.expires_in * 1000,
+  );
   const refreshToken = tokenData.refresh_token;
 
-  const userRes = await fetch('https://api.x.com/2/users/me?user.fields=profile_image_url,confirmed_email', {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${accessToken}`
-    }
-  });
+  const userRes = await fetch(
+    'https://api.x.com/2/users/me?user.fields=profile_image_url,confirmed_email',
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    },
+  );
 
   if (!userRes.ok) {
     return NextResponse.json({ message: 'Internal server error' });
@@ -73,7 +78,7 @@ export const GET = auth(async function GET(req) {
 
   await prisma.channel.upsert({
     where: {
-      platform: "TWITTER",
+      platform: 'TWITTER',
       platformUserId,
     },
     update: {
@@ -82,7 +87,7 @@ export const GET = auth(async function GET(req) {
       accessTokenExpiresIn,
     },
     create: {
-      platform: "TWITTER",
+      platform: 'TWITTER',
       accessToken,
       refreshToken,
       accessTokenExpiresIn,
@@ -92,9 +97,11 @@ export const GET = auth(async function GET(req) {
       platformUserEmail,
       userId: user.id,
       isActive: true,
-    }
+    },
   });
 
-  const redirectTo = JSON.parse(decodeURIComponent(state)) as { redirect: string };
+  const redirectTo = JSON.parse(decodeURIComponent(state)) as {
+    redirect: string;
+  };
   return NextResponse.redirect(`${BASE_URL}${redirectTo.redirect}`);
 });

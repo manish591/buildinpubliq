@@ -1,5 +1,5 @@
-import { Plus } from 'lucide-react';
 import { format } from 'date-fns';
+import { Plus } from 'lucide-react';
 import { getAllGithubRepositories } from '@/app/data/github/get-all-github-repositories';
 import { getInstalledRepositories } from '@/app/data/github/get-installed-repositories';
 import { GithubSVGIcon } from '@/components/svg-icons/github';

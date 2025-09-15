@@ -1,28 +1,26 @@
-"use server";
+'use server';
 
-import { prisma } from "@buildinpubliq/db";
-import { getCurrentUser } from "@/app/data/users/verify-auth-session";
-import type { GithubRepository } from "./_components/add-repository";
-import type { CreateIdeaData } from "./_components/create-idea-form";
+import { prisma } from '@buildinpubliq/db';
+import { getCurrentUser } from '@/app/data/users/verify-auth-session';
+import type { GithubRepository } from './_components/add-repository';
+import type { CreateIdeaData } from './_components/create-idea-form';
 
 export async function addRepository(selectedRepo: GithubRepository) {
   const user = await getCurrentUser();
 
   if (!user?.id) {
-    throw new Error("Unauthorized");
+    throw new Error('Unauthorized');
   }
 
   if (!selectedRepo) {
-    throw new Error("Repository is required to create project");
+    throw new Error('Repository is required to create project');
   }
 
-  const projectWithRepoExists = await prisma.githubRepository.findFirst(
-    {
-      where: {
-        repoId: String(selectedRepo.id),
-      },
+  const projectWithRepoExists = await prisma.githubRepository.findFirst({
+    where: {
+      repoId: String(selectedRepo.id),
     },
-  );
+  });
 
   if (projectWithRepoExists) {
     throw new Error('project with selected repo already exists');
@@ -47,7 +45,7 @@ export async function createIdea(data: CreateIdeaData) {
   const user = await getCurrentUser();
 
   if (!user?.id) {
-    throw new Error("Unauthorized");
+    throw new Error('Unauthorized');
   }
 
   await prisma.idea.create({
@@ -56,6 +54,6 @@ export async function createIdea(data: CreateIdeaData) {
       content: data.content,
       userId: user.id,
       isArchived: false,
-    }
+    },
   });
 }

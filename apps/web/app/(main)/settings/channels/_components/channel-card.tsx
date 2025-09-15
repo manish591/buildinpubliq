@@ -1,5 +1,6 @@
 import type { Prisma } from '@buildinpubliq/db';
 import { Delete, EllipsisVertical, RefreshCcw } from 'lucide-react';
+import { ConnectChannelButton } from '@/components/general/connect-channel-button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,7 +11,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { AVAILABLE_PLATFORM } from '@/constants';
-import { ConnectChannelButton } from '@/components/general/connect-channel-button';
 import { constructChannelAuthURL } from '@/lib/construct-auth-url';
 import { cn } from '@/lib/utils';
 
