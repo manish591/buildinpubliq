@@ -8,7 +8,7 @@ import { AppLogo } from '@/components/web/app-logo';
 import { constructChannelAuthURL } from '@/lib/construct-auth-url';
 import { getUserDetails } from '@/app/data/users/get-user-details';
 import { redirect } from 'next/navigation';
-import { getAllConnectedChannels } from '@/app/data/channels/get-all-channels';
+import { getAllChannels } from '@/app/data/channels/get-all-channels';
 
 export default async function OnboardingConnectChanneslsPage() {
   const userData = await getUserDetails();
@@ -21,7 +21,7 @@ export default async function OnboardingConnectChanneslsPage() {
     redirect('/dashboard/posts');
   }
 
-  const channelsData = await getAllConnectedChannels();
+  const channelsData = await getAllChannels();
   const connectedPlatform = new Set(
     channelsData.map((channel) => channel.platform),
   );

@@ -19,11 +19,11 @@ export default function PostsPage() {
         </MainHeader.Wrapper>
       </MainHeader>
       <main className="w-full max-w-7xl mx-auto py-6 px-8">
-        <Tabs defaultValue="scheduled" className="w-full">
+        <Tabs defaultValue="drafts" className="w-full">
           <div className="flex items-center justify-between border-b">
             <TabsList>
-              <TabsTrigger value="scheduled">Scheduled (7)</TabsTrigger>
               <TabsTrigger value="drafts">Drafts (6)</TabsTrigger>
+              <TabsTrigger value="scheduled">Scheduled (7)</TabsTrigger>
               <TabsTrigger value="published">Published (2)</TabsTrigger>
             </TabsList>
             <div className="flex items-center gap-2">

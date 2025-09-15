@@ -2,7 +2,7 @@ import 'server-only';
 import { prisma } from '@buildinpubliq/db';
 import { getCurrentUser } from '../users/verify-auth-session';
 
-export async function getAllConnectedChannels() {
+export async function getAllChannels() {
   const user = await getCurrentUser();
 
   if (!user?.id) {
