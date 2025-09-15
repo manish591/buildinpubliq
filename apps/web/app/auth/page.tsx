@@ -46,7 +46,9 @@ export default async function Login() {
               </span>
             </AppLogo.LogoIcon>
             <AppLogo.AppName>
-              <span className="font-normal text-xl">buildinpubliq</span>
+              <span className="font-normal text-xl capitalize">
+                buildinpubliq
+              </span>
             </AppLogo.AppName>
           </AppLogo>
         </div>
@@ -54,9 +56,11 @@ export default async function Login() {
           <Card>
             <CardHeader className="text-center">
               <CardTitle className="text-xl">
-                connect with the community
+                Connect with the community
               </CardTitle>
-              <CardDescription>connect with github or google</CardDescription>
+              <CardDescription className="text-muted-foreground">
+                Join in with your Google or GitHub account.
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <form>
@@ -64,16 +68,16 @@ export default async function Login() {
                   <div className="flex flex-col gap-4">
                     <LoginWithGithub>
                       <GithubSVGIcon />
-                      continue with Github
+                      Continue With Github
                     </LoginWithGithub>
                     <Button variant="outline" className="w-full cursor-pointer">
                       <GoogleSVGIcon />
-                      continue with Google
+                      Continue With Google
                     </Button>
                   </div>
                   <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                     <span className="bg-card text-muted-foreground relative z-10 px-2">
-                      Or continue with
+                      or continue with
                     </span>
                   </div>
                   <div className="grid gap-6">

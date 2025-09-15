@@ -16,6 +16,7 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import { AppSidebarSecondary } from './app-sidebar-secondary';
+import { LogoutButton } from '@/components/general/logout-button';
 
 export async function AppSidebar({
   ...props
@@ -116,9 +117,11 @@ export async function AppSidebar({
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
-                    <LogOut className="w-4 h-4" />
-                    Log out
+                  <DropdownMenuItem asChild>
+                    <LogoutButton className="font-normal h-8 cursor-pointer">
+                      <LogOut className="w-4 h-4" />
+                      Log out
+                    </LogoutButton>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
