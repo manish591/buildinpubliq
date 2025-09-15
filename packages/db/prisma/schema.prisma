@@ -149,7 +149,7 @@ model Channel {
 
 model PostOnChannel {
   channelId       String
-  projectUpdateId String
+  postId          String
 
   postTitle       String
   postContent     String
@@ -158,9 +158,9 @@ model PostOnChannel {
   postStatus      PostStatus
 
   channel Channel @relation(fields: [channelId], references: [id])
-  post Post @relation(fields: [projectUpdateId], references: [id])
+  post Post @relation(fields: [postId], references: [id])
 
-  @@id([channelId, projectUpdateId])
+  @@id([channelId, postId])
 }
 
 enum PostStatus {
