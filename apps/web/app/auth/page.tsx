@@ -83,7 +83,7 @@ export default async function Login() {
                       or continue with
                     </span>
                   </div>
-                  <div className="grid gap-6 hidden">
+                  <div className="gap-6 hidden">
                     <div className="grid gap-3">
                       <Label htmlFor="email">Email</Label>
                       <Input
