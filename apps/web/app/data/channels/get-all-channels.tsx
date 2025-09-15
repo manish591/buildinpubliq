@@ -12,7 +12,6 @@ export async function getAllChannels() {
   const data = await prisma.channel.findMany({
     where: {
       userId: user.id,
-      isActive: true,
     },
   });
 
