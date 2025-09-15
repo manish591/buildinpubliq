@@ -12,9 +12,7 @@ const channelFilterSchema = z.object({
     .optional(),
 });
 
-export async function getAllChannels(
-  options?: Readonly<{ platform?: Prisma.Platform }>,
-) {
+export async function getAllChannels(options?: { platform?: string }) {
   const user = await getCurrentUser();
 
   if (!user?.id) {

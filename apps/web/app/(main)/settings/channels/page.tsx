@@ -1,4 +1,3 @@
-import type { Prisma } from '@buildinpubliq/db';
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
@@ -19,7 +18,7 @@ export default async function ChannelsSettingsPage({
   }
 
   const params = await searchParams;
-  const platform = params.platform as Prisma.Platform | undefined;
+  const platform = params.platform as string | undefined;
 
   return (
     <div>
@@ -35,7 +34,7 @@ export default async function ChannelsSettingsPage({
         </div>
         <Suspense fallback={<p>loading...</p>}>
           <ChannelsGrid
-            filters={{
+            options={{
               platform,
             }}
           />

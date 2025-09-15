@@ -1,13 +1,12 @@
-import type { Prisma } from '@buildinpubliq/db';
 import { Radio } from 'lucide-react';
 import { getAllChannels } from '@/app/data/channels/get-all-channels';
 import { EmptyState } from '@/components/ui/empty-state';
 import { ChannelCard } from './channel-card';
 
 export async function ChannelsGrid({
-  filters,
-}: Readonly<{ filters: { platform?: Prisma.Platform } }>) {
-  const allChannels = await getAllChannels(filters);
+  options,
+}: Readonly<{ options: { platform?: string } }>) {
+  const allChannels = await getAllChannels(options);
 
   return (
     <div>
