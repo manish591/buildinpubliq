@@ -2,7 +2,6 @@ import { getAllChannels } from '@/app/data/channels/get-all-channels';
 import { ChannelCard } from './channel-card';
 import { EmptyState } from '@/components/ui/empty-state';
 import { Radio } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import type { Prisma } from '@buildinpubliq/db';
 
 export async function ChannelsGrid({
@@ -30,10 +29,6 @@ export async function ChannelsGrid({
             <EmptyState.Description>
               Your connected channels will appear here
             </EmptyState.Description>
-            <EmptyState.Actions>
-              <Button>Connect Channels</Button>
-              <Button variant="outline">Learn More</Button>
-            </EmptyState.Actions>
           </EmptyState>
         </div>
       ) : (
