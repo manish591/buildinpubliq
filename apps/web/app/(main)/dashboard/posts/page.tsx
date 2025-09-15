@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import { MainHeader } from '@/app/(main)/_components/main-header';
 import { Button } from '@/components/ui/button';
 import { CalendarCheck, FileCheck, FilePen, Plus } from 'lucide-react';
@@ -5,8 +6,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PostsChannelFilterDropdown } from './_components/posts-channel-filter-dropdown';
 import { PostsTimezonesDropdown } from './_components/posts-timezones-dropdown';
 import { EmptyState } from '@/components/ui/empty-state';
+import { getUserDetails } from '@/app/data/users/get-user-details';
 
-export default function PostsPage() {
+export default async function PostsPage() {
+  const userData = await getUserDetails();
+
+  if (!userData) {
+    redirect('/auth');
+  }
+
   return (
     <div>
       <MainHeader>
