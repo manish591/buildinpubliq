@@ -12,7 +12,7 @@ export function FinishOnboardingButton({
   async function handleFinishOnboarding() {
     try {
       await finishOnboarding();
-      router.push('/dashboard');
+      router.push('/dashboard/posts');
     } catch (err) {
       console.log('Failed to finish onboarding', err);
     }

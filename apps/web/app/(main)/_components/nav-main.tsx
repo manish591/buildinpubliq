@@ -1,4 +1,4 @@
-import { Layers, LayoutPanelLeft, Lightbulb } from 'lucide-react';
+import { Layers, Lightbulb } from 'lucide-react';
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -9,21 +9,14 @@ import {
 
 const items = [
   {
-    title: 'Overview',
-    url: '/dashboard',
-    icon: LayoutPanelLeft,
-    isActive: true,
+    title: 'Posts',
+    url: '/dashboard/posts',
+    icon: Layers,
   },
   {
     title: 'Ideas',
     url: '/dashboard/ideas',
     icon: Lightbulb,
-    isActive: true,
-  },
-  {
-    title: 'Posts',
-    url: '/dashboard/posts',
-    icon: Layers,
   },
 ];
 

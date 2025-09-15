@@ -17,7 +17,7 @@ export default async function OnboardingInstallGithubAppPage() {
   }
 
   if (userData.isOnboardingCompleted) {
-    redirect('/dashboard');
+    redirect('/dashboard/posts');
   }
 
   const isGithubAppInstalled = await hasGithubIntegration();

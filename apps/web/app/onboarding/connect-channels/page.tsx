@@ -18,7 +18,7 @@ export default async function OnboardingConnectChanneslsPage() {
   }
 
   if (userData.isOnboardingCompleted) {
-    redirect('/dashboard');
+    redirect('/dashboard/posts');
   }
 
   const channelsData = await getAllConnectedChannels();

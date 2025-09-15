@@ -1,3 +1,4 @@
+import { ChevronDown, Globe2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -7,15 +8,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { ChevronDown, Radio } from 'lucide-react';
 
-export function PostsChannelFilterDropdown() {
+export function PostsTimezonesDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost">
-          <Radio />
-          Channels
+          <Globe2 />
+          Select Timezone
           <ChevronDown className="text-foreground/70" />
         </Button>
       </DropdownMenuTrigger>

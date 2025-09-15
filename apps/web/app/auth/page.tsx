@@ -27,7 +27,7 @@ export default async function Login() {
   }
 
   if (userData && isOnboardingCompleted) {
-    redirect('/dashboard');
+    redirect('/dashboard/posts');
   }
 
   return (

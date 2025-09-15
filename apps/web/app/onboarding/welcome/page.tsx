@@ -15,7 +15,7 @@ export default async function OnboardingWelcomePage() {
   }
 
   if (userData.isOnboardingCompleted) {
-    redirect('/dashboard');
+    redirect('/dashboard/posts');
   }
 
   return (
