@@ -59,7 +59,7 @@ export default async function Login() {
                 Connect with the community
               </CardTitle>
               <CardDescription className="text-muted-foreground">
-                Join in with your Google or GitHub account.
+                Join in with your GitHub account.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -70,17 +70,20 @@ export default async function Login() {
                       <GithubSVGIcon />
                       Continue With Github
                     </LoginWithGithub>
-                    <Button variant="outline" className="w-full cursor-pointer">
+                    <Button
+                      variant="outline"
+                      className="hidden w-full cursor-pointer"
+                    >
                       <GoogleSVGIcon />
                       Continue With Google
                     </Button>
                   </div>
-                  <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
+                  <div className="hidden after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                     <span className="bg-card text-muted-foreground relative z-10 px-2">
                       or continue with
                     </span>
                   </div>
-                  <div className="grid gap-6">
+                  <div className="grid gap-6 hidden">
                     <div className="grid gap-3">
                       <Label htmlFor="email">Email</Label>
                       <Input
@@ -98,7 +101,7 @@ export default async function Login() {
             </CardContent>
           </Card>
           <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-            By clicking continue, you agree to our{' '}
+            By continuing, you agree to our{' '}
             <Link href="/terms">Terms of Service</Link> and{' '}
             <Link href="/privacy">Privacy Policy</Link>.
           </div>
