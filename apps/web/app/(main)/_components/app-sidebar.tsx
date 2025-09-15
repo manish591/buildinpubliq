@@ -55,7 +55,7 @@ export async function AppSidebar({
             </div>
             <SidebarMenu>
               <DropdownMenu>
-                <DropdownMenuTrigger className="w-max mx-auto">
+                <DropdownMenuTrigger className="w-max mx-auto cursor-pointer">
                   <Avatar className="h-8 w-8 rounded-full">
                     <AvatarImage
                       src={user.image ?? ''}
