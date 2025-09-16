@@ -151,7 +151,6 @@ model PostOnChannel {
   channelId       String
   postId          String
 
-  postTitle       String
   postContent     String
   postScheduledAt DateTime?
   postPublishedAt DateTime?
