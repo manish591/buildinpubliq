@@ -19,7 +19,7 @@ export async function getAllChannels(options?: { platform?: string }) {
     throw new Error('Unauthenticated');
   }
 
-  const isValidated = await channelFilterSchema.safeParseAsync(options);
+  const isValidated = await channelFilterSchema.safeParseAsync(options ?? {});
 
   if (isValidated.error) {
     throw new BuildinpubliqError(400, 'Bad request');

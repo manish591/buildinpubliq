@@ -7,6 +7,7 @@ import { PostsContainer } from './_components/posts-container';
 import { PostsDisplayDropdown } from './_components/posts-display-dropdown';
 import { PostsFilterDropdown } from './_components/posts-filter-dropdown';
 import { PostsSearchBox } from './_components/posts-search-box';
+import { getAllChannels } from '@/app/data/channels/get-all-channels';
 
 export default async function PostsPage({
   searchParams,
@@ -22,12 +23,14 @@ export default async function PostsPage({
   const params = await searchParams;
   const tab = params.tab as string | undefined;
 
+  const channels = await getAllChannels();
+
   return (
     <div>
       <MainHeader>
         <MainHeader.Wrapper>
           <MainHeader.Title>Posts</MainHeader.Title>
-          <CreatePostModal />
+          <CreatePostModal channels={channels} />
         </MainHeader.Wrapper>
       </MainHeader>
       <main className="w-full max-w-7xl mx-auto py-6 px-8">

@@ -1,5 +1,7 @@
+'use client';
+
 import { ChevronRight, Plus } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import type { Prisma } from '@buildinpubliq/db';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -9,11 +11,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { LinkedinSVGIcon } from '@/components/svg-icons/linkedin';
 import { Textarea } from '@/components/ui/textarea';
 import { PostDatetimePicker } from './post-datetime-picker';
+import { ChannelsAvatarCombo } from './channels-avatar';
 
-export function CreatePostModal() {
+export function CreatePostModal({
+  channels,
+}: Readonly<{ channels: Prisma.Channel[] }>) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -29,39 +33,47 @@ export function CreatePostModal() {
             <span className="text-foreground">New Post</span>
           </DialogTitle>
         </DialogHeader>
-        <div className="flex items-center gap-4 px-6 bg-background py-4">
-          <div className="relative w-max">
-            <Avatar className="w-12 h-12">
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <div className="absolute size-[22px] bg-background right-0 bottom-[0%] rounded-full flex items-center justify-center">
-              <LinkedinSVGIcon className="size-[18px] p-0.5 rounded-full text-white bg-[#0A66C2]" />
+        {channels.length === 0 ? (
+          <div className="min-h-[300px] px-6 py-4">
+            <div className="h-full flex items-center justify-center border rounded-md">
+              <div className="text-center">
+                <h3 className="text-lg font-medium">No channels connected</h3>
+                <p className="text-muted-foreground">
+                  Connect a channel to start sharing your updates with the world
+                </p>
+              </div>
             </div>
           </div>
-          <Avatar className="w-10 h-10">
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-        </div>
-        <div className="max-h-[300px] overflow-y-auto px-6 pt-2 pb-4">
-          <Textarea
-            placeholder="Enter post content"
-            className="min-h-[200px] focus-visible:ring-0 focus-visible:ring-transparent"
-          />
-        </div>
+        ) : (
+          <>
+            <ChannelsAvatarCombo channels={channels} />
+            <div className="max-h-[300px] overflow-y-auto px-6 pt-2 pb-4">
+              <Textarea
+                placeholder="Enter post content"
+                className="min-h-[200px] focus-visible:ring-0 focus-visible:ring-transparent"
+              />
+            </div>
+          </>
+        )}
         <DialogFooter className="px-6 py-4 bg-muted/80 rounded-b-xl gap-0 sm:justify-between border-t">
           <div className="flex flex-col">
             <p className="text-xs font-medium text-muted-foreground/70 p-0 m-0">
               When To Post
             </p>
-            <PostDatetimePicker />
+            <PostDatetimePicker disabled={channels.length === 0} />
           </div>
           <div className="flex items-center gap-4">
-            <Button variant="outline" size="sm" className="cursor-pointer">
+            <Button
+              variant="outline"
+              size="sm"
+              className="cursor-pointer"
+              disabled={channels.length === 0}
+            >
               Save As Drafts
             </Button>
-            <Button size="sm">Schedule Posts</Button>
+            <Button size="sm" disabled={channels.length === 0}>
+              Schedule Posts
+            </Button>
           </div>
         </DialogFooter>
       </DialogContent>

@@ -12,14 +12,21 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 
-export function PostDatetimePicker() {
+export function PostDatetimePicker({
+  disabled,
+}: Readonly<{ disabled?: boolean }>) {
   const [_open, setOpen] = React.useState(false);
   const [date, setDate] = React.useState<Date | undefined>(undefined);
 
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button size="sm" variant="ghost" className="h-6 px-2 -ml-2 gap-1">
+        <Button
+          size="sm"
+          variant="ghost"
+          className="h-6 px-2 -ml-2 gap-1"
+          disabled={disabled}
+        >
           Set Date & Time <ChevronDown className="mt-[1px]" />
         </Button>
       </PopoverTrigger>
