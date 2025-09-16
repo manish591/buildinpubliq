@@ -1,12 +1,11 @@
-import { Plus } from 'lucide-react';
 import { redirect } from 'next/navigation';
+import { Suspense } from 'react';
 import { MainHeader } from '@/app/(main)/_components/main-header';
 import { getUserDetails } from '@/app/data/users/get-user-details';
-import { Button } from '@/components/ui/button';
 import { PostsChannelFilterDropdown } from './_components/posts-channel-filter-dropdown';
 import { PostsTimezonesDropdown } from './_components/posts-timezones-dropdown';
 import { PostsTabList } from './_components/posts-tablist';
-import { Suspense } from 'react';
+import { CreatePostModal } from './_components/create-post-modal';
 import { PostsTabcontent } from './_components/posts-tabcontent';
 
 export default async function PostsPage({
@@ -28,10 +27,7 @@ export default async function PostsPage({
       <MainHeader>
         <MainHeader.Wrapper>
           <MainHeader.Title>Posts</MainHeader.Title>
-          <Button>
-            <Plus />
-            Create Post
-          </Button>
+          <CreatePostModal />
         </MainHeader.Wrapper>
       </MainHeader>
       <main className="w-full max-w-7xl mx-auto py-6 px-8">
