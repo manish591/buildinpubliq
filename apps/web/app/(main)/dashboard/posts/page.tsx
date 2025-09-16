@@ -2,11 +2,11 @@ import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import { MainHeader } from '@/app/(main)/_components/main-header';
 import { getUserDetails } from '@/app/data/users/get-user-details';
-import { PostsChannelFilterDropdown } from './_components/posts-channel-filter-dropdown';
-import { PostsTimezonesDropdown } from './_components/posts-timezones-dropdown';
-import { PostsTabList } from './_components/posts-tablist';
 import { CreatePostModal } from './_components/create-post-modal';
-import { PostsTabcontent } from './_components/posts-tabcontent';
+import { PostsContainer } from './_components/posts-container';
+import { PostsDisplayDropdown } from './_components/posts-display-dropdown';
+import { PostsFilterDropdown } from './_components/posts-filter-dropdown';
+import { PostsSearchBox } from './_components/posts-search-box';
 
 export default async function PostsPage({
   searchParams,
@@ -31,15 +31,17 @@ export default async function PostsPage({
         </MainHeader.Wrapper>
       </MainHeader>
       <main className="w-full max-w-7xl mx-auto py-6 px-8">
-        <div className="flex items-center justify-between border-b">
-          <PostsTabList />
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <PostsChannelFilterDropdown />
-            <PostsTimezonesDropdown />
+            <PostsFilterDropdown />
+            <PostsDisplayDropdown />
+          </div>
+          <div className="flex items-center gap-2">
+            <PostsSearchBox />
           </div>
         </div>
         <Suspense fallback={<p>Loading...</p>}>
-          <PostsTabcontent tab={tab ?? 'draft'} />
+          <PostsContainer tab={tab ?? 'draft'} />
         </Suspense>
       </main>
     </div>

@@ -1,13 +1,14 @@
 import { File } from 'lucide-react';
 import { getAllPosts } from '@/app/data/posts/get-all-posts';
 import { EmptyState } from '@/components/ui/empty-state';
+import { PostCard } from './post-card';
 
-export async function PostsTabcontent({ tab }: Readonly<{ tab: string }>) {
+export async function PostsContainer({ tab }: Readonly<{ tab: string }>) {
   const postsData = await getAllPosts({ status: tab });
 
   return (
     <div className="mt-6">
-      {postsData.length === 0 ? (
+      {postsData.length > 0 ? (
         <div className="border min-h-[500px] flex justify-center items-center relative overflow-hidden rounded-xl">
           <EmptyState>
             <div>
@@ -28,7 +29,9 @@ export async function PostsTabcontent({ tab }: Readonly<{ tab: string }>) {
           </EmptyState>
         </div>
       ) : (
-        <div>mt posts</div>
+        <div>
+          <PostCard />
+        </div>
       )}
     </div>
   );
