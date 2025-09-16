@@ -22,7 +22,7 @@ export function PostsTabList() {
         value="draft"
         variant="ghost"
         className={cn(
-          'rounded-none border-b border-transparent px-4 hover:bg-transparent cursor-pointer',
+          'h-12 rounded-none border-b border-transparent px-4 hover:bg-transparent cursor-pointer',
           tab === 'draft' && 'border-primary',
         )}
         onClick={() => {
@@ -35,7 +35,7 @@ export function PostsTabList() {
         value="scheduled"
         variant="ghost"
         className={cn(
-          'rounded-none border-b border-transparent px-4 hover:bg-transparent cursor-pointer',
+          'h-12 rounded-none border-b border-transparent px-4 hover:bg-transparent cursor-pointer',
           tab === 'scheduled' && 'border-primary',
         )}
         onClick={() => {
@@ -48,7 +48,7 @@ export function PostsTabList() {
         value="published"
         variant="ghost"
         className={cn(
-          'rounded-none border-b border-transparent px-4 hover:bg-transparent cursor-pointer',
+          'h-12 rounded-none border-b border-transparent px-4 hover:bg-transparent cursor-pointer',
           tab === 'published' && 'border-primary',
         )}
         onClick={() => {

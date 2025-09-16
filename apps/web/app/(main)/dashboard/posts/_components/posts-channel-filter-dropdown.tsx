@@ -13,7 +13,7 @@ export function PostsChannelFilterDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost">
+        <Button variant="ghost" size="sm">
           <Radio />
           Channels
           <ChevronDown className="text-foreground/70" />

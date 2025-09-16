@@ -13,7 +13,7 @@ export function PostsTimezonesDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost">
+        <Button variant="ghost" size="sm">
           <Globe2 />
           Select Timezone
           <ChevronDown className="text-foreground/70" />
