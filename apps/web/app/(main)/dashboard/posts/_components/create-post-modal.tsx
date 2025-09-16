@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronRight, Plus } from 'lucide-react';
+import { ChevronRight, Plus } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -11,11 +11,6 @@ import {
 } from '@/components/ui/dialog';
 import { LinkedinSVGIcon } from '@/components/svg-icons/linkedin';
 import { Textarea } from '@/components/ui/textarea';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 import { PostDatetimePicker } from './post-datetime-picker';
 
 export function CreatePostModal() {
