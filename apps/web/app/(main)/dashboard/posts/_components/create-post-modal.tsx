@@ -11,12 +11,18 @@ import {
 } from '@/components/ui/dialog';
 import { LinkedinSVGIcon } from '@/components/svg-icons/linkedin';
 import { Textarea } from '@/components/ui/textarea';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { PostDatetimePicker } from './post-datetime-picker';
 
 export function CreatePostModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="gap-2">
+        <Button className="gap-2 cursor-pointer">
           <Plus className="h-4 w-4" />
           Create Post
         </Button>
@@ -49,13 +55,19 @@ export function CreatePostModal() {
             className="min-h-[200px] focus-visible:ring-0 focus-visible:ring-transparent"
           />
         </div>
-        <DialogFooter className="px-4 py-4 bg-muted/80 rounded-b-xl gap-4 border-t">
-          <Button variant="outline" size="sm">
-            Save As Drafts
-          </Button>
-          <Button size="sm">
-            Schedule Posts <ChevronDown />
-          </Button>
+        <DialogFooter className="px-6 py-4 bg-muted/80 rounded-b-xl gap-0 sm:justify-between border-t">
+          <div className="flex flex-col">
+            <p className="text-xs font-medium text-muted-foreground/70 p-0 m-0">
+              When To Post
+            </p>
+            <PostDatetimePicker />
+          </div>
+          <div className="flex items-center gap-4">
+            <Button variant="outline" size="sm" className="cursor-pointer">
+              Save As Drafts
+            </Button>
+            <Button size="sm">Schedule Posts</Button>
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>
