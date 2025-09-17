@@ -3,8 +3,11 @@ import { getAllPosts } from '@/app/data/posts/get-all-posts';
 import { EmptyState } from '@/components/ui/empty-state';
 import { PostCard } from './post-card';
 
-export async function PostsContainer({ tab }: Readonly<{ tab: string }>) {
-  const postsData = await getAllPosts({ status: tab });
+export async function PostsContainer({
+  status,
+  channel,
+}: Readonly<{ status: string; channel?: string }>) {
+  const postsData = await getAllPosts({ status, channel });
 
   return (
     <div className="mt-6">
@@ -22,9 +25,9 @@ export async function PostsContainer({ tab }: Readonly<{ tab: string }>) {
                 <File className="text-foreground/70" />
               </EmptyState.Mockup>
             </div>
-            <EmptyState.Title>No {tab} posts</EmptyState.Title>
+            <EmptyState.Title>No posts found</EmptyState.Title>
             <EmptyState.Description>
-              Your {tab} post appear here
+              Your post will appear here
             </EmptyState.Description>
           </EmptyState>
         </div>

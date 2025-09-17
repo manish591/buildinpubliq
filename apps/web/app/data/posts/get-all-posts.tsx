@@ -5,7 +5,7 @@ import { BuildinpubliqError } from '@/lib/buildinpubliq-error';
 import { getCurrentUser } from '../users/verify-auth-session';
 
 const schema = z.object({
-  platform: z
+  channel: z
     .string()
     .transform((val) => val.toUpperCase())
     .pipe(z.nativeEnum(Prisma.$Enums.Platform))
@@ -18,7 +18,7 @@ const schema = z.object({
 });
 
 export async function getAllPosts(options?: {
-  platform?: string;
+  channel?: string;
   status?: string;
 }) {
   const user = await getCurrentUser();
@@ -35,7 +35,7 @@ export async function getAllPosts(options?: {
     throw new BuildinpubliqError(400, 'Bad request');
   }
 
-  const { status, platform } = validationResult.data;
+  const { status, channel } = validationResult.data;
 
   const data = await prisma.post.findMany({
     where: {
@@ -43,9 +43,9 @@ export async function getAllPosts(options?: {
       ...(status && {
         status,
       }),
-      ...(platform && {
+      ...(channel && {
         channel: {
-          platform,
+          platform: channel,
         },
       }),
     },

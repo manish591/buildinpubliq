@@ -21,7 +21,8 @@ export default async function PostsPage({
   }
 
   const params = await searchParams;
-  const tab = params.tab as string | undefined;
+  const status = params.status as string | undefined;
+  const channel = params.channel as string | undefined;
 
   const channels = await getAllChannels();
 
@@ -44,7 +45,7 @@ export default async function PostsPage({
           </div>
         </div>
         <Suspense fallback={<p>Loading...</p>}>
-          <PostsContainer tab={tab ?? 'draft'} />
+          <PostsContainer status={status ?? 'draft'} channel={channel} />
         </Suspense>
       </main>
     </div>
