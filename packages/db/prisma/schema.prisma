@@ -119,9 +119,14 @@ model Idea {
 model Post {
   id                String    @id @default(cuid())
   userId            String
-  postOnChannel     PostOnChannel[]
+  channelId         String
+  content           String
+  scheduledAt       DateTime?
+  publishedAt       DateTime?
+  status            PostStatus
 
   user  User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  channel Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -139,27 +144,12 @@ model Channel {
   platformUserEmail     String?
   userId                String
   isActive              Boolean
-  postOnChannel         PostOnChannel[]
+  post                  Post[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-model PostOnChannel {
-  channelId       String
-  postId          String
-
-  postContent     String
-  postScheduledAt DateTime?
-  postPublishedAt DateTime?
-  postStatus      PostStatus
-
-  channel Channel @relation(fields: [channelId], references: [id])
-  post Post @relation(fields: [postId], references: [id])
-
-  @@id([channelId, postId])
 }
 
 enum PostStatus {
