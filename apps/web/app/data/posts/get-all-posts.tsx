@@ -27,31 +27,30 @@ export async function getAllPosts(options?: {
     throw new BuildinpubliqError(401, 'Unauthenticated');
   }
 
+  const userId = user.id;
+
   const validationResult = await schema.safeParseAsync(options);
 
   if (validationResult.error) {
     throw new BuildinpubliqError(400, 'Bad request');
   }
 
-  const validatedData = validationResult.data;
+  const { status, platform } = validationResult.data;
 
   const data = await prisma.post.findMany({
     where: {
-      userId: user.id,
-      ...(validatedData.platform && {
-        postOnChannel: {
-          some: {
-            postStatus: validatedData.status,
-            channel: {
-              platform: validatedData.platform,
-            },
-          },
+      userId,
+      ...(status && {
+        status,
+      }),
+      ...(platform && {
+        channel: {
+          platform,
         },
       }),
     },
     include: {
-      _count: true,
-      postOnChannel: true,
+      channel: true,
     },
   });
 

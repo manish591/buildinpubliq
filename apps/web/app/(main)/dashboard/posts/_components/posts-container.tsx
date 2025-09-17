@@ -8,7 +8,7 @@ export async function PostsContainer({ tab }: Readonly<{ tab: string }>) {
 
   return (
     <div className="mt-6">
-      {postsData.length > 0 ? (
+      {postsData.length === 0 ? (
         <div className="border min-h-[500px] flex justify-center items-center relative overflow-hidden rounded-xl">
           <EmptyState>
             <div>
@@ -29,8 +29,12 @@ export async function PostsContainer({ tab }: Readonly<{ tab: string }>) {
           </EmptyState>
         </div>
       ) : (
-        <div>
-          <PostCard />
+        <div className="space-y-4">
+          {postsData.map((post) => {
+            return (
+              <PostCard key={post.id} post={post} channel={post.channel} />
+            );
+          })}
         </div>
       )}
     </div>

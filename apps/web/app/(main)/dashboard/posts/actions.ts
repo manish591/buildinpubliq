@@ -43,31 +43,25 @@ export async function createPost(data: CreatePostData) {
   const validationResult = await schema.safeParseAsync(data);
 
   if (validationResult.error) {
-    console.log("the error", validationResult.error, data);
     throw new BuildinpubliqError(400, 'Bad request');
   }
 
   const { channelsContent, scheduledAt, selectedChannels, status } =
     validationResult.data;
 
-  const createPostsPromiseArr = selectedChannels.map((channelId) => {
-    const postContent = channelsContent.find(
-      (item) => item.channelId === channelId,
-    )?.content as string;
-    return prisma.post.create({
-      data: {
-        userId,
-        postOnChannel: {
-          create: {
-            channelId,
-            postContent,
-            postStatus: status,
-            postScheduledAt: scheduledAt,
-          },
-        },
-      },
-    });
-  });
+  await prisma.post.createMany({
+    data: selectedChannels.map(channelId => {
+      const content = channelsContent.find(
+        (item) => item.channelId === channelId,
+      )?.content as string;
 
-  await Promise.all(createPostsPromiseArr);
+      return {
+        userId,
+        channelId,
+        status,
+        content,
+        scheduledAt
+      }
+    })
+  });
 }
