@@ -6,8 +6,9 @@ import { PostCard } from './post-card';
 export async function PostsContainer({
   status,
   channel,
-}: Readonly<{ status: string; channel?: string }>) {
-  const postsData = await getAllPosts({ status, channel });
+  query,
+}: Readonly<{ status?: string; channel?: string; query?: string }>) {
+  const postsData = await getAllPosts({ status, channel, query });
 
   return (
     <div className="mt-6">

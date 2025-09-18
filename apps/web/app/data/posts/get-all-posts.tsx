@@ -15,11 +15,13 @@ const schema = z.object({
     .transform((val) => val.toUpperCase())
     .pipe(z.nativeEnum(Prisma.$Enums.PostStatus))
     .optional(),
+  query: z.string().optional(),
 });
 
 export async function getAllPosts(options?: {
   channel?: string;
   status?: string;
+  query?: string;
 }) {
   const user = await getCurrentUser();
 
@@ -35,7 +37,7 @@ export async function getAllPosts(options?: {
     throw new BuildinpubliqError(400, 'Bad request');
   }
 
-  const { status, channel } = validationResult.data;
+  const { status, channel, query } = validationResult.data;
 
   const data = await prisma.post.findMany({
     where: {
@@ -46,6 +48,11 @@ export async function getAllPosts(options?: {
       ...(channel && {
         channel: {
           platform: channel,
+        },
+      }),
+      ...(query && {
+        content: {
+          contains: query,
         },
       }),
     },

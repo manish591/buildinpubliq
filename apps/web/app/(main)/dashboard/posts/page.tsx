@@ -21,6 +21,7 @@ export default async function PostsPage({
   const params = await searchParams;
   const status = params.status as string | undefined;
   const channel = params.channel as string | undefined;
+  const query = params.query as string | undefined;
 
   const channels = await getAllChannels();
 
@@ -35,7 +36,7 @@ export default async function PostsPage({
       <main className="w-full max-w-7xl mx-auto py-6 px-8">
         <PostsActionBar />
         <Suspense fallback={<p>Loading...</p>}>
-          <PostsContainer status={status ?? 'draft'} channel={channel} />
+          <PostsContainer status={status} channel={channel} query={query} />
         </Suspense>
       </main>
     </div>
