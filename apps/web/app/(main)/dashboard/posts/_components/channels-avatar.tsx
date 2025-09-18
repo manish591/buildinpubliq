@@ -18,40 +18,43 @@ export function ChannelsAvatar({
   );
   const isChannelSelected = selectedChannels.includes(channel.id);
 
+  const toggleChannel = () =>
+    setSelectedChannels((prev) =>
+      prev.includes(channel.id)
+        ? prev.filter((id) => id !== channel.id)
+        : [...prev, channel.id],
+    );
+
+  const PlatformIcon = platformData?.icon as
+    | React.ComponentType<React.SVGProps<SVGSVGElement>>
+    | undefined;
+
   return (
     <Button
+      type="button"
+      aria-pressed={isChannelSelected}
+      onClick={toggleChannel}
       className={cn(
-        'relative w-max',
-        'bg-transparent h-12 w-12 border-0 shadow-none p-0 rounded-full hover:bg-transparent cursor-pointer',
+        'relative p-0 w-12 h-12 rounded-full bg-transparent border-0 shadow-none',
+        'flex items-center justify-center',
       )}
-      onClick={() => {
-        setSelectedChannels((prevChannels) => {
-          if (prevChannels.includes(channel.id)) {
-            return prevChannels.filter((item) => item !== channel.id);
-          }
-          return [...prevChannels, channel.id];
-        });
-      }}
     >
       <Avatar className={cn('w-12 h-12', !isChannelSelected && 'saturate-0')}>
         <AvatarImage src={channel.platformUserImg ?? ''} />
         <AvatarFallback>{channel.platformUserName?.at(0)}</AvatarFallback>
       </Avatar>
-      <div
-        className={cn(
-          'absolute size-[22px] bg-background right-0 bottom-[0%] rounded-full flex items-center justify-center',
-        )}
-      >
-        {platformData && (
-          <platformData.icon
+      {PlatformIcon && (
+        <span className="absolute size-[22px] bg-background right-0 bottom-0 rounded-full flex items-center justify-center">
+          <PlatformIcon
             className={cn(
               'size-[18px] p-0.5 rounded-full',
-              platformData.iconBGColor,
+              platformData?.iconBGColor,
               !isChannelSelected && 'saturate-0',
             )}
+            aria-hidden
           />
-        )}
-      </div>
+        </span>
+      )}
     </Button>
   );
 }

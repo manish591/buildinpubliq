@@ -4,7 +4,6 @@ import { X } from 'lucide-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { PostsDisplayDropdown } from './posts-display-dropdown';
 import { PostsFilterDropdown } from './posts-filter-dropdown';
 import { PostsSearchBox } from './posts-search-box';
 
@@ -22,7 +21,6 @@ export function PostsActionBar() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <PostsFilterDropdown />
-          <PostsDisplayDropdown />
         </div>
         <div className="flex items-center gap-2">
           <PostsSearchBox />

@@ -59,6 +59,9 @@ export async function getAllPosts(options?: {
     include: {
       channel: true,
     },
+    orderBy: {
+      updatedAt: 'desc',
+    },
   });
 
   return data;
