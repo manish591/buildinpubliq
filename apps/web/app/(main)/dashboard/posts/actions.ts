@@ -89,3 +89,17 @@ export async function editPost(data: {
     },
   });
 }
+
+export async function deletePost(postId: string) {
+  const user = await getCurrentUser();
+
+  if (!user?.id) {
+    throw new BuildinpubliqError(401, 'Unauthenticated');
+  }
+
+  await prisma.post.delete({
+    where: {
+      id: postId
+    }
+  });
+}

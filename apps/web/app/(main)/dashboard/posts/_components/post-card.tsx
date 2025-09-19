@@ -21,10 +21,8 @@ import { useState } from 'react';
 import { PostPreviewModal } from './post-preview-modal';
 import { PostActionDropdown } from './post-action-dropdown';
 import { EditPostModal } from './edit-post-modal';
-import {
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-} from '@/components/ui/dropdown-menu';
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
+import { useDeleteModal } from './delete-post-modal';
 
 const POST_STATUS_DATA = {
   [Prisma.PostStatus.DRAFT]: {
@@ -59,6 +57,10 @@ export function PostCard({
 }: Readonly<{ post: Prisma.Post; channel: Prisma.Channel }>) {
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
   const [isEditPostModalOpen, setIsEditPostModalOpen] = useState(false);
+  const { DeletePostModal, setShowDeletePostModal } = useDeleteModal({
+    postId: post.id,
+  });
+
   const platformData = AVAILABLE_PLATFORM.find(
     (p) => p.name === channel.platform,
   );
@@ -138,7 +140,7 @@ export function PostCard({
                     <SquarePen className="size-4" /> <span>Edit</span>
                   </DropdownMenuItem>
                 )}
-                <DropdownMenuItem className="flex gap-2 items-center">
+                <DropdownMenuItem className="hidden gap-2 items-center">
                   <CopyPlus className="size-4" /> <span>Duplicate</span>
                 </DropdownMenuItem>
                 {post.status === Prisma.PostStatus.PUBLISHED && (
@@ -151,8 +153,12 @@ export function PostCard({
                     </DropdownMenuItem>
                   </>
                 )}
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="flex gap-2 items-center text-destructive!">
+                <DropdownMenuItem
+                  className="flex gap-2 items-center text-destructive!"
+                  onClick={() => {
+                    setShowDeletePostModal(true);
+                  }}
+                >
                   <Delete className="size-4" /> <span>Delete</span>
                 </DropdownMenuItem>
               </PostActionDropdown>
@@ -172,6 +178,7 @@ export function PostCard({
         isEditPostModalOpen={isEditPostModalOpen}
         setIsEditPostModalOpen={setIsEditPostModalOpen}
       />
+      <DeletePostModal />
     </div>
   );
 }
