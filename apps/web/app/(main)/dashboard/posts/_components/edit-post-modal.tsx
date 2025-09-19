@@ -1,9 +1,9 @@
 'use client';
 
 import { Prisma } from '@buildinpubliq/db';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, CircleAlert } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -15,11 +15,8 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { AVAILABLE_PLATFORM } from '@/constants';
 import { cn } from '@/lib/utils';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { PostSchedulerModal } from './post-scheduler-modal';
+import { editPost } from '../actions';
 
 export function EditPostModal({
   post,
@@ -36,8 +33,8 @@ export function EditPostModal({
   const [scheduledAt, setScheduledAt] = useState<Date | null>(post.scheduledAt);
   const [content, setContent] = useState(post.content);
   const [errors, setErrors] = useState({
-    content: '',
-    scheduledAt: '',
+    content: false,
+    scheduledAt: false,
   });
 
   const platformData = AVAILABLE_PLATFORM.find(
@@ -48,55 +45,33 @@ export function EditPostModal({
     | React.ComponentType<React.SVGProps<SVGSVGElement>>
     | undefined;
 
-  const isErrors = Object.values(errors).some((err) => err !== '');
+  const isError = Object.values(errors).some((err) => err);
 
-  const isContentEmpty = content === '';
-  const isScheduledAtFalsy = !scheduledAt;
-  const hasContentChanged = content !== post.content;
-  const hasScheduledAtChanged = scheduledAt !== post.scheduledAt;
+  async function handleEditPost(status: Prisma.PostStatus) {
+    if (scheduledAt && scheduledAt < new Date()) {
+      setErrors((prev) => ({ ...prev, scheduledAt: true }));
+      return;
+    }
 
-  const buttonConfigs = {
-    DRAFT: {
-      primary: {
-        label: 'Schedule Post',
-      },
-      secondary: {
-        label: 'Save Draft',
-      },
-    },
-    SCHEDULED: {
-      primary: {
-        label: 'Save',
-        disabled: true,
-      },
-      secondary: {
-        label: 'Move to Draft',
-        disabled: true,
-      },
-    },
-    FAILED: {
-      primary: {
-        label: 'Move to Draft',
-        disabled: true,
-      },
-      secondary: {
-        label: 'Schedule',
-        disabled: true,
-      },
-    },
-    PUBLISHED: null,
-  };
-
-  const config = buttonConfigs[post.status];
-
-  async function handleEditPost() {
     try {
+      await editPost({
+        id: post.id,
+        content,
+        status,
+        scheduledAt,
+      });
       router.refresh();
-      console.log('this works');
+      setIsEditPostModalOpen(false);
     } catch (err) {
       console.log('Failed to create posts', err);
     }
   }
+
+  useEffect(() => {
+    if (scheduledAt && scheduledAt > new Date()) {
+      setErrors((prev) => ({ ...prev, scheduledAt: false }));
+    }
+  }, [scheduledAt]);
 
   return (
     <Dialog
@@ -116,6 +91,14 @@ export function EditPostModal({
             <span className="text-foreground">Edit Post</span>
           </DialogTitle>
         </DialogHeader>
+        {errors.scheduledAt && (
+          <div className="px-6">
+            <div className="flex items-center gap-2 py-2 px-4 text-destructive text-sm border border-destructive rounded-md">
+              <CircleAlert className="size-4" />
+              <span>It seems like your selected date is in the past</span>
+            </div>
+          </div>
+        )}
         <div className="max-h-[300px] overflow-y-auto px-6 pt-2 pb-4">
           <div className="flex gap-2 items-start">
             <div className="mt-2 flex items-center gap-4 bg-background">
@@ -137,10 +120,10 @@ export function EditPostModal({
                 if (!value) {
                   setErrors((prev) => ({
                     ...prev,
-                    content: 'You gotta write something first!',
+                    content: true,
                   }));
                 } else {
-                  setErrors((prev) => ({ ...prev, content: '' }));
+                  setErrors((prev) => ({ ...prev, content: false }));
                 }
               }}
               placeholder="Enter post content"
@@ -153,37 +136,46 @@ export function EditPostModal({
             <p className="text-xs font-medium text-muted-foreground/70 p-0 m-0">
               When To Post
             </p>
-            {/* <PostDatetimePicker
+            <PostSchedulerModal
               scheduledAt={scheduledAt}
               setScheduledAt={setScheduledAt}
-            /> */}
+            />
           </div>
           <div className="flex items-center gap-4">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="cursor-pointer"
-                  onClick={handleEditPost}
-                  // disabled={isErrors}
-                >
-                  {config?.secondary.label}
-                </Button>
-              </TooltipTrigger>
-              {isErrors && (
-                <TooltipContent>
-                  <p>Add to library</p>
-                </TooltipContent>
-              )}
-            </Tooltip>
+            {post.status === 'SCHEDULED' ? (
+              <Button
+                size="sm"
+                variant="outline"
+                className="cursor-pointer"
+                onClick={() => {
+                  handleEditPost('DRAFT');
+                }}
+                disabled={isError}
+              >
+                Move to Draft
+              </Button>
+            ) : (
+              <Button
+                size="sm"
+                variant="outline"
+                className="cursor-pointer"
+                onClick={() => {
+                  handleEditPost('SCHEDULED');
+                }}
+                disabled={isError || !scheduledAt}
+              >
+                Schedule Post
+              </Button>
+            )}
             <Button
               size="sm"
               className="cursor-pointer"
-              onClick={handleEditPost}
-              disabled={Object.values(errors).some((err) => err !== '')}
+              onClick={() => {
+                handleEditPost(post.status);
+              }}
+              disabled={isError}
             >
-              {config?.primary.label}
+              Save
             </Button>
           </div>
         </DialogFooter>

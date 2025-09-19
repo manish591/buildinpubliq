@@ -28,10 +28,8 @@ import { parseDate } from 'chrono-node';
 export function PostSchedulerModal({
   scheduledAt,
   setScheduledAt,
-  setIsScheduledAtInPast,
 }: Readonly<{
   scheduledAt: Date | null;
-  setIsScheduledAtInPast: React.Dispatch<React.SetStateAction<boolean>>;
   setScheduledAt: React.Dispatch<React.SetStateAction<Date | null>>;
 }>) {
   const [date, setDate] = useState<Date>(() => {
@@ -183,7 +181,6 @@ export function PostSchedulerModal({
               setScheduledAt(date);
               setIsOpen(false);
               setError(false);
-              setIsScheduledAtInPast(false);
             }}
           >
             Confirm

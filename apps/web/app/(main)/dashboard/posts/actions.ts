@@ -1,6 +1,6 @@
 'use server';
 
-import { prisma, Prisma } from '@buildinpubliq/db';
+import { Prisma, prisma } from '@buildinpubliq/db';
 import { z } from 'zod';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { BuildinpubliqError } from '@/lib/buildinpubliq-error';
@@ -50,7 +50,7 @@ export async function createPost(data: CreatePostData) {
     validationResult.data;
 
   await prisma.post.createMany({
-    data: selectedChannels.map(channelId => {
+    data: selectedChannels.map((channelId) => {
       const content = channelsContent.find(
         (item) => item.channelId === channelId,
       )?.content as string;
@@ -60,8 +60,32 @@ export async function createPost(data: CreatePostData) {
         channelId,
         status,
         content,
-        scheduledAt
-      }
-    })
+        scheduledAt,
+      };
+    }),
+  });
+}
+
+export async function editPost(data: {
+  id: string;
+  content: string;
+  status: Prisma.PostStatus;
+  scheduledAt: null | Date;
+}) {
+  const user = await getCurrentUser();
+
+  if (!user?.id) {
+    throw new BuildinpubliqError(401, 'Unauthenticated');
+  }
+
+  await prisma.post.update({
+    where: {
+      id: data.id,
+    },
+    data: {
+      content: data.content,
+      status: data.status,
+      scheduledAt: data.scheduledAt,
+    },
   });
 }

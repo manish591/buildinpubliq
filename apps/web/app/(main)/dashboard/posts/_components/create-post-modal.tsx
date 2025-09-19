@@ -1,9 +1,9 @@
 'use client';
 
-import { Prisma } from '@buildinpubliq/db';
+import type { Prisma } from '@buildinpubliq/db';
 import { ChevronRight, CircleAlert, Plus } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -66,6 +66,12 @@ export function CreatePostModal({
       console.log('Failed to create posts', err);
     }
   }
+
+  useEffect(() => {
+    if (scheduledAt && scheduledAt > new Date()) {
+      setIsScheduledAtInPast(false);
+    }
+  }, [scheduledAt]);
 
   return (
     <Dialog
@@ -169,7 +175,6 @@ export function CreatePostModal({
             <PostSchedulerModal
               scheduledAt={scheduledAt}
               setScheduledAt={setScheduledAt}
-              setIsScheduledAtInPast={setIsScheduledAtInPast}
             />
           </div>
           <div className="flex items-center gap-4">
