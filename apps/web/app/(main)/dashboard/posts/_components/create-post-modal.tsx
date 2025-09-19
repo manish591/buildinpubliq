@@ -1,8 +1,9 @@
 'use client';
 
-import { ChevronRight, Plus } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { Prisma } from '@buildinpubliq/db';
+import { ChevronRight, CircleAlert, Plus } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -13,9 +14,8 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
-import { PostDatetimePicker } from './post-datetime-picker';
 import { ChannelsAvatar } from './channels-avatar';
-import { useState } from 'react';
+import { PostSchedulerModal } from './post-scheduler-modal';
 import { createPost } from '../actions';
 
 export function CreatePostModal({
@@ -30,17 +30,19 @@ export function CreatePostModal({
   const [channelsContent, setChannelsContent] = useState(() => {
     return channels.map((channel) => ({ channelId: channel.id, content: '' }));
   });
+  const [isScheduledAtInPast, setIsScheduledAtInPast] = useState(false);
   const router = useRouter();
-  const disableButtons = channels.length === 0 || selectedChannels.length === 0;
-  const isContentEmpty = channelsContent.some((ch) => ch.content === '');
 
-  async function handleCreatePosts({
-    status,
-    scheduledAt,
-  }: {
-    status: Prisma.PostStatus;
-    scheduledAt: Date | null;
-  }) {
+  const isContentEmpty = channelsContent.some((ch) => ch.content === '');
+  const isChannelsNotSelected =
+    channels.length === 0 || selectedChannels.length === 0;
+
+  async function handleCreatePosts(status: Prisma.PostStatus) {
+    if (scheduledAt && scheduledAt < new Date()) {
+      setIsScheduledAtInPast(true);
+      return;
+    }
+
     try {
       const updatedChannelsContent = channelsContent.filter((ch) =>
         selectedChannels.includes(ch.channelId),
@@ -93,6 +95,14 @@ export function CreatePostModal({
             <span className="text-foreground">New Post</span>
           </DialogTitle>
         </DialogHeader>
+        {isScheduledAtInPast && (
+          <div className="px-6">
+            <div className="flex items-center gap-2 py-2 px-4 text-destructive border border-destructive rounded-md">
+              <CircleAlert className="size-4" />
+              <span>It seems like your selected date is in the past</span>
+            </div>
+          </div>
+        )}
         <div className="max-h-[300px] overflow-y-auto px-6 py-4">
           {channels.length === 0 ? (
             <div className="min-h-[250px] h-full">
@@ -156,10 +166,10 @@ export function CreatePostModal({
             <p className="text-xs font-medium text-muted-foreground/70 p-0 m-0">
               When To Post
             </p>
-            <PostDatetimePicker
-              disabled={disableButtons}
+            <PostSchedulerModal
               scheduledAt={scheduledAt}
               setScheduledAt={setScheduledAt}
+              setIsScheduledAtInPast={setIsScheduledAtInPast}
             />
           </div>
           <div className="flex items-center gap-4">
@@ -167,25 +177,15 @@ export function CreatePostModal({
               variant="outline"
               size="sm"
               className="cursor-pointer"
-              disabled={disableButtons || isContentEmpty}
-              onClick={() => {
-                handleCreatePosts({
-                  status: Prisma.PostStatus.DRAFT,
-                  scheduledAt: null,
-                });
-              }}
+              disabled={isChannelsNotSelected || isContentEmpty}
+              onClick={() => handleCreatePosts('DRAFT')}
             >
               Save As Drafts
             </Button>
             <Button
               size="sm"
-              disabled={disableButtons || !scheduledAt || isContentEmpty}
-              onClick={() => {
-                handleCreatePosts({
-                  status: Prisma.PostStatus.SCHEDULED,
-                  scheduledAt,
-                });
-              }}
+              disabled={isChannelsNotSelected || !scheduledAt || isContentEmpty}
+              onClick={() => handleCreatePosts('SCHEDULED')}
             >
               Schedule Posts
             </Button>

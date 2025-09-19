@@ -3,12 +3,15 @@
 import {
   AlertTriangle,
   Clock10,
-  EllipsisVertical,
+  Copy,
+  CopyPlus,
+  Delete,
+  ExternalLink,
   FileCheck,
   FileText,
+  SquarePen,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { Prisma } from '@buildinpubliq/db';
@@ -16,6 +19,12 @@ import { formatDistanceToNow } from 'date-fns';
 import { AVAILABLE_PLATFORM } from '@/constants';
 import { useState } from 'react';
 import { PostPreviewModal } from './post-preview-modal';
+import { PostActionDropdown } from './post-action-dropdown';
+import { EditPostModal } from './edit-post-modal';
+import {
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu';
 
 const POST_STATUS_DATA = {
   [Prisma.PostStatus.DRAFT]: {
@@ -49,11 +58,31 @@ export function PostCard({
   channel,
 }: Readonly<{ post: Prisma.Post; channel: Prisma.Channel }>) {
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
-
+  const [isEditPostModalOpen, setIsEditPostModalOpen] = useState(false);
   const platformData = AVAILABLE_PLATFORM.find(
     (p) => p.name === channel.platform,
   );
   const { bgColor, borderColor, color, icon } = POST_STATUS_DATA[post.status];
+
+  const PlatformIcon = platformData?.icon as
+    | React.ComponentType<React.SVGProps<SVGSVGElement>>
+    | undefined;
+
+  const renderPlatformIcon = () =>
+    PlatformIcon ? (
+      <PlatformIcon
+        className={cn(
+          'size-[18px] p-0.5 rounded-full',
+          platformData?.iconBGColor,
+        )}
+      />
+    ) : null;
+
+  const renderTimestamp = () => (
+    <p className="text-xs p-0 m-0 text-muted-foreground/70">
+      {formatDistanceToNow(post.updatedAt, { addSuffix: true })}
+    </p>
+  );
 
   return (
     <div className="relative border rounded-xl hover:bg-muted/70 group">
@@ -61,9 +90,7 @@ export function PostCard({
         <button
           type="button"
           aria-label={`Open post ${post.id}`}
-          onClick={() => {
-            setIsPreviewModalOpen(true);
-          }}
+          onClick={() => setIsPreviewModalOpen(true)}
           className="absolute inset-0 w-full h-full z-10 bg-transparent border-0 p-0 m-0"
         />
         <div className="relative w-max">
@@ -72,58 +99,63 @@ export function PostCard({
             <AvatarFallback>{channel.platformUserName?.at(0)}</AvatarFallback>
           </Avatar>
           <div className="absolute size-[22px] bg-background right-0 bottom-[0%] rounded-full flex items-center justify-center">
-            {platformData &&
-              (() => {
-                const PlatformIcon = platformData.icon as any;
-                return (
-                  <PlatformIcon
-                    className={cn(
-                      'size-[18px] p-0.5 rounded-full',
-                      platformData.iconBGColor,
-                    )}
-                  />
-                );
-              })()}
+            {renderPlatformIcon()}
           </div>
         </div>
-        <div className="flex items-center gap-8 flex-1">
+        <div className="flex items-center gap-8 flex-1 relative">
           <div>
             <p className="font-medium text-base">{channel.platformUserName}</p>
             <div className="grid grid-cols-[minmax(0,1fr)_max-content] gap-2 items-center">
               <p className="text-muted-foreground whitespace-nowrap overflow-hidden overflow-ellipsis">
                 {post.content}
               </p>
-              <div className="shrink-0">
-                <p className="text-xs p-0 m-0 text-muted-foreground/70">
-                  {formatDistanceToNow(post.updatedAt, { addSuffix: true })}
-                </p>
-              </div>
+              <div className="shrink-0">{renderTimestamp()}</div>
             </div>
           </div>
-          <div className="flex items-center gap-4 ml-auto">
-            <div>
-              <Badge
-                variant="outline"
-                className={cn(
-                  'rounded-md h-7 font-normal px-2 capitalize',
-                  'flex gap-2 items-center',
-                  bgColor,
-                  borderColor,
-                  color,
-                )}
-              >
-                {icon}
-                {post.status.toLowerCase()}
-              </Badge>
-            </div>
+          <div className="flex items-center gap-4 ml-auto relative">
+            <Badge
+              variant="outline"
+              className={cn(
+                'rounded-md h-7 font-normal px-2 capitalize',
+                'flex gap-2 items-center',
+                bgColor,
+                borderColor,
+                color,
+              )}
+            >
+              {icon}
+              {post.status.toLowerCase()}
+            </Badge>
             <div className="z-20">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="w-8 h-7 hover:bg-secondary group-hover:bg-secondary group-hover:border"
-              >
-                <EllipsisVertical />
-              </Button>
+              <PostActionDropdown>
+                {post.status !== Prisma.PostStatus.PUBLISHED && (
+                  <DropdownMenuItem
+                    className="flex gap-2 items-center"
+                    onClick={() => {
+                      setIsEditPostModalOpen(true);
+                    }}
+                  >
+                    <SquarePen className="size-4" /> <span>Edit</span>
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuItem className="flex gap-2 items-center">
+                  <CopyPlus className="size-4" /> <span>Duplicate</span>
+                </DropdownMenuItem>
+                {post.status === Prisma.PostStatus.PUBLISHED && (
+                  <>
+                    <DropdownMenuItem className="flex gap-2 items-center">
+                      <ExternalLink className="size-4" /> <span>View Post</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="flex gap-2 items-center">
+                      <Copy className="size-4" /> <span>Copy Link</span>
+                    </DropdownMenuItem>
+                  </>
+                )}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="flex gap-2 items-center text-destructive!">
+                  <Delete className="size-4" /> <span>Delete</span>
+                </DropdownMenuItem>
+              </PostActionDropdown>
             </div>
           </div>
         </div>
@@ -133,6 +165,12 @@ export function PostCard({
         channel={channel}
         isPreviewModalOpen={isPreviewModalOpen}
         setIsPreviewModalOpen={setIsPreviewModalOpen}
+      />
+      <EditPostModal
+        post={post}
+        channel={channel}
+        isEditPostModalOpen={isEditPostModalOpen}
+        setIsEditPostModalOpen={setIsEditPostModalOpen}
       />
     </div>
   );
