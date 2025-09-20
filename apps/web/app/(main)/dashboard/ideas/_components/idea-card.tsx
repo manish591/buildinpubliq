@@ -1,3 +1,5 @@
+'use client';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -17,10 +19,19 @@ import {
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
 import type { Prisma } from '@buildinpubliq/db';
+import { useEditPostModal } from './edit-idea-modal';
 
 export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
+  const { EditIdeaModal, setShowEditIdeaModal } = useEditPostModal({
+    defaultValues: {
+      id: ideaData.id,
+      title: ideaData.title,
+      content: ideaData.content,
+    },
+  });
+
   return (
-    <div className="border p-4 rounded-xl">
+    <div className="border p-4 rounded-xl hover:bg-muted/70 group">
       <div className="flex items-center gap-4">
         <div className="shrink-0 w-10 h-10 flex items-center justify-center border rounded-full bg-gradient-to-b from-transparent to-secondary ">
           <IconBulb className="text-muted-foreground/90" strokeWidth={1.5} />
@@ -66,21 +77,29 @@ export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
-                    className="w-7 h-7 border-none hover:bg-secondary group-hover:bg-secondary hover:border"
+                    className={cn(
+                      'w-7 h-7 border-transparent hover:bg-muted',
+                      'hover:border-border group-hover:border-border cursor-pointer',
+                    )}
                   >
                     <IconDotsVertical />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem className="flex items-center gap-2">
+                  <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
                     <IconNote className="size-4" />
                     Convert to post
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="flex items-center gap-2">
+                  <DropdownMenuItem
+                    className="flex items-center gap-2 cursor-pointer"
+                    onClick={() => {
+                      setShowEditIdeaModal(true);
+                    }}
+                  >
                     <IconEdit className="size-4" />
                     Edit
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="flex items-center gap-2">
+                  <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
                     <IconTrash className="size-4" />
                     Delete
                   </DropdownMenuItem>
@@ -90,6 +109,7 @@ export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
           </div>
         </div>
       </div>
+      <EditIdeaModal />
     </div>
   );
 }
