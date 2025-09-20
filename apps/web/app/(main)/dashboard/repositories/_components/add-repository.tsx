@@ -7,13 +7,12 @@ import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { addRepository } from '../actions';
+import { addRepository } from '../../ideas/actions';
 
 export const repositorySchema = z.object({
   id: z.number(),
@@ -54,17 +53,16 @@ export function AddRepository({
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DialogTrigger className="w-full">{children}</DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Add repository</DialogTitle>
-          <DialogDescription>
-            Fill out the form to add new repository
-          </DialogDescription>
+      <DialogContent className="p-0 gap-0">
+        <DialogHeader className="px-6 py-4 border-b">
+          <DialogTitle className="text-xl font-medium">
+            Add Repository
+          </DialogTitle>
         </DialogHeader>
-        <div>
+        <div className="px-6 py-6">
           <Input
             className="w-full mb-4"
-            placeholder="search repo.."
+            placeholder="Search repo.."
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
@@ -73,10 +71,11 @@ export function AddRepository({
           <div className="border rounded-md divide-y">
             {filteredRepoData.slice(0, 4).map((repo) => {
               return (
-                <div key={repo.id} className="px-3 py-3">
+                <div key={repo.id} className="px-3 py-2">
                   <div className="flex items-center justify-between gap-2">
-                    <h3>{repo.full_name}</h3>
+                    <h3 className="text-sm">{repo.full_name}</h3>
                     <Button
+                      size="sm"
                       className="cursor-pointer"
                       onClick={() => {
                         handleAddRepo(repo);

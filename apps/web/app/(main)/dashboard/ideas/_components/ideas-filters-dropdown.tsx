@@ -1,4 +1,3 @@
-import { ChevronDown, Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -8,15 +7,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { IconChevronDown, IconFilter2 } from '@tabler/icons-react';
 
 export function IdeasFilterDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">
-          <Filter />
-          filter
-          <ChevronDown className="text-foreground/70" />
+        <Button variant="outline" className="cursor-pointer">
+          <IconFilter2 />
+          Filters
+          <IconChevronDown className="text-foreground/70" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>

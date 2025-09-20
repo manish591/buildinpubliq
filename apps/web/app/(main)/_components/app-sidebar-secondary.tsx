@@ -15,6 +15,7 @@ import { AppLogo } from '@/components/web/app-logo';
 import { cn } from '@/lib/utils';
 import { NavMain } from './nav-main';
 import { NavSettings } from './nav-settings';
+import { NavLibrary } from './nav-library';
 
 export function AppSidebarSecondary() {
   const pathname = usePathname();
@@ -47,6 +48,7 @@ export function AppSidebarSecondary() {
           </SidebarHeader>
           <SidebarContent>
             <NavMain />
+            <NavLibrary />
           </SidebarContent>
           <SidebarFooter></SidebarFooter>
         </div>

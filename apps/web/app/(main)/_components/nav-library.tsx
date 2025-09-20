@@ -1,4 +1,3 @@
-import { Lightbulb, StickyNote } from 'lucide-react';
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -7,24 +6,20 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
+import { IconBrandGithub } from '@tabler/icons-react';
 
 const items = [
   {
-    title: 'Posts',
-    url: '/dashboard/posts',
-    icon: StickyNote,
-  },
-  {
-    title: 'Ideas',
-    url: '/dashboard/ideas',
-    icon: Lightbulb,
+    title: 'Repositories',
+    url: '/dashboard/repositories',
+    icon: IconBrandGithub,
   },
 ];
 
-export function NavMain() {
+export function NavLibrary() {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
+      <SidebarGroupLabel>Library</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.title}>

@@ -5,7 +5,7 @@ import { getInstalledRepositories } from '@/app/data/github/get-installed-reposi
 import { GithubSVGIcon } from '@/components/svg-icons/github';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { AddRepository } from './add-repository';
+import { AddRepository } from '../../repositories/_components/add-repository';
 
 export async function RepositoriesList() {
   const repositories = await getAllGithubRepositories();
