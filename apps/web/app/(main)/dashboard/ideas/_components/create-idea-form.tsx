@@ -16,6 +16,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { createIdea } from '../actions';
+import type React from 'react';
 
 const formSchema = z.object({
   title: z.string(),
@@ -24,7 +25,11 @@ const formSchema = z.object({
 
 export type CreateIdeaData = z.infer<typeof formSchema>;
 
-export function CreateIdeaForm() {
+export function CreateIdeaForm({
+  setShowCreateIdeaModal,
+}: Readonly<{
+  setShowCreateIdeaModal: React.Dispatch<React.SetStateAction<boolean>>;
+}>) {
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -37,6 +42,7 @@ export function CreateIdeaForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       await createIdea(values);
+      setShowCreateIdeaModal(false);
       router.refresh();
     } catch (err) {
       console.log('Error while creating the form', err);
@@ -45,35 +51,39 @@ export function CreateIdeaForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name="title"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>title</FormLabel>
-              <FormControl>
-                <Input placeholder="enter title" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="content"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>content</FormLabel>
-              <FormControl>
-                <Textarea placeholder="enter content" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="flex justify-end pt-4">
-          <Button type="submit">Submit</Button>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="space-y-4 px-6 py-6">
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Title</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter title" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="content"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Content</FormLabel>
+                <FormControl>
+                  <Textarea placeholder="Enter content" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="flex justify-end bg-muted border-t px-6 py-4 rounded-b-xl">
+          <Button type="submit" size="sm" className="cursor-pointer">
+            Create
+          </Button>
         </div>
       </form>
     </Form>

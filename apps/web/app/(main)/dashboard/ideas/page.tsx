@@ -6,6 +6,7 @@ import { IdeasFilterDropdown } from './_components/ideas-filters-dropdown';
 import { IdeasList } from './_components/ideas-list';
 import { IdeasSearchBar } from './_components/ideas-search-bar';
 import { Suspense } from 'react';
+import { getAllGithubRepositories } from '@/app/data/github/get-all-github-repositories';
 
 export default async function IdeasPage() {
   const user = await getCurrentUser();
@@ -13,6 +14,8 @@ export default async function IdeasPage() {
   if (!user?.id) {
     redirect('/auth');
   }
+
+  const githubRepositories = await getAllGithubRepositories();
 
   return (
     <div>
@@ -25,7 +28,7 @@ export default async function IdeasPage() {
       <main className="w-full max-w-7xl mx-auto py-6 px-8">
         <div className="flex items-center gap-3 justify-between">
           <div className="flex items-center gap-2">
-            <IdeasFilterDropdown />
+            <IdeasFilterDropdown githubRepositories={githubRepositories} />
           </div>
           <IdeasSearchBar />
         </div>

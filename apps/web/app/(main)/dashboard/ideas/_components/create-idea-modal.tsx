@@ -1,9 +1,11 @@
+'use client';
+
 import { Plus } from 'lucide-react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -11,22 +13,21 @@ import {
 import { CreateIdeaForm } from './create-idea-form';
 
 export function CreateIdeaModal() {
+  const [showCreateIdeaModal, setShowCreateIdeaModal] = useState(false);
+
   return (
-    <Dialog>
+    <Dialog open={showCreateIdeaModal} onOpenChange={setShowCreateIdeaModal}>
       <DialogTrigger asChild>
         <Button className="gap-2 cursor-pointer">
           <Plus className="h-4 w-4" />
           New Idea
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-md!">
-        <DialogHeader>
-          <DialogTitle>create new idea</DialogTitle>
-          <DialogDescription>
-            fill out the form below to create new idea
-          </DialogDescription>
+      <DialogContent className="md:max-w-lg p-0 gap-0 rounded-xl">
+        <DialogHeader className="py-4 px-6 border-b">
+          <DialogTitle className="text-xl font-medium">Add Idea</DialogTitle>
         </DialogHeader>
-        <CreateIdeaForm />
+        <CreateIdeaForm setShowCreateIdeaModal={setShowCreateIdeaModal} />
       </DialogContent>
     </Dialog>
   );

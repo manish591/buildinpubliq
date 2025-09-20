@@ -1,9 +1,9 @@
-import 'server-only';
 import { prisma } from '@buildinpubliq/db';
 import { redirect } from 'next/navigation';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { getGithubIntegrationToken } from './get-github-integration-token';
-import { GithubRepository } from '@/app/(main)/dashboard/repositories/_components/add-repository';
+import 'server-only';
+import type { GithubRepository } from '@/app/(main)/dashboard/repositories/_components/add-repository';
 
 export async function getInstalledRepositories(): Promise<GithubRepository[]> {
   const user = await getCurrentUser();
