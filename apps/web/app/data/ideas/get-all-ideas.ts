@@ -45,6 +45,9 @@ export async function getAllIdeas(options?: { query?: string }) {
         githubRepositoryId: repository
       })
     },
+    orderBy: {
+      updatedAt: "desc"
+    }
   });
 
   return data;
