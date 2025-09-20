@@ -6,7 +6,7 @@ import { IdeaCard } from './idea-card';
 
 export async function IdeasList({
   options,
-}: Readonly<{ options?: { query?: string } }>) {
+}: Readonly<{ options?: { query?: string; repository?: string } }>) {
   const allIdeas = await getAllIdeas(options);
 
   return (

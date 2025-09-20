@@ -1,12 +1,11 @@
 import { redirect } from 'next/navigation';
+import { Suspense } from 'react';
 import { MainHeader } from '@/app/(main)/_components/main-header';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
-import { CreateIdeaModal } from './_components/create-idea-modal';
-import { IdeasFilterDropdown } from './_components/ideas-filters-dropdown';
-import { IdeasList } from './_components/ideas-list';
-import { IdeasSearchBar } from './_components/ideas-search-bar';
-import { Suspense } from 'react';
 import { getAllGithubRepositories } from '@/app/data/github/get-all-github-repositories';
+import { CreateIdeaModal } from './_components/create-idea-modal';
+import { IdeasList } from './_components/ideas-list';
+import { IdeasActionBar } from './_components/ideas-action-bar';
 
 export default async function IdeasPage({
   searchParams,
@@ -21,6 +20,7 @@ export default async function IdeasPage({
 
   const params = await searchParams;
   const query = (params.query as string) ?? undefined;
+  const repository = (params.repository as string) ?? undefined;
   const githubRepositories = await getAllGithubRepositories();
 
   return (
@@ -32,16 +32,12 @@ export default async function IdeasPage({
         </MainHeader.Wrapper>
       </MainHeader>
       <main className="w-full max-w-7xl mx-auto py-6 px-8">
-        <div className="flex items-center gap-3 justify-between">
-          <div className="flex items-center gap-2">
-            <IdeasFilterDropdown githubRepositories={githubRepositories} />
-          </div>
-          <IdeasSearchBar />
-        </div>
+        <IdeasActionBar githubRepositories={githubRepositories} />
         <Suspense fallback={<div className="mt-6">Loading...</div>}>
           <IdeasList
             options={{
               query,
+              repository,
             }}
           />
         </Suspense>

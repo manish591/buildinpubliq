@@ -1,12 +1,11 @@
 'use client';
 
+import type { Prisma } from '@buildinpubliq/db';
 import {
   IconBrandGithub,
   IconCheck,
   IconChevronDown,
   IconFilter2,
-  IconSourceCode,
-  IconUserCheck,
 } from '@tabler/icons-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
@@ -25,13 +24,12 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
-import type { Prisma } from '@buildinpubliq/db';
 
 const filters = [
   {
-    value: 'source',
-    label: 'Source',
-    icon: IconSourceCode,
+    value: 'repository',
+    label: 'Repository',
+    icon: IconBrandGithub,
   },
 ];
 
@@ -43,7 +41,7 @@ export function IdeasFilterDropdown({
   const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
   const [currentFilter, setCurrentFilter] = useState('');
-  const source = searchParams.get('source');
+  const repository = searchParams.get('repository');
 
   return (
     <Popover
@@ -61,7 +59,7 @@ export function IdeasFilterDropdown({
         </Button>
       </PopoverTrigger>
       {currentFilter === '' ? (
-        <PopoverContent className="w-[160px] p-0">
+        <PopoverContent className="w-[160px] p-0" align="start">
           <Command>
             <CommandInput placeholder="Search filters" className="h-9" />
             <CommandList>
@@ -85,23 +83,13 @@ export function IdeasFilterDropdown({
           </Command>
         </PopoverContent>
       ) : null}
-      {currentFilter === 'source' ? (
-        <PopoverContent className="p-0 w-[180px]">
+      {currentFilter === 'repository' ? (
+        <PopoverContent className="p-0 w-[180px]" align="start">
           <Command>
             <CommandInput placeholder="Search source" className="h-9" />
             <CommandList>
               <CommandEmpty>Source not found</CommandEmpty>
               <CommandGroup>
-                <CommandItem value="create-by-you">
-                  <IconUserCheck className="size-4" />
-                  Created By You
-                  <IconCheck
-                    className={cn(
-                      'ml-auto',
-                      source === 'create-by-you' ? 'opacity-100' : 'opacity-0',
-                    )}
-                  />
-                </CommandItem>
                 {githubRepositories.map((repo) => {
                   const repoName = repo.fullName.split('/')[1].toLowerCase();
                   return (
@@ -109,13 +97,18 @@ export function IdeasFilterDropdown({
                       key={repo.id}
                       value={repoName}
                       className="capitalize"
+                      onSelect={() => {
+                        const params = new URLSearchParams(searchParams);
+                        params.set('repository', repo.id);
+                        router.push(`${pathname}?${params.toString()}`);
+                      }}
                     >
                       <IconBrandGithub className="size-4" />
                       {repoName}
                       <IconCheck
                         className={cn(
                           'ml-auto',
-                          source === repoName ? 'opacity-100' : 'opacity-0',
+                          repository === repo.id ? 'opacity-100' : 'opacity-0',
                         )}
                       />
                     </CommandItem>

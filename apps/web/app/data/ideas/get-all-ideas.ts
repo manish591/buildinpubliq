@@ -6,6 +6,7 @@ import { BuildinpubliqError } from '@/lib/buildinpubliq-error';
 
 const schema = z.object({
   query: z.string().optional(),
+  repository: z.string().optional()
 });
 
 export async function getAllIdeas(options?: { query?: string }) {
@@ -21,7 +22,7 @@ export async function getAllIdeas(options?: { query?: string }) {
     throw new BuildinpubliqError(400, "Bad request");
   }
 
-  const { query } = validationResult.data;
+  const { query, repository } = validationResult.data;
 
   const data = await prisma.idea.findMany({
     where: {
@@ -40,6 +41,9 @@ export async function getAllIdeas(options?: { query?: string }) {
           }
         ]
       }),
+      ...(repository && {
+        githubRepositoryId: repository
+      })
     },
   });
 
