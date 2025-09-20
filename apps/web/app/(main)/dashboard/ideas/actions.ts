@@ -39,3 +39,17 @@ export async function editIdea(data: EditIdeaData) {
     }
   });
 }
+
+export async function deleteIdea(id: string) {
+  const user = await getCurrentUser();
+
+  if (!user?.id) {
+    throw new Error('Unauthorized');
+  }
+
+  await prisma.idea.delete({
+    where: {
+      id
+    }
+  })
+}

@@ -11,16 +11,16 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { deletePost } from '../actions';
+import { deleteIdea } from '../actions';
 
-export function DeletePostModal({
-  postId,
-  showDeletePostModal,
-  setShowDeletePostModal,
+export function DeleteIdeaModal({
+  id,
+  showDeleteIdeaModal,
+  setShowDeleteIdeaModal,
 }: Readonly<{
-  postId: string;
-  showDeletePostModal: boolean;
-  setShowDeletePostModal: React.Dispatch<React.SetStateAction<boolean>>;
+  id: string;
+  showDeleteIdeaModal: boolean;
+  setShowDeleteIdeaModal: React.Dispatch<React.SetStateAction<boolean>>;
 }>) {
   const router = useRouter();
   const [confirmText, setConfirmText] = useState('');
@@ -33,26 +33,26 @@ export function DeletePostModal({
     }
 
     try {
-      await deletePost(postId);
-      setShowDeletePostModal(false);
+      await deleteIdea(id);
+      setShowDeleteIdeaModal(false);
       router.refresh();
     } catch (err) {
-      console.log('Failed to delete the post', err);
+      console.log('Failed to delete the idea', err);
     }
   }
 
   return (
-    <Dialog open={showDeletePostModal} onOpenChange={setShowDeletePostModal}>
+    <Dialog open={showDeleteIdeaModal} onOpenChange={setShowDeleteIdeaModal}>
       <DialogContent className="p-0 md:max-w-md gap-0 rounded-xl">
         <DialogHeader className="px-6 py-4 border-b">
-          <DialogTitle className="text-xl font-medium">Delete Post</DialogTitle>
+          <DialogTitle className="text-xl font-medium">Delete Idea</DialogTitle>
         </DialogHeader>
         <div className="px-6 py-6 space-y-4">
           <p className="text-muted-foreground">
-            Are you sure you want to delete the following post?
+            Are you sure you want to delete the following idea?
           </p>
           <p className="font-medium">
-            This action cannot be undone. This will permanently delete your post
+            This action cannot be undone. This will permanently delete your idea
             and remove your data from our servers.
           </p>
           <p className="text-muted-foreground">
@@ -81,7 +81,7 @@ export function DeletePostModal({
             size="sm"
             className="cursor-pointer"
             onClick={() => {
-              setShowDeletePostModal(false);
+              setShowDeleteIdeaModal(false);
             }}
           >
             Cancel
@@ -92,7 +92,7 @@ export function DeletePostModal({
             className="cursor-pointer"
             onClick={handleDeletePost}
           >
-            Delete Post
+            Delete Idea
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -100,24 +100,24 @@ export function DeletePostModal({
   );
 }
 
-export function useDeleteModal({ postId }: { postId: string }) {
-  const [showDeletePostModal, setShowDeletePostModal] = useState(false);
+export function useDeleteIdeaModal({ id }: { id: string }) {
+  const [showDeleteIdeaModal, setShowDeleteIdeaModal] = useState(false);
 
-  const DeletePostModalCallback = useCallback(() => {
+  const deleteIdeaModalCallback = useCallback(() => {
     return (
-      <DeletePostModal
-        postId={postId}
-        showDeletePostModal={showDeletePostModal}
-        setShowDeletePostModal={setShowDeletePostModal}
+      <DeleteIdeaModal
+        id={id}
+        showDeleteIdeaModal={showDeleteIdeaModal}
+        setShowDeleteIdeaModal={setShowDeleteIdeaModal}
       />
     );
-  }, [showDeletePostModal, postId]);
+  }, [showDeleteIdeaModal, id]);
 
   return useMemo(
     () => ({
-      setShowDeletePostModal,
-      DeletePostModal: DeletePostModalCallback,
+      setShowDeleteIdeaModal,
+      DeleteIdeaModal: deleteIdeaModalCallback,
     }),
-    [DeletePostModalCallback],
+    [deleteIdeaModalCallback],
   );
 }

@@ -20,6 +20,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
 import type { Prisma } from '@buildinpubliq/db';
 import { useEditPostModal } from './edit-idea-modal';
+import { useDeleteIdeaModal } from './delete-idea-modal';
 
 export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
   const { EditIdeaModal, setShowEditIdeaModal } = useEditPostModal({
@@ -28,6 +29,9 @@ export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
       title: ideaData.title,
       content: ideaData.content,
     },
+  });
+  const { DeleteIdeaModal, setShowDeleteIdeaModal } = useDeleteIdeaModal({
+    id: ideaData.id,
   });
 
   return (
@@ -99,7 +103,12 @@ export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
                     <IconEdit className="size-4" />
                     Edit
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+                  <DropdownMenuItem
+                    className="flex items-center gap-2 cursor-pointer"
+                    onClick={() => {
+                      setShowDeleteIdeaModal(true);
+                    }}
+                  >
                     <IconTrash className="size-4" />
                     Delete
                   </DropdownMenuItem>
@@ -110,6 +119,7 @@ export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
         </div>
       </div>
       <EditIdeaModal />
+      <DeleteIdeaModal />
     </div>
   );
 }
