@@ -8,13 +8,19 @@ import { IdeasSearchBar } from './_components/ideas-search-bar';
 import { Suspense } from 'react';
 import { getAllGithubRepositories } from '@/app/data/github/get-all-github-repositories';
 
-export default async function IdeasPage() {
+export default async function IdeasPage({
+  searchParams,
+}: Readonly<{
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}>) {
   const user = await getCurrentUser();
 
   if (!user?.id) {
     redirect('/auth');
   }
 
+  const params = await searchParams;
+  const query = (params.query as string) ?? undefined;
   const githubRepositories = await getAllGithubRepositories();
 
   return (
@@ -33,7 +39,11 @@ export default async function IdeasPage() {
           <IdeasSearchBar />
         </div>
         <Suspense fallback={<div className="mt-6">Loading...</div>}>
-          <IdeasList />
+          <IdeasList
+            options={{
+              query,
+            }}
+          />
         </Suspense>
       </main>
     </div>

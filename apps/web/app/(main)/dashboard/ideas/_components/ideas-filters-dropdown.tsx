@@ -25,7 +25,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
-import { Prisma } from '@buildinpubliq/db';
+import type { Prisma } from '@buildinpubliq/db';
 
 const filters = [
   {
@@ -92,26 +92,6 @@ export function IdeasFilterDropdown({
             <CommandList>
               <CommandEmpty>Source not found</CommandEmpty>
               <CommandGroup>
-                {/* {channelsFilter.map((filter) => (
-                  <CommandItem
-                    key={filter.value}
-                    value={filter.value}
-                    onSelect={(currentValue) => {
-                      const params = new URLSearchParams(searchParams);
-                      params.set('channel', currentValue);
-                      router.push(`${pathname}?${params.toString()}`);
-                    }}
-                  >
-                    <filter.icon className={cn('size-4', filter.bg)} />
-                    {filter.label}
-                    <Check
-                      className={cn(
-                        'ml-auto',
-                        channel === filter.value ? 'opacity-100' : 'opacity-0',
-                      )}
-                    />
-                  </CommandItem>
-                ))} */}
                 <CommandItem value="create-by-you">
                   <IconUserCheck className="size-4" />
                   Created By You

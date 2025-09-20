@@ -1,11 +1,13 @@
+import { IconBulb } from '@tabler/icons-react';
 import { getAllIdeas } from '@/app/data/ideas/get-all-ideas';
 import { EmptyState } from '@/components/ui/empty-state';
-import { IconBulb } from '@tabler/icons-react';
-import { IdeaCard } from './idea-card';
 import { cn } from '@/lib/utils';
+import { IdeaCard } from './idea-card';
 
-export async function IdeasList() {
-  const allIdeas = await getAllIdeas();
+export async function IdeasList({
+  options,
+}: Readonly<{ options?: { query?: string } }>) {
+  const allIdeas = await getAllIdeas(options);
 
   return (
     <div className="mt-6">
