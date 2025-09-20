@@ -101,13 +101,13 @@ export function PostsFilterDropdown() {
       }}
     >
       <PopoverTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" className="cursor-pointer">
           <ListFilter />
           Filters
           <ChevronDown className="text-foreground/70" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[160px] p-0">
+      <PopoverContent className="w-[160px] p-0" align="start">
         {currentFilter === '' && (
           <Command>
             <CommandInput placeholder="Search filters..." className="h-9" />

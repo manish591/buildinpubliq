@@ -33,9 +33,14 @@ export function PostsActionBar() {
               <div className="flex items-center rounded-md border">
                 <Badge
                   variant="outline"
-                  className="capitalize rounded-none h-10 text-sm font-medium border-0 border-r"
+                  className="capitalize rounded-none h-10 font-normal text-sm border-0 border-r"
                 >
-                  Channel: {channel}
+                  <span className="text-muted-foreground">
+                    Channel is{' '}
+                    <span className="text-foreground font-medium">
+                      {channel}
+                    </span>
+                  </span>
                 </Badge>
                 <Button
                   variant="ghost"
@@ -55,9 +60,14 @@ export function PostsActionBar() {
               <div className="flex items-center rounded-md border">
                 <Badge
                   variant="outline"
-                  className="capitalize rounded-none h-10 text-sm font-medium border-0 border-r"
+                  className="capitalize rounded-none h-10 font-normal text-sm border-0 border-r"
                 >
-                  Status: {status}
+                  <span className="text-muted-foreground">
+                    Status is{' '}
+                    <span className="text-foreground font-medium">
+                      {status}
+                    </span>
+                  </span>
                 </Badge>
                 <Button
                   variant="ghost"
