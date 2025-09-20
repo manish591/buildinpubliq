@@ -7,7 +7,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
-  IconArchive,
   IconBrandGithub,
   IconBulb,
   IconDotsVertical,
@@ -17,7 +16,7 @@ import {
 } from '@tabler/icons-react';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
-import { Prisma } from '@buildinpubliq/db';
+import type { Prisma } from '@buildinpubliq/db';
 
 export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
   return (
@@ -80,9 +79,6 @@ export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
                   <DropdownMenuItem className="flex items-center gap-2">
                     <IconEdit className="size-4" />
                     Edit
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="flex items-center gap-2">
-                    <IconArchive className="size-4" /> Archive
                   </DropdownMenuItem>
                   <DropdownMenuItem className="flex items-center gap-2">
                     <IconTrash className="size-4" />

@@ -52,7 +52,7 @@ export function CreateIdeaForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="space-y-4 px-6 py-6">
+        <div className="space-y-4 px-6 py-6 max-h-[300px] overflow-y-auto">
           <FormField
             control={form.control}
             name="title"
@@ -73,7 +73,11 @@ export function CreateIdeaForm({
               <FormItem>
                 <FormLabel>Content</FormLabel>
                 <FormControl>
-                  <Textarea placeholder="Enter content" {...field} />
+                  <Textarea
+                    placeholder="Enter content"
+                    className="min-h-[160px]"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
