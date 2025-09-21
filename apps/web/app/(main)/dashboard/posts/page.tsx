@@ -2,10 +2,9 @@ import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import { MainHeader } from '@/app/(main)/_components/main-header';
 import { getUserDetails } from '@/app/data/users/get-user-details';
-import { CreatePostModal } from './_components/create-post-modal';
-import { PostsContainer } from './_components/posts-container';
-import { getAllChannels } from '@/app/data/channels/get-all-channels';
+import { CreatePostButton } from './_components/create-post-button';
 import { PostsActionBar } from './_components/posts-action-bar';
+import { PostsContainer } from './_components/posts-container';
 
 export default async function PostsPage({
   searchParams,
@@ -23,14 +22,12 @@ export default async function PostsPage({
   const channel = params.channel as string | undefined;
   const query = params.query as string | undefined;
 
-  const channels = await getAllChannels();
-
   return (
     <div>
       <MainHeader>
         <MainHeader.Wrapper>
           <MainHeader.Title>Posts</MainHeader.Title>
-          <CreatePostModal channels={channels} />
+          <CreatePostButton />
         </MainHeader.Wrapper>
       </MainHeader>
       <main className="w-full max-w-7xl mx-auto py-6 px-8">

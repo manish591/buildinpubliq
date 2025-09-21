@@ -2,6 +2,9 @@
 
 import { SessionProvider } from 'next-auth/react';
 import { Toaster } from '@/components/ui/sonner';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 export default function Providers({
   children,
@@ -9,7 +12,9 @@ export default function Providers({
   return (
     <>
       <Toaster richColors closeButton duration={6000} position="top-right" />
-      <SessionProvider>{children}</SessionProvider>
+      <QueryClientProvider client={queryClient}>
+        <SessionProvider>{children}</SessionProvider>
+      </QueryClientProvider>
     </>
   );
 }

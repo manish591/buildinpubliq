@@ -52,7 +52,11 @@ export function PostSchedulerModal({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger>
-        <Button size="sm" variant="ghost" className="h-6 px-2 -ml-2 gap-1">
+        <Button
+          size="sm"
+          variant="ghost"
+          className="h-6 px-2 -ml-2 gap-1 cursor-pointer"
+        >
           {scheduledAt
             ? format(scheduledAt, 'MMM d, h:mm a')
             : 'Set Date & Time'}
