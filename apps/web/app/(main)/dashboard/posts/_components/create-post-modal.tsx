@@ -16,18 +16,23 @@ import { Loader } from '@/components/general/loader';
 
 function CreatePostModalForm({
   channels,
+  defaultValues,
   setShowCreateFormModal,
 }: Readonly<{
   channels: Prisma.Channel[];
   setShowCreateFormModal: React.Dispatch<React.SetStateAction<boolean>>;
+  defaultValues: { content: string };
 }>) {
   const [scheduledAt, setScheduledAt] = useState<Date | null>(null);
-  const [baseContent, setBaseContent] = useState('');
+  const [baseContent, setBaseContent] = useState(defaultValues?.content);
   const [selectedChannels, setSelectedChannels] = useState(() => {
     return channels.map((channel) => channel.id);
   });
   const [channelsContent, setChannelsContent] = useState(() => {
-    return channels.map((channel) => ({ channelId: channel.id, content: '' }));
+    return channels.map((channel) => ({
+      channelId: channel.id,
+      content: defaultValues?.content,
+    }));
   });
 
   const [isScheduledAtInPast, setIsScheduledAtInPast] = useState(false);
@@ -180,14 +185,15 @@ function CreatePostModalForm({
 }
 
 function CreatePostModalInner({
+  defaultValues,
   setShowCreatePostModal,
 }: Readonly<{
   setShowCreatePostModal: React.Dispatch<React.SetStateAction<boolean>>;
+  defaultValues: { content: string };
 }>) {
   const { data } = useSuspenseQuery({
     queryKey: ['channels'],
     queryFn: async (): Promise<{ data: Prisma.Channel[]; status: number }> => {
-      await new Promise((res) => setTimeout(res, 4000));
       const res = await fetch('/api/channels');
       const data = await res.json();
       return data;
@@ -197,6 +203,7 @@ function CreatePostModalInner({
   return (
     <CreatePostModalForm
       channels={data.data}
+      defaultValues={defaultValues}
       setShowCreateFormModal={setShowCreatePostModal}
     />
   );
@@ -211,11 +218,13 @@ function CreatePostModalLoader() {
 }
 
 function CreatePostModal({
+  defaultValues,
   showCreatePostModal,
   setShowCreatePostModal,
 }: Readonly<{
   showCreatePostModal: boolean;
   setShowCreatePostModal: React.Dispatch<React.SetStateAction<boolean>>;
+  defaultValues: { content: string };
 }>) {
   return (
     <Dialog open={showCreatePostModal} onOpenChange={setShowCreatePostModal}>
@@ -224,6 +233,7 @@ function CreatePostModal({
         <Suspense fallback={<CreatePostModalLoader />}>
           <CreatePostModalInner
             setShowCreatePostModal={setShowCreatePostModal}
+            defaultValues={defaultValues}
           />
         </Suspense>
       </DialogContent>
@@ -231,12 +241,13 @@ function CreatePostModal({
   );
 }
 
-export function useCreatePostModal() {
+export function useCreatePostModal(defaultValues = { content: '' }) {
   const [showCreatePostModal, setShowCreatePostModal] = useState(false);
 
   const createPostModalCallback = useCallback(() => {
     return (
       <CreatePostModal
+        defaultValues={defaultValues}
         showCreatePostModal={showCreatePostModal}
         setShowCreatePostModal={setShowCreatePostModal}
       />
