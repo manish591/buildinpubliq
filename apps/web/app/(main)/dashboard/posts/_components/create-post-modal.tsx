@@ -67,7 +67,7 @@ function CreatePostModalForm({
         channels.map((channel) => ({ channelId: channel.id, content: '' })),
       );
       setSelectedChannels(channels.map((channel) => channel.id));
-      router.refresh();
+      router.push(`/dashboard/posts`);
     } catch (err) {
       console.log('Failed to create posts', err);
     }

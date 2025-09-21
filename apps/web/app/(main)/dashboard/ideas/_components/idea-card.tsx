@@ -21,6 +21,7 @@ import { cn } from '@/lib/utils';
 import type { Prisma } from '@buildinpubliq/db';
 import { useEditPostModal } from './edit-idea-modal';
 import { useDeleteIdeaModal } from './delete-idea-modal';
+import { useCreatePostModal } from '../../posts/_components/create-post-modal';
 
 export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
   const { EditIdeaModal, setShowEditIdeaModal } = useEditPostModal({
@@ -32,6 +33,9 @@ export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
   });
   const { DeleteIdeaModal, setShowDeleteIdeaModal } = useDeleteIdeaModal({
     id: ideaData.id,
+  });
+  const { CreatePostModal, setShowCreatePostModal } = useCreatePostModal({
+    content: ideaData.content,
   });
 
   return (
@@ -90,7 +94,12 @@ export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+                  <DropdownMenuItem
+                    className="flex items-center gap-2 cursor-pointer"
+                    onClick={() => {
+                      setShowCreatePostModal(true);
+                    }}
+                  >
                     <IconNote className="size-4" />
                     Convert to post
                   </DropdownMenuItem>
@@ -120,6 +129,7 @@ export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
       </div>
       <EditIdeaModal />
       <DeleteIdeaModal />
+      <CreatePostModal />
     </div>
   );
 }
