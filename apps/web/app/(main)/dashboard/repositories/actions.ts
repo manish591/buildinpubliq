@@ -1,10 +1,10 @@
 "use server";
 
 import { getCurrentUser } from "@/app/data/users/verify-auth-session";
-import { GithubRepository } from "./_components/add-repository";
 import { prisma } from "@buildinpubliq/db";
+import { GithubRepository } from "./_components/connect-repo-modal";
 
-export async function addRepository(selectedRepo: GithubRepository) {
+export async function connectRepository(selectedRepo: GithubRepository) {
   const user = await getCurrentUser();
 
   if (!user?.id) {
@@ -37,5 +37,19 @@ export async function addRepository(selectedRepo: GithubRepository) {
 
   await prisma.githubRepository.create({
     data: projectData,
+  });
+}
+
+export async function disconnectRepository(id: string) {
+  const user = await getCurrentUser();
+
+  if (!user?.id) {
+    throw new Error('Unauthorized');
+  }
+
+  await prisma.githubRepository.delete({
+    where: {
+      id
+    }
   });
 }

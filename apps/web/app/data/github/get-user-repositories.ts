@@ -3,9 +3,9 @@ import { redirect } from 'next/navigation';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { getGithubIntegrationToken } from './get-github-integration-token';
 import 'server-only';
-import type { GithubRepository } from '@/app/(main)/dashboard/repositories/_components/add-repository';
+import { GithubRepository } from '@/app/(main)/dashboard/repositories/_components/connect-repo-modal';
 
-export async function getInstalledRepositories(): Promise<GithubRepository[]> {
+export async function getUserRepositories(): Promise<GithubRepository[]> {
   const user = await getCurrentUser();
 
   if (!user?.id) {

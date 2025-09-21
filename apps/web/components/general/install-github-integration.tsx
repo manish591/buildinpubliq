@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { GithubSVGIcon } from '../svg-icons/github';
+import { IconBrandGithub } from '@tabler/icons-react';
 
 export function InstallGithubIntegration({
   className,
@@ -17,11 +17,11 @@ export function InstallGithubIntegration({
   return (
     <Button
       variant="outline"
-      className={cn('border py-2 px-3', className)}
+      className={cn('border py-2 px-3 cursor-pointer', className)}
       onClick={handleInstallGithubIntegration}
     >
-      <GithubSVGIcon />
-      <span>install github app</span>
+      <IconBrandGithub />
+      <span>Install Github App</span>
     </Button>
   );
 }

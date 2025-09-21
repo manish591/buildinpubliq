@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import { MainHeader } from '@/app/(main)/_components/main-header';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
-import { getAllGithubRepositories } from '@/app/data/github/get-all-github-repositories';
+import { getConnectedRepositories } from '@/app/data/github/get-connected-repositories';
 import { CreateIdeaModal } from './_components/create-idea-modal';
 import { IdeasList } from './_components/ideas-list';
 import { IdeasActionBar } from './_components/ideas-action-bar';
@@ -21,7 +21,7 @@ export default async function IdeasPage({
   const params = await searchParams;
   const query = (params.query as string) ?? undefined;
   const repository = (params.repository as string) ?? undefined;
-  const githubRepositories = await getAllGithubRepositories();
+  const githubRepositories = await getConnectedRepositories();
 
   return (
     <div>
