@@ -2,8 +2,18 @@
   "name": "post-scheduler",
   "version": "0.0.0",
   "private": true,
-  "scripts": {},
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "pnpm run build & node dist/index.js"
+  },
+  "dependencies": {
+    "@buildinpubliq/db": "workspace:*",
+    "@buildinpubliq/redis": "workspace:*",
+    "bullmq": "^5.58.7"
+  },
   "devDependencies": {
+    "@types/node": "^24.5.2",
     "typescript": "^5.5.2"
   }
 }
