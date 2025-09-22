@@ -1,15 +1,9 @@
 {
-  "name": "update-uploader",
+  "name": "upload-worker",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "deploy": "wrangler deploy",
-    "dev": "wrangler dev --test-scheduled",
-    "start": "wrangler dev --test-scheduled",
-    "cf-typegen": "wrangler types"
-  },
+  "scripts": {},
   "devDependencies": {
-    "typescript": "^5.5.2",
-    "wrangler": "^4.18.0"
+    "typescript": "^5.5.2"
   }
 }

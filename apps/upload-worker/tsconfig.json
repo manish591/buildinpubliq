@@ -1,41 +1,44 @@
 {
+  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    /* Visit https://aka.ms/tsconfig.json to read more about this file */
+    // File Layout
+    "rootDir": "./src",
+    "outDir": "./dist",
 
-    /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
-    "target": "es2021",
-    /* Specify a set of bundled library declaration files that describe the target runtime environment. */
-    "lib": ["es2021"],
-    /* Specify what JSX code is generated. */
-    "jsx": "react-jsx",
+    // Environment Settings
+    // See also https://aka.ms/tsconfig/module
+    "module": "nodenext",
+    "target": "esnext",
+    "types": [],
+    // For nodejs:
+    // "lib": ["esnext"],
+    // "types": ["node"],
+    // and npm install -D @types/node
 
-    /* Specify what module code is generated. */
-    "module": "es2022",
-    /* Specify how TypeScript looks up a file from a given module specifier. */
-    "moduleResolution": "node",
-    /* Enable importing .json files */
-    "resolveJsonModule": true,
+    // Other Outputs
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
 
-    /* Allow JavaScript files to be a part of your program. Use the `checkJS` option to get errors from these files. */
-    "allowJs": true,
-    /* Enable error reporting in type-checked JavaScript files. */
-    "checkJs": false,
+    // Stricter Typechecking Options
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
 
-    /* Disable emitting files from a compilation. */
-    "noEmit": true,
+    // Style Options
+    // "noImplicitReturns": true,
+    // "noImplicitOverride": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    // "noFallthroughCasesInSwitch": true,
+    // "noPropertyAccessFromIndexSignature": true,
 
-    /* Ensure that each file can be safely transpiled without relying on other imports. */
-    "isolatedModules": true,
-    /* Allow 'import x from y' when a module doesn't have a default export. */
-    "allowSyntheticDefaultImports": true,
-    /* Ensure that casing is correct in imports. */
-    "forceConsistentCasingInFileNames": true,
-
-    /* Enable all strict type-checking options. */
+    // Recommended Options
     "strict": true,
-
-    /* Skip type checking all .d.ts files. */
-    "skipLibCheck": true,
-    "types": ["./worker-configuration.d.ts"]
+    "jsx": "react-jsx",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true
   }
 }
