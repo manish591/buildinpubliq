@@ -155,6 +155,7 @@ model Channel {
 enum PostStatus {
   DRAFT
   PUBLISHED
+  PUBLISHING
   SCHEDULED
   FAILED
 }
