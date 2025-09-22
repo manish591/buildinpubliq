@@ -2,9 +2,25 @@
   "name": "github-worker",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {},
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "pnpm run build & node dist/index.js"
+  },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@ai-sdk/google": "2.1.0-beta.2",
+    "@buildinpubliq/db": "workspace:*",
+    "@buildinpubliq/redis": "workspace:*",
+    "ai": "5.1.0-beta.4",
+    "bullmq": "^5.58.7",
+    "dotenv": "^17.2.2",
+    "zod": "^3.24.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "typescript": "^5.9.2"
+  }
 }
