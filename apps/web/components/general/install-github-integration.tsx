@@ -1,8 +1,8 @@
 'use client';
 
+import { IconBrandGithub } from '@tabler/icons-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { IconBrandGithub } from '@tabler/icons-react';
 
 export function InstallGithubIntegration({
   className,

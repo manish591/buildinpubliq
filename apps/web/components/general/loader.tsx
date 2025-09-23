@@ -12,12 +12,12 @@ export function Loader({ className }: Readonly<{ className?: string }>) {
       xmlSpace="preserve"
       className={cn(className)}
     >
+      <title>Loader svg</title>
       <g
         strokeWidth="200"
         strokeLinecap="round"
         stroke="currentColor"
         fill="none"
-        id="spinner"
       >
         <line x1="1200" y1="600" x2="1200" y2="100" />
         <line opacity="0.5" x1="1200" y1="2300" x2="1200" y2="1800" />
