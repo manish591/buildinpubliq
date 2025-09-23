@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
-    "build": "tsc",
-    "start": "pnpm run build && node dist/index.js"
+    "build": "tsup",
+    "start": "pnpm run build && node dist/index.cjs"
   },
   "dependencies": {
     "@buildinpubliq/db": "workspace:*",

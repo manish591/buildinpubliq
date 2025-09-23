@@ -11,7 +11,6 @@ type PostToLinkedinData = {
   content: string;
   accessToken: string;
   linkedinUserId: string;
-  postId: string;
   channelId: string;
 };
 
@@ -19,7 +18,6 @@ async function postToLinkedin({
   content,
   accessToken,
   linkedinUserId,
-  postId,
   channelId,
 }: PostToLinkedinData) {
   const url = 'https://api.linkedin.com/v2/ugcPosts';
@@ -101,7 +99,6 @@ async function workerCallback(job: Job) {
 
     if (channelData.platform === "LINKEDIN") {
       await postToLinkedin({
-        postId: postData.id,
         channelId: channelData.id,
         content: postData.content,
         accessToken: channelData.accessToken,
