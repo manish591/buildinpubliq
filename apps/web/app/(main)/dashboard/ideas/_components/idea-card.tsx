@@ -1,13 +1,6 @@
 'use client';
 
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import type { Prisma } from '@buildinpubliq/db';
 import {
   IconBrandGithub,
   IconBulb,
@@ -17,10 +10,17 @@ import {
   IconTrash,
 } from '@tabler/icons-react';
 import { formatDistanceToNow } from 'date-fns';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
-import type { Prisma } from '@buildinpubliq/db';
-import { useEditPostModal } from './edit-idea-modal';
 import { useDeleteIdeaModal } from './delete-idea-modal';
+import { useEditPostModal } from './edit-idea-modal';
 import { useCreatePostModal } from '../../posts/_components/create-post-modal';
 
 export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {

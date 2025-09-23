@@ -1,8 +1,8 @@
 "use server";
 
-import { getCurrentUser } from "@/app/data/users/verify-auth-session";
 import { prisma } from "@buildinpubliq/db";
-import { GithubRepository } from "./_components/connect-repo-modal";
+import { getCurrentUser } from "@/app/data/users/verify-auth-session";
+import type { GithubRepository } from "./_components/connect-repo-modal";
 
 export async function connectRepository(selectedRepo: GithubRepository) {
   const user = await getCurrentUser();

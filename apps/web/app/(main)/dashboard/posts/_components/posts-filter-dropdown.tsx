@@ -28,8 +28,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { TwitterSVGIcon } from '@/components/svg-icons/twitter';
-import { LinkedinSVGIcon } from '@/components/svg-icons/linkedin';
+import { IconBrandLinkedin, IconBrandX } from '@tabler/icons-react';
 
 const filters = [
   {
@@ -48,13 +47,13 @@ const channelsFilter = [
   {
     value: 'twitter',
     label: 'Twitter',
-    icon: TwitterSVGIcon,
+    icon: IconBrandX,
     bg: 'bg-black',
   },
   {
     value: 'linkedin',
     label: 'LinkedIn',
-    icon: LinkedinSVGIcon,
+    icon: IconBrandLinkedin,
     bg: 'bg-[#0A66C2]',
   },
 ];

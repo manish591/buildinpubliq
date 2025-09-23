@@ -23,6 +23,7 @@ import { PostActionDropdown } from './post-action-dropdown';
 import { EditPostModal } from './edit-post-modal';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { useDeleteModal } from './delete-post-modal';
+import { IconUpload } from '@tabler/icons-react';
 
 const POST_STATUS_DATA = {
   [Prisma.PostStatus.DRAFT]: {
@@ -48,6 +49,12 @@ const POST_STATUS_DATA = {
     bgColor: 'bg-blue-50',
     borderColor: 'border-blue-200',
     icon: <Clock10 className="size-4" strokeWidth={1.5} />,
+  },
+  [Prisma.PostStatus.PUBLISHING]: {
+    color: 'text-yellow-400',
+    bgColor: 'bg-yellow-50',
+    borderColor: 'border-yellow-200',
+    icon: <IconUpload className="size-4" strokeWidth={1.5} />,
   },
 };
 

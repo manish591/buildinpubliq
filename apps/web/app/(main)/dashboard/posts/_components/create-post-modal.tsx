@@ -252,7 +252,7 @@ export function useCreatePostModal(defaultValues = { content: '' }) {
         setShowCreatePostModal={setShowCreatePostModal}
       />
     );
-  }, [showCreatePostModal]);
+  }, [showCreatePostModal, defaultValues]);
 
   return useMemo(
     () => ({

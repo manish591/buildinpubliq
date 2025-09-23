@@ -53,6 +53,10 @@ export function PostPreviewModal({
         content: post.scheduledAt ? 'Draft Scheduled for' : 'Draft',
         date: post.scheduledAt,
       },
+      [Prisma.PostStatus.PUBLISHING]: {
+        content: 'Publishing on',
+        date: post.scheduledAt,
+      },
     };
     return statusMap[post.status] ?? { content: '', date: undefined };
   })();

@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
-import { Prisma } from '@buildinpubliq/db';
+import type { Prisma } from '@buildinpubliq/db';
 import {
   IconBrandGithub,
   IconDotsVertical,

@@ -22,7 +22,8 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import type React from 'react';
 import { parseDate } from 'chrono-node';
 
 export function PostSchedulerModal({

@@ -1,11 +1,11 @@
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import { MainHeader } from '@/app/(main)/_components/main-header';
-import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { getConnectedRepositories } from '@/app/data/github/get-connected-repositories';
+import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { CreateIdeaModal } from './_components/create-idea-modal';
-import { IdeasList } from './_components/ideas-list';
 import { IdeasActionBar } from './_components/ideas-action-bar';
+import { IdeasList } from './_components/ideas-list';
 
 export default async function IdeasPage({
   searchParams,
