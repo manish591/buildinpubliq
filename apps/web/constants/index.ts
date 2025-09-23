@@ -1,6 +1,5 @@
 import { Prisma } from '@buildinpubliq/db';
-import { LinkedinSVGIcon } from '@/components/svg-icons/linkedin';
-import { TwitterSVGIcon } from '@/components/svg-icons/twitter';
+import { IconBrandLinkedin, IconBrandX } from '@tabler/icons-react';
 
 export const BASE_URL =
   process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
@@ -9,7 +8,7 @@ export const BASE_URL =
 export const AVAILABLE_PLATFORM = [
   {
     name: Prisma.Platform.TWITTER,
-    icon: TwitterSVGIcon,
+    icon: IconBrandX,
     iconBGColor: 'bg-black',
     title: 'Twitter/X',
     authBaseURL: 'https://x.com/i/oauth2/authorize',
@@ -24,7 +23,7 @@ export const AVAILABLE_PLATFORM = [
   },
   {
     name: Prisma.Platform.LINKEDIN,
-    icon: LinkedinSVGIcon,
+    icon: IconBrandLinkedin,
     iconBGColor: 'bg-[#0A66C2]',
     title: 'LinkedIn',
     authBaseURL: 'https://www.linkedin.com/oauth/v2/authorization',
