@@ -1,6 +1,7 @@
 import { prisma } from "@buildinpubliq/db";
 import { redis } from "@buildinpubliq/redis";
 import { Queue } from "bullmq";
+import cron from "node-cron";
 
 const scheduledPostsQueue = new Queue("scheduled-posts", {
   connection: redis
@@ -31,6 +32,10 @@ async function main() {
       }
     });
   }
+
+  await scheduledPostsQueue.close();
 }
 
-main().catch(console.error);
+cron.schedule('*/1 * * * *', () => {
+  main().catch(console.error);
+});
