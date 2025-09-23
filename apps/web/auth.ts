@@ -6,5 +6,5 @@ import GitHub from 'next-auth/providers/github';
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [GitHub],
-  secret: process.env.NEXTAUTH_SECRET ?? 'secret',
+  secret: process.env.NEXTAUTH_SECRET,
 });
