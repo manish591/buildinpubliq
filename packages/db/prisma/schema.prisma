@@ -137,7 +137,6 @@ model Channel {
   platform              Platform
   accessToken           String
   refreshToken          String?
-  accessTokenExpiresIn  DateTime
   platformUserId        String @unique
   platformUserName      String?
   platformUserImg       String?
