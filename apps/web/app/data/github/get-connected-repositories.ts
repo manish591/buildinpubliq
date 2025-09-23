@@ -1,8 +1,8 @@
 import 'server-only';
-import { z } from "zod";
 import { prisma } from '@buildinpubliq/db';
-import { getCurrentUser } from '../users/verify-auth-session';
+import { z } from "zod";
 import { BuildinpubliqError } from '@/lib/buildinpubliq-error';
+import { getCurrentUser } from '../users/verify-auth-session';
 
 const schema = z.object({
   query: z.string().optional()

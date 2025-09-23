@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { getGithubIntegrationToken } from './get-github-integration-token';
 import 'server-only';
-import { GithubRepository } from '@/app/(main)/dashboard/repositories/_components/connect-repo-modal';
+import type { GithubRepository } from '@/app/(main)/dashboard/repositories/_components/connect-repo-modal';
 
 export async function getUserRepositories(): Promise<GithubRepository[]> {
   const user = await getCurrentUser();
