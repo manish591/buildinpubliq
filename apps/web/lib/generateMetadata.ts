@@ -35,7 +35,7 @@ export function generateMetadata({
       creator: '@manishdevrani777',
     },
     icons,
-    metadataBase: new URL('https://buildd-eight.vercel.app'),
+    metadataBase: new URL('https://buildinpuliq.space'),
     ...(noIndex && {
       robots: {
         index: false,
