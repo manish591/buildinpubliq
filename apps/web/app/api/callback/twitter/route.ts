@@ -51,9 +51,6 @@ export const GET = auth(async function GET(req) {
 
   const tokenData = await tokenRes.json();
   const accessToken = tokenData.access_token;
-  const accessTokenExpiresIn = new Date(
-    Date.now() + tokenData.expires_in * 1000,
-  );
   const refreshToken = tokenData.refresh_token;
 
   const userRes = await fetch(
@@ -84,19 +81,16 @@ export const GET = auth(async function GET(req) {
     update: {
       accessToken,
       refreshToken,
-      accessTokenExpiresIn,
     },
     create: {
       platform: 'TWITTER',
       accessToken,
       refreshToken,
-      accessTokenExpiresIn,
       platformUserId,
       platformUserName,
       platformUserImg,
       platformUserEmail,
       userId: user.id,
-      isActive: true,
     },
   });
 

@@ -29,9 +29,6 @@ export const GET = auth(async function GET(req) {
 
   const tokenData = await getAccessToken(code);
   const accessToken = tokenData.access_token;
-  const accessTokenExpiresIn = new Date(
-    Date.now() + tokenData.expires_in * 1000,
-  );
 
   const userData = await getUserData(accessToken);
   const platformUserId = userData.sub;
@@ -46,18 +43,15 @@ export const GET = auth(async function GET(req) {
     },
     update: {
       accessToken,
-      accessTokenExpiresIn,
     },
     create: {
       platform: 'LINKEDIN',
       accessToken,
-      accessTokenExpiresIn,
       platformUserId,
       platformUserName,
       platformUserImg,
       platformUserEmail,
       userId: user.id,
-      isActive: true,
     },
   });
 
