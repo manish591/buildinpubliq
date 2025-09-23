@@ -143,7 +143,6 @@ model Channel {
   platformUserImg       String?
   platformUserEmail     String?
   userId                String
-  isActive              Boolean
   post                  Post[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
