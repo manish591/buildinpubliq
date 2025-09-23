@@ -18,7 +18,6 @@ async function main() {
 
   for (const post of postsAvailableToPost) {
     await scheduledPostsQueue.add("upload-post", {
-      userId: post.userId,
       postId: post.id,
       channelId: post.channelId,
     });

@@ -1,13 +1,9 @@
+import { google } from '@ai-sdk/google';
 import { prisma } from '@buildinpubliq/db';
 import { redis } from '@buildinpubliq/redis';
-import { Worker, Job, WorkerOptions } from 'bullmq';
 import { generateObject } from 'ai';
-import { google } from '@ai-sdk/google';
+import { type Job, Worker } from 'bullmq';
 import { z } from 'zod';
-
-const workerOptions: WorkerOptions = {
-  connection: redis,
-};
 
 type UninstallGithubIntegrationEventPayload = {
   installationId: string;
@@ -110,24 +106,23 @@ async function handleUninstallGithubIntegrationEvent(
 async function workerCallback(job: Job) {
   const jobName = job.name;
 
-  switch (jobName) {
-    case 'uninstall-github-integration': {
-      const jobData = job.data as UninstallGithubIntegrationEventPayload;
-      await handleUninstallGithubIntegrationEvent(jobData);
-      break;
-    }
-    case 'generate-idea': {
-      const jobData = job.data as GenerateIdeaEventPayload;
-      await handleGenerateIdeaEvent(jobData);
-      break;
-    }
-    default:
-      console.log('Unknown job');
+  if (jobName === 'uninstall-github-integration') {
+    const jobData = job.data as UninstallGithubIntegrationEventPayload;
+    await handleUninstallGithubIntegrationEvent(jobData);
+    return;
   }
+
+  if (jobName === 'generate-idea') {
+    const jobData = job.data as GenerateIdeaEventPayload;
+    await handleGenerateIdeaEvent(jobData);
+    return;
+  }
+
+  console.log("Unknown job name: ", jobName);
 }
 
-const worker = new Worker('github-events', workerCallback, workerOptions);
-
-worker.on('error', () => {
-  console.log('Error occured in the worker');
+const worker = new Worker('github-events', workerCallback, {
+  connection: redis
 });
+
+worker.on('error', console.error);

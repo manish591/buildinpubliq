@@ -2,8 +2,20 @@
   "name": "upload-worker",
   "version": "0.0.0",
   "private": true,
-  "scripts": {},
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "pnpm run build && node dist/index.js"
+  },
+  "dependencies": {
+    "@buildinpubliq/db": "workspace:*",
+    "@buildinpubliq/redis": "workspace:*",
+    "bullmq": "^5.58.7",
+    "dotenv": "^17.2.2"
+  },
   "devDependencies": {
+    "@types/node": "^24.5.2",
+    "tsup": "^8.5.0",
     "typescript": "^5.5.2"
   }
 }
