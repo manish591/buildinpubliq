@@ -13,9 +13,9 @@ import {
 } from '@/components/ui/sidebar';
 import { AppLogo } from '@/components/web/app-logo';
 import { cn } from '@/lib/utils';
+import { NavLibrary } from './nav-library';
 import { NavMain } from './nav-main';
 import { NavSettings } from './nav-settings';
-import { NavLibrary } from './nav-library';
 
 export function AppSidebarSecondary() {
   const pathname = usePathname();
