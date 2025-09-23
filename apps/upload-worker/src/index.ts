@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { prisma } from '@buildinpubliq/db';
 import { redis } from '@buildinpubliq/redis';
 import { type Job, Worker } from 'bullmq';
@@ -11,14 +12,65 @@ type PostToLinkedinData = {
   content: string;
   accessToken: string;
   linkedinUserId: string;
-  channelId: string;
 };
+
+type PostToTwitterData = {
+  content: string,
+  accessToken: string,
+  channelId: string,
+  refreshToken: string
+}
+
+const TWITTER_CLIENT_ID = process.env.TWITTER_CLIENT_ID;
+const TWITTER_CLIENT_SECRET = process.env.TWITTER_CLIENT_SECRET;
+
+async function refreshTwitterAccessToken(refreshToken: string): Promise<{
+  access_token: string,
+  refresh_token: string,
+  expires_in: number
+} | null> {
+  if (!TWITTER_CLIENT_ID || !TWITTER_CLIENT_SECRET) {
+    console.log("Invalid client id and client secert");
+    return null;
+  }
+
+  const params = new URLSearchParams({
+    refresh_token: refreshToken,
+    grant_type: 'refresh_token',
+    client_id: TWITTER_CLIENT_ID,
+  });
+
+  const basicAuth = Buffer.from(`${TWITTER_CLIENT_ID}:${TWITTER_CLIENT_SECRET}`).toString('base64');
+
+  try {
+    const res = await fetch('https://api.x.com/2/oauth2/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Basic ${basicAuth}`,
+      },
+      body: params.toString(),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error('Error while refreshing twitter/x token:', errorData);
+      return null;
+    }
+
+    const data = await res.json();
+    console.log('Token refreshed successfully');
+    return data;
+  } catch (err) {
+    console.log("Failed to refresh twitter access token", err);
+    return null;
+  }
+}
 
 async function postToLinkedin({
   content,
   accessToken,
   linkedinUserId,
-  channelId,
 }: PostToLinkedinData) {
   const url = 'https://api.linkedin.com/v2/ugcPosts';
   const body = JSON.stringify({
@@ -47,34 +99,85 @@ async function postToLinkedin({
     body,
   };
 
-  const res = await fetch(url, options);
-  const data = await res.json();
+  try {
+    const res = await fetch(url, options);
 
-  if (!res.ok) {
-    const status = data.status;
-
-    if (status === 401) {
-      const errorCode = data.serviceErrorCode;
-
-      if (errorCode === 65600) {
-        await prisma.channel.update({
-          where: {
-            id: channelId,
-          },
-          data: {
-            isActive: false,
-          },
-        });
-      }
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.log("Failed to upload post to linkedin", errorData);
+      const message = errorData.message;
+      throw new Error(message);
     }
 
-    console.log("Failed to upload post to linkedin");
-    throw new Error("Failed to upload post to linkedin");
+    console.log("Successfully published post to linkedin");
+  } catch (err) {
+    console.log("Error occured while publishing post to linkedin", err);
+    const errMessage = err instanceof Error ? err.message : String(err);
+    throw new Error(errMessage);
   }
 }
 
-async function postToTwitter() {
+async function postToTwitter({
+  content,
+  channelId,
+  accessToken,
+  refreshToken
+}: PostToTwitterData) {
+  const url = 'https://api.x.com/2/tweets'
+  const options = {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`
+    },
+    body: JSON.stringify({
+      text: content
+    })
+  };
 
+  try {
+    const res = await fetch(url, options);
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      const status = errorData.status;
+
+      if (status === 401) {
+        const refreshTokenData = await refreshTwitterAccessToken(refreshToken);
+
+        if (refreshTokenData) {
+          await prisma.channel.update({
+            where: {
+              id: channelId,
+            },
+            data: {
+              accessToken: refreshTokenData.access_token,
+              refreshToken: refreshTokenData.refresh_token,
+            }
+          });
+
+          postToTwitter({
+            content,
+            channelId,
+            refreshToken,
+            accessToken
+          });
+        } else {
+          const errorMessage = "Failed to refresh twitter/x access token";
+          throw new Error(errorMessage);
+        }
+      } else {
+        const errorMessage = errorData.detail ?? "Unexpected error occcured";
+        throw new Error(errorMessage);
+      }
+    }
+
+    console.log("Published the post to twitter/x successfully");
+  } catch (err) {
+    console.log("Error occured while publishing post to twitter/x", err);
+    const errMessage = err instanceof Error ? err.message : String(err);
+    throw new Error(errMessage);
+  }
 }
 
 async function workerCallback(job: Job) {
@@ -94,18 +197,22 @@ async function workerCallback(job: Job) {
     });
 
     if (!postData || !channelData) {
-      throw new Error("Failed to retreive post and channel data");
+      throw new Error("Failed to retrieve post and channel data");
     }
 
     if (channelData.platform === "LINKEDIN") {
       await postToLinkedin({
-        channelId: channelData.id,
         content: postData.content,
         accessToken: channelData.accessToken,
         linkedinUserId: channelData.platformUserId
       });
     } else if (channelData.platform === "TWITTER") {
-      await postToTwitter();
+      await postToTwitter({
+        content: postData.content,
+        accessToken: channelData.accessToken,
+        channelId: channelData.id,
+        refreshToken: channelData.refreshToken as string
+      });
     }
 
     await prisma.post.update({
@@ -117,9 +224,8 @@ async function workerCallback(job: Job) {
       }
     });
 
-    console.log("Upload post successfully");
+    console.log("Published the post successfully");
   } catch (err) {
-    console.log("Error occured while processing job: ", err);
     const attemptsMade = job.attemptsMade + 1;
     const maxAttempts = job.opts.attempts ?? 1;
 
@@ -134,7 +240,8 @@ async function workerCallback(job: Job) {
       });
     }
 
-    throw new Error("Error while processing the job");
+    const errMessage = err instanceof Error ? err.message : String(err);
+    throw new Error(errMessage);
   }
 }
 
@@ -143,5 +250,5 @@ const worker = new Worker('scheduled-posts', workerCallback, {
 });
 
 worker.on('error', (err) => {
-  console.log("Error occured while uploading post", err);
+  console.log("Error occured while publishing post", err.message);
 });
