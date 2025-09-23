@@ -1,8 +1,7 @@
+import { IconBrandGithub, IconBrandGoogle } from '@tabler/icons-react';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { GithubSVGIcon } from '@/components/svg-icons/github';
-import { GoogleSVGIcon } from '@/components/svg-icons/google';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -67,14 +66,14 @@ export default async function Login() {
                 <div className="grid gap-6">
                   <div className="flex flex-col gap-4">
                     <LoginWithGithub>
-                      <GithubSVGIcon />
+                      <IconBrandGithub />
                       Continue With Github
                     </LoginWithGithub>
                     <Button
                       variant="outline"
                       className="hidden w-full cursor-pointer"
                     >
-                      <GoogleSVGIcon />
+                      <IconBrandGoogle />
                       Continue With Google
                     </Button>
                   </div>
