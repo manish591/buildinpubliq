@@ -1,7 +1,7 @@
+import type { NextRequest } from "next/server";
 import { getUserRepositories } from "@/app/data/github/get-user-repositories";
-import { NextRequest } from "next/server";
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     const data = await getUserRepositories();
 
