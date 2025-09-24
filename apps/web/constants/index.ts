@@ -1,5 +1,6 @@
 import { Prisma } from '@buildinpubliq/db';
-import { IconBrandLinkedin, IconBrandX } from '@tabler/icons-react';
+import { IconBrandX } from '@tabler/icons-react';
+import { Linkedin } from 'lucide-react';
 
 export const BASE_URL =
   process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
@@ -23,7 +24,7 @@ export const AVAILABLE_PLATFORM = [
   },
   {
     name: Prisma.Platform.LINKEDIN,
-    icon: IconBrandLinkedin,
+    icon: Linkedin,
     iconBGColor: 'bg-[#0A66C2]',
     title: 'LinkedIn',
     authBaseURL: 'https://www.linkedin.com/oauth/v2/authorization',

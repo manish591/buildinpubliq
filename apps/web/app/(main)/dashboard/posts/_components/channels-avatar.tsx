@@ -36,7 +36,7 @@ export function ChannelsAvatar({
       onClick={toggleChannel}
       className={cn(
         'relative p-0 w-12 h-12 rounded-full bg-transparent border-0 shadow-none',
-        'flex items-center justify-center',
+        'flex items-center justify-center cursor-pointer',
       )}
     >
       <Avatar className={cn('w-12 h-12', !isChannelSelected && 'saturate-0')}>
@@ -45,14 +45,14 @@ export function ChannelsAvatar({
       </Avatar>
       {PlatformIcon && (
         <span className="absolute size-[22px] bg-background right-0 bottom-0 rounded-full flex items-center justify-center">
-          <PlatformIcon
+          <span
             className={cn(
-              'size-[18px] p-0.5 rounded-full',
+              'h-[18px] w-[18px] p-0.5 rounded-full',
               platformData?.iconBGColor,
-              !isChannelSelected && 'saturate-0',
             )}
-            aria-hidden
-          />
+          >
+            <PlatformIcon className={cn('text-white w-full! h-full!')} />
+          </span>
         </span>
       )}
     </Button>

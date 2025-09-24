@@ -36,12 +36,16 @@ export function ChannelCard({
           </Avatar>
           <div className="absolute size-[22px] bg-background right-0 bottom-[0%] rounded-full flex items-center justify-center">
             {platformData && (
-              <platformData.icon
+              <span
                 className={cn(
-                  'size-[18px] p-0.5 rounded-full text-white',
+                  'h-[18px] w-[18px] p-0.5 rounded-full',
                   platformData.iconBGColor,
                 )}
-              />
+              >
+                <platformData.icon
+                  className={cn('text-white w-full! h-full!')}
+                />
+              </span>
             )}
           </div>
         </div>

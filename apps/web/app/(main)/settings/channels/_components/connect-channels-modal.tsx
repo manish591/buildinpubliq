@@ -38,7 +38,7 @@ export function ConnectChannelsModal() {
                     ...platform.authQueryParams,
                     state: encodeURIComponent(
                       JSON.stringify({
-                        redirect: '/onboarding/connect-channels',
+                        redirect: '/settings/channels',
                       }),
                     ),
                   },

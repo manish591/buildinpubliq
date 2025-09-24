@@ -79,12 +79,14 @@ export function PostCard({
 
   const renderPlatformIcon = () =>
     PlatformIcon ? (
-      <PlatformIcon
+      <span
         className={cn(
-          'size-[18px] p-0.5 rounded-full text-white',
+          'h-[18px] w-[18px] p-0.5 rounded-full',
           platformData?.iconBGColor,
         )}
-      />
+      >
+        <PlatformIcon className={cn('text-white w-full! h-full!')} />
+      </span>
     ) : null;
 
   const renderTimestamp = () => (
