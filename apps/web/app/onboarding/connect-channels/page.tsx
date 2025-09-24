@@ -67,10 +67,10 @@ export default async function OnboardingConnectChanneslsPage() {
                 ),
               })}
             >
-              <div
-                className={cn('w-12 h-12 p-1 rounded-md', platform.iconBGColor)}
-              >
-                <platform.icon className="w-full! h-full!" />
+              <div className={cn('w-12 h-12')}>
+                <platform.icon
+                  className={cn('w-full! h-full!', platform.iconBGColor)}
+                />
               </div>
               <p className="font-medium text-lg mt-3">{platform.title}</p>
               <p className="text-muted-foreground mt-1">Profile</p>
@@ -85,7 +85,14 @@ export default async function OnboardingConnectChanneslsPage() {
           </Link>
         </Button>
         <Button asChild>
-          <Link href="/onboarding/install-github-app">Continue</Link>
+          <Link
+            href="/onboarding/install-github-app"
+            className={cn(
+              connectedPlatform.size === 0 && 'pointer-events-none opacity-80',
+            )}
+          >
+            Continue
+          </Link>
         </Button>
       </div>
     </>
