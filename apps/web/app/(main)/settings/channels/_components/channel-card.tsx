@@ -27,7 +27,7 @@ export function ChannelCard({
   >;
 
   return (
-    <div className="border rounded-md p-4 px-6 flex items-center justify-between">
+    <div className="border rounded-md p-4 px-6 flex items-center justify-between hover:bg-muted transition-colors">
       <div className="flex items-center gap-4">
         <div className="relative w-max">
           <Avatar className="w-12 h-12">
@@ -38,7 +38,7 @@ export function ChannelCard({
             {platformData && (
               <platformData.icon
                 className={cn(
-                  'size-[18px] p-0.5 rounded-full',
+                  'size-[18px] p-0.5 rounded-full text-white',
                   platformData.iconBGColor,
                 )}
               />
@@ -62,7 +62,7 @@ export function ChannelCard({
           <DropdownMenuContent align="end">
             <DropdownMenuItem className="flex gap-2 items-center" asChild>
               <ConnectChannelButton
-                className="hover:shadow-none h-8 hover:bg-secondary font-normal"
+                className="hover:shadow-none h-8 hover:bg-secondary font-normal cursor-pointer"
                 authorizationURL={constructChannelAuthURL(platformAuthURL, {
                   ...platformQueryParams,
                   state: encodeURIComponent(

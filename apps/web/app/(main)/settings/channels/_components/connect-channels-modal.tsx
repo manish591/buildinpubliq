@@ -18,7 +18,7 @@ export function ConnectChannelsModal() {
       <DialogTrigger asChild className="cursor-pointer">
         <Button>Connect Channel</Button>
       </DialogTrigger>
-      <DialogContent className="max-w-2xl!">
+      <DialogContent className="max-w-2xl! rounded-xl">
         <DialogHeader>
           <DialogTitle>Connect Your Channels</DialogTitle>
           <DialogDescription>
@@ -46,7 +46,7 @@ export function ConnectChannelsModal() {
               >
                 <div
                   className={cn(
-                    'w-12 h-12 p-1 rounded-md',
+                    'w-12 h-12 p-1 rounded-md text-white',
                     platform.iconBGColor,
                   )}
                 >

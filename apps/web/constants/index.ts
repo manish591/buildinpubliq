@@ -9,7 +9,7 @@ export const AVAILABLE_PLATFORM = [
   {
     name: Prisma.Platform.TWITTER,
     icon: IconBrandX,
-    iconBGColor: 'text-black',
+    iconBGColor: 'bg-black',
     title: 'Twitter/X',
     authBaseURL: 'https://x.com/i/oauth2/authorize',
     authQueryParams: {
@@ -24,7 +24,7 @@ export const AVAILABLE_PLATFORM = [
   {
     name: Prisma.Platform.LINKEDIN,
     icon: IconBrandLinkedin,
-    iconBGColor: 'text-[#0A66C2]',
+    iconBGColor: 'bg-[#0A66C2]',
     title: 'LinkedIn',
     authBaseURL: 'https://www.linkedin.com/oauth/v2/authorization',
     authQueryParams: {
