@@ -1,4 +1,4 @@
-import { IconArrowRight, IconMenu3 } from '@tabler/icons-react';
+import { IconMenu3 } from '@tabler/icons-react';
 import Link from 'next/link';
 import {
   Sheet,
@@ -9,12 +9,11 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { AppLogo } from '@/components/web/app-logo';
-import { Button } from '../ui/button';
 
 export function Header() {
   return (
     <header className="z-10 sticky top-0 backdrop-blur-lg">
-      <div className="flex items-center h-16 max-w-6xl px-4 mx-auto gap-10">
+      <div className="flex items-center h-16 max-w-[1380px] px-4 mx-auto gap-10">
         <AppLogo>
           <AppLogo.LogoIcon>
             <span className="mt-[1px] font-bold text-white text-2xl text-shadow-[1.5px_1.5px_0px_rgba(0,0,0,1)]">
@@ -54,6 +53,9 @@ export function Header() {
               <Link href="#integrations" className="text-base font-medium">
                 Integrations
               </Link>
+              <Link href="#pricing" className="text-base font-medium">
+                Pricing
+              </Link>
               <Link
                 href="https://buildinpubliq.blogbee.site"
                 target="_blank"
@@ -62,24 +64,9 @@ export function Header() {
                 Blog
               </Link>
             </nav>
-            <div className="mt-6 flex flex-col gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="cursor-pointer"
-                asChild
-              >
-                <Link href="/auth">Login</Link>
-              </Button>
-              <Button size="sm" className="cursor-pointer" asChild>
-                <Link href="/auth">
-                  Get Started <IconArrowRight />
-                </Link>
-              </Button>
-            </div>
           </SheetContent>
         </Sheet>
-        <nav className="gap-4 sm:gap-8 items-center hidden sm:flex mt-[2px]">
+        <nav className="ml-auto gap-4 sm:gap-8 items-center hidden sm:flex mt-[2px]">
           <Link
             href="#features"
             className="font-normal hover:opacity-80 transition-opacity"
@@ -93,6 +80,12 @@ export function Header() {
             Integrations
           </Link>
           <Link
+            href="#pricing"
+            className="font-normal hover:opacity-80 transition-opacity"
+          >
+            Pricing
+          </Link>
+          <Link
             href="https://buildinpubliq.blogbee.site"
             target="_blank"
             className="font-normal hover:opacity-80 transition-opacity"
@@ -100,21 +93,6 @@ export function Header() {
             Blog
           </Link>
         </nav>
-        <div className="ml-auto hidden sm:flex items-center gap-4">
-          <Button
-            variant="outline"
-            size="sm"
-            className="cursor-pointer"
-            asChild
-          >
-            <Link href="/auth">Login</Link>
-          </Button>
-          <Button size="sm" className="cursor-pointer" asChild>
-            <Link href="/auth">
-              Get Started <IconArrowRight />
-            </Link>
-          </Button>
-        </div>
       </div>
     </header>
   );
