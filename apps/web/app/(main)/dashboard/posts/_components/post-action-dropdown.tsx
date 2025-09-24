@@ -15,7 +15,7 @@ export function PostActionDropdown({
         <Button
           variant="ghost"
           size="sm"
-          className="w-8 h-7 hover:bg-secondary group-hover:bg-secondary group-hover:border"
+          className="cursor-pointer w-8 h-7 hover:bg-secondary group-hover:bg-secondary group-hover:border"
         >
           <EllipsisVertical />
         </Button>

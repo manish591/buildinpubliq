@@ -81,7 +81,7 @@ export function PostCard({
     PlatformIcon ? (
       <PlatformIcon
         className={cn(
-          'size-[18px] p-0.5 rounded-full',
+          'size-[18px] p-0.5 rounded-full text-white',
           platformData?.iconBGColor,
         )}
       />
@@ -139,7 +139,7 @@ export function PostCard({
               <PostActionDropdown>
                 {post.status !== Prisma.PostStatus.PUBLISHED && (
                   <DropdownMenuItem
-                    className="flex gap-2 items-center"
+                    className="flex gap-2 items-center cursor-pointer"
                     onClick={() => {
                       setIsEditPostModalOpen(true);
                     }}
@@ -147,21 +147,21 @@ export function PostCard({
                     <SquarePen className="size-4" /> <span>Edit</span>
                   </DropdownMenuItem>
                 )}
-                <DropdownMenuItem className="hidden gap-2 items-center">
+                <DropdownMenuItem className="hidden gap-2 items-center cursor-pointer">
                   <CopyPlus className="size-4" /> <span>Duplicate</span>
                 </DropdownMenuItem>
                 {post.status === Prisma.PostStatus.PUBLISHED && (
                   <>
-                    <DropdownMenuItem className="flex gap-2 items-center">
+                    <DropdownMenuItem className="flex gap-2 items-center cursor-pointer">
                       <ExternalLink className="size-4" /> <span>View Post</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="flex gap-2 items-center">
+                    <DropdownMenuItem className="flex gap-2 items-center cursor-pointer">
                       <Copy className="size-4" /> <span>Copy Link</span>
                     </DropdownMenuItem>
                   </>
                 )}
                 <DropdownMenuItem
-                  className="flex gap-2 items-center text-destructive!"
+                  className="flex gap-2 items-center text-destructive! cursor-pointer"
                   onClick={() => {
                     setShowDeletePostModal(true);
                   }}
