@@ -12,7 +12,7 @@ import { AppLogo } from '@/components/web/app-logo';
 
 export function Header() {
   return (
-    <header className="z-10 sticky top-0 backdrop-blur-lg">
+    <header className="z-20 sticky top-0 backdrop-blur-lg">
       <div className="flex items-center h-16 max-w-[1380px] px-4 mx-auto gap-10">
         <AppLogo>
           <AppLogo.LogoIcon>
