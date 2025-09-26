@@ -17,7 +17,8 @@ import { Button } from '../ui/button';
 
 export function FeaturesSection() {
   return (
-    <section className="relative mt-16">
+    // biome-ignore lint/correctness/useUniqueElementIds: false positive
+    <section id="features" className="relative mt-16">
       <div className="w-full max-w-[1380px] mx-auto px-4">
         <div className="flex justify-center">
           <Badge
@@ -239,14 +240,14 @@ export function FeaturesSection() {
             <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-4">
               <div className="p-8 gap-2 border bg-background flex flex-col items-center justify-center rounded-md">
                 <IconExchange className="size-8 text-primary" />
-                <p className="text-lg text-muted-foreground/80 text-center">
+                <p className="text-base leading-[1.3] text-muted-foreground/80 text-center">
                   More <br />
                   Channels
                 </p>
               </div>
               <div className="p-8 gap-2 border bg-background flex flex-col items-center justify-center rounded-md">
                 <IconChartLine className="size-8 text-primary" />
-                <p className="text-lg text-muted-foreground/80 text-center">
+                <p className="text-base leading-[1.3] text-muted-foreground/80 text-center">
                   Channel <br />
                   Analytics
                 </p>
