@@ -9,9 +9,9 @@ type GenerateMetadataProps = {
 };
 
 export function generateMetadata({
-  title = 'buildinpubliq - promoting building in public',
-  description = 'create your projects in the open and be discovered by a community eager to connect, collaborate, and celebrate innovation. share your learning each for better visibility.',
-  image = '/thumbnail.png',
+  title = 'Buildinpubliq - Where Code Becomes Content',
+  description = 'Show your progress, not just your product. BuildinPubliq turns your GitHub activity into ready-to-post content for Twitter, LinkedIn, and more.',
+  image = '/thumbnail.webp',
   icons = '/favicon.ico',
   noIndex = false,
 }: GenerateMetadataProps = {}): Metadata {
@@ -32,7 +32,7 @@ export function generateMetadata({
       title,
       description,
       images: [image],
-      creator: '@manishdevrani777',
+      creator: '@manishdevrani77',
     },
     icons,
     metadataBase: new URL('https://buildinpuliq.space'),
