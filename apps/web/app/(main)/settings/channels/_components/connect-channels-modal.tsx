@@ -46,7 +46,7 @@ export function ConnectChannelsModal() {
               >
                 <div
                   className={cn(
-                    'w-12 h-12 p-1 rounded-md text-white',
+                    'w-12 h-12 p-1 rounded-[4px] text-white',
                     platform.iconBGColor,
                   )}
                 >

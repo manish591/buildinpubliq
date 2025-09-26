@@ -53,7 +53,7 @@ export function IdeasFilterDropdown({
     >
       <PopoverTrigger asChild>
         <Button variant="outline" className="cursor-pointer">
-          <IconFilter2 />
+          <IconFilter2 className="text-muted-foreground" />
           Filters
           <IconChevronDown className="text-foreground/70" />
         </Button>

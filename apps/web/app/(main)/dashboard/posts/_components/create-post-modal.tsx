@@ -95,7 +95,7 @@ function CreatePostModalForm({
           </div>
         </div>
       )}
-      <div className="max-h-[300px] overflow-y-auto px-6 py-4">
+      <div className="max-h-[320px] overflow-y-auto px-6 py-4">
         {channels.length === 0 ? (
           <div className="min-h-[250px] h-full">
             <div className="h-full flex items-center justify-center">

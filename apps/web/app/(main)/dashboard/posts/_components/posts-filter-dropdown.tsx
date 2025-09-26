@@ -9,7 +9,7 @@ import {
   Clock10,
   FileCheck,
   FileText,
-  ListFilter,
+  Linkedin,
   Radio,
 } from 'lucide-react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
@@ -28,7 +28,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { IconBrandLinkedin, IconBrandX } from '@tabler/icons-react';
+import { IconBrandX, IconFilter2 } from '@tabler/icons-react';
 
 const filters = [
   {
@@ -53,7 +53,7 @@ const channelsFilter = [
   {
     value: 'linkedin',
     label: 'LinkedIn',
-    icon: IconBrandLinkedin,
+    icon: Linkedin,
     bg: 'bg-[#0A66C2]',
   },
 ];
@@ -101,7 +101,7 @@ export function PostsFilterDropdown() {
     >
       <PopoverTrigger asChild>
         <Button variant="outline" className="cursor-pointer">
-          <ListFilter />
+          <IconFilter2 className="text-muted-foreground" />
           Filters
           <ChevronDown className="text-foreground/70" />
         </Button>
@@ -120,7 +120,7 @@ export function PostsFilterDropdown() {
                     onSelect={(currentValue) => {
                       setCurrentFilter(currentValue);
                     }}
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-2 cursor-pointer"
                   >
                     <filter.icon />
                     {filter.label}
@@ -140,13 +140,16 @@ export function PostsFilterDropdown() {
                   <CommandItem
                     key={filter.value}
                     value={filter.value}
+                    className="cursor-pointer"
                     onSelect={(currentValue) => {
                       const params = new URLSearchParams(searchParams);
                       params.set('channel', currentValue);
                       router.push(`${pathname}?${params.toString()}`);
                     }}
                   >
-                    <filter.icon className={cn('size-4', filter.bg)} />
+                    <span className={cn('p-0.5 rounded-[4px]', filter.bg)}>
+                      <filter.icon className={cn('size-4 text-white')} />
+                    </span>
                     {filter.label}
                     <Check
                       className={cn(
@@ -170,6 +173,7 @@ export function PostsFilterDropdown() {
                   <CommandItem
                     key={filter.value}
                     value={filter.value}
+                    className="cursor-pointer"
                     onSelect={(currentValue) => {
                       const params = new URLSearchParams(searchParams);
                       params.set('status', currentValue);

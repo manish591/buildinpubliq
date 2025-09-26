@@ -59,8 +59,15 @@ export function ChannelCard({
       <div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild className="cursor-pointer">
-            <Button size="icon" variant="ghost">
-              <EllipsisVertical />
+            <Button
+              size="icon"
+              variant="outline"
+              className={cn(
+                'w-7 h-7 border-transparent hover:bg-muted',
+                'hover:border-border group-hover:border-border cursor-pointer',
+              )}
+            >
+              <EllipsisVertical className="size-[14px]!" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">

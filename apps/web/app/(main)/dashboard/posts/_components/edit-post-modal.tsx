@@ -105,7 +105,7 @@ export function EditPostModal({
               {PlatformIcon && (
                 <PlatformIcon
                   className={cn(
-                    'size-6 p-1 rounded-full',
+                    'size-6 p-1 rounded-full text-white',
                     platformData?.iconBGColor,
                   )}
                   aria-hidden
@@ -141,7 +141,7 @@ export function EditPostModal({
               setScheduledAt={setScheduledAt}
             />
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             {post.status === 'SCHEDULED' ? (
               <Button
                 size="sm"

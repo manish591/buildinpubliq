@@ -154,10 +154,10 @@ export function PostCard({
                 </DropdownMenuItem>
                 {post.status === Prisma.PostStatus.PUBLISHED && (
                   <>
-                    <DropdownMenuItem className="flex gap-2 items-center cursor-pointer">
+                    <DropdownMenuItem className="hidden gap-2 items-center cursor-pointer">
                       <ExternalLink className="size-4" /> <span>View Post</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="flex gap-2 items-center cursor-pointer">
+                    <DropdownMenuItem className="hidden gap-2 items-center cursor-pointer">
                       <Copy className="size-4" /> <span>Copy Link</span>
                     </DropdownMenuItem>
                   </>

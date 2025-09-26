@@ -27,7 +27,7 @@ export function ConnectedRepoCard({
 
   return (
     <>
-      <div className="p-4 hover:bg-muted/70 group">
+      <div className="p-4 hover:bg-muted/70 group rounded-md">
         <div className="flex items-center gap-4">
           <div className="shrink-0 w-7 h-7 flex items-center justify-center border rounded-full bg-gradient-to-b from-transparent to-secondary ">
             <IconBrandGithub
@@ -59,13 +59,14 @@ export function ConnectedRepoCard({
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
+                      size="icon"
                       variant="outline"
                       className={cn(
                         'w-7 h-7 border-transparent hover:bg-muted',
                         'hover:border-border group-hover:border-border cursor-pointer',
                       )}
                     >
-                      <IconDotsVertical />
+                      <IconDotsVertical className="size-[14px]!" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">

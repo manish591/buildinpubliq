@@ -5,6 +5,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
 
 export function PostActionDropdown({
   children,
@@ -13,11 +14,14 @@ export function PostActionDropdown({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="ghost"
-          size="sm"
-          className="cursor-pointer w-8 h-7 hover:bg-secondary group-hover:bg-secondary group-hover:border"
+          size="icon"
+          variant="outline"
+          className={cn(
+            'w-7 h-7 border-transparent hover:bg-muted',
+            'hover:border-border group-hover:border-border cursor-pointer',
+          )}
         >
-          <EllipsisVertical />
+          <EllipsisVertical className="size-[14px]!" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">{children}</DropdownMenuContent>

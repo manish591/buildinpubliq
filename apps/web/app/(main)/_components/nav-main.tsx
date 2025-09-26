@@ -1,4 +1,3 @@
-import { Lightbulb, StickyNote } from 'lucide-react';
 import Link from 'next/link';
 import {
   SidebarGroup,
@@ -7,17 +6,18 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { IconBulb, IconNote } from '@tabler/icons-react';
 
 const items = [
   {
     title: 'Posts',
     url: '/dashboard/posts',
-    icon: StickyNote,
+    icon: IconNote,
   },
   {
     title: 'Ideas',
     url: '/dashboard/ideas',
-    icon: Lightbulb,
+    icon: IconBulb,
   },
 ];
 

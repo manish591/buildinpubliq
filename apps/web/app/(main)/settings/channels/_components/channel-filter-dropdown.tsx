@@ -25,7 +25,7 @@ export function ChannelFilterDropdown() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="cursor-pointer self-start">
-            <Filter />
+            <Filter className="text-muted-foreground" />
             Filter
             <ChevronDown className="text-foreground/70" />
           </Button>

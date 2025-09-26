@@ -1,4 +1,4 @@
-import { ExternalLink, LifeBuoy, LogOut, Send, Settings } from 'lucide-react';
+import { ExternalLink, LogOut, Settings } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
@@ -17,6 +17,7 @@ import {
 import { Sidebar, SidebarMenu } from '@/components/ui/sidebar';
 import { AppLogo } from '@/components/web/app-logo';
 import { AppSidebarSecondary } from './app-sidebar-secondary';
+import { IconHelp, IconSend } from '@tabler/icons-react';
 
 export async function AppSidebar({
   ...props
@@ -43,13 +44,22 @@ export async function AppSidebar({
           <div className="mt-auto flex flex-col gap-6 items-center justify-center">
             <div className="flex flex-col gap-3">
               <Button asChild size="icon" variant="ghost">
-                <Link href="/support">
-                  <LifeBuoy className="w-4 h-4 text-foreground/60" />
+                <Link href="#">
+                  <IconHelp
+                    strokeWidth={1.5}
+                    className="size-5! text-foreground/60"
+                  />
                 </Link>
               </Button>
               <Button asChild size="icon" variant="ghost">
-                <Link href="/feedback">
-                  <Send className="w-4 h-4 text-foreground/60" />
+                <Link
+                  href="https://x.com/messages/1153611581646704640-1153611581646704640?recipient_id=1153611581646704640"
+                  target="_blank"
+                >
+                  <IconSend
+                    strokeWidth={1.5}
+                    className="size-5! text-foreground/60"
+                  />
                 </Link>
               </Button>
             </div>

@@ -84,13 +84,14 @@ export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
+                    size="icon"
                     variant="outline"
                     className={cn(
                       'w-7 h-7 border-transparent hover:bg-muted',
                       'hover:border-border group-hover:border-border cursor-pointer',
                     )}
                   >
-                    <IconDotsVertical />
+                    <IconDotsVertical className="size-[14px]!" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
@@ -113,7 +114,7 @@ export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
                     Edit
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    className="flex items-center gap-2 cursor-pointer"
+                    className="flex items-center gap-2 cursor-pointer text-destructive!"
                     onClick={() => {
                       setShowDeleteIdeaModal(true);
                     }}
