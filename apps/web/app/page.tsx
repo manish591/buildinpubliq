@@ -1,4 +1,5 @@
 import { ChannelsSection } from '@/components/web/channels-section';
+import { FaqsSection } from '@/components/web/faqs-section';
 import { FeaturesSection } from '@/components/web/features-section';
 import { Footer } from '@/components/web/footer';
 import { Header } from '@/components/web/header';
@@ -12,10 +13,11 @@ export default async function Home() {
       <Header />
       <main className="relative z-10">
         <HeroSection />
-        <FeaturesSection />
+        {/* <FeaturesSection />
         <ChannelsSection />
         <HowItWorksSection />
         <ReviewsSection />
+        <FaqsSection /> */}
       </main>
       <div className="mt-32">
         <Footer />

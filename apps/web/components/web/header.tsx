@@ -50,11 +50,8 @@ export function Header() {
               <Link href="#features" className="text-base font-medium">
                 Features
               </Link>
-              <Link href="#integrations" className="text-base font-medium">
-                Integrations
-              </Link>
-              <Link href="#pricing" className="text-base font-medium">
-                Pricing
+              <Link href="#how-it-works" className="text-base font-medium">
+                How it works?
               </Link>
               <Link
                 href="https://buildinpubliq.blogbee.site"
@@ -74,16 +71,10 @@ export function Header() {
             Features
           </Link>
           <Link
-            href="#integrations"
+            href="#how-it-works"
             className="font-normal hover:opacity-80 transition-opacity"
           >
-            Integrations
-          </Link>
-          <Link
-            href="#pricing"
-            className="font-normal hover:opacity-80 transition-opacity"
-          >
-            Pricing
+            How it works?
           </Link>
           <Link
             href="https://buildinpubliq.blogbee.site"
