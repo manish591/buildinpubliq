@@ -24,7 +24,7 @@ export function HowItWorksSection() {
           </div>
           <div className="space-y-4">
             <div className="rounded-md border flex items-start gap-4 p-4">
-              <div className="rounded-full shrink-0 w-8 h-8 flex items-center justify-center bg-muted">
+              <div className="rounded-full shrink-0 w-8 h-8 flex items-center justify-center bg-primary/60 text-primary-foreground">
                 1
               </div>
               <div>
@@ -35,7 +35,7 @@ export function HowItWorksSection() {
               </div>
             </div>
             <div className="rounded-md border flex items-start gap-4 p-4">
-              <div className="rounded-full shrink-0 w-8 h-8 flex items-center justify-center bg-muted">
+              <div className="rounded-full shrink-0 w-8 h-8 flex items-center justify-center bg-primary/60 text-primary-foreground">
                 2
               </div>
               <div>
@@ -47,7 +47,7 @@ export function HowItWorksSection() {
               </div>
             </div>
             <div className="rounded-md border flex items-start gap-4 p-4">
-              <div className="rounded-full shrink-0 w-8 h-8 flex items-center justify-center bg-muted">
+              <div className="rounded-full shrink-0 w-8 h-8 flex items-center justify-center bg-primary/60 text-primary-foreground">
                 3
               </div>
               <div>

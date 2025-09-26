@@ -4,6 +4,7 @@ import { Footer } from '@/components/web/footer';
 import { Header } from '@/components/web/header';
 import { HeroSection } from '@/components/web/hero-section';
 import { HowItWorksSection } from '@/components/web/how-it-works-section';
+import { ReviewsSection } from '@/components/web/reviews-section';
 
 export default async function Home() {
   return (
@@ -14,8 +15,9 @@ export default async function Home() {
         <FeaturesSection />
         <ChannelsSection />
         <HowItWorksSection />
+        <ReviewsSection />
       </main>
-      <div className="mt-16">
+      <div className="mt-32">
         <Footer />
       </div>
     </div>

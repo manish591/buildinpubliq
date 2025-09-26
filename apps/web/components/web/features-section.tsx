@@ -234,12 +234,18 @@ export function FeaturesSection() {
             </p>
             <div className="mt-8 grid grid-cols-3 gap-4">
               <div className="p-8 gap-2 border bg-background flex flex-col items-center justify-center rounded-md">
-                <IconExchange className="size-8" />
-                <p>More Channels</p>
+                <IconExchange className="size-8 text-primary" />
+                <p className="text-lg text-muted-foreground/80 text-center">
+                  More <br />
+                  Channels
+                </p>
               </div>
               <div className="p-8 gap-2 border bg-background flex flex-col items-center justify-center rounded-md">
-                <IconChartLine className="size-8" />
-                <p>Channel Analytics</p>
+                <IconChartLine className="size-8 text-primary" />
+                <p className="text-lg text-muted-foreground/80 text-center">
+                  Channel <br />
+                  Analytics
+                </p>
               </div>
             </div>
           </div>
