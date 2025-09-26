@@ -31,14 +31,16 @@ export function FeaturesSection() {
           </Badge>
         </div>
         <div className="text-center mt-6">
-          <h2 className="text-5xl leading-[1.2] font-normal">
+          <h2 className="text-3xl sm:text-5xl leading-[1.2] font-normal">
             Everything You Need
             <br /> to Build Out Loud
           </h2>
         </div>
-        <div className="grid grid-cols-6 gap-6 mt-12">
-          <div className="col-span-2 p-8 rounded-md bg-gradient-to-b from-transparent to-muted border">
-            <h3 className="text-[26px] font-normal">Auto-Ideas from GitHub</h3>
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 mt-12">
+          <div className="md:col-span-2 p-8 rounded-md bg-gradient-to-b from-transparent to-muted border">
+            <h3 className="text-[24px] sm:text-[26px] font-normal">
+              Auto-Ideas from GitHub
+            </h3>
             <p className="mt-4 text-base text-muted-foreground/80">
               Every pull request becomes a ready-to-share update, so you never
               run out of things to post.
@@ -78,8 +80,8 @@ export function FeaturesSection() {
               </div>
             </div>
           </div>
-          <div className="col-span-2 p-8 rounded-md bg-gradient-to-b from-transparent to-muted border">
-            <h3 className="text-[26px] font-normal">
+          <div className="md:col-span-2 p-8 rounded-md bg-gradient-to-b from-transparent to-muted border">
+            <h3 className="text-[24px] sm:text-[26px] font-normal">
               Multi-Channel Scheduling
             </h3>
             <p className="mt-4 text-base text-muted-foreground/80">
@@ -88,42 +90,42 @@ export function FeaturesSection() {
             </p>
             <div className="mt-8 flex items-center gap-6 flex-wrap">
               <div className="bg-black p-1 w-max rounded-[4px]">
-                <IconBrandX className="text-white size-10" />
+                <IconBrandX className="text-white size-8 sm:size-10" />
               </div>
               <div className="bg-[#0a66c2] p-1 w-max rounded-[4px]">
-                <Linkedin className="text-white size-10" />
+                <Linkedin className="text-white size-8 sm:size-10" />
               </div>
               <div className="bg-[#01AAFF] p-1 w-max rounded-[4px]">
-                <IconBrandBluesky className="text-white size-10" />
+                <IconBrandBluesky className="text-white size-8 sm:size-10" />
               </div>
               <div className="bg-black p-1 w-max rounded-[4px]">
-                <IconBrandThreads className="text-white size-10" />
+                <IconBrandThreads className="text-white size-8 sm:size-10" />
               </div>
             </div>
             <div className="mt-8 text-muted-foreground/80">
               4+ Channels supported
             </div>
           </div>
-          <div className="col-span-2 p-8 rounded-md bg-gradient-to-b from-transparent to-muted border">
-            <h3 className="text-[26px] font-normal">
+          <div className="md:col-span-2 p-8 rounded-md bg-gradient-to-b from-transparent to-muted border">
+            <h3 className="text-[24px] sm:text-[26px] font-normal">
               AI-Powered Content Creation
             </h3>
             <p className="mt-4 text-base text-muted-foreground/80">
               AI that transforms your code into content.
             </p>
             <div className="mt-8">
-              <div className="relative h-[150px] w-[200px] mx-auto overflow-hidden rounded-md border border-zinc-950/10 bg-white text-zinc-700 outline-hidden dark:border-zinc-50/20 dark:bg-zinc-950 dark:text-zinc-300">
+              <div className="relative h-[130px] w-[180px] sm:h-[150px] sm:w-[200px] mx-auto overflow-hidden rounded-md border border-zinc-950/10 bg-white text-zinc-700 outline-hidden dark:border-zinc-50/20 dark:bg-zinc-950 dark:text-zinc-300">
                 <div className="flex items-center justify-center h-full w-full resize-none rounded-md bg-transparent px-4 py-3 text-sm outline-hidden">
                   <div className="flex h-full flex-col items-start justify-center">
-                    <p className="text-5xl text-black">AI</p>
+                    <p className="text-4xl sm:text-5xl text-black">AI</p>
                   </div>
                 </div>
                 <BorderTrail className="bg-primary" size={120} />
               </div>
             </div>
           </div>
-          <div className="col-span-3 grid-s p-8 rounded-md bg-gradient-to-b from-transparent to-muted border">
-            <h3 className="text-[26px] font-normal">
+          <div className="md:col-span-3 grid-s p-8 rounded-md bg-gradient-to-b from-transparent to-muted border">
+            <h3 className="text-[24px] sm:text-[26px] font-normal">
               Account Management & Cross-Posting
             </h3>
             <p className="mt-4 text-base text-muted-foreground/80">
@@ -225,14 +227,16 @@ export function FeaturesSection() {
               </div>
             </div>
           </div>
-          <div className="col-span-3 p-8 rounded-md bg-gradient-to-b from-transparent to-muted border">
-            <h3 className="text-[26px] font-normal">Coming soon...</h3>
+          <div className="md:col-span-3 p-8 rounded-md bg-gradient-to-b from-transparent to-muted border">
+            <h3 className="text-[24px] sm:text-[26px] font-normal">
+              Coming soon...
+            </h3>
             <p className="mt-4 text-base text-muted-foreground/80">
               We're just getting started. Soon you'll unlock more channels to
               share your journey, detailed analytics to measure impact, and
               smart workflows that make building in public even easier.
             </p>
-            <div className="mt-8 grid grid-cols-3 gap-4">
+            <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-4">
               <div className="p-8 gap-2 border bg-background flex flex-col items-center justify-center rounded-md">
                 <IconExchange className="size-8 text-primary" />
                 <p className="text-lg text-muted-foreground/80 text-center">

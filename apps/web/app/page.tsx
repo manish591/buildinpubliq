@@ -13,8 +13,8 @@ export default async function Home() {
       <Header />
       <main className="relative z-10">
         <HeroSection />
-        {/* <FeaturesSection />
-        <ChannelsSection />
+        <FeaturesSection />
+        {/* <ChannelsSection />
         <HowItWorksSection />
         <ReviewsSection />
         <FaqsSection /> */}
