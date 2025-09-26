@@ -1,4 +1,4 @@
-import { ChevronLeft } from 'lucide-react';
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getAllChannels } from '@/app/data/channels/get-all-channels';
@@ -49,7 +49,7 @@ export default async function OnboardingConnectChanneslsPage() {
         Connect at least one social media channel to start scheduling and
         managing your content. You can add more channels anytime.
       </p>
-      <div className="mt-10 grid grid-cols-3 gap-4">
+      <div className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-4">
         {AVAILABLE_PLATFORM.map((platform) => {
           return (
             <ConnectChannelButton
@@ -67,10 +67,13 @@ export default async function OnboardingConnectChanneslsPage() {
                 ),
               })}
             >
-              <div className={cn('w-12 h-12')}>
-                <platform.icon
-                  className={cn('w-full! h-full!', platform.iconBGColor)}
-                />
+              <div
+                className={cn(
+                  'w-12 h-12 p-0.5 rounded-[4px] flex items-center justify-center',
+                  platform.iconBGColor,
+                )}
+              >
+                <platform.icon className={cn('w-11! h-11! text-white')} />
               </div>
               <p className="font-medium text-lg mt-3">{platform.title}</p>
               <p className="text-muted-foreground mt-1">Profile</p>
@@ -81,7 +84,7 @@ export default async function OnboardingConnectChanneslsPage() {
       <div className="flex items-center justify-between mt-10">
         <Button variant="outline" asChild>
           <Link href="/onboarding/welcome" className="flex items-center gap-2">
-            <ChevronLeft className="text-muted-foreground" /> Previous
+            <IconChevronLeft className="text-muted-foreground" /> Previous
           </Link>
         </Button>
         <Button asChild>
@@ -91,7 +94,7 @@ export default async function OnboardingConnectChanneslsPage() {
               connectedPlatform.size === 0 && 'pointer-events-none opacity-80',
             )}
           >
-            Continue
+            Continue <IconChevronRight />
           </Link>
         </Button>
       </div>
