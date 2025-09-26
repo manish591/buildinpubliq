@@ -1,6 +1,6 @@
 'use client';
 
-import { Prisma } from '@buildinpubliq/db';
+import type { Prisma } from '@buildinpubliq/db';
 import { ChevronRight, CircleAlert } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
