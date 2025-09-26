@@ -57,7 +57,10 @@ export function ChannelFilterDropdown() {
               variant="outline"
               className="capitalize rounded-none h-10 text-sm font-medium border-0 border-r"
             >
-              Platform: {platform}
+              <span className="text-muted-foreground">
+                Channel is{' '}
+                <span className="text-foreground font-medium">{platform}</span>
+              </span>
             </Badge>
             <Button
               variant="ghost"

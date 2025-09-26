@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { IconPlus } from '@tabler/icons-react';
 import { useInstallGithubIntegrationModal } from './install-github-integration-modal';
 import { useConnectRepoModal } from './connect-repo-modal';
 
@@ -30,7 +29,6 @@ export function ConnectRepoButton({
           setShowConnectRepoModal(true);
         }}
       >
-        <IconPlus className="size-4" />
         Connect Repo
       </Button>
       <InstallGithubIntegrationModal />

@@ -27,7 +27,7 @@ export function PostsSearchBox() {
   }, [debouncedQuery, pathname, router, searchParams]);
 
   return (
-    <div className="border rounded-md flex items-center w-xs px-2 gap-2 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
+    <div className="border rounded-md flex items-center w-full sm:w-xs px-2 gap-2 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
       <Search className="size-4 text-muted-foreground" />
       <Input
         placeholder="Search posts"

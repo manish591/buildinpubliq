@@ -75,7 +75,7 @@ export function DeleteIdeaModal({
             </p>
           ) : null}
         </div>
-        <DialogFooter className="py-4 px-6 border-t bg-muted rounded-b-xl">
+        <DialogFooter className="py-4 px-6 border-t bg-muted justify-end flex-row rounded-b-xl">
           <Button
             variant="outline"
             size="sm"

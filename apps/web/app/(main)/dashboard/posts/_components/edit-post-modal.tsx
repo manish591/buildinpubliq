@@ -85,31 +85,32 @@ export function EditPostModal({
       }}
     >
       <DialogContent className="max-w-2xl! gap-0 p-0 rounded-xl">
-        <DialogHeader className="px-6 py-5 pb-2">
+        <DialogHeader className="px-4 sm:px-6 py-5 pb-2">
           <DialogTitle className="text-base flex items-center font-normal gap-2 text-muted-foreground">
             Post <ChevronRight className="size-4 text-muted-foreground/90" />{' '}
             <span className="text-foreground">Edit Post</span>
           </DialogTitle>
         </DialogHeader>
         {errors.scheduledAt && (
-          <div className="px-6">
+          <div className="px-4 sm:px-6">
             <div className="flex items-center gap-2 py-2 px-4 text-destructive text-sm border border-destructive rounded-md">
               <CircleAlert className="size-4" />
               <span>It seems like your selected date is in the past</span>
             </div>
           </div>
         )}
-        <div className="max-h-[300px] overflow-y-auto px-6 pt-2 pb-4">
+        <div className="max-h-[300px] overflow-y-auto px-4 sm:px-6 pt-2 pb-4">
           <div className="flex gap-2 items-start">
             <div className="mt-2 flex items-center gap-4 bg-background">
               {PlatformIcon && (
-                <PlatformIcon
-                  className={cn(
-                    'size-6 p-1 rounded-full text-white',
-                    platformData?.iconBGColor,
-                  )}
-                  aria-hidden
-                />
+                <span
+                  className={cn('p-1 rounded-full', platformData?.iconBGColor)}
+                >
+                  <PlatformIcon
+                    className={cn('size-4 text-white')}
+                    aria-hidden
+                  />
+                </span>
               )}
             </div>
             <Textarea
@@ -131,8 +132,8 @@ export function EditPostModal({
             />
           </div>
         </div>
-        <DialogFooter className="px-6 py-4 bg-muted/80 rounded-b-xl gap-0 sm:justify-between border-t">
-          <div className="flex flex-col">
+        <DialogFooter className="px-4 sm:px-6 py-4 bg-muted/80 rounded-b-xl gap-0 flex-row justify-between border-t">
+          <div className="flex flex-col mr-auto">
             <p className="text-xs font-medium text-muted-foreground/70 p-0 m-0">
               When To Post
             </p>

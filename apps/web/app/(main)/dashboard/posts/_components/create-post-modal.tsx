@@ -81,21 +81,21 @@ function CreatePostModalForm({
 
   return (
     <div>
-      <div className="px-6 py-5 pb-2">
+      <div className="px-4 sm:px-6 py-5 pb-2">
         <div className="text-base flex items-center font-normal gap-2 text-muted-foreground">
           Post <ChevronRight className="size-4 text-muted-foreground/90" />{' '}
           <span className="text-foreground">New Post</span>
         </div>
       </div>
       {isScheduledAtInPast && (
-        <div className="px-6">
+        <div className="px-4 sm:px-6">
           <div className="flex items-center gap-2 py-2 px-4 text-destructive border border-destructive rounded-md">
             <CircleAlert className="size-4" />
             <span>It seems like your selected date is in the past</span>
           </div>
         </div>
       )}
-      <div className="max-h-[320px] overflow-y-auto px-6 py-4">
+      <div className="max-h-[320px] overflow-y-auto px-4 sm:px-6 py-4">
         {channels.length === 0 ? (
           <div className="min-h-[250px] h-full">
             <div className="h-full flex items-center justify-center">
@@ -150,7 +150,7 @@ function CreatePostModalForm({
           </div>
         )}
       </div>
-      <div className="flex items-center px-6 py-4 bg-muted/80 rounded-b-xl gap-0 sm:justify-between border-t">
+      <div className="flex items-center px-4 sm:px-6 py-4 bg-muted/80 rounded-b-xl gap-0 sm:justify-between border-t">
         <div className="flex flex-col">
           <p className="text-xs font-medium text-muted-foreground/70 p-0 m-0">
             When To Post
@@ -160,7 +160,7 @@ function CreatePostModalForm({
             setScheduledAt={setScheduledAt}
           />
         </div>
-        <div className="flex items-center gap-4">
+        <div className="ml-auto flex items-center gap-2">
           <Button
             variant="outline"
             size="sm"
@@ -168,7 +168,7 @@ function CreatePostModalForm({
             disabled={isChannelsNotSelected || isContentEmpty}
             onClick={() => handleCreatePosts('DRAFT')}
           >
-            Save As Drafts
+            <span className="hidden sm:inline">Save As</span> Draft
           </Button>
           <Button
             size="sm"
@@ -176,7 +176,7 @@ function CreatePostModalForm({
             disabled={isChannelsNotSelected || !scheduledAt || isContentEmpty}
             onClick={() => handleCreatePosts('SCHEDULED')}
           >
-            Schedule Posts
+            Schedule <span className="hidden sm:inline">Posts</span>
           </Button>
         </div>
       </div>

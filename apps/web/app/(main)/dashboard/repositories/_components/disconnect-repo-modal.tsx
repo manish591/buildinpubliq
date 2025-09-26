@@ -45,7 +45,7 @@ export function DisconnectRepoModal({
     >
       <DialogContent className="p-0 md:max-w-md gap-0 rounded-xl">
         <DialogHeader className="px-6 py-4 border-b">
-          <DialogTitle className="text-xl font-medium">
+          <DialogTitle className="text-xl font-medium text-left">
             Disconnect Repo
           </DialogTitle>
         </DialogHeader>
@@ -78,7 +78,7 @@ export function DisconnectRepoModal({
             </p>
           ) : null}
         </div>
-        <DialogFooter className="py-4 px-6 border-t bg-muted rounded-b-xl">
+        <DialogFooter className="py-4 px-6 border-t bg-muted rounded-b-xl justify-end flex-row">
           <Button
             variant="outline"
             size="sm"

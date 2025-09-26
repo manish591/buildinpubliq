@@ -27,8 +27,8 @@ export function RepoSearchBox() {
   }, [debouncedQuery, pathname, router, searchParams]);
 
   return (
-    <div className="border rounded-md flex items-center w-xs px-2 gap-2 focus-within:ring-1 focus-within:ring-ring focus-within:ring-offset-1">
-      <Search className="size-4" />
+    <div className="border rounded-md flex items-center w-[200px] sm:w-xs px-2 gap-2 focus-within:ring-1 focus-within:ring-ring focus-within:ring-offset-1">
+      <Search className="size-4 text-muted-foreground" />
       <Input
         placeholder="Search"
         className="w-full px-0 focus-visible:ring-0 focus-visible:ring-transparent border-0"

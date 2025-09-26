@@ -6,6 +6,7 @@ import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { CreateIdeaModal } from './_components/create-idea-modal';
 import { IdeasActionBar } from './_components/ideas-action-bar';
 import { IdeasList } from './_components/ideas-list';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export default async function IdeasPage({
   searchParams,
@@ -27,11 +28,14 @@ export default async function IdeasPage({
     <div>
       <MainHeader>
         <MainHeader.Wrapper>
-          <MainHeader.Title>Ideas</MainHeader.Title>
+          <div className="flex items-center gap-2">
+            <SidebarTrigger className="sm:hidden" />
+            <MainHeader.Title>Ideas</MainHeader.Title>
+          </div>
           <CreateIdeaModal />
         </MainHeader.Wrapper>
       </MainHeader>
-      <main className="w-full max-w-7xl mx-auto py-6 px-8">
+      <main className="w-full max-w-7xl mx-auto py-6 px-4 sm:px-8">
         <IdeasActionBar githubRepositories={githubRepositories} />
         <Suspense fallback={<div className="mt-6">Loading...</div>}>
           <IdeasList

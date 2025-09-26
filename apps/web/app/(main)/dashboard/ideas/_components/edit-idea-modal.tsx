@@ -66,7 +66,7 @@ function EditIdeaForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="space-y-4 px-6 py-6 max-h-[320px] overflow-y-auto">
+        <div className="space-y-4 px-4 sm:px-6 py-6 max-h-[320px] overflow-y-auto">
           <FormField
             control={form.control}
             name="title"
@@ -98,7 +98,7 @@ function EditIdeaForm({
             )}
           />
         </div>
-        <div className="flex justify-end bg-muted border-t px-6 py-4 rounded-b-xl">
+        <div className="flex justify-end bg-muted border-t px-4 sm:px-6 py-4 rounded-b-xl">
           <Button type="submit" size="sm" className="cursor-pointer">
             Submit
           </Button>
@@ -120,8 +120,10 @@ function EditIdeaModal({
   return (
     <Dialog open={showEditIdeaModal} onOpenChange={setShowEditIdeaModal}>
       <DialogContent className="md:max-w-lg p-0 gap-0 rounded-xl">
-        <DialogHeader className="py-4 px-6 border-b">
-          <DialogTitle className="text-xl font-medium">Edit Idea</DialogTitle>
+        <DialogHeader className="py-4 px-4 sm:px-6 border-b">
+          <DialogTitle className="text-xl font-medium text-left">
+            Edit Idea
+          </DialogTitle>
         </DialogHeader>
         <EditIdeaForm
           defaultValues={defaultValues}

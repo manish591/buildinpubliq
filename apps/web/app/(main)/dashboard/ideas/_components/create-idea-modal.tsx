@@ -24,8 +24,10 @@ export function CreateIdeaModal() {
         </Button>
       </DialogTrigger>
       <DialogContent className="md:max-w-lg p-0 gap-0 rounded-xl">
-        <DialogHeader className="py-4 px-6 border-b">
-          <DialogTitle className="text-xl font-medium">Add Idea</DialogTitle>
+        <DialogHeader className="py-4 px-4 sm:px-6 border-b">
+          <DialogTitle className="text-xl font-medium text-left">
+            Add Idea
+          </DialogTitle>
         </DialogHeader>
         <CreateIdeaForm setShowCreateIdeaModal={setShowCreateIdeaModal} />
       </DialogContent>

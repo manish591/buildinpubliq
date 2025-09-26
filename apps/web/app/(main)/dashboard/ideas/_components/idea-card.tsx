@@ -41,7 +41,7 @@ export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
   return (
     <div className="border p-4 rounded-xl hover:bg-muted/70 group">
       <div className="flex items-center gap-4">
-        <div className="shrink-0 w-10 h-10 flex items-center justify-center border rounded-full bg-gradient-to-b from-transparent to-secondary ">
+        <div className="hidden shrink-0 w-10 h-10 sm:flex items-center justify-center border rounded-full bg-gradient-to-b from-transparent to-secondary ">
           <IconBulb className="text-muted-foreground/90" strokeWidth={1.5} />
         </div>
         <div className="flex-1 flex items-center justify-between gap-12">

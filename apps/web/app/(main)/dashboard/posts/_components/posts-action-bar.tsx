@@ -18,16 +18,16 @@ export function PostsActionBar() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <PostsFilterDropdown />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-1 sm:flex-none">
           <PostsSearchBox />
         </div>
       </div>
       {isFiltersApplied && (
-        <div className="flex items-center justify-between w-full">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 justify-between w-full">
           <div className="flex items-center gap-2">
             {channel && (
               <div className="flex items-center rounded-md border">
@@ -86,7 +86,7 @@ export function PostsActionBar() {
           </div>
           <Button
             variant="outline"
-            className="h-10 cursor-pointer"
+            className="h-10 cursor-pointer self-start"
             onClick={() => {
               router.push(`${pathname}`);
             }}

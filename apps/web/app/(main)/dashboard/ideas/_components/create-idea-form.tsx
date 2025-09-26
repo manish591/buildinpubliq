@@ -52,7 +52,7 @@ export function CreateIdeaForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="space-y-4 px-6 py-6 max-h-[320px] overflow-y-auto">
+        <div className="space-y-4 px-4 sm:px-6 py-6 max-h-[320px] overflow-y-auto">
           <FormField
             control={form.control}
             name="title"
@@ -84,7 +84,7 @@ export function CreateIdeaForm({
             )}
           />
         </div>
-        <div className="flex justify-end bg-muted border-t px-6 py-4 rounded-b-xl">
+        <div className="flex justify-end bg-muted border-t px-4 sm:px-6 py-4 rounded-b-xl">
           <Button type="submit" size="sm" className="cursor-pointer">
             Create
           </Button>

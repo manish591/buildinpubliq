@@ -104,7 +104,7 @@ export function PostCard({
           onClick={() => setIsPreviewModalOpen(true)}
           className="absolute inset-0 w-full h-full z-10 bg-transparent border-0 p-0 m-0"
         />
-        <div className="relative w-max">
+        <div className="relative w-max hidden sm:block">
           <Avatar className="w-12 h-12">
             <AvatarImage src={channel.platformUserImg ?? ''} />
             <AvatarFallback>{channel.platformUserName?.at(0)}</AvatarFallback>

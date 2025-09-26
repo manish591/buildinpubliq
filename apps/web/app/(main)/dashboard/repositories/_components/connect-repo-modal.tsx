@@ -68,7 +68,7 @@ function ConnectRepoModalInner({
   return (
     <>
       <DialogHeader className="px-6 py-4 border-b">
-        <DialogTitle className="text-xl font-medium">
+        <DialogTitle className="text-xl font-medium text-left">
           Connect Repository
         </DialogTitle>
       </DialogHeader>

@@ -29,7 +29,7 @@ export function ConnectedRepoCard({
     <>
       <div className="p-4 hover:bg-muted/70 group rounded-md">
         <div className="flex items-center gap-4">
-          <div className="shrink-0 w-7 h-7 flex items-center justify-center border rounded-full bg-gradient-to-b from-transparent to-secondary ">
+          <div className="shrink-0 w-7 h-7 hidden sm:flex items-center justify-center border rounded-full bg-gradient-to-b from-transparent to-secondary ">
             <IconBrandGithub
               className="size-4 text-muted-foreground/90"
               strokeWidth={2}

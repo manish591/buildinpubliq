@@ -19,14 +19,14 @@ export function ConnectChannelsModal() {
         <Button>Connect Channel</Button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl! rounded-xl">
-        <DialogHeader>
+        <DialogHeader className="text-left">
           <DialogTitle>Connect Your Channels</DialogTitle>
           <DialogDescription>
             Link your socials so every win gets shared — build in public,
             without lifting a finger.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid grid-cols-3 gap-4 mt-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
           {AVAILABLE_PLATFORM.map((platform) => {
             return (
               <ConnectChannelButton

@@ -6,6 +6,7 @@ import { Suspense } from 'react';
 import { ConnectedRepoContainer } from './_components/connected-repo-container';
 import { ConnectRepoButton } from './_components/connect-repo-button';
 import { hasGithubIntegration } from '@/app/data/github/has-github-integration';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export default async function Repositories({
   searchParams,
@@ -27,13 +28,16 @@ export default async function Repositories({
     <div>
       <MainHeader>
         <MainHeader.Wrapper>
-          <MainHeader.Title>Repositories</MainHeader.Title>
+          <div className="flex items-center gap-2">
+            <SidebarTrigger className="sm:hidden" />
+            <MainHeader.Title>Repositories</MainHeader.Title>
+          </div>
           <ConnectRepoButton
             isGithubIntegrationInstalled={!!isgithubIntegrationInstalled}
           />
         </MainHeader.Wrapper>
       </MainHeader>
-      <main className="w-full max-w-7xl mx-auto py-6 px-8">
+      <main className="w-full max-w-7xl mx-auto py-6 px-4 sm:px-8">
         <div>
           <RepoSearchBox />
         </div>

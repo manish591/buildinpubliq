@@ -27,8 +27,8 @@ EmptyState.Mockup = ({
         {children}
       </span>
       <div className="space-y-2">
-        <Skeleton className="h-4 w-[250px] animate-none bg-accent/40" />
-        <Skeleton className="h-4 w-[200px] animate-none bg-secondary" />
+        <Skeleton className="h-4 sm:w-[250px] w-[200px] animate-none bg-accent/40" />
+        <Skeleton className="h-4 sm:w-[200px] w-[150px] animate-none bg-secondary" />
       </div>
     </div>
   );
