@@ -1,5 +1,10 @@
-import { IconBrandGithub } from '@tabler/icons-react';
-import { Calendar, ChevronLeft, User2 } from 'lucide-react';
+import {
+  IconBrandGithub,
+  IconCalendar,
+  IconChevronLeft,
+  IconChevronRight,
+  IconUser,
+} from '@tabler/icons-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getUserDetails } from '@/app/data/users/get-user-details';
@@ -30,53 +35,55 @@ export default async function OnboardingWelcomePage() {
         </AppLogo>
       </div>
       <h1 className="text-2xl mt-6 font-medium capitalize">
-        Welcome, {userData.name}!
+        Welcome, {userData?.name}!
       </h1>
       <p className="text-muted-foreground mt-2 max-w-xl">
         Let's get your social media automation set up in just a few minutes.
         Buildinpubliq offers variety of features for you to grow as a developer.
       </p>
-      <div className="mt-10 grid grid-cols-3 gap-4">
+      <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
         <WelcomeFeatureCard>
-          <User2 />
+          <IconUser className="text-muted-foreground" />
           <div className="mt-6">
             <h3 className="font-medium text-lg leading-[1.1]">
-              Unlimited social accounts
+              Connect social accounts
             </h3>
             <p className="text-muted-foreground text-sm mt-2">
-              Connect unlimited accounts from all major platforms
+              Connect multiple accounts from all major platforms
             </p>
           </div>
         </WelcomeFeatureCard>
         <WelcomeFeatureCard>
-          <Calendar />
+          <IconCalendar className="text-muted-foreground" />
           <div className="mt-6">
             <h3 className="font-medium text-lg leading-[1.1]">
-              Unlimited scheduling
+              Schedule Posts
             </h3>
             <p className="text-muted-foreground text-sm mt-2">
-              Schedule unlimited posts with no monthly restrictions
+              Schedule posts with customized timings
             </p>
           </div>
         </WelcomeFeatureCard>
         <WelcomeFeatureCard>
-          <IconBrandGithub className="size-6" />
+          <IconBrandGithub className="size-6 text-muted-foreground" />
           <div className="mt-6">
             <h3 className="font-medium text-lg leading-[1.1]">
               Code to Content
             </h3>
             <p className="text-muted-foreground text-sm mt-2">
-              Auto-generate ideas from your github pull request.
+              Auto generate ideas from your github pull request.
             </p>
           </div>
         </WelcomeFeatureCard>
       </div>
       <div className="flex items-center justify-between mt-10">
         <Button variant="outline" disabled>
-          <ChevronLeft className="text-muted-foreground" /> Previous
+          <IconChevronLeft className="text-muted-foreground" /> Previous
         </Button>
         <Button asChild>
-          <Link href="/onboarding/connect-channels">Continue</Link>
+          <Link href="/onboarding/connect-channels">
+            Continue <IconChevronRight />
+          </Link>
         </Button>
       </div>
     </>

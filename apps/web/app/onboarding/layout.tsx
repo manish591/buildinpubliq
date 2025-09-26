@@ -4,8 +4,8 @@ export default function OnboardingLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="bg-sidebar w-full min-h-svh p-2 grid grid-cols-[300px_minmax(0,1fr)] border">
-      <div className="h-screen">
+    <div className="bg-sidebar w-full min-h-svh p-2 grid grid-cols-1 md:grid-cols-[300px_minmax(0,1fr)] border">
+      <div className="h-screen hidden sm:block">
         <div className="px-4 py-4 pb-6 fixed flex flex-col h-screen">
           <AppLogo>
             <AppLogo.LogoIcon>
@@ -26,7 +26,9 @@ export default function OnboardingLayout({
         </div>
       </div>
       <div className="h-full border rounded-xl bg-background">
-        <div className="max-w-2xl mx-auto h-full py-24">{children}</div>
+        <div className="max-w-2xl mx-auto h-full py-8 px-4 md:py-24">
+          {children}
+        </div>
       </div>
     </div>
   );
