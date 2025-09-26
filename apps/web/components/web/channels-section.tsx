@@ -23,12 +23,12 @@ export function ChannelsSection() {
             Channels
           </Badge>
         </div>
-        <h2 className="text-5xl font-normal mt-6 text-center leading-[1.2]">
+        <h2 className="text-3xl sm:text-5xl font-normal mt-6 text-center leading-[1.2]">
           Share Everywhere
           <br />
           That Matters
         </h2>
-        <div className="mt-12 max-w-max mx-auto bg-muted rounded-md p-6 flex items-center gap-6 px-10">
+        <div className="mt-12 max-w-[80%] sm:max-w-max mx-auto bg-muted rounded-md p-6 flex items-center justify-center sm:justify-start flex-wrap sm:flex-nowrap gap-6 px-10">
           <div className="bg-black p-1 w-max rounded-[4px]">
             <IconBrandX className="text-white size-10" />
           </div>

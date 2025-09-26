@@ -14,9 +14,9 @@ export default async function Home() {
       <main className="relative z-10">
         <HeroSection />
         <FeaturesSection />
-        {/* <ChannelsSection />
+        <ChannelsSection />
         <HowItWorksSection />
-        <ReviewsSection />
+        {/* <ReviewsSection />
         <FaqsSection /> */}
       </main>
       <div className="mt-32">
