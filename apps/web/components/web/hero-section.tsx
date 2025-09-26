@@ -7,6 +7,7 @@ import { Linkedin } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import LoadingIndicator from '../general/loading-indicator';
 
 export function HeroSection() {
   return (
@@ -34,6 +35,7 @@ export function HeroSection() {
           <div className="flex items-center gap-4 justify-center sm:justify-end mt-6 sm:mt-4">
             <Button className="rounded-full" asChild>
               <Link href="/auth" className="inline-block">
+                <LoadingIndicator />
                 <span>Get Started</span>
               </Link>
             </Button>
