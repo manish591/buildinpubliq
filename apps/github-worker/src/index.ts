@@ -74,6 +74,10 @@ async function handleGenerateIdeaEvent(payload: GenerateIdeaEventPayload) {
     },
   });
 
+  if (!repoData) {
+    throw new Error("Repo with repo id does not exists");
+  }
+
   const userId = repoData?.userId as string;
   const repoName = repoData?.fullName as string;
   const pullRequestTitle = payload.title;
