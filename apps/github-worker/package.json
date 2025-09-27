@@ -2,10 +2,11 @@
   "name": "github-worker",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "main": "dist/index.js",
   "scripts": {
     "build": "tsup",
-    "start": "pnpm run build && node dist/index.cjs"
+    "start": "pnpm run build && node dist/index.js"
   },
   "keywords": [],
   "author": "",
