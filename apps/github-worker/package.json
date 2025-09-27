@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
-    "start": "pnpm run build & node dist/index.js"
+    "build": "tsup",
+    "start": "pnpm run build && node dist/index.cjs"
   },
   "keywords": [],
   "author": "",
