@@ -90,6 +90,8 @@ async function handleGenerateIdeaEvent(payload: GenerateIdeaEventPayload) {
   });
 
   await createIdea({ title, content, userId });
+
+  console.log(`Idea generated and created for user ID ${userId}`);
 }
 
 async function handleUninstallGithubIntegrationEvent(
@@ -105,9 +107,13 @@ async function handleUninstallGithubIntegrationEvent(
       isActive: false,
     },
   });
+
+  console.log(`GitHub integration with installation ID ${installationId} has been deactivated.`);
 }
 
 async function workerCallback(job: Job) {
+  console.log(`Processing job ${job.id} of type ${job.name}`);
+
   const jobName = job.name;
 
   if (jobName === 'uninstall-github-integration') {
@@ -129,4 +135,6 @@ const worker = new Worker('github-events', workerCallback, {
   connection: redis
 });
 
-worker.on('error', console.error);
+worker.on('error', (err) => {
+  console.log('Worker error:', err);
+});

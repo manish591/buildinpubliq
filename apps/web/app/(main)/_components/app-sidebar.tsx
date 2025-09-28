@@ -128,7 +128,7 @@ export async function AppSidebar({
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <LogoutButton className="font-normal h-8 cursor-pointer">
+                    <LogoutButton className="font-normal h-7! p-0! px-2! text-sm! cursor-pointer">
                       <LogOut className="w-4 h-4" />
                       Log out
                     </LogoutButton>

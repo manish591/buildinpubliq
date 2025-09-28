@@ -39,6 +39,8 @@ export async function POST(req: NextRequest) {
   const githubEvent = req.headers.get('X-Github-Event');
   const data = await req.json();
 
+  console.log(`Received data event: ${data}`);
+
   if (githubEvent === 'installation' && data && data.action === 'deleted') {
     const installationId = String(data.installation.id);
     await githubEventsQueue.add("uninstall-github-integration", {
