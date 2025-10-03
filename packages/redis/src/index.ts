@@ -1,7 +1,7 @@
 import Redis from "ioredis";
 
-const REDIS_HOST = process.env.REDIS_HOST;
-const REDIS_PORT = process.env.REDIS_PORT as number | undefined;
+const REDIS_HOST = process.env.REDIS_HOST ?? "localhost";
+const REDIS_PORT = process.env.REDIS_PORT as number | undefined ?? 6379;
 
 if (!REDIS_HOST || !REDIS_PORT) {
   throw new Error("Redis configuration not found");
