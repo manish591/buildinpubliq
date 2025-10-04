@@ -35,7 +35,7 @@ export function generateMetadata({
       creator: '@manishdevrani77',
     },
     icons,
-    metadataBase: new URL('https://buildinpuliq.space'),
+    metadataBase: new URL('https://buildinpubliq.space'),
     ...(noIndex && {
       robots: {
         index: false,
