@@ -4,9 +4,6 @@ on:
   push:
     branches: [main]
 
-env:
-  DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
 jobs:
   commit-hash:
     runs-on: ubuntu-latest
@@ -46,6 +43,12 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm i
+
+      - name: Create env file in package
+        run: |
+          cat <<EOF > packages/db/.env
+          DATABASE_URL=${{ secrets.DATABASE_URL }}
+          EOF
 
       - name: Run Migrations
         run: pnpm run db:migrate:deploy
