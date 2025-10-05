@@ -1,4 +1,10 @@
-FROM node:22-alpine AS base
+FROM node:22-alpine3.21 AS base
+
+# Install required system dependencies for Prisma
+RUN apk add --no-cache \
+  bash \
+  libc6-compat \
+  openssl
 
 FROM base AS prunner
 WORKDIR /app
