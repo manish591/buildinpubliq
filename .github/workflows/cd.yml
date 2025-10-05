@@ -48,7 +48,7 @@ jobs:
         run: pnpm i
 
       - name: Run Migrations
-        run: pnpm dlx prisma migrate deploy
+        run: turbo run db:migrate:deploy
 
       - name: Log in to Github Container Registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
