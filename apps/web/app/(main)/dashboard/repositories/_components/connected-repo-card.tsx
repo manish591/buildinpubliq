@@ -1,5 +1,13 @@
 'use client';
 
+import type { Prisma } from '@buildinpubliq/db';
+import {
+  IconBrandGithub,
+  IconDotsVertical,
+  IconExternalLink,
+  IconTrash,
+} from '@tabler/icons-react';
+import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -9,14 +17,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
-import type { Prisma } from '@buildinpubliq/db';
-import {
-  IconBrandGithub,
-  IconDotsVertical,
-  IconExternalLink,
-  IconTrash,
-} from '@tabler/icons-react';
-import Link from 'next/link';
 import { useDisconnectRepoModal } from './disconnect-repo-modal';
 
 export function ConnectedRepoCard({

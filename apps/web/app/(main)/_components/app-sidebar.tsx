@@ -1,3 +1,4 @@
+import { IconHelp, IconSend } from '@tabler/icons-react';
 import { ExternalLink, LogOut, Settings } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -17,7 +18,6 @@ import {
 import { Sidebar, SidebarMenu } from '@/components/ui/sidebar';
 import { AppLogo } from '@/components/web/app-logo';
 import { AppSidebarSecondary } from './app-sidebar-secondary';
-import { IconHelp, IconSend } from '@tabler/icons-react';
 
 export async function AppSidebar({
   ...props

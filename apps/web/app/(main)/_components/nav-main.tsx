@@ -1,3 +1,4 @@
+import { IconBulb, IconNote } from '@tabler/icons-react';
 import Link from 'next/link';
 import {
   SidebarGroup,
@@ -6,7 +7,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { IconBulb, IconNote } from '@tabler/icons-react';
 
 const items = [
   {

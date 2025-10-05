@@ -1,9 +1,12 @@
 'use client';
 
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { Suspense, useCallback, useMemo, useState } from 'react';
 import type React from 'react';
+import { Suspense, useCallback, useMemo, useState } from 'react';
 import { z } from 'zod';
+import { Loader } from '@/components/general/loader';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -12,9 +15,6 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { connectRepository } from '../actions';
-import { Loader } from '@/components/general/loader';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { Button } from '@/components/ui/button';
 
 export const repositorySchema = z.object({
   id: z.number(),

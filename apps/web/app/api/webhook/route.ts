@@ -43,8 +43,8 @@ export async function POST(req: NextRequest) {
 
   if (githubEvent === 'installation' && data && data.action === 'deleted') {
     const installationId = String(data.installation.id);
-    await githubEventsQueue.add("uninstall-github-integration", {
-      installationId
+    await githubEventsQueue.add('uninstall-github-integration', {
+      installationId,
     });
   }
 
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
   ) {
     const repoId = String(data.repository.id);
     const title = data.pull_request.title as string;
-    const description = data.pull_request.body ?? "";
+    const description = data.pull_request.body ?? '';
 
     await githubEventsQueue.add('generate-idea', {
       repoId,

@@ -75,7 +75,7 @@ async function handleGenerateIdeaEvent(payload: GenerateIdeaEventPayload) {
   });
 
   if (!repoData) {
-    throw new Error("Repo with repo id does not exists");
+    throw new Error('Repo with repo id does not exists');
   }
 
   const userId = repoData.userId;
@@ -108,7 +108,9 @@ async function handleUninstallGithubIntegrationEvent(
     },
   });
 
-  console.log(`GitHub integration with installation ID ${installationId} has been deactivated.`);
+  console.log(
+    `GitHub integration with installation ID ${installationId} has been deactivated.`,
+  );
 }
 
 async function workerCallback(job: Job) {
@@ -128,11 +130,11 @@ async function workerCallback(job: Job) {
     return;
   }
 
-  console.log("Unknown job name: ", jobName);
+  console.log('Unknown job name: ', jobName);
 }
 
 const worker = new Worker('github-events', workerCallback, {
-  connection: redis
+  connection: redis,
 });
 
 worker.on('error', (err) => {

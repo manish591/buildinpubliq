@@ -1,6 +1,7 @@
 'use client';
 
 import { Radio, Settings } from 'lucide-react';
+import Link from 'next/link';
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -8,7 +9,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import Link from 'next/link';
 
 const items = [
   {

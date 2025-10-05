@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation';
 import { getUserDetails } from '@/app/data/users/get-user-details';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 import { MainHeader } from '../../_components/main-header';
 import { EditProfile } from './_components/edit-profile';
-import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export default async function SettingsGeneralPage() {
   const userData = await getUserDetails();

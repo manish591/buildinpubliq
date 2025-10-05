@@ -1,12 +1,12 @@
-import { MainHeader } from '../../_components/main-header';
-import { RepoSearchBox } from './_components/repo-search-bar';
-import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
-import { ConnectedRepoContainer } from './_components/connected-repo-container';
-import { ConnectRepoButton } from './_components/connect-repo-button';
 import { hasGithubIntegration } from '@/app/data/github/has-github-integration';
+import { getCurrentUser } from '@/app/data/users/verify-auth-session';
 import { SidebarTrigger } from '@/components/ui/sidebar';
+import { MainHeader } from '../../_components/main-header';
+import { ConnectRepoButton } from './_components/connect-repo-button';
+import { ConnectedRepoContainer } from './_components/connected-repo-container';
+import { RepoSearchBox } from './_components/repo-search-bar';
 
 export default async function Repositories({
   searchParams,

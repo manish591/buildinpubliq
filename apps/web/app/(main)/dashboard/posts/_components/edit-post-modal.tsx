@@ -15,8 +15,8 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { AVAILABLE_PLATFORM } from '@/constants';
 import { cn } from '@/lib/utils';
-import { PostSchedulerModal } from './post-scheduler-modal';
 import { editPost } from '../actions';
+import { PostSchedulerModal } from './post-scheduler-modal';
 
 export function EditPostModal({
   post,

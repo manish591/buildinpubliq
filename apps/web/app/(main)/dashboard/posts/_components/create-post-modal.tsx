@@ -1,18 +1,18 @@
 'use client';
 
 import type { Prisma } from '@buildinpubliq/db';
-import { useRouter } from 'next/navigation';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { ChevronRight, CircleAlert } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
+import { Loader } from '@/components/general/loader';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/lib/utils';
+import { createPost } from '../actions';
 import { ChannelsAvatar } from './channels-avatar';
 import { PostSchedulerModal } from './post-scheduler-modal';
-import { createPost } from '../actions';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { cn } from '@/lib/utils';
-import { Loader } from '@/components/general/loader';
 
 function CreatePostModalForm({
   channels,

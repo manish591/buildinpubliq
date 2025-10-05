@@ -3,6 +3,6 @@
   "extends": "//",
   "files": {
     "ignoreUnknown": false,
-    "includes": ["./**/*.{ts,tsx}", "!.next"]
+    "includes": ["./**/*.{ts,tsx}", "!.next", "!generated"]
   }
 }

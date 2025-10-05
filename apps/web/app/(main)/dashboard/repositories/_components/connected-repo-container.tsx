@@ -1,7 +1,7 @@
-import { EmptyState } from '@/components/ui/empty-state';
-import { cn } from '@/lib/utils';
 import { IconBrandGithub } from '@tabler/icons-react';
 import { getConnectedRepositories } from '@/app/data/github/get-connected-repositories';
+import { EmptyState } from '@/components/ui/empty-state';
+import { cn } from '@/lib/utils';
 import { ConnectedRepoCard } from './connected-repo-card';
 
 export async function ConnectedRepoContainer({

@@ -1,5 +1,3 @@
-import { cn } from '@/lib/utils';
-import { Badge } from '../ui/badge';
 import {
   IconBrandBluesky,
   IconBrandThreads,
@@ -12,7 +10,9 @@ import {
 } from '@tabler/icons-react';
 import { Linkedin } from 'lucide-react';
 import { BorderTrail } from '@/components/motion-primitives/border-trail';
+import { cn } from '@/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 
 export function FeaturesSection() {

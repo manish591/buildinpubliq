@@ -1,11 +1,8 @@
-import { defineConfig, type Options } from "tsup";
+import { defineConfig, type Options } from 'tsup';
 
 export default defineConfig((options: Options) => ({
-  entry: ["src/**/*"],
-  noExternal: [
-    '@buildinpubliq/db',
-    '@buildinpubliq/redis'
-  ],
+  entry: ['src/**/*'],
+  noExternal: ['@buildinpubliq/db', '@buildinpubliq/redis'],
   sourcemap: true,
   ...options,
 }));

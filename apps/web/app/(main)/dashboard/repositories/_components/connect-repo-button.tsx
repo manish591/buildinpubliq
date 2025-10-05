@@ -1,8 +1,8 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { useInstallGithubIntegrationModal } from './install-github-integration-modal';
 import { useConnectRepoModal } from './connect-repo-modal';
+import { useInstallGithubIntegrationModal } from './install-github-integration-modal';
 
 export function ConnectRepoButton({
   isGithubIntegrationInstalled,

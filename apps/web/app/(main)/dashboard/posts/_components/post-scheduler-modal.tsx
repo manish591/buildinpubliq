@@ -1,10 +1,13 @@
+import { parseDate } from 'chrono-node';
+import { format } from 'date-fns';
 import {
+  CalendarClock,
+  Calendar as CalendarIcon,
   ChevronDown,
   Clock8,
-  Calendar as CalendarIcon,
-  CalendarClock,
 } from 'lucide-react';
-import { format } from 'date-fns';
+import type React from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
@@ -22,9 +25,6 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
-import type React from 'react';
-import { parseDate } from 'chrono-node';
 
 export function PostSchedulerModal({
   scheduledAt,

@@ -1,7 +1,7 @@
 import { ArrowLeft } from 'lucide-react';
-import { BackButton } from '@/components/web/back-button';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { BackButton } from '@/components/web/back-button';
 
 export default function NotFound() {
   return (

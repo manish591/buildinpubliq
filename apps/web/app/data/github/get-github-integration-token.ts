@@ -30,12 +30,12 @@ export async function getGithubIntegrationToken(installationId: string) {
     headers: {
       Authorization: `Bearer ${bearerToken}`,
       Accept: 'application/vnd.github+json',
-      "X-GitHub-Api-Version": "2022-11-28"
+      'X-GitHub-Api-Version': '2022-11-28',
     },
   });
 
   if (!res.ok) {
-    console.log("the response: ", res);
+    console.log('the response: ', res);
     throw new Error('Failed to get github integration access token');
   }
 

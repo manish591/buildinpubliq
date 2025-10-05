@@ -3,10 +3,10 @@ import { Suspense } from 'react';
 import { MainHeader } from '@/app/(main)/_components/main-header';
 import { getConnectedRepositories } from '@/app/data/github/get-connected-repositories';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 import { CreateIdeaModal } from './_components/create-idea-modal';
 import { IdeasActionBar } from './_components/ideas-action-bar';
 import { IdeasList } from './_components/ideas-list';
-import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export default async function IdeasPage({
   searchParams,

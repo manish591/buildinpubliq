@@ -1,12 +1,12 @@
 import { prisma } from '@buildinpubliq/db';
-import { z } from "zod";
+import { z } from 'zod';
 import { getCurrentUser } from '../users/verify-auth-session';
 import 'server-only';
 import { BuildinpubliqError } from '@/lib/buildinpubliq-error';
 
 const schema = z.object({
   query: z.string().optional(),
-  repository: z.string().optional()
+  repository: z.string().optional(),
 });
 
 export async function getAllIdeas(options?: { query?: string }) {
@@ -19,7 +19,7 @@ export async function getAllIdeas(options?: { query?: string }) {
   const validationResult = await schema.safeParseAsync(options);
 
   if (validationResult.error) {
-    throw new BuildinpubliqError(400, "Bad request");
+    throw new BuildinpubliqError(400, 'Bad request');
   }
 
   const { query, repository } = validationResult.data;
@@ -31,23 +31,23 @@ export async function getAllIdeas(options?: { query?: string }) {
         OR: [
           {
             content: {
-              contains: query
-            }
+              contains: query,
+            },
           },
           {
             title: {
-              contains: query
-            }
-          }
-        ]
+              contains: query,
+            },
+          },
+        ],
       }),
       ...(repository && {
-        githubRepositoryId: repository
-      })
+        githubRepositoryId: repository,
+      }),
     },
     orderBy: {
-      updatedAt: "desc"
-    }
+      updatedAt: 'desc',
+    },
   });
 
   return data;

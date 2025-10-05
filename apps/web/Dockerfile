@@ -1,4 +1,4 @@
-FROM node:lts-alpine3.21 AS base
+FROM node:lts-alpine3.17 AS base
 
 FROM base AS prunner
 WORKDIR /app

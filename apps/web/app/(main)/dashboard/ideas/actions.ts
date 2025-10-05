@@ -31,12 +31,12 @@ export async function editIdea(data: EditIdeaData) {
 
   await prisma.idea.update({
     where: {
-      id: data.id
+      id: data.id,
     },
     data: {
       title: data.title,
-      content: data.content
-    }
+      content: data.content,
+    },
   });
 }
 
@@ -49,7 +49,7 @@ export async function deleteIdea(id: string) {
 
   await prisma.idea.delete({
     where: {
-      id
-    }
-  })
+      id,
+    },
+  });
 }

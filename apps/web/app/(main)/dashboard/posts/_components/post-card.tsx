@@ -1,5 +1,8 @@
 'use client';
 
+import { Prisma } from '@buildinpubliq/db';
+import { IconUpload } from '@tabler/icons-react';
+import { formatDistanceToNow } from 'date-fns';
 import {
   AlertTriangle,
   Clock10,
@@ -11,19 +14,16 @@ import {
   FileText,
   SquarePen,
 } from 'lucide-react';
+import { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
-import { Prisma } from '@buildinpubliq/db';
-import { formatDistanceToNow } from 'date-fns';
-import { AVAILABLE_PLATFORM } from '@/constants';
-import { useState } from 'react';
-import { PostPreviewModal } from './post-preview-modal';
-import { PostActionDropdown } from './post-action-dropdown';
-import { EditPostModal } from './edit-post-modal';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
+import { AVAILABLE_PLATFORM } from '@/constants';
+import { cn } from '@/lib/utils';
 import { useDeleteModal } from './delete-post-modal';
-import { IconUpload } from '@tabler/icons-react';
+import { EditPostModal } from './edit-post-modal';
+import { PostActionDropdown } from './post-action-dropdown';
+import { PostPreviewModal } from './post-preview-modal';
 
 const POST_STATUS_DATA = {
   [Prisma.PostStatus.DRAFT]: {

@@ -19,9 +19,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
+import { useCreatePostModal } from '../../posts/_components/create-post-modal';
 import { useDeleteIdeaModal } from './delete-idea-modal';
 import { useEditPostModal } from './edit-idea-modal';
-import { useCreatePostModal } from '../../posts/_components/create-post-modal';
 
 export function IdeaCard({ ideaData }: Readonly<{ ideaData: Prisma.Idea }>) {
   const { EditIdeaModal, setShowEditIdeaModal } = useEditPostModal({

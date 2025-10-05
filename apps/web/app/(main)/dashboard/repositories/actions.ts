@@ -1,8 +1,8 @@
-"use server";
+'use server';
 
-import { prisma } from "@buildinpubliq/db";
-import { getCurrentUser } from "@/app/data/users/verify-auth-session";
-import type { GithubRepository } from "./_components/connect-repo-modal";
+import { prisma } from '@buildinpubliq/db';
+import { getCurrentUser } from '@/app/data/users/verify-auth-session';
+import type { GithubRepository } from './_components/connect-repo-modal';
 
 export async function connectRepository(selectedRepo: GithubRepository) {
   const user = await getCurrentUser();
@@ -49,7 +49,7 @@ export async function disconnectRepository(id: string) {
 
   await prisma.githubRepository.delete({
     where: {
-      id
-    }
+      id,
+    },
   });
 }

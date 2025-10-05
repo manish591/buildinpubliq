@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import { IconBrandX, IconFilter2 } from '@tabler/icons-react';
 import {
   AlertTriangle,
   Check,
@@ -12,8 +12,8 @@ import {
   Linkedin,
   Radio,
 } from 'lucide-react';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { cn } from '@/lib/utils';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import * as React from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Command,
@@ -28,7 +28,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { IconBrandX, IconFilter2 } from '@tabler/icons-react';
+import { cn } from '@/lib/utils';
 
 const filters = [
   {

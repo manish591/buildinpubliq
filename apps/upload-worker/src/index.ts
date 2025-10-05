@@ -1,4 +1,4 @@
-import "dotenv/config";
+import 'dotenv/config';
 import { prisma } from '@buildinpubliq/db';
 import { redis } from '@buildinpubliq/redis';
 import { type Job, Worker } from 'bullmq';
@@ -15,22 +15,22 @@ type PostToLinkedinData = {
 };
 
 type PostToTwitterData = {
-  content: string,
-  accessToken: string,
-  channelId: string,
-  refreshToken: string
-}
+  content: string;
+  accessToken: string;
+  channelId: string;
+  refreshToken: string;
+};
 
 const TWITTER_CLIENT_ID = process.env.TWITTER_CLIENT_ID;
 const TWITTER_CLIENT_SECRET = process.env.TWITTER_CLIENT_SECRET;
 
 async function refreshTwitterAccessToken(refreshToken: string): Promise<{
-  access_token: string,
-  refresh_token: string,
-  expires_in: number
+  access_token: string;
+  refresh_token: string;
+  expires_in: number;
 } | null> {
   if (!TWITTER_CLIENT_ID || !TWITTER_CLIENT_SECRET) {
-    console.log("Invalid client id and client secert");
+    console.log('Invalid client id and client secert');
     return null;
   }
 
@@ -40,7 +40,9 @@ async function refreshTwitterAccessToken(refreshToken: string): Promise<{
     client_id: TWITTER_CLIENT_ID,
   });
 
-  const basicAuth = Buffer.from(`${TWITTER_CLIENT_ID}:${TWITTER_CLIENT_SECRET}`).toString('base64');
+  const basicAuth = Buffer.from(
+    `${TWITTER_CLIENT_ID}:${TWITTER_CLIENT_SECRET}`,
+  ).toString('base64');
 
   try {
     const res = await fetch('https://api.x.com/2/oauth2/token', {
@@ -62,7 +64,7 @@ async function refreshTwitterAccessToken(refreshToken: string): Promise<{
     console.log('Token refreshed successfully');
     return data;
   } catch (err) {
-    console.log("Failed to refresh twitter access token", err);
+    console.log('Failed to refresh twitter access token', err);
     return null;
   }
 }
@@ -104,14 +106,14 @@ async function postToLinkedin({
 
     if (!res.ok) {
       const errorData = await res.json();
-      console.log("Failed to upload post to linkedin", errorData);
+      console.log('Failed to upload post to linkedin', errorData);
       const message = errorData.message;
       throw new Error(message);
     }
 
-    console.log("Successfully published post to linkedin");
+    console.log('Successfully published post to linkedin');
   } catch (err) {
-    console.log("Error occured while publishing post to linkedin", err);
+    console.log('Error occured while publishing post to linkedin', err);
     const errMessage = err instanceof Error ? err.message : String(err);
     throw new Error(errMessage);
   }
@@ -121,18 +123,18 @@ async function postToTwitter({
   content,
   channelId,
   accessToken,
-  refreshToken
+  refreshToken,
 }: PostToTwitterData) {
-  const url = 'https://api.x.com/2/tweets'
+  const url = 'https://api.x.com/2/tweets';
   const options = {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
+      Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify({
-      text: content
-    })
+      text: content,
+    }),
   };
 
   try {
@@ -153,28 +155,28 @@ async function postToTwitter({
             data: {
               accessToken: refreshTokenData.access_token,
               refreshToken: refreshTokenData.refresh_token,
-            }
+            },
           });
 
           postToTwitter({
             content,
             channelId,
             refreshToken,
-            accessToken
+            accessToken,
           });
         } else {
-          const errorMessage = "Failed to refresh twitter/x access token";
+          const errorMessage = 'Failed to refresh twitter/x access token';
           throw new Error(errorMessage);
         }
       } else {
-        const errorMessage = errorData.detail ?? "Unexpected error occcured";
+        const errorMessage = errorData.detail ?? 'Unexpected error occcured';
         throw new Error(errorMessage);
       }
     }
 
-    console.log("Published the post to twitter/x successfully");
+    console.log('Published the post to twitter/x successfully');
   } catch (err) {
-    console.log("Error occured while publishing post to twitter/x", err);
+    console.log('Error occured while publishing post to twitter/x', err);
     const errMessage = err instanceof Error ? err.message : String(err);
     throw new Error(errMessage);
   }
@@ -186,32 +188,32 @@ async function workerCallback(job: Job) {
   try {
     const channelData = await prisma.channel.findUnique({
       where: {
-        id: channelId
-      }
+        id: channelId,
+      },
     });
 
     const postData = await prisma.post.findUnique({
       where: {
-        id: postId
-      }
+        id: postId,
+      },
     });
 
     if (!postData || !channelData) {
-      throw new Error("Failed to retrieve post and channel data");
+      throw new Error('Failed to retrieve post and channel data');
     }
 
-    if (channelData.platform === "LINKEDIN") {
+    if (channelData.platform === 'LINKEDIN') {
       await postToLinkedin({
         content: postData.content,
         accessToken: channelData.accessToken,
-        linkedinUserId: channelData.platformUserId
+        linkedinUserId: channelData.platformUserId,
       });
-    } else if (channelData.platform === "TWITTER") {
+    } else if (channelData.platform === 'TWITTER') {
       await postToTwitter({
         content: postData.content,
         accessToken: channelData.accessToken,
         channelId: channelData.id,
-        refreshToken: channelData.refreshToken as string
+        refreshToken: channelData.refreshToken as string,
       });
     }
 
@@ -220,11 +222,11 @@ async function workerCallback(job: Job) {
         id: postId,
       },
       data: {
-        status: "PUBLISHED"
-      }
+        status: 'PUBLISHED',
+      },
     });
 
-    console.log("Published the post successfully");
+    console.log('Published the post successfully');
   } catch (err) {
     const attemptsMade = job.attemptsMade + 1;
     const maxAttempts = job.opts.attempts ?? 1;
@@ -232,11 +234,11 @@ async function workerCallback(job: Job) {
     if (attemptsMade >= maxAttempts) {
       await prisma.post.update({
         where: {
-          id: postId
+          id: postId,
         },
         data: {
-          status: "FAILED"
-        }
+          status: 'FAILED',
+        },
       });
     }
 
@@ -250,5 +252,5 @@ const worker = new Worker('scheduled-posts', workerCallback, {
 });
 
 worker.on('error', (err) => {
-  console.log("Error occured while publishing post", err.message);
+  console.log('Error occured while publishing post', err.message);
 });

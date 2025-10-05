@@ -1,4 +1,4 @@
-FROM node:22-alpine3.21 AS base
+FROM node:lts-alpine3.17 AS base
 
 # Install required system dependencies for Prisma
 RUN apk add --no-cache \

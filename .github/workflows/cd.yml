@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
 
+env:
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
 jobs:
   commit-hash:
     runs-on: ubuntu-latest
@@ -32,6 +35,20 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        run: npm install pnpm -g
+
+      - name: Install Dependencies
+        run: pnpm i
+
+      - name: Run Migrations
+        run: pnpm dlx primsa mirgrate deploy
 
       - name: Log in to Github Container Registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1

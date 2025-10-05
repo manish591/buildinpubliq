@@ -1,11 +1,11 @@
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import { getCurrentUser } from '@/app/data/users/verify-auth-session';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 import { MainHeader } from '../../_components/main-header';
 import { ChannelFilterDropdown } from './_components/channel-filter-dropdown';
 import { ChannelsGrid } from './_components/channels-grid';
 import { ConnectChannelsModal } from './_components/connect-channels-modal';
-import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export default async function ChannelsSettingsPage({
   searchParams,

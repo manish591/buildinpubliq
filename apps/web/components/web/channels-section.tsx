@@ -4,9 +4,9 @@ import {
   IconBrandThreads,
   IconBrandX,
 } from '@tabler/icons-react';
+import { Linkedin } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Badge } from '../ui/badge';
-import { Linkedin } from 'lucide-react';
 
 export function ChannelsSection() {
   return (

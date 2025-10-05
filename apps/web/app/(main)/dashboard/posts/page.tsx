@@ -2,10 +2,10 @@ import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import { MainHeader } from '@/app/(main)/_components/main-header';
 import { getUserDetails } from '@/app/data/users/get-user-details';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 import { CreatePostButton } from './_components/create-post-button';
 import { PostsActionBar } from './_components/posts-action-bar';
 import { PostsContainer } from './_components/posts-container';
-import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export default async function PostsPage({
   searchParams,
