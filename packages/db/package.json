@@ -13,7 +13,8 @@
     "db:migrate:dev": "prisma migrate dev",
     "db:push": "prisma db push",
     "format": "prisma format",
-    "studio": "prisma studio"
+    "studio": "prisma studio",
+    "postinstall": "npx prisma generate"
   },
   "exports": {
     ".": "./src/index.ts"
