@@ -12,13 +12,13 @@ import { FinishOnboardingButton } from './_components/finish-onboarding-button';
 export default async function OnboardingInstallGithubAppPage() {
   const userData = await getUserDetails();
 
-  if (!userData) {
-    redirect('/auth');
-  }
+  // if (!userData) {
+  //   redirect('/auth');
+  // }
 
-  if (userData.isOnboardingCompleted) {
-    redirect('/dashboard/posts');
-  }
+  // if (userData.isOnboardingCompleted) {
+  //   redirect('/dashboard/posts');
+  // }
 
   const isGithubAppInstalled = await hasGithubIntegration();
 
@@ -46,7 +46,7 @@ export default async function OnboardingInstallGithubAppPage() {
       <div className="mt-10">
         <InstallGithubIntegration
           className={cn(
-            'w-full h-30 border-dashed border-2 hover:bg-transparent',
+            'w-full h-30! border-dashed border-2 hover:bg-transparent',
             'hover:border-black/20 [&_svg]:size-8 text-lg flex-col cursor-pointer',
             'gap-3 capitalize opacity-70 hover:opacity-100 transition-opacity',
             isGithubAppInstalled &&
