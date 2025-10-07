@@ -8,7 +8,7 @@ export function InstallGithubIntegration({
   className,
   redirectTo,
 }: Readonly<{ className?: string; redirectTo: string }>) {
-  console.log('the github name', process.env.NEXT_PUBLIC_GITHUB_APP_NAME);
+  console.log('the github name', process.env);
   function handleInstallGithubIntegration() {
     const githubAppName = process.env.NEXT_PUBLIC_GITHUB_APP_NAME;
     const state = encodeURIComponent(JSON.stringify({ redirect: redirectTo }));
