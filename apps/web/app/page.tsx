@@ -6,6 +6,7 @@ import { HeroSection } from '@/components/web/hero-section';
 import { HowItWorksSection } from '@/components/web/how-it-works-section';
 
 export default async function Home() {
+  console.log('the process env', process.env);
   return (
     <div>
       <Header />
