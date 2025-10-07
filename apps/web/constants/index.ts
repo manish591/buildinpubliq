@@ -5,6 +5,8 @@ import { Linkedin } from 'lucide-react';
 export const BASE_URL =
   process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
 
+export const GITHUB_APP_NAME = process.env.NEXT_PUBLIC_GITHUB_APP_NAME
+
 // platforms
 export const AVAILABLE_PLATFORM = [
   {

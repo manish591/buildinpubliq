@@ -1,6 +1,7 @@
 FROM node:lts-alpine3.17 AS base
 
 ARG NEXT_PUBLIC_BASE_URL
+ARG NEXT_PUBLIC_GITHUB_APP_NAME
 
 FROM base AS prunner
 WORKDIR /app

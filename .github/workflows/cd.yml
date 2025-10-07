@@ -69,6 +69,9 @@ jobs:
           tags: |
             ghcr.io/manish591/buildinpubliq-web:${{ needs.commit-hash.outputs.commit-hash }}
             ghcr.io/manish591/buildinpubliq-web:latest
+          build-args: |
+            NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}
+            NEXT_PUBLIC_GITHUB_APP_NAME=${{ secrets.NEXT_PUBLIC_GITHUB_APP_NAME }}
 
       - name: Build and Push Github Worker Docker Image
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
