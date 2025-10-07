@@ -1,5 +1,7 @@
 FROM node:lts-alpine3.17 AS base
 
+ARG NEXT_PUBLIC_BASE_URL
+
 FROM base AS prunner
 WORKDIR /app
 RUN npm install turbo -g

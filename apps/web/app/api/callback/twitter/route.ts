@@ -4,8 +4,8 @@ import { auth } from '@/auth';
 import { BASE_URL } from '@/constants';
 
 const CLIENT_SECRET = process.env.TWITTER_CLIENT_SECRET;
-const CLIENT_ID = process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID;
-const REDIRECT_URI = process.env.NEXT_PUBLIC_TWITTER_REDIRECT_URI as string;
+const CLIENT_ID = process.env.TWITTER_CLIENT_ID;
+const REDIRECT_URI = process.env.TWITTER_REDIRECT_URI as string;
 const BASIC_AUTH = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString(
   'base64',
 );

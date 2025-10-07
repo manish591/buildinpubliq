@@ -17,9 +17,9 @@ export const AVAILABLE_PLATFORM = [
       response_type: 'code',
       code_challenge: 'challenge',
       code_challenge_method: 'plain',
-      client_id: process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID,
-      redirect_uri: process.env.NEXT_PUBLIC_TWITTER_REDIRECT_URI,
-      scope: process.env.NEXT_PUBLIC_TWITTER_SCOPE,
+      client_id: process.env.TWITTER_CLIENT_ID,
+      redirect_uri: process.env.TWITTER_REDIRECT_URI,
+      scope: process.env.TWITTER_SCOPE,
     },
   },
   {
@@ -30,9 +30,9 @@ export const AVAILABLE_PLATFORM = [
     authBaseURL: 'https://www.linkedin.com/oauth/v2/authorization',
     authQueryParams: {
       response_type: 'code',
-      client_id: process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_ID,
-      redirect_uri: process.env.NEXT_PUBLIC_LINKEDIN_REDIRECT_URI,
-      scope: process.env.NEXT_PUBLIC_LINKEDIN_SCOPE,
+      client_id: process.env.LINKEDIN_CLIENT_ID,
+      redirect_uri: process.env.LINKEDIN_REDIRECT_URI,
+      scope: process.env.LINKEDIN_SCOPE,
     },
   },
 ];

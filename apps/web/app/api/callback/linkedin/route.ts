@@ -5,8 +5,8 @@ import { BASE_URL } from '@/constants';
 import { BuildinpubliqError } from '@/lib/buildinpubliq-error';
 
 const CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET as string;
-const CLIENT_ID = process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_ID as string;
-const REDIRECT_URI = process.env.NEXT_PUBLIC_LINKEDIN_REDIRECT_URI as string;
+const CLIENT_ID = process.env.LINKEDIN_CLIENT_ID as string;
+const REDIRECT_URI = process.env.LINKEDIN_REDIRECT_URI as string;
 
 export const GET = auth(async function GET(req) {
   if (!req.auth?.user) {
