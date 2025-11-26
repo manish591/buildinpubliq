@@ -78,7 +78,7 @@ export function ChannelCard({
                   ...platformQueryParams,
                   state: encodeURIComponent(
                     JSON.stringify({
-                      redirect: '/dashboard/channels',
+                      redirect: '/settings/channels',
                     }),
                   ),
                 })}
