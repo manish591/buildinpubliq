@@ -162,7 +162,7 @@ async function postToTwitter({
             content,
             channelId,
             refreshToken,
-            accessToken,
+            accessToken: refreshTokenData.access_token,
           });
         } else {
           const errorMessage = 'Failed to refresh twitter/x access token';
